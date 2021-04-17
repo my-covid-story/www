@@ -16,6 +16,10 @@
   align-items: center;
 }
 
+.formContainer {
+  margin: 2rem;
+}
+
 .footer {
   width: 100%;
   height: 100px;

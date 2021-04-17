@@ -1,0 +1,13 @@
+.storyForm {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+}
+
+.field {
+  margin: 1rem;
+}
+
+.label {
+  margin-right: 10px;
+}

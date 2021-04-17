@@ -1,3 +1,26 @@
+# My Covid Story
+
+This is an extremely early MVP, so there is a lot to do.
+
+Our prosposed stack / architecture is:
+
+- [NextJS](https://next.js.org/) hosted on [Vercel](https://vercel.com) (already setup here)
+- [Prisma](https://prisma.io) as our ORM (makes things pretty smooth)
+- Postgresql as a DB
+
+Contact @mwickett on Slack for access to the Vercel team, or the GitHub org if you're interested.
+
+## Todo
+
+- [ ] Add Prisma - see [example](https://github.com/prisma/prisma-examples/tree/latest/typescript/rest-nextjs-api-routes)
+- [ ] Decide if we're using Typescript
+
+## Contributing
+
+Open a PR!
+
+---
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

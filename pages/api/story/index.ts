@@ -3,8 +3,9 @@ import prisma from '../../../lib/prisma'
 
 
 // POST /api/post
-// Required fields in body: title, authorEmail
-// Optional fields in body: content
+// Required fields in body: story, postal
+// Optional fields in body: email, twitter, phone
+// Approved field is set to false by default
 export default async function handle(req: NextApiRequest, res: NextApiResponse) {
   const { story, postal } = req.body
   const result = await prisma.story.create({

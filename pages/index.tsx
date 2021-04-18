@@ -2,6 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
 import StoryForm from '../components/form'
+import Footer from '../components/footer'
 
 export default function Home() {
   return (
@@ -18,9 +19,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className={styles.footer}>
-        Footer stuff like links, contact info, privacy policy, etc. will go here
-      </footer>
+      <Footer />
     </div>
   )
 }

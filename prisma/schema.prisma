@@ -15,11 +15,12 @@ model Story {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   content   String
-  postal    String @db.VarChar(3)
+  postal    String
   email     String?
   twitter   String?
   phone     String?
   approved  Boolean  @default(false)
   viewCount Int      @default(0)
-    @@index([postal, approved])
+
+  @@index([postal, approved])
 }

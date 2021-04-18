@@ -8,9 +8,11 @@
     "start": "next start",
     "type-check": "tsc --project tsconfig.json --pretty --noEmit",
     "lint": "eslint --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "ts-node": "ts-node --compiler-options '{\"module\":\"CommonJS\"}'"
   },
   "dependencies": {
+    "@prisma/client": "^2.21.2",
     "next": "10.1.3",
     "react": "17.0.2",
     "react-dom": "17.0.2"
@@ -33,6 +35,8 @@
     "husky": "^6.0.0",
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
+    "prisma": "^2.21.2",
+    "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   }
 }

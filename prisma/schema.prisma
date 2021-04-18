@@ -21,4 +21,5 @@ model Story {
   phone     String?
   approved  Boolean  @default(false)
   viewCount Int      @default(0)
+    @@index([postal, approved])
 }

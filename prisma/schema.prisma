@@ -15,6 +15,7 @@ model Story {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   content   String
+  postal    String
   email     String?
   twitter   String?
   phone     String?

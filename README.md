@@ -13,11 +13,16 @@ Contact @mwickett on Slack for access to the Vercel team, or the GitHub org if y
 ## Todo
 
 - [ ] Add Prisma - see [example](https://github.com/prisma/prisma-examples/tree/latest/typescript/rest-nextjs-api-routes)
-- [ ] Decide if we're using Typescript
+- [x] ~Decide if we're using Typescript~ Yes!
 
 ## Contributing
 
-Open a PR!
+1. Clone this repo
+2. Install dependencies with `npm i`
+3. Run `npx prisma migrate dev --name init` to scaffold a local sqlite db on your machine
+4. Run `npx prisma db seed --preview-feature` to see test data from `prisma/seed.ts`
+5. Run `npm run dev` to start the app locally
+6. You can use `/api/story` to create new stories
 
 ---
 

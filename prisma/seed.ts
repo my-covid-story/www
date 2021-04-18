@@ -6,28 +6,34 @@ const userData: Prisma.StoryCreateInput[] = [
   {
     content: 'This is a covid story',
     email: 'alice@test.io',
+    postal: 'N6A',
     approved: true
   },
   {
     content: 'This is a covid story',
     phone: '5195551122',
+    postal: 'M5N',
     approved: true
   },
   {
     content: 'This is a covid story',
+    postal: 'K7B',
     twitter: 'alicetest',
     approved: true
   },
   {
     content: 'This story has an image',
+    postal: 'K7B',
     approved: true
   },
   {
     content: 'NOT APPROVED This story has an image',
+    postal: 'K7B',
     approved: false
   },
   {
     content: 'NOT APPROVEDThis story has an image',
+    postal: 'K7B',
     approved: false
   },
 ]

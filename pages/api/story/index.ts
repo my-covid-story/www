@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '../../../lib/prisma'
 
-
 // POST /api/post
 // Required fields in body: story, postal
 // Optional fields in body: email, twitter, phone
@@ -11,7 +10,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
   const result = await prisma.story.create({
     data: {
       content: story,
-      postal: postal
+      postal: postal,
     },
   })
   res.json(result)

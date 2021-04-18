@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import prisma from '../lib/prisma'
 
 import StoryForm from '../components/form'
 import Footer from '../components/footer'
@@ -18,7 +19,7 @@ export default function Home({ feed }) {
         <div className={styles.storyContainer}>
           <h3>Latest stories</h3>
           {feed.map((story) => (
-            <pre>
+            <pre key={story.id}>
               <ul>
                 <li>id: {story.id}</li>
                 <li>content: {story.content}</li>
@@ -41,8 +42,11 @@ export default function Home({ feed }) {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch('http://localhost:3000/api/feed')
-  const feed = await res.json()
+  const feed = await prisma.story.findMany({
+    where: { approved: true },
+    orderBy: { createdAt: 'asc' },
+  })
+
   return {
     props: { feed },
   }

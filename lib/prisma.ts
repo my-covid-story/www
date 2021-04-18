@@ -1,15 +1,16 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client'
 
 // PrismaClient is attached to the `global` object in development to prevent
 // exhausting your database connection limit.
 //
-// Learn more: 
+// Learn more:
 // https://pris.ly/d/help/next-js-best-practices
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace NodeJS {
     interface Global {
-      prisma: any;
+      prisma: any
     }
   }
 }

@@ -2,7 +2,6 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import prisma from '../lib/prisma'
 
-import StoryForm from '../components/form'
 import Footer from '../components/footer'
 
 export default function Home({ feed }) {
@@ -30,9 +29,6 @@ export default function Home({ feed }) {
               </ul>
             </pre>
           ))}
-        </div>
-        <div className={styles.storyContainer}>
-          <StoryForm />
         </div>
       </main>
 

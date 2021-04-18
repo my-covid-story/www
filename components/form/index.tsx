@@ -13,6 +13,7 @@ import {
 } from '@chakra-ui/react'
 import { Formik, Field, Form } from 'formik'
 import * as yup from 'yup'
+import Router from 'next/router'
 
 const schema = yup.object().shape({
   title: yup.string().required(), // TODO: length validation
@@ -60,7 +61,7 @@ export default function StoryForm() {
       onSubmit={async (values: LoginFormInputs, actions) => {
         try {
           actions.setSubmitting(true)
-          const result = await fetch(`http://localhost:3000/api/story`, {
+          const result = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/story`, {
             method: 'POST',
             body: JSON.stringify(values),
             headers: {
@@ -70,6 +71,7 @@ export default function StoryForm() {
           console.log(result)
           if (result) {
             actions.setSubmitting(false)
+            Router.push('/stories/thanks')
           }
         } catch (e) {
           console.error(e)

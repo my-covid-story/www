@@ -7,6 +7,7 @@ import { PrismaClient } from '@prisma/client'
 // https://pris.ly/d/help/next-js-best-practices
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace NodeJS {
     interface Global {
       prisma: any

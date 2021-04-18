@@ -19,10 +19,11 @@ Contact @mwickett on Slack for access to the Vercel team, or the GitHub org if y
 
 1. Clone this repo
 2. Install dependencies with `npm i`
-3. Run `npx prisma migrate dev --name init` to scaffold a local sqlite db on your machine
-4. Run `npx prisma db seed --preview-feature` to see test data from `prisma/seed.ts`
-5. Run `npm run dev` to start the app locally
-6. You can use `/api/story` to create new stories
+3. Rename `.env.template` to `.env` (soon we'll switch to a postgresql db, but for now it's using sqlite locally)
+4. Run `npx prisma migrate dev --name init` to scaffold a local sqlite db on your machine
+5. Run `npx prisma db seed --preview-feature` to see test data from `prisma/seed.ts`
+6. Run `npm run dev` to start the app locally
+7. You can use `/api/story` to create new stories
 
 ---
 

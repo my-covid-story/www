@@ -9,7 +9,10 @@
     "type-check": "tsc --project tsconfig.json --pretty --noEmit",
     "lint": "eslint --fix",
     "prepare": "husky install",
-    "ts-node": "ts-node --compiler-options '{\"module\":\"CommonJS\"}'"
+    "ts-node": "ts-node --compiler-options '{\"module\":\"CommonJS\"}'",
+    "vercel-build": "prisma migrate deploy && next build",
+    "prisma:generate": "prisma generate",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^2.21.2",

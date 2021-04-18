@@ -8,11 +8,16 @@ import prisma from '../../../lib/prisma'
 
 // TODO: Sanitization needed here for all fields!
 export default async function handle(req: NextApiRequest, res: NextApiResponse) {
-  const { story, postal } = req.body
+  const { title, content, postal } = req.body
   const result = await prisma.story.create({
     data: {
-      content: story,
+      title: title,
+      content: content,
       postal: postal,
+      // hard coded for now
+      category: 'foo',
+      anonymous: true,
+      contact: false,
     },
   })
   res.json(result)

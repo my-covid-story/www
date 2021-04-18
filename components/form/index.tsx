@@ -1,4 +1,5 @@
 import {
+  Box,
   FormControl,
   FormLabel,
   FormErrorMessage,
@@ -10,110 +11,114 @@ import {
   Radio,
   RadioGroup,
 } from '@chakra-ui/react'
+import { Formik, Field, Form } from 'formik'
 import * as yup from 'yup'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
 
 const schema = yup.object().shape({
   title: yup.string().required(), // TODO: length validation
   content: yup.string().required(),
   postal: yup.string().required(), // TODO: need to do postal FSA validation
-  category: yup.string(), // TODO: Figure out enum validation for list options
-  anonymous: yup.bool().required(),
-  contact: yup.bool().required(),
-  name: yup.string(),
-  email: yup.string().email(),
-  phone: yup.string(), // TODO: Phone validation
-  twitter: yup.string(),
+  // category: yup.string(), // TODO: Figure out enum validation for list options
+  // anonymous: yup.bool().required(),
+  // contact: yup.bool().required(),
+  // name: yup.string(),
+  // email: yup.string().email(),
+  // phone: yup.string(), // TODO: Phone validation
+  // twitter: yup.string(),
 })
 
 type LoginFormInputs = {
   title: string
   content: string
   postal: string
-  category?: string
-  anonymous: boolean
-  contact: boolean
-  name?: string
-  email?: string
-  phone?: string
-  twitter?: string
+  // category?: string
+  // anonymous: boolean
+  // contact: boolean
+  // name?: string
+  // email?: string
+  // phone?: string
+  // twitter?: string
 }
 
-export default function LoginForm() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<LoginFormInputs>({
-    mode: 'onBlur',
-    resolver: yupResolver(schema),
-  })
-
-  const onSubmit = (values: LoginFormInputs) => {
-    console.log('submitted')
-    console.log(values)
-  }
-
-  console.log(watch('postal'))
-
+const initialValues = {
+  title: '',
+  content: '',
+  postal: '',
+  category: '',
+  anonymous: '',
+  contact: '',
+  name: '',
+  email: '',
+  phone: '',
+  twitter: '',
+}
+export default function StoryForm() {
   return (
-    <form style={{ width: 350 }} onSubmit={handleSubmit(onSubmit)}>
-      {/* Title field */}
-      <FormControl
-        isInvalid={!!errors?.title?.message}
-        errortext={errors?.title?.message}
-        p="4"
-        isRequired
-      >
-        <FormLabel>Enter a title or quote</FormLabel>
-        <Textarea name="title" placeholder="Here is a summary of my story" {...register('title')} />
-        <FormErrorMessage>{errors?.title?.message}</FormErrorMessage>
-        <FormHelperText>Maximum ___ characters</FormHelperText>
-      </FormControl>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={schema}
+      onSubmit={async (values: LoginFormInputs, actions) => {
+        try {
+          actions.setSubmitting(true)
+          const result = await fetch(`http://localhost:3000/api/story`, {
+            method: 'POST',
+            body: JSON.stringify(values),
+            headers: {
+              'content-type': 'application/json',
+            },
+          })
+          console.log(result)
+          if (result) {
+            actions.setSubmitting(false)
+          }
+        } catch (e) {
+          console.error(e)
+          actions.setSubmitting(false)
+        }
+      }}
+    >
+      {(props) => (
+        <Form>
+          {/* Title */}
+          <Field name="title">
+            {({ field, form }) => (
+              <FormControl p="4" isInvalid={form.errors.title && form.touched.title}>
+                <FormLabel htmlFor="title">Your story title</FormLabel>
+                <Textarea {...field} id="title" placeholder="Enter your story title" />
+                <FormHelperText>Maximum ___ characters</FormHelperText>
+                <FormErrorMessage>{form.errors.title}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
 
-      {/* Content field */}
-      <FormControl
-        isInvalid={!!errors?.content?.message}
-        errortext={errors?.content?.message}
-        p="4"
-        isRequired
-      >
-        <FormLabel>Please share your story</FormLabel>
-        <Textarea
-          name="content"
-          placeholder="Here is a summary of my story"
-          {...register('content')}
-        />
-        <FormErrorMessage>{errors?.content?.message}</FormErrorMessage>
-        <FormHelperText>Maximum ___ characters</FormHelperText>
-      </FormControl>
+          {/* Content */}
+          <Field name="content">
+            {({ field, form }) => (
+              <FormControl p="4" isInvalid={form.errors.content && form.touched.content}>
+                <FormLabel htmlFor="content">Your story content</FormLabel>
+                <Textarea {...field} id="content" placeholder="Enter your story content" />
+                <FormHelperText>Maximum ___ characters</FormHelperText>
+                <FormErrorMessage>{form.errors.content}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
 
-      {/* Postal field */}
-      <FormControl
-        isInvalid={!!errors?.postal?.message}
-        errortext={errors?.postal?.message}
-        p="4"
-        isRequired
-      >
-        <FormLabel>First 3 digits of your postal code</FormLabel>
-        <Input type="text" name="postal" {...register('postal')} />
-        <FormErrorMessage>{errors?.postal?.message}</FormErrorMessage>
-      </FormControl>
+          {/* Postal */}
+          <Field name="postal">
+            {({ field, form }) => (
+              <FormControl p="4" isInvalid={form.errors.postal && form.touched.postal}>
+                <FormLabel htmlFor="postal">Your story postal</FormLabel>
+                <Input {...field} id="postal" placeholder="P6A" />
+                <FormErrorMessage>{form.errors.postal}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
 
-      <Button
-        type="submit"
-        p="4"
-        mx="4"
-        mt="6"
-        w="90%"
-        colorScheme="blue"
-        variant="solid"
-        disabled={!!errors.title || !!errors.content}
-      >
-        Submit Story
-      </Button>
-    </form>
+          <Button mt={4} colorScheme="teal" isLoading={props.isSubmitting} type="submit">
+            Submit
+          </Button>
+        </Form>
+      )}
+    </Formik>
   )
 }

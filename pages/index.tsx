@@ -8,15 +8,27 @@ import { Box, Button, Heading, Link, Text } from '@chakra-ui/react'
 
 export default function Home({ feed }) {
   if (process.env.NODE_ENV === 'production') {
+    const title = "My Covid Story | Every number has a story"
+    const description = "Every covid number has a story which deserves to be shared"
+    const previewImage = "https://www.mycovidstory.ca/img/landingpage-v2.jpg"
     return (
       <div className={landing.container}>
         <Head>
-          <title>My Covid Story | Every number has a story</title>
+          <title>{title}</title>
           <meta
             name="description"
-            content="Every covid number has a story which deserves to be shared"
+            content={description}
           />
           <link rel="icon" href="/favicon.ico" />
+
+          <meta property="og:title" content={title} />
+          <meta property="og:description" content={description} />
+          <meta property="og:image" content={previewImage} />
+
+          <meta name="twitter:title" content={title} />
+          <meta name="twitter:description" content={description} />
+          <meta name="twitter:image" content={previewImage} />
+          <meta name="twitter:card" content="summary_large_image" />
         </Head>
         <div className={landing.background} />
         <main className={landing.main}>

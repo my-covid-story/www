@@ -2,10 +2,7 @@ import Head from 'next/head'
 import landing from '../styles/LandingPage.module.css'
 import { Box, Button, Heading, Link, Text } from '@chakra-ui/react'
 
-export default function Home() {
-  const title = 'My Covid Story | Every number has a story'
-  const description = 'Every covid number has a story which deserves to be shared'
-  const previewImage = 'https://www.mycovidstory.ca/img/landingpage-v2.jpg'
+export default function Home({ title, description, previewImage }) {
   return (
     <>
       <Head>
@@ -52,4 +49,14 @@ export default function Home() {
       </div>
     </>
   )
+}
+
+export async function getStaticProps() {
+  const title = 'My Covid Story | Every number has a story'
+  const description = 'Every covid number has a story which deserves to be shared'
+  const previewImage = 'https://www.mycovidstory.ca/img/landingpage-v2.jpg'
+
+  return {
+    props: { title, description, previewImage },
+  }
 }

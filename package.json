@@ -20,6 +20,8 @@
     "@emotion/styled": "^11.3.0",
     "@hookform/resolvers": "^2.4.0",
     "@prisma/client": "^2.21.2",
+    "@sentry/react": "^6.2.5",
+    "@sentry/tracing": "^6.2.5",
     "formik": "^2.2.6",
     "framer-motion": "^4.1.4",
     "next": "10.1.3",

@@ -14,7 +14,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
 // GET /api/post/:id
 async function handleGET(storyId, res) {
   const post = await prisma.story.findUnique({
-    where: { id: Number(storyId) },
+    where: { id: storyId },
   })
   res.json(post)
 }

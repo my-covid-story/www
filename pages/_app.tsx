@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import '../styles/globals.css'
 
-import { ChakraProvider } from "@chakra-ui/react"
+import { ChakraProvider } from '@chakra-ui/react'
 
 function MyApp({ Component, pageProps }) {
   return (

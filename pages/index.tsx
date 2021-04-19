@@ -5,20 +5,6 @@ import { Box, Button, Heading, Link, Text } from '@chakra-ui/react'
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>PAGE TITLE</title>
-        {/* <meta name="description" content={description} />
-        <link rel="icon" href="/favicon.ico" />
-
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={previewImage} />
-
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={previewImage} />
-        <meta name="twitter:card" content="summary_large_image" /> */}
-      </Head>
       <div className={landing.container}>
         <div className={landing.background} />
         <main className={landing.main}>
@@ -50,13 +36,3 @@ export default function Home() {
     </>
   )
 }
-
-// export async function getStaticProps() {
-//   const title = 'My Covid Story | Every number has a story'
-//   const description = 'Every covid number has a story which deserves to be shared'
-//   const previewImage = 'https://www.mycovidstory.ca/img/landingpage-v2.jpg'
-
-//   return {
-//     props: { title, description, previewImage },
-//   }
-// }

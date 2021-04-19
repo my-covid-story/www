@@ -46,7 +46,7 @@ async function handleGet(req: NextApiRequest, res: NextApiResponse): Promise<voi
 // Optional fields in body: name, email, twitter, phone
 // Approved field is set to false by default
 async function handlePost(req: NextApiRequest, res: NextApiResponse): Promise<void> {
-  const { title, content, postal, category, anonymous } = req.body
+  const { title, content, postal, category, anonymous, contact } = req.body
   try {
     const result = await prisma.story.create({
       data: {
@@ -55,8 +55,7 @@ async function handlePost(req: NextApiRequest, res: NextApiResponse): Promise<vo
         postal,
         category,
         anonymous: JSON.parse(anonymous),
-        // hardcoded for now
-        contact: false,
+        contact: contact,
       },
     })
     res.setHeader('Location', `${baseUrl}${req.url}/${result.id}`)

@@ -1,5 +1,5 @@
 import {
-  // Box,
+  Stack,
   FormControl,
   FormLabel,
   FormErrorMessage,
@@ -8,9 +8,9 @@ import {
   Button,
   Textarea,
   Select,
-  // Checkbox,
   Radio,
   RadioGroup,
+  Checkbox,
 } from '@chakra-ui/react'
 import { Formik, Field, Form } from 'formik'
 import * as yup from 'yup'
@@ -22,7 +22,7 @@ const schema = yup.object().shape({
   postal: yup.string().required(), // TODO: need to do postal FSA validation
   category: yup.string(), // TODO: Figure out enum validation for list options
   anonymous: yup.bool().required(),
-  // contact: yup.bool().required(),
+  contact: yup.bool().required(),
   // name: yup.string(),
   // email: yup.string().email(),
   // phone: yup.string(), // TODO: Phone validation
@@ -34,8 +34,8 @@ type LoginFormInputs = {
   content: string
   postal: string
   category?: string
-  anonymous: boolean
-  // contact: boolean
+  anonymous: string
+  contact: boolean
   // name?: string
   // email?: string
   // phone?: string
@@ -48,7 +48,7 @@ const initialValues = {
   postal: '',
   category: '',
   anonymous: 'true',
-  // contact: '',
+  contact: false,
   // name: '',
   // email: '',
   // phone: '',
@@ -88,7 +88,7 @@ export default function StoryForm() {
           <Field name="title">
             {({ field, form }) => (
               <FormControl p="4" isRequired isInvalid={form.errors.title && form.touched.title}>
-                <FormLabel htmlFor="title">Your story title</FormLabel>
+                <FormLabel htmlFor="title">Enter a title or quote</FormLabel>
                 <Textarea {...field} id="title" placeholder="Enter your story title" />
                 <FormHelperText>Maximum ___ characters</FormHelperText>
                 <FormErrorMessage>{form.errors.title}</FormErrorMessage>
@@ -100,7 +100,7 @@ export default function StoryForm() {
           <Field name="content">
             {({ field, form }) => (
               <FormControl p="4" isRequired isInvalid={form.errors.content && form.touched.content}>
-                <FormLabel htmlFor="content">Your story content</FormLabel>
+                <FormLabel htmlFor="content">Please share your story</FormLabel>
                 <Textarea {...field} id="content" placeholder="Enter your story content" />
                 <FormHelperText>Maximum ___ characters</FormHelperText>
                 <FormErrorMessage>{form.errors.content}</FormErrorMessage>
@@ -112,7 +112,7 @@ export default function StoryForm() {
           <Field name="postal">
             {({ field, form }) => (
               <FormControl p="4" isRequired isInvalid={form.errors.postal && form.touched.postal}>
-                <FormLabel htmlFor="postal">Your story postal</FormLabel>
+                <FormLabel htmlFor="postal">First 3 characters of your postal code</FormLabel>
                 <Input {...field} id="postal" placeholder="P6A" />
                 <FormErrorMessage>{form.errors.postal}</FormErrorMessage>
               </FormControl>
@@ -147,17 +147,34 @@ export default function StoryForm() {
           <Field name="anonymous">
             {({ field, form }) => (
               <FormControl p="4" isInvalid={form.errors.anonymous && form.touched.anonymous}>
-                <FormLabel htmlFor="anonymous">I am a:</FormLabel>
+                <FormLabel as="legend" htmlFor="anonymous">
+                  I want the story published:
+                </FormLabel>
                 <RadioGroup {...field} name="anonymous" id="anonymous">
-                  <Radio {...field} value="true">
-                    Anonymously (e.g. Worker from LP6)
-                  </Radio>
-                  <Radio {...field} value="false">
-                    With my name below
-                  </Radio>
+                  <Stack direction="column">
+                    <Radio {...field} value="true">
+                      Anonymously (e.g. Worker from LP6)
+                    </Radio>
+                    <Radio {...field} value="false">
+                      With my name below
+                    </Radio>
+                  </Stack>
                 </RadioGroup>
                 <FormErrorMessage>{form.errors.anonymous}</FormErrorMessage>
-                <FormHelperText>Choose the one that best describes you</FormHelperText>
+              </FormControl>
+            )}
+          </Field>
+
+          {/* Contact */}
+          <Field name="contact">
+            {({ field, form }) => (
+              <FormControl p="4" isInvalid={form.errors.contact && form.touched.contact}>
+                <FormLabel as="legend" htmlFor="contact">
+                  Media Contact
+                </FormLabel>
+                <Checkbox {...field}>Yes, the media can contact me</Checkbox>
+                <FormErrorMessage>{form.errors.contact}</FormErrorMessage>
+                <FormHelperText>Let us know if the media can contact you.</FormHelperText>
               </FormControl>
             )}
           </Field>

@@ -11,14 +11,19 @@ generator client {
 }
 
 model Story {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  title     String
   content   String
   postal    String
+  category  String
+  name      String?
   email     String?
   twitter   String?
   phone     String?
+  anonymous Boolean
+  contact   Boolean
   approved  Boolean  @default(false)
   viewCount Int      @default(0)
 

@@ -4,37 +4,39 @@ const prisma = new PrismaClient()
 
 const userData: Prisma.StoryCreateInput[] = [
   {
-    content: 'This is a covid story',
-    email: 'alice@test.io',
+    title: 'Here is our first story',
+    content:
+      'This command deletes and recreates the database, or performs a soft reset by removing all data, tables, indexes, and other artifacts.',
     postal: 'N6A',
-    approved: true
+    category: 'doctor',
+    email: 'alice@test.io',
+    anonymous: false,
+    name: 'Alice munro',
+    contact: false,
+    approved: true,
   },
   {
-    content: 'This is a covid story',
-    phone: '5195551122',
-    postal: 'M5N',
-    approved: true
+    title: 'Here is our second story',
+    content:
+      'This command deletes and recreates the database, or performs a soft reset by removing all data, tables, indexes, and other artifacts.',
+    postal: 'N6A',
+    category: 'worker',
+    email: 'alice@test.io',
+    anonymous: true,
+    contact: false,
+    approved: true,
   },
   {
-    content: 'This is a covid story',
-    postal: 'K7B',
-    twitter: 'alicetest',
-    approved: true
-  },
-  {
-    content: 'This story has an image',
-    postal: 'K7B',
-    approved: true
-  },
-  {
-    content: 'NOT APPROVED This story has an image',
-    postal: 'K7B',
-    approved: false
-  },
-  {
-    content: 'NOT APPROVEDThis story has an image',
-    postal: 'K7B',
-    approved: false
+    title: 'Here is our first story',
+    content:
+      'This command deletes and recreates the database, or performs a soft reset by removing all data, tables, indexes, and other artifacts.',
+    postal: 'N6A',
+    category: 'doctor',
+    email: 'alice@test.io',
+    anonymous: false,
+    name: 'Alice munro',
+    contact: false,
+    approved: true,
   },
 ]
 

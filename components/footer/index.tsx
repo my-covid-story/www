@@ -12,6 +12,10 @@ export default function Footer() {
       <Link href="/faq">
         <a>FAQ</a>
       </Link>
+
+      <Link href="/stories/create">
+        <a>Create a Story</a>
+      </Link>
     </footer>
   )
 }

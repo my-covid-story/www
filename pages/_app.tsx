@@ -1,15 +1,12 @@
-// eslint-disable-next-line
-import '../styles/globals.css'
-import customTheme from '../styles/theme.js'
-import '@fontsource/inter'
-
-import { ChakraProvider, extendTheme } from '@chakra-ui/react'
-
-const theme = extendTheme(customTheme)
-
 import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
+import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+import '@fontsource/inter'
+
+import '../styles/globals.css'
+import customTheme from '../styles/theme.js'
 import { env } from 'node:process'
+import DefaultLayout from '../layouts/default'
 
 Sentry.init({
   dsn: 'https://ff771404287542638b24e14b8de8edff@o573965.ingest.sentry.io/5724646',
@@ -19,9 +16,14 @@ Sentry.init({
 })
 
 function MyApp({ Component, pageProps }) {
+  const theme = extendTheme(customTheme)
+  const Layout = Component.layout || DefaultLayout
+
   return (
     <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ChakraProvider>
   )
 }

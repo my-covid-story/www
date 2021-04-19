@@ -1,9 +1,12 @@
+import Create from '../../layouts/stories/create'
 import StoryForm from '../../components/form'
 
-export default function CreateStory() {
-  return (
-    <div>
-      <StoryForm />
-    </div>
-  )
-}
+const CreateStory = () => (
+  <div>
+    <StoryForm />
+  </div>
+)
+
+CreateStory.layout = Create
+
+export default CreateStory

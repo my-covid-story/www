@@ -1,8 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
-import Footer from '../components/footer'
-
 export default function About() {
   return (
     <div className={styles.container}>
@@ -12,8 +10,6 @@ export default function About() {
       </Head>
 
       <main className={styles.main}>About</main>
-
-      <Footer />
     </div>
   )
 }

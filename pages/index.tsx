@@ -3,7 +3,6 @@ import styles from '../styles/Home.module.css'
 import landing from '../styles/LandingPage.module.css'
 import prisma from '../lib/prisma'
 
-import Footer from '../components/footer'
 import { Box, Heading, Text } from '@chakra-ui/react'
 
 export default function Home({ feed }) {
@@ -59,8 +58,6 @@ export default function Home({ feed }) {
           ))}
         </div>
       </main>
-
-      <Footer />
     </div>
   )
 }

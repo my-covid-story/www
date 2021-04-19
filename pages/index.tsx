@@ -1,12 +1,34 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import landing from '../styles/LandingPage.module.css'
 import prisma from '../lib/prisma'
 
 import StoryForm from '../components/form'
 import Footer from '../components/footer'
+import { Box, Heading } from '@chakra-ui/react'
 
 export default function Home({ feed }) {
-  console.log(feed)
+  if (process.env.NODE_ENV !== 'production') {
+    return (
+      <div className={styles.container}>
+        <Head>
+          <title>My Covid Story | Every number has a story</title>
+          <meta
+            name="description"
+            content="Every covid number has a story which deserves to be shared"
+          />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <main className={styles.main}>
+          <Box className={landing.heading}>
+            <Heading as="h1" size="2xl">My Covid Story</Heading>
+            <p>Every number has a story</p>
+          </Box>
+        </main>
+      </div>
+    )
+  }
+
   return (
     <div className={styles.container}>
       <Head>

@@ -21,7 +21,7 @@ const schema = yup.object().shape({
   content: yup.string().required(),
   postal: yup.string().required(), // TODO: need to do postal FSA validation
   category: yup.string(), // TODO: Figure out enum validation for list options
-  // anonymous: yup.bool().required(),
+  anonymous: yup.bool().required(),
   // contact: yup.bool().required(),
   // name: yup.string(),
   // email: yup.string().email(),
@@ -34,7 +34,7 @@ type LoginFormInputs = {
   content: string
   postal: string
   category?: string
-  // anonymous: boolean
+  anonymous: boolean
   // contact: boolean
   // name?: string
   // email?: string
@@ -47,12 +47,12 @@ const initialValues = {
   content: '',
   postal: '',
   category: '',
-  anonymous: '',
-  contact: '',
-  name: '',
-  email: '',
-  phone: '',
-  twitter: '',
+  anonymous: 'true',
+  // contact: '',
+  // name: '',
+  // email: '',
+  // phone: '',
+  // twitter: '',
 }
 export default function StoryForm() {
   return (
@@ -87,7 +87,7 @@ export default function StoryForm() {
           {/* Title */}
           <Field name="title">
             {({ field, form }) => (
-              <FormControl p="4" isInvalid={form.errors.title && form.touched.title}>
+              <FormControl p="4" isRequired isInvalid={form.errors.title && form.touched.title}>
                 <FormLabel htmlFor="title">Your story title</FormLabel>
                 <Textarea {...field} id="title" placeholder="Enter your story title" />
                 <FormHelperText>Maximum ___ characters</FormHelperText>
@@ -99,7 +99,7 @@ export default function StoryForm() {
           {/* Content */}
           <Field name="content">
             {({ field, form }) => (
-              <FormControl p="4" isInvalid={form.errors.content && form.touched.content}>
+              <FormControl p="4" isRequired isInvalid={form.errors.content && form.touched.content}>
                 <FormLabel htmlFor="content">Your story content</FormLabel>
                 <Textarea {...field} id="content" placeholder="Enter your story content" />
                 <FormHelperText>Maximum ___ characters</FormHelperText>
@@ -111,7 +111,7 @@ export default function StoryForm() {
           {/* Postal */}
           <Field name="postal">
             {({ field, form }) => (
-              <FormControl p="4" isInvalid={form.errors.postal && form.touched.postal}>
+              <FormControl p="4" isRequired isInvalid={form.errors.postal && form.touched.postal}>
                 <FormLabel htmlFor="postal">Your story postal</FormLabel>
                 <Input {...field} id="postal" placeholder="P6A" />
                 <FormErrorMessage>{form.errors.postal}</FormErrorMessage>
@@ -122,9 +122,13 @@ export default function StoryForm() {
           {/* Category */}
           <Field name="category">
             {({ field, form }) => (
-              <FormControl p="4" isInvalid={form.errors.category && form.touched.category}>
+              <FormControl
+                p="4"
+                isRequired
+                isInvalid={form.errors.category && form.touched.category}
+              >
                 <FormLabel htmlFor="category">I am a:</FormLabel>
-                <Select {...field} id="category">
+                <Select {...field} name="category" id="category">
                   <option value="concerned-citizen">Concerned citizen</option>
                   <option value="essential-worker">Essential worker</option>
                   <option value="healthcare-provider">Healthcare provider</option>
@@ -144,9 +148,13 @@ export default function StoryForm() {
             {({ field, form }) => (
               <FormControl p="4" isInvalid={form.errors.anonymous && form.touched.anonymous}>
                 <FormLabel htmlFor="anonymous">I am a:</FormLabel>
-                <RadioGroup {...field} id="anonymous">
-                  <Radio value="true">Anonymously (e.g. Worker from LP6)</Radio>
-                  <Radio value="false">With my name below</Radio>
+                <RadioGroup {...field} name="anonymous" id="anonymous">
+                  <Radio {...field} value="true">
+                    Anonymously (e.g. Worker from LP6)
+                  </Radio>
+                  <Radio {...field} value="false">
+                    With my name below
+                  </Radio>
                 </RadioGroup>
                 <FormErrorMessage>{form.errors.anonymous}</FormErrorMessage>
                 <FormHelperText>Choose the one that best describes you</FormHelperText>
@@ -161,4 +169,9 @@ export default function StoryForm() {
       )}
     </Formik>
   )
+}
+
+function Logger(props) {
+  console.log(props)
+  return <pre>{JSON.stringify(props, null, 2)}</pre>
 }

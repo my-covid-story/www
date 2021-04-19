@@ -7,9 +7,10 @@ import {
   Input,
   Button,
   Textarea,
+  Select,
   // Checkbox,
-  // Radio,
-  // RadioGroup,
+  Radio,
+  RadioGroup,
 } from '@chakra-ui/react'
 import { Formik, Field, Form } from 'formik'
 import * as yup from 'yup'
@@ -19,7 +20,7 @@ const schema = yup.object().shape({
   title: yup.string().required(), // TODO: length validation
   content: yup.string().required(),
   postal: yup.string().required(), // TODO: need to do postal FSA validation
-  // category: yup.string(), // TODO: Figure out enum validation for list options
+  category: yup.string(), // TODO: Figure out enum validation for list options
   // anonymous: yup.bool().required(),
   // contact: yup.bool().required(),
   // name: yup.string(),
@@ -32,7 +33,7 @@ type LoginFormInputs = {
   title: string
   content: string
   postal: string
-  // category?: string
+  category?: string
   // anonymous: boolean
   // contact: boolean
   // name?: string
@@ -114,6 +115,41 @@ export default function StoryForm() {
                 <FormLabel htmlFor="postal">Your story postal</FormLabel>
                 <Input {...field} id="postal" placeholder="P6A" />
                 <FormErrorMessage>{form.errors.postal}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
+
+          {/* Category */}
+          <Field name="category">
+            {({ field, form }) => (
+              <FormControl p="4" isInvalid={form.errors.category && form.touched.category}>
+                <FormLabel htmlFor="category">I am a:</FormLabel>
+                <Select {...field} id="category">
+                  <option value="concerned-citizen">Concerned citizen</option>
+                  <option value="essential-worker">Essential worker</option>
+                  <option value="healthcare-provider">Healthcare provider</option>
+                  <option value="educator">Educator</option>
+                  <option value="small-business-owner">Small business owner</option>
+                  <option value="patient-family-member">Patient or patient family member</option>
+                  <option value="other">Other</option>
+                </Select>
+                <FormErrorMessage>{form.errors.category}</FormErrorMessage>
+                <FormHelperText>Choose the one that best describes you</FormHelperText>
+              </FormControl>
+            )}
+          </Field>
+
+          {/* Anonymous */}
+          <Field name="anonymous">
+            {({ field, form }) => (
+              <FormControl p="4" isInvalid={form.errors.anonymous && form.touched.anonymous}>
+                <FormLabel htmlFor="anonymous">I am a:</FormLabel>
+                <RadioGroup {...field} id="anonymous">
+                  <Radio value="true">Anonymously (e.g. Worker from LP6)</Radio>
+                  <Radio value="false">With my name below</Radio>
+                </RadioGroup>
+                <FormErrorMessage>{form.errors.anonymous}</FormErrorMessage>
+                <FormHelperText>Choose the one that best describes you</FormHelperText>
               </FormControl>
             )}
           </Field>

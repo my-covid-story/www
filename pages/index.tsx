@@ -7,7 +7,7 @@ import Footer from '../components/footer'
 import { Box, Button, Heading, Link, Text } from '@chakra-ui/react'
 
 export default function Home({ feed }) {
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV === 'production') {
     return (
       <div className={landing.container}>
         <Head>
@@ -76,13 +76,13 @@ export default function Home({ feed }) {
   )
 }
 
-// export async function getServerSideProps() {
-//   const feed = await prisma.story.findMany({
-//     where: { approved: true },
-//     orderBy: { createdAt: 'asc' },
-//   })
-//
-//   return {
-//     props: { feed },
-//   }
-// }
+export async function getServerSideProps() {
+  const feed = await prisma.story.findMany({
+    where: { approved: true },
+    orderBy: { createdAt: 'asc' },
+  })
+
+  return {
+    props: { feed },
+  }
+}

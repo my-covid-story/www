@@ -9,7 +9,7 @@ export default function About() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>About</main>
+      <div className={styles.main}>About</div>
     </div>
   )
 }

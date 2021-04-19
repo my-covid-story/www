@@ -18,7 +18,7 @@ export default function Home({ feed }) {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <div className={landing.background} />
-        <main className={landing.main}>
+        <div className={landing.main}>
           <Box className={landing.heading}>
             <Heading as="h1" size="2xl">
               My Covid Story
@@ -28,7 +28,7 @@ export default function Home({ feed }) {
           <Box>
             <Text>Coming Soon</Text>
           </Box>
-        </main>
+        </div>
       </div>
     )
   }

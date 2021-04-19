@@ -17,13 +17,11 @@ Sentry.init({
 
 function MyApp({ Component, pageProps }) {
   const theme = extendTheme(customTheme)
-  const Layout = Component.layout || DefaultLayout
+  const getLayout = Component.getLayout || ((page) => <DefaultLayout>{page}</DefaultLayout>)
 
-  return (
+  return getLayout(
     <ChakraProvider theme={theme}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <Component {...pageProps} />
     </ChakraProvider>
   )
 }

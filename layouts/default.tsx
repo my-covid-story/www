@@ -1,12 +1,14 @@
-import React from 'react'
 import Footer from '../components/footer'
+import FloatingCTA from '../components/floatingCTA'
 
-const DefaultLayout = ({ children }) => [
-  <div key={'content'} className={'layout'}>
-    {children}
-    <div className={'floatingCTA'} />
-  </div>,
-  <Footer key={'footer'} />,
-]
+const DefaultLayout = ({ children }) => (
+  <>
+    <main key={'content'} className={'layout'}>
+      {children}
+      <FloatingCTA />
+    </main>
+    <Footer key={'footer'} />
+  </>
+)
 
 export default DefaultLayout

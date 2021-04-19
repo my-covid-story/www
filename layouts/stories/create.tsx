@@ -1,5 +1,14 @@
-import React from 'react'
+import Link from 'next/link'
 
-const Create = ({ children }) => <div className={'create'}>{children}</div>
+const CreateLayout = ({ children }) => (
+  <div className={'createLayout'}>
+    {children}
+    <footer>
+      <Link href="/">
+        <a>Back</a>
+      </Link>
+    </footer>
+  </div>
+)
 
-export default Create
+export default CreateLayout

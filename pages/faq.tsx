@@ -9,7 +9,7 @@ export default function FAQ() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>FAQ</main>
+      <div className={styles.main}>FAQ</div>
     </div>
   )
 }

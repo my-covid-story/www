@@ -1,4 +1,4 @@
-import Create from '../../layouts/stories/create'
+import CreateLayout from '../../layouts/stories/create'
 import StoryForm from '../../components/form'
 
 const CreateStory = () => (
@@ -7,6 +7,6 @@ const CreateStory = () => (
   </div>
 )
 
-CreateStory.layout = Create
+CreateStory.getLayout = (page) => <CreateLayout>{page}</CreateLayout>
 
 export default CreateStory

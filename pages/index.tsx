@@ -7,7 +7,7 @@ import Footer from '../components/footer'
 import { Box, Heading, Text } from '@chakra-ui/react'
 
 export default function Home({ feed }) {
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV === 'production') {
     return (
       <div className={landing.container}>
         <Head>

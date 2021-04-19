@@ -3,7 +3,6 @@ import styles from '../styles/Home.module.css'
 import landing from '../styles/LandingPage.module.css'
 import prisma from '../lib/prisma'
 
-import StoryForm from '../components/form'
 import Footer from '../components/footer'
 import { Box, Heading } from '@chakra-ui/react'
 
@@ -52,9 +51,6 @@ export default function Home({ feed }) {
               </ul>
             </pre>
           ))}
-        </div>
-        <div className={styles.storyContainer}>
-          <StoryForm />
         </div>
       </main>
 

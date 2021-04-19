@@ -3,12 +3,12 @@ import styles from '../styles/Home.module.css'
 
 import StoryForm from '../components/form'
 
-import { signIn, signOut, useSession } from 'next-auth/client'
+import { signIn, signOut, useSession, getSession } from 'next-auth/client'
+import prisma from '../lib/prisma'
 
-export default function _Admin({ feed }) {
+export default function _Admin({ stories }) {
   const [ session ] = useSession()
-  console.log(session);
-  console.log(feed);
+
   return <>
     {!session && <>
       Not signed in <br/>
@@ -18,7 +18,7 @@ export default function _Admin({ feed }) {
       Signed in as {session.user.email} <br/>
       <button onClick={() => signOut()}>Sign out</button>
 
-      {feed && feed.map((story) => (
+      {stories.map((story) => (
         <pre>
             <ul>
             <li>id: {story.id}</li>
@@ -29,16 +29,23 @@ export default function _Admin({ feed }) {
             </ul>
         </pre>
         ))}
-
     </>}
   </>
 }
 
 
 export async function getServerSideProps({ req }) {
-  const res = await fetch('http://localhost:3000/api/admin', req)
-  const feed = await res.json()
+  const session = await getSession({ req })
+
+  let stories = {}
+  if(session) {
+    stories = await prisma.story.findMany({
+        where: { approved: false },
+        orderBy: { createdAt: 'asc' },
+    })
+  }
+
   return {
-    props: { feed },
+    props: { stories },
   }
 }

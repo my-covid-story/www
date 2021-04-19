@@ -16,7 +16,7 @@ export default function Home({ feed }) {
       <main className={styles.main}>
         <h1 className={styles.title}>Share your Covid Story</h1>
         <div className={styles.storyContainer}>
-          <h3>Latest stories</h3>
+          <h3>Latest stories:</h3>
           {feed.map((story) => (
             <pre key={story.id}>
               <ul>

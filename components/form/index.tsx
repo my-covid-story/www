@@ -5,12 +5,15 @@ import {
   FormErrorMessage,
   FormHelperText,
   Input,
+  InputGroup,
+  InputLeftAddon,
   Button,
   Textarea,
   Select,
   Radio,
   RadioGroup,
   Checkbox,
+  Text,
 } from '@chakra-ui/react'
 import { Formik, Field, Form } from 'formik'
 import * as yup from 'yup'
@@ -21,12 +24,13 @@ const schema = yup.object().shape({
   content: yup.string().required(),
   postal: yup.string().required(), // TODO: need to do postal FSA validation
   category: yup.string(), // TODO: Figure out enum validation for list options
-  anonymous: yup.bool().required(),
-  contact: yup.bool().required(),
-  // name: yup.string(),
-  // email: yup.string().email(),
-  // phone: yup.string(), // TODO: Phone validation
-  // twitter: yup.string(),
+  anonymous: yup.bool(),
+  contact: yup.bool(),
+  name: yup.string(),
+  email: yup.string().email(),
+  phone: yup.string(), // TODO: Phone validation
+  twitter: yup.string(),
+  consent: yup.bool().isTrue(),
 })
 
 type LoginFormInputs = {
@@ -36,10 +40,11 @@ type LoginFormInputs = {
   category?: string
   anonymous: string
   contact: boolean
-  // name?: string
-  // email?: string
-  // phone?: string
-  // twitter?: string
+  name?: string
+  email?: string
+  phone?: string
+  twitter?: string
+  consent: boolean
 }
 
 const initialValues = {
@@ -49,10 +54,11 @@ const initialValues = {
   category: '',
   anonymous: 'true',
   contact: false,
-  // name: '',
-  // email: '',
-  // phone: '',
-  // twitter: '',
+  name: '',
+  email: '',
+  phone: '',
+  twitter: '',
+  consent: false,
 }
 export default function StoryForm() {
   return (
@@ -87,7 +93,12 @@ export default function StoryForm() {
           {/* Title */}
           <Field name="title">
             {({ field, form }) => (
-              <FormControl p="4" isRequired isInvalid={form.errors.title && form.touched.title}>
+              <FormControl
+                pt="8"
+                pb="8"
+                isRequired
+                isInvalid={form.errors.title && form.touched.title}
+              >
                 <FormLabel htmlFor="title">Enter a title or quote</FormLabel>
                 <Textarea {...field} id="title" placeholder="Enter your story title" />
                 <FormHelperText>Maximum ___ characters</FormHelperText>
@@ -99,7 +110,12 @@ export default function StoryForm() {
           {/* Content */}
           <Field name="content">
             {({ field, form }) => (
-              <FormControl p="4" isRequired isInvalid={form.errors.content && form.touched.content}>
+              <FormControl
+                pt="8"
+                pb="8"
+                isRequired
+                isInvalid={form.errors.content && form.touched.content}
+              >
                 <FormLabel htmlFor="content">Please share your story</FormLabel>
                 <Textarea {...field} id="content" placeholder="Enter your story content" />
                 <FormHelperText>Maximum ___ characters</FormHelperText>
@@ -111,9 +127,14 @@ export default function StoryForm() {
           {/* Postal */}
           <Field name="postal">
             {({ field, form }) => (
-              <FormControl p="4" isRequired isInvalid={form.errors.postal && form.touched.postal}>
+              <FormControl
+                pt="8"
+                pb="8"
+                isRequired
+                isInvalid={form.errors.postal && form.touched.postal}
+              >
                 <FormLabel htmlFor="postal">First 3 characters of your postal code</FormLabel>
-                <Input {...field} id="postal" placeholder="P6A" />
+                <Input {...field} id="postal" placeholder="P6A" size="lg" />
                 <FormErrorMessage>{form.errors.postal}</FormErrorMessage>
               </FormControl>
             )}
@@ -123,12 +144,13 @@ export default function StoryForm() {
           <Field name="category">
             {({ field, form }) => (
               <FormControl
-                p="4"
+                pt="8"
+                pb="8"
                 isRequired
                 isInvalid={form.errors.category && form.touched.category}
               >
                 <FormLabel htmlFor="category">I am a:</FormLabel>
-                <Select {...field} name="category" id="category">
+                <Select {...field} name="category" id="category" placeholder="Choose one">
                   <option value="concerned-citizen">Concerned citizen</option>
                   <option value="essential-worker">Essential worker</option>
                   <option value="healthcare-provider">Healthcare provider</option>
@@ -146,7 +168,11 @@ export default function StoryForm() {
           {/* Anonymous */}
           <Field name="anonymous">
             {({ field, form }) => (
-              <FormControl p="4" isInvalid={form.errors.anonymous && form.touched.anonymous}>
+              <FormControl
+                pt="8"
+                pb="8"
+                isInvalid={form.errors.anonymous && form.touched.anonymous}
+              >
                 <FormLabel as="legend" htmlFor="anonymous">
                   I want the story published:
                 </FormLabel>
@@ -168,7 +194,7 @@ export default function StoryForm() {
           {/* Contact */}
           <Field name="contact">
             {({ field, form }) => (
-              <FormControl p="4" isInvalid={form.errors.contact && form.touched.contact}>
+              <FormControl pt="8" pb="8" isInvalid={form.errors.contact && form.touched.contact}>
                 <FormLabel as="legend" htmlFor="contact">
                   Media Contact
                 </FormLabel>
@@ -179,7 +205,83 @@ export default function StoryForm() {
             )}
           </Field>
 
-          <Button mt={4} colorScheme="teal" isLoading={props.isSubmitting} type="submit">
+          {/* Contact Info */}
+          <Text as="h4">
+            <strong>Optional Contact Info</strong>
+          </Text>
+          {/* Name */}
+          <Field name="name">
+            {({ field, form }) => (
+              <FormControl pt="4" pb="4" isInvalid={form.errors.name && form.touched.name}>
+                <FormLabel htmlFor="name">Name to display</FormLabel>
+                <Input {...field} id="name" placeholder="Contact name" />
+                <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
+          {/* Phone */}
+          <Field name="phone">
+            {({ field, form }) => (
+              <FormControl pt="4" pb="4" isInvalid={form.errors.phone && form.touched.phone}>
+                <FormLabel htmlFor="phone">Phone number</FormLabel>
+                <Input {...field} id="phone" placeholder="555-555-5555" />
+                <FormErrorMessage>{form.errors.phone}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
+          {/* Email */}
+          <Field name="email">
+            {({ field, form }) => (
+              <FormControl pt="4" pb="4" isInvalid={form.errors.email && form.touched.email}>
+                <FormLabel htmlFor="email">Email</FormLabel>
+                <Input {...field} id="email" placeholder="name@domain.com" />
+                <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
+          {/* Twitter */}
+          <Field name="twitter">
+            {({ field, form }) => (
+              <FormControl pt="4" pb="4" isInvalid={form.errors.twitter && form.touched.twitter}>
+                <FormLabel htmlFor="twitter">Twitter</FormLabel>
+                <InputGroup>
+                  <InputLeftAddon children="@" />
+                  <Input {...field} id="twitter" />
+                </InputGroup>
+                <FormErrorMessage>{form.errors.twitter}</FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
+
+          {/* Consent */}
+          <Field name="consent">
+            {({ field, form }) => (
+              <FormControl
+                pt="8"
+                pb="8"
+                isRequired
+                isInvalid={form.errors.consent && form.touched.consent}
+              >
+                <FormLabel as="legend" htmlFor="consent">
+                  Declaration and Consent
+                </FormLabel>
+                <Checkbox {...field} id="consent" name="consent">
+                  I confirm this story is true and I have consent to share it and any photo
+                  submitted
+                </Checkbox>
+                <FormErrorMessage>{form.errors.consent}</FormErrorMessage>
+                <FormHelperText>Let us know if the media can consent you.</FormHelperText>
+              </FormControl>
+            )}
+          </Field>
+
+          <Button
+            isFullWidth
+            mt={4}
+            colorScheme="teal"
+            isLoading={props.isSubmitting}
+            type="submit"
+          >
             Submit
           </Button>
         </Form>

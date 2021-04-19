@@ -7,9 +7,9 @@
     position: relative;
     text-align: center;
     color: #FFF;
-    background-image: url('/img/landingpage.jpg');
+    background-image: url('/img/landingpage-v2.jpg');
     background-size: cover;
-    background-position: center 25%;
+    background-position: center 60%;
 }
 
 .background {
@@ -31,4 +31,14 @@
     justify-content: space-around;
     align-items: center;
     height: 100vh;
+}
+
+.heading {
+    padding-bottom: 0.75rem;
+}
+
+.blurb {
+    max-width: 20rem;
+    padding-top: 3rem;
+    margin: 0 auto;
 }

@@ -4,7 +4,7 @@ import landing from '../styles/LandingPage.module.css'
 import prisma from '../lib/prisma'
 
 import Footer from '../components/footer'
-import { Box, Heading, Text } from '@chakra-ui/react'
+import { Box, Button, Heading, Link, Text } from '@chakra-ui/react'
 
 export default function Home({ feed }) {
   if (process.env.NODE_ENV === 'production') {
@@ -13,21 +13,32 @@ export default function Home({ feed }) {
         <Head>
           <title>My Covid Story | Every number has a story</title>
           <meta
-            name="description"
-            content="Every covid number has a story which deserves to be shared"
+            name='description'
+            content='Every covid number has a story which deserves to be shared'
           />
-          <link rel="icon" href="/favicon.ico" />
+          <link rel='icon' href='/favicon.ico' />
         </Head>
         <div className={landing.background} />
         <main className={landing.main}>
-          <Box className={landing.heading}>
-            <Heading as="h1" size="2xl">
+          <Box>
+            <Heading className={landing.heading} as='h1' size='3xl'>
               My Covid Story
             </Heading>
             <Text>Every number has a story</Text>
           </Box>
           <Box>
-            <Text>Coming Soon</Text>
+            <Heading size='xl'>Coming Soon</Heading>
+            <Text className={landing.blurb}>We are a group of concerned citizens who could no longer stand by as Ontario
+              is led into a
+              humanitarian crisis. We believe the power of storytelling is an effective means to drive government
+              action.</Text>
+          </Box>
+          <Box>
+            <Link href='https://kvmhxg5ojy6.typeform.com/to/gUsoYkft' rel='noopener' style={{'display':'inline-block'}}>
+              <Button variant='solid'>
+                Media Sign-Up
+              </Button>
+            </Link>
           </Box>
         </main>
       </div>
@@ -38,7 +49,7 @@ export default function Home({ feed }) {
     <div className={styles.container}>
       <Head>
         <title>My Covid Story</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel='icon' href='/favicon.ico' />
       </Head>
 
       <main className={styles.main}>

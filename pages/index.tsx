@@ -2,12 +2,12 @@ import Head from 'next/head'
 import landing from '../styles/LandingPage.module.css'
 import { Box, Button, Heading, Link, Text } from '@chakra-ui/react'
 
-export default function Home({ title, description, previewImage }) {
+export default function Home() {
   return (
     <>
       <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
+        <title>PAGE TITLE</title>
+        {/* <meta name="description" content={description} />
         <link rel="icon" href="/favicon.ico" />
 
         <meta property="og:title" content={title} />
@@ -17,7 +17,7 @@ export default function Home({ title, description, previewImage }) {
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={previewImage} />
-        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:card" content="summary_large_image" /> */}
       </Head>
       <div className={landing.container}>
         <div className={landing.background} />
@@ -51,12 +51,12 @@ export default function Home({ title, description, previewImage }) {
   )
 }
 
-export async function getStaticProps() {
-  const title = 'My Covid Story | Every number has a story'
-  const description = 'Every covid number has a story which deserves to be shared'
-  const previewImage = 'https://www.mycovidstory.ca/img/landingpage-v2.jpg'
+// export async function getStaticProps() {
+//   const title = 'My Covid Story | Every number has a story'
+//   const description = 'Every covid number has a story which deserves to be shared'
+//   const previewImage = 'https://www.mycovidstory.ca/img/landingpage-v2.jpg'
 
-  return {
-    props: { title, description, previewImage },
-  }
-}
+//   return {
+//     props: { title, description, previewImage },
+//   }
+// }

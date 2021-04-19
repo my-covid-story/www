@@ -10,7 +10,7 @@ export default function Home({ feed }) {
   if (process.env.NODE_ENV === 'production') {
     const title = "My Covid Story | Every number has a story"
     const description = "Every covid number has a story which deserves to be shared"
-    const previewImage = "/img/landingpage-v2.jpg"
+    const previewImage = "https://www.mycovidstory.ca/img/landingpage-v2.jpg"
     return (
       <div className={landing.container}>
         <Head>

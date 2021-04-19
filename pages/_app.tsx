@@ -24,7 +24,7 @@ const previewImage = 'https://www.mycovidstory.ca/img/landingpage-v2.jpg'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ChakraProvider theme={theme}>
+    <>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
@@ -39,8 +39,10 @@ function MyApp({ Component, pageProps }) {
         <meta name="twitter:image" content={previewImage} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <Component {...pageProps} />
-    </ChakraProvider>
+      <ChakraProvider theme={theme}>
+        <Component {...pageProps} />
+      </ChakraProvider>
+    </>
   )
 }
 

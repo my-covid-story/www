@@ -61,7 +61,7 @@ export default function StoryForm() {
       onSubmit={async (values: LoginFormInputs, actions) => {
         try {
           actions.setSubmitting(true)
-          const result = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/story`, {
+          const result = await fetch(`/api/story`, {
             method: 'POST',
             body: JSON.stringify(values),
             headers: {
@@ -69,9 +69,11 @@ export default function StoryForm() {
             },
           })
           console.log(result)
-          if (result) {
+          if (result.ok) {
             actions.setSubmitting(false)
             Router.push('/stories/thanks')
+          } else {
+            console.error('something went wrong')
           }
         } catch (e) {
           console.error(e)

@@ -20,17 +20,27 @@ import * as yup from 'yup'
 import Router from 'next/router'
 
 const schema = yup.object().shape({
-  title: yup.string().required(), // TODO: length validation
-  content: yup.string().required(),
-  postal: yup.string().required(), // TODO: need to do postal FSA validation
-  category: yup.string(), // TODO: Figure out enum validation for list options
+  title: yup
+    .string()
+    .max(75, "Your title can't be more than 75 characters")
+    .required('Title is required'),
+  content: yup
+    .string()
+    .max(600, "Story content can't be more than 600 characters")
+    .required('A story is required'),
+  postal: yup
+    .string()
+    .min(3, 'Postal code must be three characters')
+    .max(3, "Postal code can't be more than three characters")
+    .required(), // TODO: need to do postal FSA validation
+  category: yup.string().required('Please choose a category'), // TODO: Figure out enum validation for list options
   anonymous: yup.bool(),
   contact: yup.bool(),
   name: yup.string(),
-  email: yup.string().email(),
+  email: yup.string().email('Invalid email address format'),
   phone: yup.string(), // TODO: Phone validation
   twitter: yup.string(),
-  consent: yup.bool().isTrue(),
+  consent: yup.bool().isTrue('You must provide your consent to continue'),
 })
 
 type LoginFormInputs = {
@@ -101,7 +111,7 @@ export default function StoryForm() {
               >
                 <FormLabel htmlFor="title">Enter a title or quote</FormLabel>
                 <Textarea {...field} id="title" placeholder="Enter your story title" />
-                <FormHelperText>Maximum ___ characters</FormHelperText>
+                <FormHelperText>Maximum 75 characters</FormHelperText>
                 <FormErrorMessage>{form.errors.title}</FormErrorMessage>
               </FormControl>
             )}

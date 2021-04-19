@@ -25,7 +25,7 @@ Contact @mwickett on Slack for access to the Vercel team, or the GitHub org if y
 6. Run `npx prisma migrate dev --name init` to apply migrations in `prisma/migrations`
 7. Run `npx prisma db seed --preview-feature` to see test data from `prisma/seed.ts`
 8. Run `npm run dev` to start the app locally
-9. You can use `/api/story` to create new stories
+9. You can use `/api/stories` to create new stories
 
 ---
 

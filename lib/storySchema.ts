@@ -3,8 +3,8 @@
 
 import * as yup from 'yup'
 
-const TITLE_CHAR_LIMIT = 75
-const STORY_WORD_LIMIT = 1000
+export const TITLE_CHAR_LIMIT = 75
+export const STORY_WORD_LIMIT = 1000
 
 const schema = yup.object().shape({
   title: yup

@@ -18,7 +18,7 @@ import {
 import { Formik, Field, Form } from 'formik'
 import Router from 'next/router'
 
-import storySchema from '../../lib/storySchema'
+import storySchema, { TITLE_CHAR_LIMIT, STORY_WORD_LIMIT } from '../../lib/storySchema'
 
 type LoginFormInputs = {
   title: string
@@ -88,7 +88,7 @@ export default function StoryForm() {
               >
                 <FormLabel htmlFor="title">Enter a title or quote</FormLabel>
                 <Textarea {...field} id="title" placeholder="Enter your story title" />
-                <FormHelperText>Up to 75 characters</FormHelperText>
+                <FormHelperText>{`Up to ${TITLE_CHAR_LIMIT} characters`}</FormHelperText>
                 <FormErrorMessage>{form.errors.title}</FormErrorMessage>
               </FormControl>
             )}
@@ -105,7 +105,7 @@ export default function StoryForm() {
               >
                 <FormLabel htmlFor="content">Please share your story</FormLabel>
                 <Textarea {...field} id="content" placeholder="Enter your story content" />
-                <FormHelperText>Up to 1000 words</FormHelperText>
+                <FormHelperText>{`Up to ${STORY_WORD_LIMIT} words`}</FormHelperText>
                 <FormErrorMessage>{form.errors.content}</FormErrorMessage>
               </FormControl>
             )}

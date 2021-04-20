@@ -29,13 +29,13 @@ export default function FAQ() {
               <h2>
                 <AccordionButton>
                   <Box flex="1" textAlign="left">
-                  <Heading as="h2" size="sm">Who We Are</Heading>
+                  <Heading as="h2" size="sm">Why does this website exist?</Heading>
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4}>
-              We are a group of concerned Ontarians who could no longer stand by as our province is led into a humanitarian crisis. We believe the power of storytelling is an effective means to drive government action.
+                The site was created to help any Ontarian impacted by COVID-19 — from factory workers to business owners to physicians — to easily and safely share their stories with government leaders, media and the public to drive effective government policy.
               </AccordionPanel>
             </AccordionItem>
 
@@ -43,30 +43,55 @@ export default function FAQ() {
               <h2>
                 <AccordionButton>
                   <Box flex="1" textAlign="left">
-                    <Heading as="h2" size="sm">Why We’re Doing This</Heading>
+                    <Heading as="h2" size="sm">Who can access private data? </Heading>
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4}>
-                <p>It is clear that our government will not listen to numbers or scientific evidence. Data might be easy to dismiss but stories and the human connection they spark cannot be ignored.</p>
-                <p>Many doctors, business owners, essential workers and concerned citizens have already spoken up and shared their stories, but many are fearful and don’t feel they have a voice; there are too many stories still left to be told.</p>
-                <p>We created MyCovidStory as a way to amplify every voice that wanted to share - with government leaders, the media or the public -  regardless of whether they have their own platform or not.</p>
-                <p>We believe the stories speak for themselves, and will use them to engage decision-makers to drive effective government policy and science-based practices that will save lives.</p>
+                Nobody beyond who you have allowed will be able to have access to any personally identifiable information you have provided during story submission.
               </AccordionPanel>
             </AccordionItem>
 
-            <AccordionItem expanded={true}>
+            <AccordionItem>
               <h2>
                 <AccordionButton>
                   <Box flex="1" textAlign="left">
-                    <Heading as="h2" size="sm">Our Mission</Heading>
+                    <Heading as="h2" size="sm">Will any companies, media, or the government be able to find out that I posted this if I choose to remain anonymous?</Heading>
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4}>
-              To amplify the stories of anyone impacted by COVID-19 and use the power of storytelling to drive effective government policy.
+                Nobody beyond who you have allowed will be able to have access to any personally identifiable information you have provided during story submission.
+              </AccordionPanel>
+            </AccordionItem>
+
+            <AccordionItem>
+              <h2>
+                <AccordionButton>
+                  <Box flex="1" textAlign="left">
+                    <Heading as="h2" size="sm">Who’s paying for this page?</Heading>
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
+              </h2>
+              <AccordionPanel pb={4}>
+                This page is fully funded by Ontarians concerned by the current COVID-19 response in our province. Funding is sourced through GoFundMe to pay for any operations costs and this project was built by a group of volunteer  designers, developers, marketers, caregivers, and policy advocates.
+              </AccordionPanel>
+            </AccordionItem>
+
+            <AccordionItem>
+              <h2>
+                <AccordionButton>
+                  <Box flex="1" textAlign="left">
+                    <Heading as="h2" size="sm">Are the website creators affiliated with any group?</Heading>
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
+              </h2>
+              <AccordionPanel pb={4}>
+                No, we are not affiliated to any political group - we are just a collection of Ontarians concerned by the COVID-19 response in our province and hope that by presenting real stories, policy makers in all levels of government will make the right decision to keep Ontarians safe.
               </AccordionPanel>
             </AccordionItem>
           </Accordion>

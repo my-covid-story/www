@@ -16,6 +16,13 @@ export function badRequest(options: { detail?: string } = {}): ResponseError {
   }
 }
 
+export function unauthorized(): ResponseError {
+  return {
+    status: 401,
+    message: 'Unauthorized',
+  }
+}
+
 export function notFound(): ResponseError {
   return {
     status: 404,

@@ -38,6 +38,18 @@ const userData: Prisma.StoryCreateInput[] = [
     contact: false,
     approved: true,
   },
+  {
+    title: 'Here is our third story',
+    content:
+      'This command deletes and recreates the database, or performs a soft reset by removing all data, tables, indexes, and other artifacts.',
+    postal: 'N6A',
+    category: 'doctor',
+    email: 'alice@test.io',
+    anonymous: false,
+    name: 'Alice munro',
+    contact: false,
+    approved: false,
+  },
 ]
 
 async function main() {

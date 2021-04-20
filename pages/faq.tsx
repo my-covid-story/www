@@ -24,7 +24,7 @@ export default function FAQ() {
           <Heading as="h1" size="2xl" pb={4}>
             FAQ
           </Heading>
-          <Accordion allowMultiple defaultIndex={[0,1,2]}>
+          <Accordion allowMultiple defaultIndex={[0,1,2,3,4]}>
             <AccordionItem>
               <h2>
                 <AccordionButton>

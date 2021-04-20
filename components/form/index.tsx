@@ -62,7 +62,6 @@ export default function StoryForm() {
               'content-type': 'application/json',
             },
           })
-          console.log(result)
           if (result.ok) {
             actions.setSubmitting(false)
             Router.push('/stories/thanks')
@@ -88,7 +87,7 @@ export default function StoryForm() {
               >
                 <FormLabel htmlFor="title">Enter a title or quote</FormLabel>
                 <Textarea {...field} id="title" placeholder="Enter your story title" />
-                <FormHelperText>{`Up to ${TITLE_CHAR_LIMIT} characters`}</FormHelperText>
+                <FormHelperText>{`Up to ${TITLE_CHAR_LIMIT} characters.`}</FormHelperText>
                 <FormErrorMessage>{form.errors.title}</FormErrorMessage>
               </FormControl>
             )}
@@ -162,7 +161,7 @@ export default function StoryForm() {
               // Hijack the value and coerce it to boolean
               field.onChange = (event) => {
                 if (event?.target?.value) {
-                  const normalizedValue = event.target.value === 'true' ? true : false
+                  const normalizedValue = event.target.value === 'true'
                   event.target.value = normalizedValue
                 }
                 // Call formik's original handler with our replaced event and value

@@ -1,7 +1,6 @@
 import { Box, Text, Heading } from '@chakra-ui/react'
 import StoryForm from '../../components/form'
 import Link from 'next/link'
-import { brotliDecompress } from 'node:zlib'
 
 export default function CreateStory() {
   return (

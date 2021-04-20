@@ -13,6 +13,7 @@
     "ts-node": "ts-node --compiler-options '{\"module\":\"CommonJS\"}'",
     "vercel-build": "prisma migrate deploy && next build",
     "prisma:generate": "prisma generate",
+    "gen:theme-typings": "chakra-cli tokens theme/index.ts",
     "postinstall": "prisma generate"
   },
   "dependencies": {

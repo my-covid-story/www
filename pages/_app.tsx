@@ -52,7 +52,6 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <StandardHead title={title} description={description} previewImage={previewImage} />
       <Head>
         <meta key="twitter:card" name="twitter:card" content="summary_large_image" />
 
@@ -63,6 +62,7 @@ function MyApp({ Component, pageProps }) {
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
       </Head>
+      <StandardHead title={title} description={description} previewImage={previewImage} />
       <ChakraProvider theme={theme}>
         <Nav />
         <Component {...pageProps} />

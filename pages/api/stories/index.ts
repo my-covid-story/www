@@ -4,6 +4,7 @@ import prisma from '../../../lib/prisma'
 import { sendError, methodNotAllowed, badRequest, internalServerError } from '../../../lib/errors'
 import storySchema from '../../../lib/storySchema'
 import { ValidationError } from 'yup'
+import sanitizeHtml from 'sanitize-html'
 
 const baseUrl = 'https://mycovidstory.ca'
 
@@ -59,6 +60,7 @@ interface Payload {
 
 // POST /api/stories
 async function handlePost(req: NextApiRequest, res: NextApiResponse): Promise<void> {
+  console.log(req.body)
   const payload = Object.keys(req.body).reduce((acc, k) => {
     // Strip empty values
     if (req.body[k] === '') {
@@ -67,11 +69,17 @@ async function handlePost(req: NextApiRequest, res: NextApiResponse): Promise<vo
     // Parse anonymous to boolean
     else if (k === 'anonymous') {
       acc[k] = JSON.parse(req.body[k])
+      // Sanitize any strings
+    } else if (typeof req.body[k] === 'string') {
+      acc[k] = sanitizeHtml(req.body[k], { allowedTags: [], allowedAttributes: {} })
+      // Don't forget the rest
     } else {
       acc[k] = req.body[k]
     }
     return acc
   }, {}) as Payload
+
+  console.log(payload)
 
   try {
     // Validate the payload against the schema

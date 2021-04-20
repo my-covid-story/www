@@ -15,7 +15,6 @@ import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 
 import Nav from '../components/nav'
-import Footer from '../components/footer'
 
 Sentry.init({
   dsn: 'https://ff771404287542638b24e14b8de8edff@o573965.ingest.sentry.io/5724646',
@@ -67,7 +66,6 @@ function MyApp({ Component, pageProps }) {
       <ChakraProvider theme={theme}>
         <Nav />
         <Component {...pageProps} />
-        <Footer />
       </ChakraProvider>
     </>
   )

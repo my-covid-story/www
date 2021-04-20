@@ -33,6 +33,7 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "@types/next-auth": "^3.13.0",
     "@types/node": "^14.14.41",
     "@types/react": "^17.0.3",
     "@typescript-eslint/eslint-plugin": "^4.22.0",

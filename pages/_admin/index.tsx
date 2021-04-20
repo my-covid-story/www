@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Box, Button, Container, Flex, Grid, GridItem, Heading, Spacer, Stat, StatLabel, StatNumber, StatHelpText, Text } from '@chakra-ui/react'
+import { Box, Button, Container, Grid, GridItem, Heading, Stack, Text } from '@chakra-ui/react'
 import { providers, signIn, signOut, useSession, getSession } from 'next-auth/client'
 
 import styles from '../styles/Home.module.css'
@@ -13,6 +13,35 @@ const MenuItems = ({ children }) => (
   </Text>
 );
 
+function Story({ id, title, content, name, postal, ...rest}) {
+  return (
+    <Box p={5} shadow="md" borderWidth="1px" {...rest}>
+      <Heading fontSize="xl">{title}</Heading>
+      <Text mt={4}>{content}</Text>
+      <Text mt={4}>{name} from {postal}</Text>
+      <Stack direction="row" spacing={4} align="center">
+        <Button
+          colorScheme="blue"
+          variant="outline"
+          type="button"
+          data-id={id}
+          onClick={deleteStory}
+        >
+          Delete
+        </Button>
+        <Button
+          colorScheme="blue"
+          type="button"
+          data-id={id}
+          onClick={approveStory}
+        >
+          Approve
+        </Button>
+      </Stack>
+    </Box>
+  )
+}
+
 export default function _Admin({ stories, providerList }) {
   const [ session ] = useSession()
   return <>
@@ -20,57 +49,16 @@ export default function _Admin({ stories, providerList }) {
         <button onClick={() => signIn()}>Sign in</button>
       </>}
       {session && <>
-        <Flex
-          as="nav"
-          align="center"
-          justify="space-between"
-          wrap="wrap"
-          padding="1.5rem"
-          bg="teal.500"
-          color="white"
-          width="100%"
-        >
-          <Flex align="center" mr={5}>
-            <Heading as="h1" size="lg" letterSpacing={"-.1rem"}>
-              MyCovidStory
-            </Heading>
-          </Flex>
-          <Spacer />
-          <MenuItems>{session.user.email}</MenuItems>
-          <MenuItems><button onClick={() => signOut()}>Sign out</button></MenuItems>
-        </Flex>
         <Container>
-          <Grid>
+          <button onClick={() => signOut()}>Sign out</button>
+          <Stack spacing={8}>
             {stories.map((story) => (
-              <GridItem>
-                <ul>
-                <li>content: {story.content}</li>
-                <li>postal: {story.postal}</li>
-                <li>approved: {story.approved}</li>
-                <li>twitter: {story.twitter}</li>
-                </ul>
-                <Button
-                  mt={4}
-                  colorScheme="blue"
-                  variant="outline"
-                  type="button"
-                  data-id={story.id}
-                  onClick={deleteStory}
-                >
-                  Delete
-                </Button>
-                <Button
-                  mt={4}
-                  colorScheme="blue"
-                  type="button"
-                  data-id={story.id}
-                  onClick={approveStory}
-                >
-                  Approve
-                </Button>
-            </GridItem>
+              <Story
+                {...story}
+             />
             ))}
-          </Grid>
+
+          </Stack>
         </Container>
       </>}
   </>

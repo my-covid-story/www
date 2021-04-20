@@ -46,7 +46,7 @@ function MyApp({ Component, pageProps }) {
   }, [])
 
   // Default meta tag data
-  const title = 'My Covid Story | Every number has a story'
+  const title = 'Every number has a story'
   const description = 'Every covid number has a story which deserves to be shared'
   const previewImage = 'https://www.mycovidstory.ca/img/landingpage-v2.jpg'
 

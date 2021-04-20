@@ -7,7 +7,6 @@ interface HeadProps {
 }
 
 export default function StandardHead({ title, description, previewImage }: HeadProps) {
-  console.log(title)
   return (
     <Head>
       {title && (

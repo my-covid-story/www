@@ -19,7 +19,7 @@ export default function FAQ() {
         <title>FAQ - My Covid Story</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Box w="60%" p={8} pb={24}>
+      <Box w="95%" p={8} pb={24}>
         <Box pb={4}>
           <Heading as="h1" size="2xl" pb={4}>
             FAQ

@@ -2,18 +2,12 @@
 
 This is an extremely early MVP, so there is a lot to do.
 
-Our prosposed stack / architecture is:
+Our stack / architecture is:
 
 - [NextJS](https://next.js.org/) hosted on [Vercel](https://vercel.com) (already setup here)
 - [Prisma](https://prisma.io) as our ORM (makes things pretty smooth)
-- Postgresql as a DB
+- Postgresql as a DB (Digital Ocean, Toronto)
 
-Contact @mwickett on Slack for access to the Vercel team, or the GitHub org if you're interested.
-
-## Todo
-
-- [ ] Add Prisma - see [example](https://github.com/prisma/prisma-examples/tree/latest/typescript/rest-nextjs-api-routes)
-- [x] ~Decide if we're using Typescript~ Yes!
 
 ## Contributing
 

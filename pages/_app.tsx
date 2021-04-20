@@ -4,6 +4,7 @@ import theme from '../styles/theme'
 import '@fontsource/inter/700.css'
 import '@fontsource/inter/400.css'
 import Head from 'next/head'
+import StandardHead from '../components/standard-head'
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
@@ -23,10 +24,6 @@ Sentry.init({
   integrations: [new Integrations.BrowserTracing()],
   tracesSampleRate: 1.0,
 })
-
-const title = 'My Covid Story | Every number has a story'
-const description = 'Every covid number has a story which deserves to be shared'
-const previewImage = 'https://www.mycovidstory.ca/img/landingpage-v2.jpg'
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
@@ -48,16 +45,16 @@ function MyApp({ Component, pageProps }) {
     }
   }, [])
 
+  // Default meta tag data
+  const title = 'My Covid Story | Every number has a story'
+  const description = 'Every covid number has a story which deserves to be shared'
+  const previewImage = 'https://www.mycovidstory.ca/img/landingpage-v2.jpg'
+
   return (
     <>
+      <StandardHead title={title} description={description} previewImage={previewImage} />
       <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <link rel="icon" href="/favicon.ico" />
-
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={previewImage} />
+        <meta key="twitter:card" name="twitter:card" content="summary_large_image" />
 
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />

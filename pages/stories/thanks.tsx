@@ -1,9 +1,14 @@
 import { Center, Heading, Text, Container, Button } from '@chakra-ui/react'
 import Link from 'next/link'
+import StandardHead from '../../components/standard-head'
 
 export default function Thanks() {
   return (
     <Container pt="32">
+      <StandardHead
+        title="Thanks for sharing your COVID story"
+        description="We've all been affected by COVID in someway, by sharing your story, you've helped drive action in Ontario"
+      />
       <Heading as="h1" size="lg" pb="8">
         Thank you for your story.
       </Heading>

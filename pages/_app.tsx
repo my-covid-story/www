@@ -1,6 +1,6 @@
 // eslint-disable-next-line
 import '../styles/globals.css'
-import theme from '../theme'
+import theme from '../styles/theme'
 import '@fontsource/inter/700.css'
 import '@fontsource/inter/400.css'
 import Head from 'next/head'

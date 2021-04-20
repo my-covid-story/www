@@ -60,7 +60,6 @@ interface Payload {
 
 // POST /api/stories
 async function handlePost(req: NextApiRequest, res: NextApiResponse): Promise<void> {
-  console.log(req.body)
   const payload = Object.keys(req.body).reduce((acc, k) => {
     // Strip empty values
     if (req.body[k] === '') {
@@ -78,8 +77,6 @@ async function handlePost(req: NextApiRequest, res: NextApiResponse): Promise<vo
     }
     return acc
   }, {}) as Payload
-
-  console.log(payload)
 
   try {
     // Validate the payload against the schema

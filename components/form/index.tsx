@@ -16,38 +16,15 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { Formik, Field, Form } from 'formik'
-import * as yup from 'yup'
 import Router from 'next/router'
 
-const schema = yup.object().shape({
-  title: yup
-    .string()
-    .max(75, "Your title can't be more than 75 characters")
-    .required('Title is required'),
-  content: yup
-    .string()
-    .max(600, "Story content can't be more than 600 characters")
-    .required('A story is required'),
-  postal: yup
-    .string()
-    .min(3, 'Postal code must be three characters')
-    .max(3, "Postal code can't be more than three characters")
-    .required(), // TODO: need to do postal FSA validation
-  category: yup.string().required('Please choose a category'), // TODO: Figure out enum validation for list options
-  anonymous: yup.bool(),
-  contact: yup.bool(),
-  name: yup.string(),
-  email: yup.string().email('Invalid email address format'),
-  phone: yup.string(), // TODO: Phone validation
-  twitter: yup.string(),
-  consent: yup.bool().isTrue('You must provide your consent to continue'),
-})
+import storySchema from '../../lib/storySchema'
 
 type LoginFormInputs = {
   title: string
   content: string
   postal: string
-  category?: string
+  category: string
   anonymous: string
   contact: boolean
   name?: string
@@ -74,7 +51,7 @@ export default function StoryForm() {
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={schema}
+      validationSchema={storySchema}
       onSubmit={async (values: LoginFormInputs, actions) => {
         try {
           actions.setSubmitting(true)
@@ -111,7 +88,7 @@ export default function StoryForm() {
               >
                 <FormLabel htmlFor="title">Enter a title or quote</FormLabel>
                 <Textarea {...field} id="title" placeholder="Enter your story title" />
-                <FormHelperText>Maximum 75 characters</FormHelperText>
+                <FormHelperText>Up to 75 characters</FormHelperText>
                 <FormErrorMessage>{form.errors.title}</FormErrorMessage>
               </FormControl>
             )}
@@ -128,7 +105,7 @@ export default function StoryForm() {
               >
                 <FormLabel htmlFor="content">Please share your story</FormLabel>
                 <Textarea {...field} id="content" placeholder="Enter your story content" />
-                <FormHelperText>Maximum ___ characters</FormHelperText>
+                <FormHelperText>Up to 1000 words</FormHelperText>
                 <FormErrorMessage>{form.errors.content}</FormErrorMessage>
               </FormControl>
             )}
@@ -177,28 +154,43 @@ export default function StoryForm() {
 
           {/* Anonymous */}
           <Field name="anonymous">
-            {({ field, form }) => (
-              <FormControl
-                pt="8"
-                pb="8"
-                isInvalid={form.errors.anonymous && form.touched.anonymous}
-              >
-                <FormLabel as="legend" htmlFor="anonymous">
-                  I want the story published:
-                </FormLabel>
-                <RadioGroup {...field} name="anonymous" id="anonymous">
-                  <Stack direction="column">
-                    <Radio {...field} value="true">
-                      Anonymously (e.g. Worker from LP6)
-                    </Radio>
-                    <Radio {...field} value="false">
-                      With my name below
-                    </Radio>
-                  </Stack>
-                </RadioGroup>
-                <FormErrorMessage>{form.errors.anonymous}</FormErrorMessage>
-              </FormControl>
-            )}
+            {({ field, form }) => {
+              // This little beauty is a result of radio buttons only providing string values, but we really want a boolean
+              // so that we can do some conditional validation (when "Show my name" is selected, we require name)
+              // Copy the  original handler
+              const fieldOnChange = field.onChange
+              // Hijack the value and coerce it to boolean
+              field.onChange = (event) => {
+                if (event?.target?.value) {
+                  const normalizedValue = event.target.value === 'true' ? true : false
+                  event.target.value = normalizedValue
+                }
+                // Call formik's original handler with our replaced event and value
+                fieldOnChange(event)
+              }
+              return (
+                <FormControl
+                  pt="8"
+                  pb="8"
+                  isInvalid={form.errors.anonymous && form.touched.anonymous}
+                >
+                  <FormLabel as="legend" htmlFor="anonymous">
+                    I want the story published:
+                  </FormLabel>
+                  <RadioGroup {...field} name="anonymous" id="anonymous">
+                    <Stack direction="column">
+                      <Radio {...field} value="true">
+                        Anonymously (e.g. Worker from LP6)
+                      </Radio>
+                      <Radio {...field} value="false">
+                        With my name below
+                      </Radio>
+                    </Stack>
+                  </RadioGroup>
+                  <FormErrorMessage>{form.errors.anonymous}</FormErrorMessage>
+                </FormControl>
+              )
+            }}
           </Field>
 
           {/* Contact */}

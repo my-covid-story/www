@@ -1,20 +1,18 @@
 import Head from 'next/head'
-
 import {Button} from '@chakra-ui/react'
+import { providers, signIn, signOut, useSession, getSession } from 'next-auth/client'
 
 import styles from '../styles/Home.module.css'
-import StoryForm from '../components/form'
+import StoryForm from '../../components/form'
 
-import { providers, signIn, signOut, useSession, getSession } from 'next-auth/client'
-import prisma from '../lib/prisma'
+import prisma from '../../lib/prisma'
 
 export default function _Admin({ stories, providerList }) {
   const [ session ] = useSession()
-
   return <>
     {!session && <>
       Not signed in <br/>
-
+    
       {Object.values(providerList).map(provider => (
         <div key={provider.name}>
           <button onClick={() => signIn(provider.id)}>Sign in with {provider.name}</button>
@@ -22,6 +20,7 @@ export default function _Admin({ stories, providerList }) {
       ))}
     </>}
     {session && <>
+
       Signed in as {session.user.email} <br/>
       <button onClick={() => signOut()}>Sign out</button>
 

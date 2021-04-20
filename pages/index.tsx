@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import landing from '../styles/LandingPage.module.css'
 import { Box, Button, Heading, Link, Text } from '@chakra-ui/react'
 

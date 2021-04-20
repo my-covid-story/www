@@ -10,6 +10,9 @@ import { ChakraProvider } from '@chakra-ui/react'
 import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 
+import Nav from '../components/nav'
+import Footer from '../components/footer'
+
 Sentry.init({
   dsn: 'https://ff771404287542638b24e14b8de8edff@o573965.ingest.sentry.io/5724646',
   environment: process.env.NODE_ENV,
@@ -39,7 +42,9 @@ function MyApp({ Component, pageProps }) {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <ChakraProvider theme={theme}>
+        <Nav />
         <Component {...pageProps} />
+        <Footer />
       </ChakraProvider>
     </>
   )

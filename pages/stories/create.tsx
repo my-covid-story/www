@@ -5,7 +5,7 @@ import Link from 'next/link'
 export default function CreateStory() {
   return (
     <div>
-      <Box w="100%" p={8} pb={24}>
+      <Box w="100%" p={8} pb={24} maxWidth="4xl">
         <Box pb={4}>
           <Heading as="h1" size="lg" pb={4}>
             Share your COVID story

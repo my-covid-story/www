@@ -36,7 +36,9 @@ const schema = yup.object().shape({
   email: yup.string().email('Invalid email address format'),
   phone: yup
     .string()
-    .matches(/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/, 'Phone number must be formatted like 555-555-5555'),
+    .test('phone is ten digits', 'Phone number must contain 10 digits', (value) =>
+      !value ? true : Boolean(value.match(/\d/g)?.length === 10)
+    ),
   twitter: yup.string(),
   consent: yup.bool().isTrue('You must provide your consent to continue'),
 })

@@ -1,15 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { PrismaClientValidationError } from '@prisma/client/runtime'
 import { getSession } from 'next-auth/client'
 
 import prisma from '../../../lib/prisma'
 import { sendError, methodNotAllowed, internalServerError, unauthorized } from '../../../lib/errors'
 
-
 // /api/admin/update
 export default async function handle(req: NextApiRequest, res: NextApiResponse): Promise<void> {
   const session = await getSession({ req })
-  if(!session) {
+  if (!session) {
     return sendError(res, unauthorized())
   }
 
@@ -18,7 +16,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse):
       await handlePatch(req, res)
       break
     case 'DELETE':
-      console.log("DELETE")
+      console.log('DELETE')
       await handleDelete(req, res)
       break
     default:
@@ -33,13 +31,13 @@ async function handlePatch(req: NextApiRequest, res: NextApiResponse): Promise<v
   const { id, approved } = req.body
   try {
     const story = await prisma.story.update({
-        where: {
-          id,
-        },
-        data: {
-          approved,
-        },
-      })
+      where: {
+        id,
+      },
+      data: {
+        approved,
+      },
+    })
     res.json(story)
   } catch (err) {
     sendError(res, internalServerError())

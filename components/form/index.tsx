@@ -62,7 +62,7 @@ export default function StoryForm() {
       onSubmit={async (values: LoginFormInputs, actions) => {
         try {
           actions.setSubmitting(true)
-          const result = await fetch(`/api/story`, {
+          const result = await fetch(`/api/stories`, {
             method: 'POST',
             body: JSON.stringify(values),
             headers: {

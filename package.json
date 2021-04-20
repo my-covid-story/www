@@ -16,8 +16,9 @@
   },
   "dependencies": {
     "@chakra-ui/react": "^1.5.1",
-    "@emotion/react": "^11.1.5",
-    "@emotion/styled": "^11.3.0",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "@fontsource/inter": "^4.2.2",
     "@hookform/resolvers": "^2.4.0",
     "@prisma/client": "^2.21.2",
     "@sentry/react": "^6.2.5",

@@ -1,3 +1,7 @@
+:root {
+  --brand: #55099d;
+}
+
 html,
 body {
   padding: 0;
@@ -6,7 +10,7 @@ body {
 }
 
 a {
-  color: inherit;
+  color: var(--brand);
   text-decoration: none;
 }
 

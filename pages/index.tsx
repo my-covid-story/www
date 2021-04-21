@@ -1,5 +1,5 @@
 import landing from '../styles/LandingPage.module.css'
-import { Box, Button, Heading, HStack, Link, Text } from '@chakra-ui/react'
+import { Box, Button, Heading, VStack, Link, Text } from '@chakra-ui/react'
 
 export default function Home() {
   return (
@@ -11,8 +11,8 @@ export default function Home() {
             <Heading pb={'1rem'} as="h1" size="3xl">
               My COVID Story
             </Heading>
-            <Text>If our leaders won’t listen to the numbers, they must face our stories.</Text>
-            <HStack p={'2rem 0'} spacing="1rem" justify="center">
+            <Text fontSize="2xl">If our leaders won’t listen to the numbers, they must face our stories.</Text>
+            <VStack p={'2rem 0'} spacing="1rem" justify="center">
               <Link href={'/stories/create'} style={{ display: 'inline-block' }}>
                 <Button
                   variant="solid"
@@ -32,7 +32,7 @@ export default function Home() {
               >
                 <Button variant="solid">Media Sign-Up</Button>
               </Link>
-            </HStack>
+            </VStack>
           </Box>
         </main>
       </div>

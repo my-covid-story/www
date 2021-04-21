@@ -19,15 +19,19 @@ const NUMBER_SEEDS = 200
 const seedData: Prisma.StoryCreateInput[] = []
 
 for (let i = 0; i < NUMBER_SEEDS; i++) {
+  const anonymous = faker.datatype.boolean()
+  const contact = faker.datatype.boolean()
+  const name = faker.fake('{{name.firstName}} {{name.lastName}}')
   const seed = {
     title: faker.lorem.words(getRandomInt(2, 20)).substring(0, 75),
     content: faker.lorem.words(getRandomInt(3, 900)),
     postal: postalPrefixes[getRandomInt(0, postalPrefixes.length - 1)],
     category: categories[getRandomInt(0, categories.length - 1)],
-    email: faker.internet.email(),
-    anonymous: faker.datatype.boolean(),
-    name: faker.fake('{{name.firstName}} {{name.lastName}}'),
-    contact: faker.datatype.boolean(),
+    email: contact ? faker.internet.email() : null,
+    anonymous,
+    contact,
+    displayName: anonymous ? null : name,
+    contactName: contact ? name : null,
     approved: faker.datatype.boolean(),
   }
   seedData.push(seed)

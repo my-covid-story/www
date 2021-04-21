@@ -51,10 +51,6 @@ export async function add(story: NewStory) {
     // Strip empty values
     if (story[k] === '') {
       return acc
-      // Client-side error workaround: anonymous should be a boolean, not a string
-    } else if (k === 'anonymous') {
-      const anon = story[k] as unknown
-      acc[k] = typeof anon === 'string' ? JSON.parse(anon as string) : (anon as boolean)
       // Sanitize any strings
     } else if (typeof story[k] === 'string') {
       acc[k] = sanitizeHtml(story[k], { allowedTags: [], allowedAttributes: {} })

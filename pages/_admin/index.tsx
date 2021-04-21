@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Box, Button, Container, Grid, GridItem, Heading, Stack, Text } from '@chakra-ui/react'
-import { providers, signIn, signOut, useSession, getSession } from 'next-auth/client'
+import { signIn, signOut, useSession, getSession } from 'next-auth/client'
 
 import styles from '../styles/Home.module.css'
 import StoryForm from '../../components/form'
@@ -44,7 +44,7 @@ function Story({ id, title, content, name, postal, ...rest}) {
   )
 }
 
-export default function _Admin({ stories, providerList }) {
+export default function _Admin({ stories }) {
   const [ session ] = useSession()
   return <>
       {!session && <>
@@ -96,7 +96,6 @@ const updateStory = async (e) =>  {
 
 export async function getServerSideProps({ req }) {
   const session = await getSession({ req })
-  const providerList = await providers()
 
   let stories = {}
   if(session) {
@@ -111,6 +110,6 @@ export async function getServerSideProps({ req }) {
 
 
   return {
-    props: { stories, providerList },
+    props: { stories },
   }
 }

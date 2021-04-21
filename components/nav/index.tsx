@@ -103,7 +103,7 @@ const MenuLinks = ({ isOpen }) => {
         <MenuItem to="https://twitter.com/MyCOVIDStory_CA">
           <TwitterIcon />
         </MenuItem>
-        <MenuItem to="/stories/create">
+        <MenuItem to="/new">
           <Button
             size="sm"
             rounded="md"

@@ -61,15 +61,9 @@ export default function StoryForm() {
       onSubmit={async (values: LoginFormInputs, actions) => {
         try {
           actions.setSubmitting(true)
-          const anonymousValue = values.anonymous
-          const payload = {
-            ...values,
-            // cast the string anonymous value to boolean
-            anonymous: JSON.parse(anonymousValue),
-          }
           const result = await fetch(`/api/stories`, {
             method: 'POST',
-            body: JSON.stringify(payload),
+            body: JSON.stringify(values),
             headers: {
               'content-type': 'application/json',
             },

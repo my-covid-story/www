@@ -28,8 +28,6 @@ for (let i = 0; i < NUMBER_SEEDS; i++) {
     postal: postalPrefixes[getRandomInt(0, postalPrefixes.length - 1)],
     category: categories[getRandomInt(0, categories.length - 1)],
     email: contact ? faker.internet.email() : null,
-    anonymous,
-    contact,
     displayName: anonymous ? null : name,
     contactName: contact ? name : null,
     approved: faker.datatype.boolean(),

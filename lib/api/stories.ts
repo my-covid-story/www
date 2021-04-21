@@ -41,8 +41,6 @@ export interface NewStory {
   email?: string
   phone?: string
   twitter?: string
-  anonymous: boolean
-  contact: boolean
   consent?: boolean
 }
 
@@ -76,8 +74,6 @@ export async function add(story: NewStory) {
         email: payload.email,
         phone: payload.phone,
         twitter: payload.twitter,
-        anonymous: payload.anonymous,
-        contact: payload.contact,
       },
     })
   } catch (err) {

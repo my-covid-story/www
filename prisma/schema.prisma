@@ -23,8 +23,6 @@ model Story {
   email       String?
   twitter     String?
   phone       String?
-  anonymous   Boolean
-  contact     Boolean
   approved    Boolean  @default(false)
   deleted     Boolean  @default(false)
   viewCount   Int      @default(0)

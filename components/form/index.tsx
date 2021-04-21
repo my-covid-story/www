@@ -81,7 +81,7 @@ export default function StoryForm() {
           })
           if (result.ok) {
             actions.setSubmitting(false)
-            Router.push('/stories/thanks')
+            Router.push('/thanks')
           } else {
             console.error('something went wrong')
           }

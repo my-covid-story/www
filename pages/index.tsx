@@ -11,9 +11,11 @@ export default function Home() {
             <Heading pb={'1rem'} as="h1" size="3xl">
               My COVID Story
             </Heading>
-            <Text fontSize="2xl">If our leaders won’t listen to the numbers, they must face our stories.</Text>
+            <Text fontSize="2xl">
+              If our leaders won’t listen to the numbers, they must face our stories.
+            </Text>
             <VStack p={'2rem 0'} spacing="1rem" justify="center">
-              <Link href={'/stories/create'} style={{ display: 'inline-block' }}>
+              <Link href={'/new'} style={{ display: 'inline-block' }}>
                 <Button
                   variant="solid"
                   color="primary.100"

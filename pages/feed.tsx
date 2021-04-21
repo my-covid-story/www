@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { Box } from '@chakra-ui/react'
-import { list } from '../../lib/api/stories'
-import StoryFeed from '../../components/stories/StoryFeed'
-import Footer, { FooterSpace, Button } from '../../components/common/Footer'
+import { list } from '../lib/api/stories'
+import StoryFeed from '../components/stories/StoryFeed'
+import Footer, { FooterSpace, Button } from '../components/common/Footer'
 
 export default function MainPage({ stories }) {
   return (
@@ -10,7 +10,7 @@ export default function MainPage({ stories }) {
       <StoryFeed stories={stories} />
       <FooterSpace />
       <Footer>
-        <Link href="/stories/create">
+        <Link href="/new">
           <Button>Add Your Story</Button>
         </Link>
       </Footer>

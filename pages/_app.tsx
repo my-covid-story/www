@@ -65,7 +65,9 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <ChakraProvider theme={theme}>
         <Nav />
-        <Component {...pageProps} />
+        <main style={{ paddingTop: '88px' }}>
+          <Component {...pageProps} />
+        </main>
       </ChakraProvider>
     </>
   )

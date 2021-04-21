@@ -68,7 +68,6 @@ function MyApp({ Component, pageProps }) {
         <main style={{ paddingTop: '88px' }}>
           <Component {...pageProps} />
         </main>
-        <Footer />
       </ChakraProvider>
     </>
   )

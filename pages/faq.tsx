@@ -12,6 +12,7 @@ import styles from '../styles/FaqPage.module.css'
 
 import Footer from '../components/footer'
 
+const NUM_FAQS = 8
 
 export default function FAQ() {
   return (
@@ -26,7 +27,7 @@ export default function FAQ() {
             FAQ
           </Heading>
           <Text>Frequently Asked Questions</Text>
-          <Accordion allowMultiple defaultIndex={[0,1,2,3,4]}>
+          <Accordion allowMultiple defaultIndex={[...Array(NUM_FAQS).keys()]}>
             <AccordionItem>
               <h2>
                 <AccordionButton>

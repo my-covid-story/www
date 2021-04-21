@@ -1,12 +1,13 @@
-import { Heading, Text, Container, Button, VStack, Icon } from '@chakra-ui/react'
-import Link from 'next/link'
+import { Center, Heading, Text, Container, Button, VStack, Icon } from '@chakra-ui/react'
 
 export default function Thanks() {
   return (
     <Container pt="32">
-      <Heading as="h1" size="lg" pb="8" align="center">
-        Thank you for your story
-      </Heading>
+      <Center>
+        <Heading as="h1" size="lg" pb="8">
+          Thank you for your story
+        </Heading>
+      </Center>
       <VStack spacing="12px" align="left">
         <Text>
           <strong>Thank you for submitting your story.</strong> We will amplify your story to engage

@@ -4,7 +4,7 @@ const global = {
   styles: {
     global: {
       a: {
-        color: 'brand.100',
+        color: '#55099D',
       },
     },
   },

@@ -36,7 +36,8 @@ export interface NewStory {
   content: string
   postal: string
   category: string
-  name?: string
+  contactName?: string
+  displayName?: string
   email?: string
   phone?: string
   twitter?: string
@@ -70,7 +71,8 @@ export async function add(story: NewStory) {
         content: payload.content,
         postal: payload.postal,
         category: payload.category,
-        name: payload.name,
+        contactName: payload.contactName,
+        displayName: payload.displayName,
         email: payload.email,
         phone: payload.phone,
         twitter: payload.twitter,

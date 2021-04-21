@@ -25,7 +25,8 @@ function Story({ id, title, content, name, postal, ...rest}) {
           variant="outline"
           type="button"
           data-id={id}
-          onClick={deleteStory}
+          data-type="deleted"
+          onClick={updateStory}
         >
           Delete
         </Button>
@@ -33,7 +34,8 @@ function Story({ id, title, content, name, postal, ...rest}) {
           colorScheme="blue"
           type="button"
           data-id={id}
-          onClick={approveStory}
+          data-type="approved"
+          onClick={updateStory}
         >
           Approve
         </Button>
@@ -64,24 +66,22 @@ export default function _Admin({ stories, providerList }) {
   </>
 }
 
-const deleteStory = async (e) =>  {
+const updateStory = async (e) =>  {
+  let approved = false;
+  let deleted = false;
+
+  switch (e.target.dataset.type) {
+    case 'approved':
+      approved = true
+      break
+    case 'deleted':
+      deleted=true;
+      break
+  }
   let story = {
     id: e.target.dataset.id,
-  };
-
-  let response = await fetch('/api/admin/update', {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify(story)
-  });
-}
-
-const approveStory = async (e) =>  {
-  let story = {
-    id: e.target.dataset.id,
-    approved: true
+    approved,
+    deleted,
   };
 
   let response = await fetch('/api/admin/update', {
@@ -101,7 +101,10 @@ export async function getServerSideProps({ req }) {
   let stories = {}
   if(session) {
     stories = await prisma.story.findMany({
-        where: { approved: false },
+        where: {
+          approved: false,
+          deleted: false
+        },
         orderBy: { createdAt: 'asc' },
     })
   }

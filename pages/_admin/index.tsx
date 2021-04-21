@@ -26,7 +26,7 @@ function Story({ id, title, content, name, postal, ...rest}) {
           type="button"
           data-id={id}
           data-type="deleted"
-          onClick={updateStory}
+          onClick={(e) => {if(window.confirm('Are you sure you want to delete this?')){updateStory(e)}}}
         >
           Delete
         </Button>

@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import { Box, Button, Container, Flex, Grid, GridItem, Heading, Spacer, Stat, StatLabel, StatNumber, StatHelpText, Text } from '@chakra-ui/react'
-import { providers, signIn, signOut, useSession, getSession } from 'next-auth/client'
+import { Box, Button, Container, Grid, GridItem, Heading, Stack, Text } from '@chakra-ui/react'
+import { signIn, signOut, useSession, getSession } from 'next-auth/client'
 
 import styles from '../styles/Home.module.css'
 import StoryForm from '../../components/form'
@@ -13,87 +13,75 @@ const MenuItems = ({ children }) => (
   </Text>
 );
 
-export default function _Admin({ stories, providerList }) {
+function Story({ id, title, content, name, postal, ...rest}) {
+  return (
+    <Box p={5} shadow="md" borderWidth="1px" {...rest}>
+      <Heading fontSize="xl">{title}</Heading>
+      <Text mt={4}>{content}</Text>
+      <Text mt={4}>{name} from {postal}</Text>
+      <Stack direction="row" spacing={4} align="center">
+        <Button
+          colorScheme="blue"
+          variant="outline"
+          type="button"
+          data-id={id}
+          data-type="deleted"
+          onClick={(e) => {if(window.confirm('Are you sure you want to delete this?')){updateStory(e)}}}
+        >
+          Delete
+        </Button>
+        <Button
+          colorScheme="blue"
+          type="button"
+          data-id={id}
+          data-type="approved"
+          onClick={updateStory}
+        >
+          Approve
+        </Button>
+      </Stack>
+    </Box>
+  )
+}
+
+export default function _Admin({ stories }) {
   const [ session ] = useSession()
   return <>
       {!session && <>
         <button onClick={() => signIn()}>Sign in</button>
       </>}
       {session && <>
-        <Flex
-          as="nav"
-          align="center"
-          justify="space-between"
-          wrap="wrap"
-          padding="1.5rem"
-          bg="teal.500"
-          color="white"
-          width="100%"
-        >
-          <Flex align="center" mr={5}>
-            <Heading as="h1" size="lg" letterSpacing={"-.1rem"}>
-              My COVID Story
-            </Heading>
-          </Flex>
-          <Spacer />
-          <MenuItems>{session.user.email}</MenuItems>
-          <MenuItems><button onClick={() => signOut()}>Sign out</button></MenuItems>
-        </Flex>
         <Container>
-          <Grid>
+          <button onClick={() => signOut()}>Sign out</button>
+          <Stack spacing={8}>
             {stories.map((story) => (
-              <GridItem>
-                <ul>
-                <li>content: {story.content}</li>
-                <li>postal: {story.postal}</li>
-                <li>approved: {story.approved}</li>
-                <li>twitter: {story.twitter}</li>
-                </ul>
-                <Button
-                  mt={4}
-                  colorScheme="blue"
-                  variant="outline"
-                  type="button"
-                  data-id={story.id}
-                  onClick={deleteStory}
-                >
-                  Delete
-                </Button>
-                <Button
-                  mt={4}
-                  colorScheme="blue"
-                  type="button"
-                  data-id={story.id}
-                  onClick={approveStory}
-                >
-                  Approve
-                </Button>
-            </GridItem>
+              <Story
+                {...story}
+             />
             ))}
-          </Grid>
+
+          </Stack>
         </Container>
       </>}
   </>
 }
 
-const deleteStory = async (e) =>  {
+const updateStory = async (e) =>  {
+  let approved = false;
+  let deleted = false;
+
+  switch (e.target.dataset.type) {
+    case 'approved':
+      approved = true
+      break
+    case 'deleted':
+      deleted=true;
+      break
+  }
   let story = {
     id: e.target.dataset.id,
-  };
-
-  let response = await fetch('/api/admin/update', {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify(story)
-  });
-}
-
-const approveStory = async (e) =>  {
-  let story = {
-    id: e.target.dataset.id,
-    approved: true
+    approved,
+    deleted,
   };
 
   let response = await fetch('/api/admin/update', {
@@ -108,18 +96,20 @@ const approveStory = async (e) =>  {
 
 export async function getServerSideProps({ req }) {
   const session = await getSession({ req })
-  const providerList = await providers()
 
   let stories = {}
   if(session) {
     stories = await prisma.story.findMany({
-        where: { approved: false },
+        where: {
+          approved: false,
+          deleted: false
+        },
         orderBy: { createdAt: 'asc' },
     })
   }
 
 
   return {
-    props: { stories, providerList },
+    props: { stories },
   }
 }

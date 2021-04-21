@@ -59,6 +59,17 @@ export default function StoryForm() {
       initialValues={initialValues}
       validationSchema={storySchema}
       onSubmit={async (values: LoginFormInputs, actions) => {
+        // Remove any details the user filled in but then decided not to share.
+        if (values.anonymous === 'true') {
+          values.displayName = ''
+        }
+        if (!values.contact) {
+          values.contactName = ''
+          values.email = ''
+          values.phone = ''
+          values.twitter = ''
+        }
+
         try {
           actions.setSubmitting(true)
           const result = await fetch(`/api/stories`, {
@@ -124,7 +135,7 @@ export default function StoryForm() {
                   <Input {...field} id="displayName" placeholder="Your name" />
                   <FormErrorMessage>{form.errors.displayName}</FormErrorMessage>
                   <FormHelperText>
-                    This name <em>will</em> appear on the site
+                    This name <em>will</em> appear on the site.
                   </FormHelperText>
                 </FormControl>
               )}
@@ -159,7 +170,7 @@ export default function StoryForm() {
               >
                 <FormLabel htmlFor="content">Please share your story</FormLabel>
                 <Textarea {...field} id="content" placeholder="Enter your story content" />
-                <FormHelperText>{`Up to ${STORY_WORD_LIMIT} words`}</FormHelperText>
+                <FormHelperText>{`Up to ${STORY_WORD_LIMIT} words.`}</FormHelperText>
                 <FormErrorMessage>{form.errors.content}</FormErrorMessage>
               </FormControl>
             )}
@@ -201,7 +212,7 @@ export default function StoryForm() {
                   <option value="other">Other</option>
                 </Select>
                 <FormErrorMessage>{form.errors.category}</FormErrorMessage>
-                <FormHelperText>Choose the one that best describes you</FormHelperText>
+                <FormHelperText>Choose the one that best describes you.</FormHelperText>
               </FormControl>
             )}
           </Field>
@@ -242,7 +253,7 @@ export default function StoryForm() {
                     <Input {...field} id="contactName" placeholder="Contact name" />
                     <FormErrorMessage>{form.errors.contactName}</FormErrorMessage>
                     <FormHelperText>
-                      This <em>won't</em> be published.
+                      This <em>won&apos;t</em> be published.
                     </FormHelperText>
                   </FormControl>
                 )}
@@ -285,7 +296,7 @@ export default function StoryForm() {
                   >
                     <FormLabel htmlFor="twitter">Twitter</FormLabel>
                     <InputGroup>
-                      <InputLeftAddon children="@" />
+                      <InputLeftAddon>@</InputLeftAddon>
                       <Input {...field} id="twitter" />
                     </InputGroup>
                     <FormErrorMessage>{form.errors.twitter}</FormErrorMessage>
@@ -309,7 +320,7 @@ export default function StoryForm() {
                 </FormLabel>
                 <Checkbox {...field} id="consent" name="consent">
                   I confirm this story is true and I have consent to share it and any photo
-                  submitted
+                  submitted.
                 </Checkbox>
                 <FormErrorMessage>{form.errors.consent}</FormErrorMessage>
               </FormControl>

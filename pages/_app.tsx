@@ -23,8 +23,9 @@ Sentry.init({
   tracesSampleRate: 1.0,
 })
 
-const title = 'My COVID Story | Every number has a story'
-const description = 'Every COVID number has a story which deserves to be shared'
+const title = 'MyCovidStory.ca | The Stories of COVID-19 in Ontario'
+const description =
+  "Ontario is in a humanitarian crisis. If our leaders won't listen to the numbers, they must face our stories."
 const previewImage = 'https://www.mycovidstory.ca/img/landingpage-v2.jpg'
 
 function MyApp({ Component, pageProps }) {
@@ -62,6 +63,12 @@ function MyApp({ Component, pageProps }) {
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={previewImage} />
         <meta name="twitter:card" content="summary_large_image" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
       </Head>
       <ChakraProvider theme={theme}>
         <Nav />

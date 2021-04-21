@@ -1,10 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { PrismaClientValidationError } from '@prisma/client/runtime'
 import { getSession } from 'next-auth/client'
 
 import prisma from '../../../lib/prisma'
 import { sendError, methodNotAllowed, internalServerError, unauthorized } from '../../../lib/errors'
-
 
 // /api/admin/update
 export default async function handle(req: NextApiRequest, res: NextApiResponse): Promise<void> {

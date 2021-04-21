@@ -8,10 +8,6 @@ import { Accordion,
   Heading } from "@chakra-ui/react"
 import styles from '../styles/FaqPage.module.css'
 
-
-import Footer from '../components/footer'
-
-
 export default function FAQ() {
   return (
     <div className={styles.faq}>
@@ -72,8 +68,6 @@ export default function FAQ() {
           </Accordion>
           </Box>
         </Box>
-
-      <Footer />
     </div>
   )
 }

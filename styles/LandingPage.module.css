@@ -5,7 +5,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     text-align: center;
@@ -13,7 +13,7 @@
     background-image: url('/img/landingpage-v2.jpg');
     background-size: cover;
     background-position: center 60%;
-    padding: 30vh 0;
+    padding: 25vh 0;
 }
 
 .background {

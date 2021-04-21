@@ -5,13 +5,13 @@ const prisma = new PrismaClient()
 const postalPrefixes = ['L7A', 'P6A', 'M4G', 'K7H', 'N1S', 'L4B', 'G3J']
 
 const categories = [
-  'Concerned citizen',
-  'Essential worker',
-  'Healthcare provider',
-  'Educator',
-  'Small business owner',
-  'Patient or patient family member',
-  'Other',
+  'concerned-citizen',
+  'essential-worker',
+  'healthcare-provider',
+  'educator',
+  'small-business-owner',
+  'patient-family-member',
+  'other',
 ]
 
 const NUMBER_SEEDS = 200

@@ -34,9 +34,9 @@ export default function Thanks() {
         <Button color="white" leftIcon={<TwitterIcon />}>
           <a href="https://twitter.com/MyCOVIDStory_CA">Share @MyCOVIDStory_CA</a>
         </Button>
-        <Button variant="outline" size="sm">
+        {/* <Button variant="outline" size="sm">
           <Link href="/">Return to Stories</Link>
-        </Button>
+        </Button> */}
       </VStack>
     </Container>
   )

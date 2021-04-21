@@ -10,3 +10,7 @@
   .faq p {
      margin-bottom: 10px; 
   }
+
+  .faq ol {
+     margin-left:50px;
+  }

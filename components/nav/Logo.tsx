@@ -5,7 +5,7 @@ export default function Logo(props) {
   return (
     <Box {...props}>
       <Text color="white" fontSize="md" fontWeight="bold">
-        <Link href="/">My Covid Story</Link>
+        <Link href="/">My COVID Story</Link>
       </Text>
     </Box>
   )

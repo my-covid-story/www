@@ -59,9 +59,15 @@ export default function StoryForm() {
       onSubmit={async (values: LoginFormInputs, actions) => {
         try {
           actions.setSubmitting(true)
+          const anonymousValue = values.anonymous
+          const payload = {
+            ...values,
+            // cast the string anonymous value to boolean
+            anonymous: JSON.parse(anonymousValue),
+          }
           const result = await fetch(`/api/stories`, {
             method: 'POST',
-            body: JSON.stringify(values),
+            body: JSON.stringify(payload),
             headers: {
               'content-type': 'application/json',
             },
@@ -83,19 +89,6 @@ export default function StoryForm() {
           {/* Anonymous */}
           <Field name="anonymous">
             {({ field, form }) => {
-              // This little beauty is a result of radio buttons only providing string values, but we really want a boolean
-              // so that we can do some conditional validation (when "Show my name" is selected, we require name)
-              // Copy the  original handler
-              const fieldOnChange = field.onChange
-              // Hijack the value and coerce it to boolean
-              field.onChange = (event) => {
-                if (event?.target?.value) {
-                  const normalizedValue = event.target.value === 'true'
-                  event.target.value = normalizedValue
-                }
-                // Call formik's original handler with our replaced event and value
-                fieldOnChange(event)
-              }
               return (
                 <FormControl
                   pt={FIELD_PADDING}

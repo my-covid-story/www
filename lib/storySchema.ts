@@ -23,8 +23,8 @@ const schema = yup.object().shape({
     .matches(/^[A-Za-z]\d[A-Za-z]/, 'Postal code must be letter number letter')
     .required(),
   category: yup.string().required('Please choose a category'),
-  anonymous: yup.bool(),
-  contact: yup.bool(),
+  anonymous: yup.boolean().required(),
+  contact: yup.boolean(),
   name: yup.string().when('anonymous', {
     is: false,
     then: yup
@@ -40,7 +40,7 @@ const schema = yup.object().shape({
       !value ? true : Boolean(value.match(/\d/g)?.length === 10)
     ),
   twitter: yup.string(),
-  consent: yup.bool().isTrue('You must provide your consent to continue'),
+  consent: yup.boolean().isTrue('You must provide your consent to continue'),
 })
 
 export default schema

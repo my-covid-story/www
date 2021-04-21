@@ -1,44 +1,55 @@
 import type { NextApiResponse } from 'next'
 
-interface ResponseError {
-  status: number
-  message: string
+interface ResponseErrorOptions {
   detail?: string
   allowed?: string[]
 }
 
-export function badRequest(options: { detail?: string } = {}): ResponseError {
-  const { detail } = options
-  return {
-    status: 400,
-    message: 'Bad request',
-    detail,
+interface ResponseError extends ResponseErrorOptions {
+  message: string
+  status: number
+}
+
+class ResponseError extends Error {
+  constructor(message, status, options: ResponseErrorOptions = {}) {
+    super(message)
+    Error.captureStackTrace(this, ResponseError)
+    this.status = status
+    const { detail, allowed } = options
+    if (detail != null) {
+      this.detail = detail
+    }
+    if (allowed != null) {
+      this.allowed = allowed
+    }
   }
+}
+
+export function badRequest(options: { detail?: string } = {}): ResponseError {
+  return new ResponseError('Bad request', 400, options)
+}
+
+export function unauthorized(): ResponseError {
+  return new ResponseError('Unauthorized', 401)
 }
 
 export function notFound(): ResponseError {
-  return {
-    status: 404,
-    message: 'Not found',
-  }
+  return new ResponseError('Not found', 404)
 }
 
 export function methodNotAllowed(options: { allowed?: string[] } = {}): ResponseError {
-  const { allowed = [] } = options
-  return {
-    status: 405,
-    message: 'Method not allowed',
-    allowed,
-  }
+  return new ResponseError('Method not allowed', 405, options)
 }
 
 export function internalServerError(): ResponseError {
-  return {
-    status: 500,
-    message: 'Internal server error',
-  }
+  return new ResponseError('Internal server error', 500)
 }
 
-export function sendError(res: NextApiResponse, err: ResponseError): void {
-  res.status(err.status).json(err)
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-explicit-any
+export function sendError(res: NextApiResponse, err: any): void {
+  if (!(err instanceof ResponseError)) {
+    console.error(err)
+    err = internalServerError()
+  }
+  res.status(err.status).json({ message: err.message, ...err })
 }

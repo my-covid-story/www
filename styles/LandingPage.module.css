@@ -1,0 +1,40 @@
+.container {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    color: #FFF;
+    background-image: url('/img/landingpage-v2.jpg');
+    background-size: cover;
+    background-position: center 60%;
+    padding: 25vh 0;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1.5px);
+}
+
+.main {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.blurb {
+    max-width: 20rem;
+    padding-top: 3rem;
+    margin: 0 auto;
+}

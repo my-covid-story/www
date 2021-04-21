@@ -1,49 +1,41 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import prisma from '../lib/prisma'
+import landing from '../styles/LandingPage.module.css'
+import { Box, Button, Heading, HStack, Link, Text } from '@chakra-ui/react'
 
-import Footer from '../components/footer'
-
-export default function Home({ feed }) {
-  console.log(feed)
+export default function Home() {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>My Covid Story</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>Share your Covid Story</h1>
-        <div className={styles.storyContainer}>
-          <h3>Latest stories</h3>
-          {feed.map((story) => (
-            <pre key={story.id}>
-              <ul>
-                <li>id: {story.id}</li>
-                <li>content: {story.content}</li>
-                <li>postal: {story.postal}</li>
-                <li>approved: {story.approved}</li>
-                <li>email: {story.email}</li>
-                <li>twitter: {story.twitter}</li>
-              </ul>
-            </pre>
-          ))}
-        </div>
-      </main>
-
-      <Footer />
-    </div>
+    <>
+      <div className={landing.container}>
+        <div className={landing.background} />
+        <main className={landing.main}>
+          <Box>
+            <Heading pb={'1rem'} as="h1" size="3xl">
+              My COVID Story
+            </Heading>
+            <Text>If our leaders won’t listen to the numbers, they must face our stories.</Text>
+            <HStack p={'2rem 0'} spacing="1rem" justify="center">
+              <Link href={'/stories/create'} style={{ display: 'inline-block' }}>
+                <Button
+                  variant="solid"
+                  color="primary.100"
+                  bg="white"
+                  _hover={{
+                    bg: ['gray.200'],
+                  }}
+                >
+                  Add Your Story
+                </Button>
+              </Link>
+              <Link
+                href="https://kvmhxg5ojy6.typeform.com/to/gUsoYkft"
+                style={{ display: 'inline-block', textDecoration: 'none' }}
+                isExternal
+              >
+                <Button variant="solid">Media Sign-Up</Button>
+              </Link>
+            </HStack>
+          </Box>
+        </main>
+      </div>
+    </>
   )
-}
-
-export async function getServerSideProps() {
-  const feed = await prisma.story.findMany({
-    where: { approved: true },
-    orderBy: { createdAt: 'asc' },
-  })
-
-  return {
-    props: { feed },
-  }
 }

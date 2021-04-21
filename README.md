@@ -2,18 +2,12 @@
 
 This is an extremely early MVP, so there is a lot to do.
 
-Our prosposed stack / architecture is:
+Our stack / architecture is:
 
 - [NextJS](https://next.js.org/) hosted on [Vercel](https://vercel.com) (already setup here)
 - [Prisma](https://prisma.io) as our ORM (makes things pretty smooth)
-- Postgresql as a DB
+- Postgresql as a DB (Digital Ocean, Toronto)
 
-Contact @mwickett on Slack for access to the Vercel team, or the GitHub org if you're interested.
-
-## Todo
-
-- [ ] Add Prisma - see [example](https://github.com/prisma/prisma-examples/tree/latest/typescript/rest-nextjs-api-routes)
-- [x] ~Decide if we're using Typescript~ Yes!
 
 ## Contributing
 
@@ -25,7 +19,7 @@ Contact @mwickett on Slack for access to the Vercel team, or the GitHub org if y
 6. Run `npx prisma migrate dev --name init` to apply migrations in `prisma/migrations`
 7. Run `npx prisma db seed --preview-feature` to see test data from `prisma/seed.ts`
 8. Run `npm run dev` to start the app locally
-9. You can use `/api/story` to create new stories
+9. You can use `/api/stories` to create new stories
 
 ---
 

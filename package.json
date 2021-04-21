@@ -24,8 +24,6 @@
     "@hookform/resolvers": "^2.4.0",
     "@prisma/client": "^2.21.2",
     "@sentry/nextjs": "^6.3.0",
-    "@sentry/react": "^6.2.5",
-    "@sentry/tracing": "^6.2.5",
     "fathom-client": "^3.0.0",
     "formik": "^2.2.6",
     "framer-motion": "^4.1.4",

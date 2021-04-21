@@ -15,7 +15,7 @@ export default function FAQ() {
   return (
     <div className={styles.faq}>
       <Head>
-        <title>FAQ - My Covid Story</title>
+        <title>FAQ - My COVID Story</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Box w="95%" p={8} pb={24}>

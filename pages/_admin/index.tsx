@@ -1,21 +1,18 @@
-import Head from 'next/head'
-import { Box, Button, Container, Grid, GridItem, Heading, Stack, Text } from '@chakra-ui/react'
-import { signIn, signOut, useSession, getSession } from 'next-auth/client'
-
-import styles from '../styles/Home.module.css'
-import StoryForm from '../../components/form'
+import { useRouter } from 'next/router'
+import { Box,
+  Button,
+  Container,
+  Heading,
+  Stack,
+  Text } from '@chakra-ui/react'
+import { useSession, getSession } from 'next-auth/client'
 
 import prisma from '../../lib/prisma'
-
-const MenuItems = ({ children }) => (
-  <Text mt={{ base: 4, md: 0 }} mr={6} display="block">
-    {children}
-  </Text>
-);
+import Nav from './nav'
 
 function Story({ id, title, content, name, postal, ...rest}) {
   return (
-    <Box p={5} shadow="md" borderWidth="1px" {...rest}>
+    <Box mt={2} p={5} shadow="md" borderWidth="1px" {...rest}>
       <Heading fontSize="xl">{title}</Heading>
       <Text mt={4}>{content}</Text>
       <Text mt={4}>{name} from {postal}</Text>
@@ -46,13 +43,11 @@ function Story({ id, title, content, name, postal, ...rest}) {
 
 export default function _Admin({ stories }) {
   const [ session ] = useSession()
+
   return <>
-      {!session && <>
-        <button onClick={() => signIn()}>Sign in</button>
-      </>}
+      <Nav session={session} />
       {session && <>
         <Container>
-          <button onClick={() => signOut()}>Sign out</button>
           <Stack spacing={8}>
             {stories.map((story) => (
               <Story
@@ -93,16 +88,17 @@ const updateStory = async (e) =>  {
   });
 }
 
-
-export async function getServerSideProps({ req }) {
+export async function getServerSideProps({ req, query} ) {
   const session = await getSession({ req })
+
+  const deleted = query.deleted ? true : false
 
   let stories = {}
   if(session) {
     stories = await prisma.story.findMany({
         where: {
           approved: false,
-          deleted: false
+          deleted
         },
         orderBy: { createdAt: 'asc' },
     })

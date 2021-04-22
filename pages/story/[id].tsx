@@ -3,7 +3,6 @@ import { Box } from '@chakra-ui/react'
 import { Story } from '@prisma/client'
 import { list, get } from '../../lib/api/stories'
 import StoryDetail from '../../components/stories/StoryDetail'
-import Footer, { FooterSpace, Button } from '../../components/common/Footer'
 
 interface Props {
   story: Story
@@ -20,10 +19,6 @@ export default function StoryPage({ story }: Props) {
   return (
     <Box>
       <StoryDetail story={story} onCancel={handleCancel} />
-      <FooterSpace />
-      <Footer>
-        <Button>Share This Story</Button>
-      </Footer>
     </Box>
   )
 }

@@ -1,4 +1,6 @@
-export function storyCategory({ category }) {
+import { Story } from '@prisma/client'
+
+export function storyCategory({ category }: Story) {
   switch (category) {
     case 'concerned-citizen':
       return 'Concerned Citizen'
@@ -18,7 +20,7 @@ export function storyCategory({ category }) {
   }
 }
 
-export function storyImage({ category }) {
+export function storyImage({ category }: Story) {
   switch (category) {
     case 'concerned-citizen':
     case 'essential-worker':
@@ -33,19 +35,19 @@ export function storyImage({ category }) {
   }
 }
 
-export function storyName({ displayName }) {
+export function storyName({ displayName }: Story) {
   return displayName || 'Anonymous'
 }
 
-export function storyCite(story) {
+export function storyCite(story: Story) {
   const { displayName, postal } = story
   return displayName ? `${displayName} from ${postal}` : `${storyCategory(story)} from ${postal}`
 }
 
-export function storyDate({ createdAt }) {
+export function storyDate({ createdAt }: Story) {
   return new Date(createdAt).toDateString()
 }
 
-export function storyParagraphs({ content }) {
+export function storyParagraphs({ content }: Story) {
   return content.split('\n').filter((p) => p)
 }

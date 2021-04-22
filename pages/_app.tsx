@@ -33,7 +33,7 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     Fathom.load('XNKNPYHV', {
-      includedDomains: ['staging.mycovidstory.ca', 'www.mycovidstory.ca'],
+      includedDomains: ['www.mycovidstory.ca'],
     })
 
     function onRouteChangeComplete() {

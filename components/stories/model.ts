@@ -16,7 +16,7 @@ export function storyCategory({ category }: Story) {
       return 'Patient or Family Member'
     case 'other':
     default:
-      return 'Other'
+      return 'Resident'
   }
 }
 

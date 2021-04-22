@@ -28,7 +28,6 @@ export default function StoryDetail({ story, onClose }: Props) {
           <Flex>
             <Heading
               as="h2"
-              visibility={story.category === 'other' ? 'hidden' : 'visible'}
               py={1}
               px={2}
               border="2px"

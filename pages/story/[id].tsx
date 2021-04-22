@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router'
 import { Box } from '@chakra-ui/react'
-import { get } from '../../lib/api/stories'
+import { get, list } from '../../lib/api/stories'
 import StoryDetail from '../../components/stories/StoryDetail'
 import Footer, { FooterSpace, Button } from '../../components/common/Footer'
+import { GetStaticPaths } from 'next'
 
 export default function StoryPage() {
   const router = useRouter()
@@ -24,11 +25,19 @@ export default function StoryPage() {
   )
 }
 
-export async function getServerSideProps({ params }) {
-  try {
-    const prefected = await get(params.id)
-    return { props: { prefected } }
-  } catch (err) {
-    return { notFound: true }
+// For details, see https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation
+export const getStaticPaths: GetStaticPaths = async () => {
+  const storyIds = await list()
+  const paths = storyIds.map((s) => ({ params: { id: s.id } }))
+  return {
+    paths,
+    // If the ID being requested isn't in this array, getStaticProps will run on the server and fetch the data
+    // Equivalent to getServerSideProps, plus the page is then cached for future visits
+    fallback: 'blocking',
   }
+}
+
+export async function getStaticProps({ params }) {
+  const story = await get(params.id)
+  return { props: { story } }
 }

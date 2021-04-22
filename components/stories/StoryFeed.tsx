@@ -6,7 +6,7 @@ export default function StoryFeed({ stories }) {
   return (
     <Box>
       <FeedHeader />
-      <Stack as="main" spacing={4} p={4}>
+      <Stack as="main" py={6} px={4} spacing={6}>
         {stories.map((story) => (
           <StorySummary key={story.id} story={story} />
         ))}
@@ -46,7 +46,7 @@ function StorySummary({ story }) {
             bgPosition="center"
             color="white"
           >
-            <Box py={4} px={6} bg="rgba(0, 0, 0, 0.5)">
+            <Box py={4} px={6} borderRadius="8px" bg="rgba(0, 0, 0, 0.5)">
               <Heading
                 as="h2"
                 mb={4}

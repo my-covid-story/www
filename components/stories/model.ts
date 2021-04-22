@@ -13,7 +13,7 @@ export function storyCategory({ category }: Story) {
     case 'small-business-owner':
       return 'Small Business Owner'
     case 'patient-family-member':
-      return 'Patient or Family Memeber'
+      return 'Patient or Family Member'
     case 'other':
     default:
       return 'Other'

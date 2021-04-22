@@ -1,12 +1,16 @@
 import { useRouter } from 'next/router'
 import { Box } from '@chakra-ui/react'
+import { Story } from '@prisma/client'
 import { list, get } from '../../lib/api/stories'
 import StoryDetail from '../../components/stories/StoryDetail'
 import Footer, { FooterSpace, Button } from '../../components/common/Footer'
 
-export default function StoryPage() {
+interface Props {
+  story: Story
+}
+
+export default function StoryPage({ story }: Props) {
   const router = useRouter()
-  const id = router.query.id as string
 
   // If we came from the feed, go back on cancel. If not, navigate forward to the feed.
   function handleCancel() {
@@ -15,7 +19,7 @@ export default function StoryPage() {
 
   return (
     <Box>
-      <StoryDetail id={id} onCancel={handleCancel} />
+      <StoryDetail story={story} onCancel={handleCancel} />
       <FooterSpace />
       <Footer>
         <Button>Share This Story</Button>

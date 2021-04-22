@@ -1,37 +1,14 @@
-import { useState, useEffect } from 'react'
-import { Box, IconButton, Flex, Heading, Progress, Stack, Text } from '@chakra-ui/react'
+import { Box, IconButton, Flex, Heading, Stack, Text } from '@chakra-ui/react'
 import { CloseIcon } from '@chakra-ui/icons'
 import { Story } from '@prisma/client'
 import { storyCategory, storyImage, storyName, storyDate, storyParagraphs } from './model'
 
-interface StoryDetailProps {
-  id: string
-  prefetched?: Story
+interface Props {
+  story: Story
   onCancel: () => void
 }
 
-const headers = { 'content-type': 'application/json' }
-
-export default function StoryDetail({ id, prefetched, onCancel }: StoryDetailProps) {
-  const [story, setStory] = useState(prefetched)
-
-  useEffect(() => {
-    async function fetchStory() {
-      if (id != null && story == null) {
-        const response = await fetch(`/api/stories/${id}`, { headers })
-        if (response.ok) {
-          const s = await response.json()
-          setStory(s)
-        }
-      }
-    }
-    fetchStory()
-  }, [id, story])
-
-  if (story == null) {
-    return <Progress isIndeterminate size="xs" colorScheme="gray" />
-  }
-
+export default function StoryDetail({ story, onCancel }: Props) {
   return (
     <Box as="main">
       <Box bgImage={storyImage(story)} bgSize="cover" bgPosition="center" color="white">

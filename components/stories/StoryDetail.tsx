@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Box, IconButton, Flex, Heading, Progress, Stack, Text } from '@chakra-ui/react'
 import { CloseIcon } from '@chakra-ui/icons'
-import { Story, storyCategory, storyImage, storyName, storyDate, storyParagraphs } from './model'
+import { Story } from '@prisma/client'
+import { storyCategory, storyImage, storyName, storyDate, storyParagraphs } from './model'
 
 interface StoryDetailProps {
   id: string

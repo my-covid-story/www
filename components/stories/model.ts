@@ -1,6 +1,4 @@
-import { Prisma } from '@prisma/client'
-
-export type Story = Prisma.Story
+import { Story } from '@prisma/client'
 
 export function storyCategory({ category }: Story) {
   switch (category) {

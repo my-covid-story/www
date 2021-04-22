@@ -47,7 +47,6 @@ export default function StoryDetail({ story, onCancel }: Props) {
             fontSize="2xl"
             fontWeight={600}
             fontStyle="italic"
-            noOfLines={3}
             _before={{ content: `"“"` }}
             _after={{ content: `"”"` }}
           >

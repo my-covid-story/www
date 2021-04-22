@@ -30,6 +30,7 @@ function StorySummary({ story }) {
               <Heading
                 as="h2"
                 mb={4}
+                minH="6rem"
                 fontSize="2xl"
                 fontWeight={600}
                 fontStyle="italic"

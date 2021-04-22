@@ -5,10 +5,10 @@ import { storyCategory, storyImage, storyName, storyDate, storyParagraphs } from
 
 interface Props {
   story: Story
-  onCancel: () => void
+  onClose: () => void
 }
 
-export default function StoryDetail({ story, onCancel }: Props) {
+export default function StoryDetail({ story, onClose }: Props) {
   return (
     <Box as="main">
       <Box bgImage={storyImage(story)} bgSize="cover" bgPosition="center" color="white">
@@ -23,7 +23,7 @@ export default function StoryDetail({ story, onCancel }: Props) {
             colorScheme="white"
             aria-label="Close"
             icon={<CloseIcon />}
-            onClick={onCancel}
+            onClick={onClose}
           />
           <Flex>
             <Heading

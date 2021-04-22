@@ -12,13 +12,13 @@ export default function StoryPage({ story }: Props) {
   const router = useRouter()
 
   // If we came from the feed, go back on cancel. If not, navigate forward to the feed.
-  function handleCancel() {
-    router.query.back === 'true' ? router.back() : router.push('/feed')
+  function handleClose() {
+    router.query.back === 'true' ? router.back() : router.push('/')
   }
 
   return (
     <Box>
-      <StoryDetail story={story} onCancel={handleCancel} />
+      <StoryDetail story={story} onClose={handleClose} />
     </Box>
   )
 }

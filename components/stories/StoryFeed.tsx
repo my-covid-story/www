@@ -4,11 +4,31 @@ import { storyImage, storyCite } from './model'
 
 export default function StoryFeed({ stories }) {
   return (
-    <Stack as="main" spacing={6} p={4}>
-      {stories.map((story) => (
-        <StorySummary key={story.id} story={story} />
-      ))}
-    </Stack>
+    <Box>
+      <FeedHeader />
+      <Stack as="main" spacing={4} p={4}>
+        {stories.map((story) => (
+          <StorySummary key={story.id} story={story} />
+        ))}
+      </Stack>
+    </Box>
+  )
+}
+
+function FeedHeader() {
+  return (
+    <Box
+      bgImage="url('/img/landingpage-v2.jpg')"
+      bgSize="cover"
+      bgPosition="center 55%"
+      color="white"
+    >
+      <Box pt={8} pb={10} px={4} bg="rgba(0, 0, 0, 0.5)">
+        <Heading as="h1" fontSize="2xl" fontWeight={300}>
+          If our leaders won’t listen to the numbers, they must face our stories.
+        </Heading>
+      </Box>
+    </Box>
   )
 }
 

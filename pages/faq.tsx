@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import { Accordion,
   AccordionItem,
   AccordionButton,
@@ -77,7 +78,7 @@ export default function FAQ() {
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4}>
-                You have full control over who your information will be shared with — nobody else will have access to any personally identifiable information. We take your privacy seriously and have taken this into consideration at every step. The site does not use any third-party tracking or analytics tools.
+                You have full control over who your information will be shared with — nobody else will have access to any personally identifiable information. We take your privacy seriously and have taken this into consideration at every step. <Link href="https://app.usefathom.com/share/xnknpyhv/mycovidstory.ca#/" externalLink={true}></Link>
               </AccordionPanel>
             </AccordionItem>
 
@@ -135,7 +136,7 @@ export default function FAQ() {
                 </AccordionButton>
               </h2>
               <AccordionPanel pb={4}>
-                We are a group of concerned Ontarians who can no longer stand by as our province is led into a humanitarian crisis. We believe the power of storytelling is an effective means to drive government action. Please view our <a href='/about/'>About</a> page to view our full list of contributors.
+                We are a group of concerned Ontarians who can no longer stand by as our province is led into a humanitarian crisis. We believe the power of storytelling is an effective means to drive government action. Please view our <Link href='/about/'>About</Link> page to view our full list of contributors.
               </AccordionPanel>
             </AccordionItem>
 

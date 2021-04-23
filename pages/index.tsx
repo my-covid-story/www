@@ -3,8 +3,9 @@ import { Box, Link } from '@chakra-ui/react'
 import { list } from '../lib/api/stories'
 import StoryFeed from '../components/stories/StoryFeed'
 import FloatingRibbon, { Button } from '../components/common/FloatingRibbon'
+import SiteLayout from '../layouts/Default'
 
-export default function MainPage({ stories }) {
+const MainPage = ({ stories }) => {
   return (
     <>
       <Box>
@@ -28,3 +29,7 @@ export async function getStaticProps() {
     revalidate: 600, // 10 minutes
   }
 }
+
+MainPage.getLayout = (page) => <SiteLayout navPosition="sticky">{page}</SiteLayout>
+
+export default MainPage

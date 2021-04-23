@@ -1,6 +1,5 @@
 // eslint-disable-next-line
 import '../styles/globals.css'
-import theme from '../styles/theme'
 import '@fontsource/inter/700.css'
 import '@fontsource/inter/400.css'
 import Head from 'next/head'
@@ -9,12 +8,10 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import * as Fathom from 'fathom-client'
 
-import { ChakraProvider } from '@chakra-ui/react'
-
 import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 
-import Nav from '../components/nav'
+import SiteLayout from '../layouts/Default'
 
 Sentry.init({
   dsn: 'https://ff771404287542638b24e14b8de8edff@o573965.ingest.sentry.io/5724646',
@@ -39,6 +36,7 @@ function MyApp({ Component, pageProps }) {
     function onRouteChangeComplete() {
       Fathom.trackPageview()
     }
+
     // Record a pageview when route changes
     router.events.on('routeChangeComplete', onRouteChangeComplete)
 
@@ -48,7 +46,9 @@ function MyApp({ Component, pageProps }) {
     }
   }, [])
 
-  return (
+  const getLayout = Component.getLayout || ((page) => <SiteLayout>{page}</SiteLayout>)
+
+  return getLayout(
     <>
       <Head>
         <title>{title}</title>
@@ -70,12 +70,7 @@ function MyApp({ Component, pageProps }) {
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
       </Head>
-      <ChakraProvider theme={theme}>
-        <Nav />
-        <main style={{ paddingTop: '88px' }}>
-          <Component {...pageProps} />
-        </main>
-      </ChakraProvider>
+      <Component {...pageProps} />
     </>
   )
 }

@@ -74,9 +74,9 @@ const MenuToggle = ({ toggle, isOpen }) => {
   )
 }
 
-const MenuItem = ({ children, to = '/', ...rest }) => {
+const MenuItem = ({ children, to = '/', externalLink = false, ...rest }) => {
   return (
-    <Link href={to}>
+    <Link href={to} isExternal={externalLink}>
       <Text display="block" {...rest}>
         {children}
       </Text>
@@ -100,8 +100,8 @@ const MenuLinks = ({ isOpen }) => {
         <MenuItem to="/">Home</MenuItem>
         <MenuItem to="/about">About Us</MenuItem>
         <MenuItem to="/faq">FAQ</MenuItem>
-        <MenuItem to="https://kvmhxg5ojy6.typeform.com/to/gUsoYkft">Media</MenuItem>
-        <MenuItem to="https://twitter.com/MyCOVIDStory_CA">
+        <MenuItem to="https://kvmhxg5ojy6.typeform.com/to/gUsoYkft" externalLink={true}>Media</MenuItem>
+        <MenuItem to="https://twitter.com/MyCOVIDStory_CA" externalLink={true}>
           <TwitterIcon />
         </MenuItem>
         <MenuItem to="/new">
@@ -125,7 +125,6 @@ const MenuLinks = ({ isOpen }) => {
 const NavBarContainer = ({ children, ...props }) => {
   return (
     <Flex
-      position="absolute"
       zIndex="5"
       top="0"
       as="nav"
@@ -133,7 +132,6 @@ const NavBarContainer = ({ children, ...props }) => {
       justify="space-between"
       wrap="wrap"
       w="100%"
-      mb={8}
       p={8}
       bg="primary.100"
       bgGradient="linear(to-r, primary.100, primary.700)"

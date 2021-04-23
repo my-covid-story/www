@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Link from 'next/link'
+
 import {
   Accordion,
   AccordionItem,
@@ -8,6 +8,7 @@ import {
   AccordionIcon,
   Box,
   Heading,
+  Link,
   Text,
 } from '@chakra-ui/react'
 import styles from '../styles/FaqPage.module.css'
@@ -114,13 +115,9 @@ export default function FAQ() {
                 will have access to any personally identifiable information. We take your privacy
                 seriously and have taken this into consideration at every step. This site does not
                 use cookies or any third-party tracking tools. We use{' '}
-                <a
-                  href="https://app.usefathom.com/share/xnknpyhv/mycovidstory.ca#/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <Link href="https://app.usefathom.com/share/xnknpyhv/mycovidstory.ca#/" isExternal>
                   Fathom
-                </a>{' '}
+                </Link>{' '}
                 to generate simple traffic metrics. Fathom does not track any personally
                 identifiable information.
               </AccordionPanel>
@@ -143,7 +140,7 @@ export default function FAQ() {
                   MyCovidStory.ca is not a direct line to media coverage. While the untold stories
                   of the pandemic are important and we expect that the media may be interested in
                   learning more, they will only contact you if you have given express consent for
-                  this.{' '}
+                  this.
                 </p>
 
                 <p>
@@ -212,7 +209,7 @@ export default function FAQ() {
               <AccordionPanel pb={4}>
                 We are a group of concerned Ontarians who can no longer stand by as our province is
                 led into a humanitarian crisis. We believe the power of storytelling is an effective
-                means to drive government action. Please view our <Link href="/about/">About</Link>{' '}
+                means to drive government action. Please view our <Link href="/about/">About</Link>
                 page to view our full list of contributors.
               </AccordionPanel>
             </AccordionItem>

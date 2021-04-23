@@ -9,7 +9,7 @@ const NavBar = (props) => {
   const toggle = () => setIsOpen(!isOpen)
 
   return (
-    <NavBarContainer {...props}>
+    <NavBarContainer {...props} pos="sticky">
       <Logo w="150px" color={['white', 'white', 'primary.500', 'primary.500']} />
       <MenuToggle toggle={toggle} isOpen={isOpen} />
       <MenuLinks isOpen={isOpen} />
@@ -125,7 +125,6 @@ const MenuLinks = ({ isOpen }) => {
 const NavBarContainer = ({ children, ...props }) => {
   return (
     <Flex
-      position="absolute"
       zIndex="5"
       top="0"
       as="nav"
@@ -133,7 +132,6 @@ const NavBarContainer = ({ children, ...props }) => {
       justify="space-between"
       wrap="wrap"
       w="100%"
-      mb={8}
       p={8}
       bg="primary.100"
       bgGradient="linear(to-r, primary.100, primary.700)"

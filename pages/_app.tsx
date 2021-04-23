@@ -11,9 +11,7 @@ import * as Fathom from 'fathom-client'
 import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 
-import DefaultSiteLayout from '../layouts/Default'
-import Nav from '../components/nav'
-import { ChakraProvider } from '@chakra-ui/react'
+import SiteLayout from '../layouts/Default'
 
 Sentry.init({
   dsn: 'https://ff771404287542638b24e14b8de8edff@o573965.ingest.sentry.io/5724646',
@@ -48,7 +46,7 @@ function MyApp({ Component, pageProps }) {
     }
   }, [])
 
-  const getLayout = Component.getLayout || ((page) => <DefaultSiteLayout>{page}</DefaultSiteLayout>)
+  const getLayout = Component.getLayout || ((page) => <SiteLayout>{page}</SiteLayout>)
 
   return getLayout(
     <>
@@ -72,10 +70,7 @@ function MyApp({ Component, pageProps }) {
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
       </Head>
-      <Nav />
-      <main style={{ paddingTop: '88px' }}>
-        <Component {...pageProps} />
-      </main>
+      <Component {...pageProps} />
     </>
   )
 }

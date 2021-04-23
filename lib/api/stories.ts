@@ -13,14 +13,26 @@ const select = {
   content: true,
   postal: true,
   category: true,
+  displayName: true,
   approved: true,
   viewCount: true,
+}
+
+function applySelect(story) {
+  const result = {}
+  Object.entries(select).forEach(([prop, val]) => {
+    if (val === true) {
+      result[prop] = story[prop]
+    }
+  })
+  return result
 }
 
 // GET /api/stories
 export async function list() {
   try {
     return await prisma.story.findMany({
+      take: 100,
       where: { approved: true },
       orderBy: { createdAt: 'desc' },
       select,
@@ -36,12 +48,11 @@ export interface NewStory {
   content: string
   postal: string
   category: string
-  name?: string
+  contactName?: string
+  displayName?: string
   email?: string
   phone?: string
   twitter?: string
-  anonymous: boolean
-  contact: boolean
   consent?: boolean
 }
 
@@ -70,12 +81,11 @@ export async function add(story: NewStory) {
         content: payload.content,
         postal: payload.postal,
         category: payload.category,
-        name: payload.name,
+        contactName: payload.contactName,
+        displayName: payload.displayName,
         email: payload.email,
         phone: payload.phone,
         twitter: payload.twitter,
-        anonymous: payload.anonymous,
-        contact: payload.contact,
       },
     })
   } catch (err) {
@@ -93,7 +103,7 @@ export async function get(id: string) {
   try {
     const story = await prisma.story.findUnique({ where: { id: id } })
     if (story != null && story.approved) {
-      return story
+      return applySelect(story)
     }
   } catch (err) {
     if (!(err instanceof PrismaClientValidationError)) {

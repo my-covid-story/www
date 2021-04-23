@@ -17,6 +17,7 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^1.0.11",
     "@chakra-ui/react": "^1.5.1",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",

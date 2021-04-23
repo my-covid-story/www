@@ -1,6 +1,12 @@
+import { useEffect } from 'react'
 import { Center, Heading, Text, Container, Button, VStack, Icon } from '@chakra-ui/react'
 
 export default function Thanks() {
+  // Triggers a Story goal event on Fathom
+  useEffect(() => {
+    window?.fathom?.trackGoal('RT0FH11Y', 0)
+  }, [])
+
   return (
     <Container pt="32">
       <Center>

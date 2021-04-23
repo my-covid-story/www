@@ -1,5 +1,5 @@
 import { Box, Text, Heading } from '@chakra-ui/react'
-import StoryForm from '../../components/form'
+import StoryForm from '../components/form'
 import Link from 'next/link'
 
 export default function CreateStory() {

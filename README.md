@@ -8,7 +8,6 @@ Our stack / architecture is:
 - [Prisma](https://prisma.io) as our ORM (makes things pretty smooth)
 - Postgresql as a DB (Digital Ocean, Toronto)
 
-
 ## Contributing
 
 1. Clone this repo
@@ -16,10 +15,10 @@ Our stack / architecture is:
 3. Rename `.env.template` to `.env`
 4. Get a local postgres db running - Docker is probably easiest, but local postgres would also work
 5. With Docker installed, run `docker run --name my-covid-story-dev -p 5432:5432 -e POSTGRES_PASSWORD=mycovidstory -d postgres:12.6-alpine` (this will match the DB URL string in .env)
-6. Run `npx prisma migrate dev --name init` to apply migrations in `prisma/migrations`
-7. Run `npx prisma db seed --preview-feature` to see test data from `prisma/seed.ts`
-8. Run `npm run dev` to start the app locally
-9. You can use `/api/stories` to create new stories
+6. Run `npx prisma migrate dev --name init` to apply migrations in `prisma/migrations`.
+7. Run `npx prisma db seed --preview-feature` to see test data from `prisma/seed.ts`.
+8. Run `npm run dev` to start the app locally.
+9. You can use `/api/stories` to create new stories.
 
 ---
 

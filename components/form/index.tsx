@@ -27,7 +27,8 @@ type LoginFormInputs = {
   category: string
   anonymous: string
   contact: boolean
-  name?: string
+  contactName?: string
+  displayName?: string
   email?: string
   phone?: string
   twitter?: string
@@ -41,7 +42,8 @@ const initialValues = {
   category: '',
   anonymous: 'true',
   contact: false,
-  name: '',
+  contactName: '',
+  displayName: '',
   email: '',
   phone: '',
   twitter: '',
@@ -57,24 +59,29 @@ export default function StoryForm() {
       initialValues={initialValues}
       validationSchema={storySchema}
       onSubmit={async (values: LoginFormInputs, actions) => {
+        // Remove any details the user filled in but then decided not to share.
+        if (values.anonymous === 'true') {
+          values.displayName = ''
+        }
+        if (!values.contact) {
+          values.contactName = ''
+          values.email = ''
+          values.phone = ''
+          values.twitter = ''
+        }
+
         try {
           actions.setSubmitting(true)
-          const anonymousValue = values.anonymous
-          const payload = {
-            ...values,
-            // cast the string anonymous value to boolean
-            anonymous: JSON.parse(anonymousValue),
-          }
           const result = await fetch(`/api/stories`, {
             method: 'POST',
-            body: JSON.stringify(payload),
+            body: JSON.stringify(values),
             headers: {
               'content-type': 'application/json',
             },
           })
           if (result.ok) {
             actions.setSubmitting(false)
-            Router.push('/stories/thanks')
+            Router.push('/thanks')
           } else {
             console.error('something went wrong')
           }
@@ -114,6 +121,27 @@ export default function StoryForm() {
             }}
           </Field>
 
+          {props.values.anonymous === 'false' && (
+            <Field name="displayName">
+              {/* Display Name */}
+              {({ field, form }) => (
+                <FormControl
+                  pt={FIELD_PADDING}
+                  pb={FIELD_PADDING}
+                  isRequired
+                  isInvalid={form.errors.displayName && form.touched.displayName}
+                >
+                  <FormLabel htmlFor="displayName">Name to display</FormLabel>
+                  <Input {...field} id="displayName" placeholder="Your name" />
+                  <FormErrorMessage>{form.errors.displayName}</FormErrorMessage>
+                  <FormHelperText>
+                    This name <em>will</em> appear on the site.
+                  </FormHelperText>
+                </FormControl>
+              )}
+            </Field>
+          )}
+
           {/* Title */}
           <Field name="title">
             {({ field, form }) => (
@@ -142,7 +170,7 @@ export default function StoryForm() {
               >
                 <FormLabel htmlFor="content">Please share your story</FormLabel>
                 <Textarea {...field} id="content" placeholder="Enter your story content" />
-                <FormHelperText>{`Up to ${STORY_WORD_LIMIT} words`}</FormHelperText>
+                <FormHelperText>{`Up to ${STORY_WORD_LIMIT} words.`}</FormHelperText>
                 <FormErrorMessage>{form.errors.content}</FormErrorMessage>
               </FormControl>
             )}
@@ -184,7 +212,7 @@ export default function StoryForm() {
                   <option value="other">Other</option>
                 </Select>
                 <FormErrorMessage>{form.errors.category}</FormErrorMessage>
-                <FormHelperText>Choose the one that best describes you</FormHelperText>
+                <FormHelperText>Choose the one that best describes you.</FormHelperText>
               </FormControl>
             )}
           </Field>
@@ -206,70 +234,77 @@ export default function StoryForm() {
               </FormControl>
             )}
           </Field>
-
           {/* Contact Info */}
-          <Text as="h4" pt={FIELD_PADDING}>
-            <strong>Optional Contact Info</strong>
-          </Text>
-          {/* Name */}
-          <Field name="name">
-            {({ field, form }) => (
-              <FormControl
-                pt={OPTIONAL_FIELD_PADDING}
-                pb={OPTIONAL_FIELD_PADDING}
-                isInvalid={form.errors.name && form.touched.name}
-              >
-                <FormLabel htmlFor="name">Name to display</FormLabel>
-                <Input {...field} id="name" placeholder="Contact name" />
-                <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-              </FormControl>
-            )}
-          </Field>
-          {/* Phone */}
-          <Field name="phone">
-            {({ field, form }) => (
-              <FormControl
-                pt={OPTIONAL_FIELD_PADDING}
-                pb={OPTIONAL_FIELD_PADDING}
-                isInvalid={form.errors.phone && form.touched.phone}
-              >
-                <FormLabel htmlFor="phone">Phone number</FormLabel>
-                <Input {...field} id="phone" placeholder="555-555-5555" />
-                <FormErrorMessage>{form.errors.phone}</FormErrorMessage>
-              </FormControl>
-            )}
-          </Field>
-          {/* Email */}
-          <Field name="email">
-            {({ field, form }) => (
-              <FormControl
-                pt={OPTIONAL_FIELD_PADDING}
-                pb={OPTIONAL_FIELD_PADDING}
-                isInvalid={form.errors.email && form.touched.email}
-              >
-                <FormLabel htmlFor="email">Email</FormLabel>
-                <Input {...field} id="email" placeholder="name@domain.com" />
-                <FormErrorMessage>{form.errors.email}</FormErrorMessage>
-              </FormControl>
-            )}
-          </Field>
-          {/* Twitter */}
-          <Field name="twitter">
-            {({ field, form }) => (
-              <FormControl
-                pt={OPTIONAL_FIELD_PADDING}
-                pb={OPTIONAL_FIELD_PADDING}
-                isInvalid={form.errors.twitter && form.touched.twitter}
-              >
-                <FormLabel htmlFor="twitter">Twitter</FormLabel>
-                <InputGroup>
-                  <InputLeftAddon children="@" />
-                  <Input {...field} id="twitter" />
-                </InputGroup>
-                <FormErrorMessage>{form.errors.twitter}</FormErrorMessage>
-              </FormControl>
-            )}
-          </Field>
+          {props.values.contact && (
+            <>
+              <Text as="h4" pt={FIELD_PADDING}>
+                <strong>Interview Contact Info</strong>
+              </Text>
+              {/* Contact Name */}
+              <Field name="contactName">
+                {({ field, form }) => (
+                  <FormControl
+                    pt={OPTIONAL_FIELD_PADDING}
+                    pb={OPTIONAL_FIELD_PADDING}
+                    isInvalid={form.errors.contactName && form.touched.contactName}
+                    isRequired
+                  >
+                    <FormLabel htmlFor="name">Your name</FormLabel>
+                    <Input {...field} id="contactName" placeholder="Contact name" />
+                    <FormErrorMessage>{form.errors.contactName}</FormErrorMessage>
+                    <FormHelperText>
+                      This <em>won&apos;t</em> be published.
+                    </FormHelperText>
+                  </FormControl>
+                )}
+              </Field>
+              {/* Phone */}
+              <Field name="phone">
+                {({ field, form }) => (
+                  <FormControl
+                    pt={OPTIONAL_FIELD_PADDING}
+                    pb={OPTIONAL_FIELD_PADDING}
+                    isInvalid={form.errors.phone && form.touched.phone}
+                  >
+                    <FormLabel htmlFor="phone">Phone number</FormLabel>
+                    <Input {...field} id="phone" placeholder="555-555-5555" />
+                    <FormErrorMessage>{form.errors.phone}</FormErrorMessage>
+                  </FormControl>
+                )}
+              </Field>
+              {/* Email */}
+              <Field name="email">
+                {({ field, form }) => (
+                  <FormControl
+                    pt={OPTIONAL_FIELD_PADDING}
+                    pb={OPTIONAL_FIELD_PADDING}
+                    isInvalid={form.errors.email && form.touched.email}
+                  >
+                    <FormLabel htmlFor="email">Email</FormLabel>
+                    <Input {...field} id="email" placeholder="name@domain.com" />
+                    <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+                  </FormControl>
+                )}
+              </Field>
+              {/* Twitter */}
+              <Field name="twitter">
+                {({ field, form }) => (
+                  <FormControl
+                    pt={OPTIONAL_FIELD_PADDING}
+                    pb={OPTIONAL_FIELD_PADDING}
+                    isInvalid={form.errors.twitter && form.touched.twitter}
+                  >
+                    <FormLabel htmlFor="twitter">Twitter</FormLabel>
+                    <InputGroup>
+                      <InputLeftAddon>@</InputLeftAddon>
+                      <Input {...field} id="twitter" />
+                    </InputGroup>
+                    <FormErrorMessage>{form.errors.twitter}</FormErrorMessage>
+                  </FormControl>
+                )}
+              </Field>
+            </>
+          )}
 
           {/* Consent */}
           <Field name="consent">
@@ -285,7 +320,7 @@ export default function StoryForm() {
                 </FormLabel>
                 <Checkbox {...field} id="consent" name="consent">
                   I confirm this story is true and I have consent to share it and any photo
-                  submitted
+                  submitted.
                 </Checkbox>
                 <FormErrorMessage>{form.errors.consent}</FormErrorMessage>
               </FormControl>

@@ -3,7 +3,7 @@
 
 import * as yup from 'yup'
 
-export const TITLE_CHAR_LIMIT = 75
+export const TITLE_CHAR_LIMIT = 140
 export const STORY_WORD_LIMIT = 1000
 
 const schema = yup.object().shape({
@@ -24,15 +24,27 @@ const schema = yup.object().shape({
     .required(),
   category: yup.string().required('Please choose a category'),
   anonymous: yup.boolean().required(),
-  contact: yup.boolean(),
-  name: yup.string().when('anonymous', {
-    is: false,
-    then: yup
-      .string()
-      .required(
-        "You must include your name since you've agreed to be contacted. Choose 'Anonymously' above if you don't want to share your name"
-      ),
-  }),
+  displayName: yup
+    .string()
+    .max(200, 'Display name is too long')
+    .when('anonymous', {
+      is: false,
+      then: yup
+        .string()
+        .required(
+          "You must include your name since you've agreed to be contacted. Choose 'Anonymously' above if you don't want to share your name"
+        ),
+    }),
+  contact: yup.boolean().required(),
+  contactName: yup
+    .string()
+    .max(200, 'Contact name is too long')
+    .when('contact', {
+      is: true,
+      then: yup
+        .string()
+        .required("You must include your name since you've agreed to be contacted."),
+    }),
   email: yup.string().email('Invalid email address format'),
   phone: yup
     .string()

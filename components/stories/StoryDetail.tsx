@@ -1,7 +1,14 @@
 import { Box, IconButton, Flex, Heading, Stack, Text } from '@chakra-ui/react'
 import { CloseIcon } from '@chakra-ui/icons'
 import { Story } from '@prisma/client'
-import { storyCategory, storyImage, storyName, storyDate, storyParagraphs } from './model'
+import {
+  categoryLabel,
+  storyCategoryLabel,
+  storyImage,
+  storyName,
+  storyDate,
+  storyParagraphs,
+} from './model'
 
 interface Props {
   story: Story
@@ -28,6 +35,7 @@ export default function StoryDetail({ story, onClose }: Props) {
           <Flex>
             <Heading
               as="h2"
+              visibility={categoryLabel[story.category] ? 'visible' : 'hidden'}
               py={1}
               px={2}
               border="2px"
@@ -36,7 +44,7 @@ export default function StoryDetail({ story, onClose }: Props) {
               fontSize="md"
               fontWeight={600}
             >
-              {storyCategory(story)}
+              {storyCategoryLabel(story)}
             </Heading>
           </Flex>
           <Heading

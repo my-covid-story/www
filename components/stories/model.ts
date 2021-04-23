@@ -1,23 +1,16 @@
 import { Story } from '@prisma/client'
 
-export function storyCategory({ category }: Story) {
-  switch (category) {
-    case 'concerned-citizen':
-      return 'Concerned Citizen'
-    case 'essential-worker':
-      return 'Essential Worker'
-    case 'healthcare-provider':
-      return 'Healthcare Provider'
-    case 'educator':
-      return 'Educator'
-    case 'small-business-owner':
-      return 'Small Business Owner'
-    case 'patient-family-member':
-      return 'Patient or Family Member'
-    case 'other':
-    default:
-      return 'Resident'
-  }
+export const categoryLabel = {
+  'concerned-citizen': 'Concerned Citizen',
+  'essential-worker': 'Essential Worker',
+  'healthcare-provider': 'Healthcare Provider',
+  educator: 'Educator',
+  'small-business-owner': 'Small Business Owner',
+  'patient-family-member': 'Patient or Family Member',
+}
+
+export function storyCategoryLabel({ category }: Story) {
+  return categoryLabel[category] || 'Other'
 }
 
 export function storyImage({ category }: Story) {
@@ -39,9 +32,10 @@ export function storyName({ displayName }: Story) {
   return displayName || 'Anonymous'
 }
 
-export function storyCite(story: Story) {
-  const { displayName, postal } = story
-  return displayName ? `${displayName} from ${postal}` : `${storyCategory(story)} from ${postal}`
+export function storyCite({ displayName, category, postal }: Story) {
+  if (displayName) return `${displayName} from ${postal}`
+  const cl = categoryLabel[category]
+  return cl ? `${cl} from ${postal}` : `From ${postal}`
 }
 
 export function storyDate({ createdAt }: Story) {

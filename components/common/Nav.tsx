@@ -74,9 +74,9 @@ const MenuToggle = ({ toggle, isOpen }) => {
   )
 }
 
-const MenuItem = ({ children, to = '/', ...rest }) => {
+const MenuItem = ({ children, to = '/', externalLink = false, ...rest }) => {
   return (
-    <Link href={to}>
+    <Link href={to} isExternal={externalLink}>
       <Text display="block" {...rest}>
         {children}
       </Text>
@@ -100,7 +100,7 @@ const MenuLinks = ({ isOpen }) => {
         <MenuItem to="/">Home</MenuItem>
         <MenuItem to="/about">About Us</MenuItem>
         <MenuItem to="/faq">FAQ</MenuItem>
-        <MenuItem to="https://kvmhxg5ojy6.typeform.com/to/gUsoYkft">Media</MenuItem>
+        <MenuItem to="https://kvmhxg5ojy6.typeform.com/to/gUsoYkft" externalLink={true}>Media</MenuItem>
         <MenuItem to="https://twitter.com/MyCOVIDStory_CA">
           <TwitterIcon />
         </MenuItem>

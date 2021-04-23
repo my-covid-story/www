@@ -4,7 +4,7 @@ import '@fontsource/inter/700.css'
 import '@fontsource/inter/400.css'
 import Head from 'next/head'
 
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import * as Fathom from 'fathom-client'
 

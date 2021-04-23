@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Center, Heading, Text, Container, Button, VStack, Icon } from '@chakra-ui/react'
+import { useEffect } from 'react'
+import { Center, Heading, Text, Container, Button, VStack, Icon, Link } from '@chakra-ui/react'
 
 import BlankLayout from '../layouts/Blank'
 
@@ -40,12 +40,16 @@ const Thanks = () => {
         <Heading as="h2" size="md">
           Spread the word
         </Heading>
-        <Button color="white" leftIcon={<TwitterIcon />}>
-          <a href="https://twitter.com/MyCOVIDStory_CA">Share @MyCOVIDStory_CA</a>
-        </Button>
-        <Button variant="outline" size="sm">
-          <a href="/">Return to Stories</a>
-        </Button>
+        <Link href="https://twitter.com/MyCOVIDStory_CA" isExternal>
+          <Button color="white" leftIcon={<TwitterIcon />}>
+            Share @MyCOVIDStory_CA
+          </Button>
+        </Link>
+        <Link href="/">
+          <Button variant="outline" size="sm">
+            Return to Stories
+          </Button>
+        </Link>
       </VStack>
     </Container>
   )

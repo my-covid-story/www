@@ -1,25 +1,77 @@
 import { useRouter } from 'next/router'
-import { Box } from '@chakra-ui/react'
+
+import {
+  Box,
+  Drawer,
+  DrawerBody,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  useDisclosure,
+} from '@chakra-ui/react'
+import {
+  EmailShareButton,
+  EmailIcon,
+  FacebookShareButton,
+  FacebookIcon,
+  TwitterShareButton,
+  TwitterIcon,
+  WhatsappShareButton,
+  WhatsappIcon,
+} from 'react-share'
+
+import absoluteUrl from 'next-absolute-url'
+
 import { Story } from '@prisma/client'
 import { list, get } from '../../lib/api/stories'
 import StoryDetail from '../../components/stories/StoryDetail'
+import FloatingRibbon, { Button } from '../../components/common/FloatingRibbon'
 
 interface Props {
   story: Story
+  url: string
 }
 
 export default function StoryPage({ story }: Props) {
   const router = useRouter()
-
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const shareIconSize = 64
   // If we came from the feed, go back on cancel. If not, navigate forward to the feed.
   function handleClose() {
     router.query.back === 'true' ? router.back() : router.push('/')
   }
 
+  const url = `/story/${story.id}`
   return (
-    <Box>
-      <StoryDetail story={story} onClose={handleClose} />
-    </Box>
+    <>
+      <Box>
+        <StoryDetail story={story} onClose={handleClose} />
+      </Box>
+      <FloatingRibbon>
+        <Button onClick={onOpen}>Share This Story</Button>
+        <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
+          <DrawerOverlay>
+            <DrawerContent>
+              <DrawerHeader>Share via</DrawerHeader>
+              <DrawerBody>
+                <TwitterShareButton url={url}>
+                  <TwitterIcon size={shareIconSize} round={true} />
+                </TwitterShareButton>
+                <FacebookShareButton url={url}>
+                  <FacebookIcon size={shareIconSize} round={true} />
+                </FacebookShareButton>
+                <WhatsappShareButton url={url}>
+                  <WhatsappIcon size={shareIconSize} round={true} />
+                </WhatsappShareButton>
+                <EmailShareButton url={url}>
+                  <EmailIcon size={shareIconSize} round={true} />
+                </EmailShareButton>
+              </DrawerBody>
+            </DrawerContent>
+          </DrawerOverlay>
+        </Drawer>
+      </FloatingRibbon>
+    </>
   )
 }
 

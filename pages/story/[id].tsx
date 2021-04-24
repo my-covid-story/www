@@ -3,6 +3,7 @@ import { Box } from '@chakra-ui/react'
 import { Story } from '@prisma/client'
 import { list, get } from '../../lib/api/stories'
 import StoryDetail from '../../components/stories/StoryDetail'
+import GlobalHead from '../../components/common/GlobalHead'
 
 interface Props {
   story: Story
@@ -17,9 +18,12 @@ export default function StoryPage({ story }: Props) {
   }
 
   return (
-    <Box>
-      <StoryDetail story={story} onClose={handleClose} />
-    </Box>
+    <>
+      <GlobalHead title={`${story.title.substring(0, 45)} | My COVID Story`} />
+      <Box>
+        <StoryDetail story={story} onClose={handleClose} />
+      </Box>
+    </>
   )
 }
 

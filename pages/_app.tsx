@@ -3,6 +3,7 @@ import '../styles/globals.css'
 import '@fontsource/inter/700.css'
 import '@fontsource/inter/400.css'
 import Head from 'next/head'
+import GlobalHead from '../components/common/GlobalHead'
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
@@ -55,6 +56,7 @@ function MyApp({ Component, pageProps }) {
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
       </Head>
+      <GlobalHead />
       <Component {...pageProps} />
     </>
   )

@@ -15,9 +15,12 @@ interface Props {
   onClose: () => void
 }
 
+// TODO: This is gross, how can this be done better?
+const minHeight = 2000
+
 export default function StoryDetail({ story, onClose }: Props) {
   return (
-    <Box as="main">
+    <Box as="main" minH={minHeight}>
       <Box bgImage={storyImage(story)} bgSize="cover" bgPosition="center" color="white">
         <Box pos="relative" p={4} bg="rgba(0, 0, 0, 0.5)">
           <IconButton

@@ -7,12 +7,12 @@ export default function Footer() {
       as="footer"
       backgroundColor="#202020"
       color="#FFF"
-      paddingTop={4}
-      paddingBottom={4}
+      paddingTop={10}
+      paddingBottom={8}
       textAlign="left"
     >
       <Container centerContent maxW="container.sm">
-        <SimpleGrid columns={3} width="100%" textAlign="center">
+        <SimpleGrid columns={3} width="100%" textAlign={['left', 'left', 'center']}>
           <MenuItem padding={1} marginBottom={1}>
             Home
           </MenuItem>

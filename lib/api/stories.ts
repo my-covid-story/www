@@ -62,6 +62,9 @@ export async function add(story: NewStory) {
     // Strip empty values
     if (story[k] === '') {
       return acc
+      // Uppercase postal
+    } else if (k === 'postal') {
+      acc[k] = story[k].toUpperCase()
       // Sanitize any strings
     } else if (typeof story[k] === 'string') {
       acc[k] = sanitizeHtml(story[k], { allowedTags: [], allowedAttributes: {} })

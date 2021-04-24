@@ -4,12 +4,10 @@ import { list } from '../lib/api/stories'
 import StoryFeed from '../components/stories/StoryFeed'
 import FloatingRibbon, { Button } from '../components/common/FloatingRibbon'
 import SiteLayout from '../layouts/Default'
-import GlobalHead from '../components/common/GlobalHead'
 
 const MainPage = ({ stories }) => {
   return (
     <>
-      <GlobalHead />
       <Box>
         <StoryFeed stories={stories} />
       </Box>

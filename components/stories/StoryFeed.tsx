@@ -41,7 +41,7 @@ function StorySummary({ story }) {
         <Link _hover={{ textDecoration: 'none' }}>
           <Box
             borderRadius="8px"
-            bgImage={storyImage(story)}
+            bgImage={`url(${storyImage(story)})`}
             bgSize="cover"
             bgPosition="center"
             color="white"

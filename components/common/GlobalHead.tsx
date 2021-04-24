@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-const defaultTitle = 'MyCovidStory.ca | The Stories of COVID-19 in Ontario'
+const defaultTitle = 'The Stories of COVID-19 in Ontario | MyCovidStory.ca'
 const defaultDescription =
   "Ontario is in a humanitarian crisis. If our leaders won't listen to the numbers, they must face our stories."
 const defaultPreviewImage = 'https://www.mycovidstory.ca/img/landingpage-v2.jpg'

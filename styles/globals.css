@@ -1,17 +1,8 @@
-:root {
-  --brand: #55099d;
-}
-
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: Inter, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: var(--brand);
-  text-decoration: none;
 }
 
 * {

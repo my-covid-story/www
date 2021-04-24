@@ -2,6 +2,7 @@ import { Link, Box, Flex, Text, Button, Stack, Icon } from '@chakra-ui/react'
 import { useState } from 'react'
 
 import Logo from './Logo'
+import MenuItem from './MenuItem'
 
 const NavBar = (props) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -71,16 +72,6 @@ const MenuToggle = ({ toggle, isOpen }) => {
     <Box display={{ base: 'block', md: 'none' }} onClick={toggle}>
       {isOpen ? <CloseIcon /> : <MenuIcon />}
     </Box>
-  )
-}
-
-const MenuItem = ({ children, to = '/', externalLink = false, ...rest }) => {
-  return (
-    <Link href={to} isExternal={externalLink}>
-      <Text display="block" {...rest}>
-        {children}
-      </Text>
-    </Link>
   )
 }
 

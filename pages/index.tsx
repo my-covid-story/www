@@ -30,6 +30,7 @@ export async function getStaticProps() {
   }
 }
 
+// eslint-disable-next-line react/display-name
 MainPage.getLayout = (page) => <SiteLayout navPosition="sticky">{page}</SiteLayout>
 
 export default MainPage

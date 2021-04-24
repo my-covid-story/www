@@ -100,7 +100,9 @@ const MenuLinks = ({ isOpen }) => {
         <MenuItem to="/">Home</MenuItem>
         <MenuItem to="/about">About Us</MenuItem>
         <MenuItem to="/faq">FAQ</MenuItem>
-        <MenuItem to="https://kvmhxg5ojy6.typeform.com/to/gUsoYkft" externalLink={true}>Media</MenuItem>
+        <MenuItem to="https://kvmhxg5ojy6.typeform.com/to/gUsoYkft" externalLink={true}>
+          Media
+        </MenuItem>
         <MenuItem to="https://twitter.com/MyCOVIDStory_CA" externalLink={true}>
           <TwitterIcon />
         </MenuItem>

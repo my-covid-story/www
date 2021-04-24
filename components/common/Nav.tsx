@@ -1,8 +1,8 @@
-import { Link, Box, Flex, Text, Button, Stack, Icon } from '@chakra-ui/react'
 import { useState } from 'react'
-
+import { Box, Flex, Button, Stack, Icon } from '@chakra-ui/react'
 import Logo from './Logo'
 import MenuItem from './MenuItem'
+import { RESPONSIVE_PADDING } from './ContentBox'
 
 const NavBar = (props) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -91,13 +91,16 @@ const MenuLinks = ({ isOpen }) => {
         <MenuItem to="/">Home</MenuItem>
         <MenuItem to="/about">About Us</MenuItem>
         <MenuItem to="/faq">FAQ</MenuItem>
-        <MenuItem to="https://kvmhxg5ojy6.typeform.com/to/gUsoYkft" externalLink={true}>Media</MenuItem>
+        <MenuItem to="https://kvmhxg5ojy6.typeform.com/to/gUsoYkft" externalLink={true}>
+          Media
+        </MenuItem>
         <MenuItem to="https://twitter.com/MyCOVIDStory_CA" externalLink={true}>
           <TwitterIcon />
         </MenuItem>
         <MenuItem to="/new">
           <Button
             size="sm"
+            my={isOpen ? 0 : -1}
             rounded="md"
             color="primary.100"
             bg="white"
@@ -123,7 +126,8 @@ const NavBarContainer = ({ children, ...props }) => {
       justify="space-between"
       wrap="wrap"
       w="100%"
-      p={8}
+      py={4}
+      px={RESPONSIVE_PADDING}
       bg="primary.100"
       bgGradient="linear(to-r, primary.100, primary.700)"
       color="white"

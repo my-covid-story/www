@@ -20,8 +20,6 @@ import {
   WhatsappIcon,
 } from 'react-share'
 
-import absoluteUrl from 'next-absolute-url'
-
 import { Story } from '@prisma/client'
 import { list, get } from '../../lib/api/stories'
 import StoryDetail from '../../components/stories/StoryDetail'

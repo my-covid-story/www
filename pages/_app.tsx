@@ -20,11 +20,6 @@ Sentry.init({
   tracesSampleRate: 1.0,
 })
 
-const title = 'MyCovidStory.ca | The Stories of COVID-19 in Ontario'
-const description =
-  "Ontario is in a humanitarian crisis. If our leaders won't listen to the numbers, they must face our stories."
-const previewImage = 'https://www.mycovidstory.ca/img/landingpage-v2.jpg'
-
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
 
@@ -51,17 +46,7 @@ function MyApp({ Component, pageProps }) {
   return getLayout(
     <>
       <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
         <link rel="icon" href="/favicon.ico" />
-
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={previewImage} />
-
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={previewImage} />
         <meta name="twitter:card" content="summary_large_image" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />

@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "type-check": "tsc --project tsconfig.json --pretty --noEmit",
-    "lint": "eslint --fix",
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
     "format": "prettier --write \"{,!(node_modules)/**/}*.{js,jsx}\"",
     "prepare": "husky install",
     "ts-node": "ts-node --compiler-options '{\"module\":\"CommonJS\"}'",

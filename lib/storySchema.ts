@@ -20,6 +20,7 @@ const schema = yup.object().shape({
     .required('A story is required'),
   postal: yup
     .string()
+    .max(3, 'Postal code should be 3 characters')
     .matches(/^[A-Za-z]\d[A-Za-z]/, 'Postal code must be letter number letter')
     .required(),
   category: yup.string().required('Please choose a category'),

@@ -2,6 +2,7 @@ import NextLink from 'next/link'
 import { Box, Heading, Link, SimpleGrid } from '@chakra-ui/react'
 import { storyImage, storyCite } from './model'
 import ContentBox from '../common/ContentBox'
+import { ContentWarningBox } from '../common/Warnings'
 
 export default function StoryFeed({ stories }) {
   return (
@@ -72,6 +73,7 @@ function StorySummary({ story }) {
                 >
                   {story.title}
                 </Heading>
+                {story.contentWarning && <ContentWarningBox />}
               </Box>
               <Box lineHeight={1.2}>{storyCite(story)}</Box>
             </Box>

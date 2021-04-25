@@ -10,6 +10,8 @@ import {
   storyParagraphs,
 } from './model'
 
+import { ContentWarningBox, SuicidalBox} from '../common/Warnings'
+
 interface Props {
   story: Story
   onClose: () => void
@@ -68,6 +70,8 @@ export default function StoryDetail({ story, onClose }: Props) {
         </Box>
       </Box>
       <Box m={4}>
+        {story.contentWarning && <ContentWarningBox />}
+        {story.suicidal && <SuicidalBox />}
         <Heading as="h3" mb={2} fontSize="md" fontWeight={700}>
           {storyDate(story)}
         </Heading>

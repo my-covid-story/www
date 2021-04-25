@@ -8,7 +8,7 @@ import { sendError, methodNotAllowed, internalServerError, unauthorized } from '
 export default async function handle(req: NextApiRequest, res: NextApiResponse): Promise<void> {
   const session = await getSession({ req })
 
-  if(!session) {
+  if (!session) {
     sendError(res, unauthorized())
   }
 
@@ -29,14 +29,14 @@ async function handlePatch(req: NextApiRequest, res: NextApiResponse): Promise<v
 
   try {
     const story = await prisma.story.update({
-        where: {
-          id,
-        },
-        data: {
-          approved,
-          deleted,
-        },
-      })
+      where: {
+        id,
+      },
+      data: {
+        approved,
+        deleted,
+      },
+    })
 
     res.json(story)
   } catch (err) {

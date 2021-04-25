@@ -1,7 +1,8 @@
-import { Link, Box, Flex, Text, Button, Stack, Icon } from '@chakra-ui/react'
 import { useState } from 'react'
-
+import { Box, Flex, Button, Stack, Icon } from '@chakra-ui/react'
 import Logo from './Logo'
+import MenuItem from './MenuItem'
+import { RESPONSIVE_PADDING } from './ContentBox'
 
 const NavBar = (props) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -74,16 +75,6 @@ const MenuToggle = ({ toggle, isOpen }) => {
   )
 }
 
-const MenuItem = ({ children, to = '/', externalLink = false, ...rest }) => {
-  return (
-    <Link href={to} isExternal={externalLink}>
-      <Text display="block" {...rest}>
-        {children}
-      </Text>
-    </Link>
-  )
-}
-
 const MenuLinks = ({ isOpen }) => {
   return (
     <Box
@@ -109,6 +100,7 @@ const MenuLinks = ({ isOpen }) => {
         <MenuItem to="/new">
           <Button
             size="sm"
+            my={isOpen ? 0 : -1}
             rounded="md"
             color="primary.100"
             bg="white"
@@ -134,7 +126,8 @@ const NavBarContainer = ({ children, ...props }) => {
       justify="space-between"
       wrap="wrap"
       w="100%"
-      p={8}
+      py={4}
+      px={RESPONSIVE_PADDING}
       bg="primary.100"
       bgGradient="linear(to-r, primary.100, primary.700)"
       color="white"

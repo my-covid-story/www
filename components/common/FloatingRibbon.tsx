@@ -1,4 +1,5 @@
 import { Button as BaseButton, Center } from '@chakra-ui/react'
+import { RESPONSIVE_PADDING } from './ContentBox'
 
 export default function FloatingRibbon({ children }) {
   return (
@@ -7,7 +8,8 @@ export default function FloatingRibbon({ children }) {
       bottom={0}
       left={0}
       right={0}
-      p={4}
+      py={4}
+      px={RESPONSIVE_PADDING}
       borderTopRadius="8px"
       boxShadow="0px -4px 4px rgba(0, 0, 0, 0.1)"
       bg="white"

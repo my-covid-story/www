@@ -1,16 +1,26 @@
 import { Box, IconButton, Flex, Heading, Stack, Text } from '@chakra-ui/react'
 import { CloseIcon } from '@chakra-ui/icons'
 import { Story } from '@prisma/client'
-import { storyCategory, storyImage, storyName, storyDate, storyParagraphs } from './model'
+import {
+  categoryLabel,
+  storyCategoryLabel,
+  storyImage,
+  storyName,
+  storyDate,
+  storyParagraphs,
+} from './model'
 
 interface Props {
   story: Story
   onClose: () => void
 }
 
+// TODO: This is gross, how can this be done better?
+const minHeight = 2000
+
 export default function StoryDetail({ story, onClose }: Props) {
   return (
-    <Box as="main">
+    <Box as="main" minH={minHeight}>
       <Box bgImage={storyImage(story)} bgSize="cover" bgPosition="center" color="white">
         <Box pos="relative" p={4} bg="rgba(0, 0, 0, 0.5)">
           <IconButton
@@ -28,6 +38,7 @@ export default function StoryDetail({ story, onClose }: Props) {
           <Flex>
             <Heading
               as="h2"
+              visibility={categoryLabel[story.category] ? 'visible' : 'hidden'}
               py={1}
               px={2}
               border="2px"
@@ -36,7 +47,7 @@ export default function StoryDetail({ story, onClose }: Props) {
               fontSize="md"
               fontWeight={600}
             >
-              {storyCategory(story)}
+              {storyCategoryLabel(story)}
             </Heading>
           </Flex>
           <Heading

@@ -10,7 +10,9 @@ const SiteLayout = ({ children, navPosition = 'relative' }) => {
     <ChakraProvider theme={theme}>
       <Grid templateRows="auto 1fr auto" templateColumns="auto" minH="100vh">
         <Nav pos={navPosition} />
-        <main>{children}</main>
+        <Grid as="main" templateRows="1fr auto" templateColumns="auto">
+          {children}
+        </Grid>
         <Footer />
       </Grid>
     </ChakraProvider>

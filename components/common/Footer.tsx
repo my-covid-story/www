@@ -12,7 +12,7 @@ export default function Footer() {
       textAlign="left"
     >
       <Container centerContent maxW="container.sm">
-        <SimpleGrid columns={3} width="100%" textAlign={['left', 'left', 'center']}>
+        <SimpleGrid columns={[2, 3]} width="100%" textAlign={['left', 'center']}>
           <MenuItem padding={1} marginBottom={1}>
             Home
           </MenuItem>

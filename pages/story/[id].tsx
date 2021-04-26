@@ -30,21 +30,23 @@ import { GetStaticPropsResult } from 'next'
 import ErrorPage from '../_error'
 
 interface StoryProps {
+  success: true
   story: Story
   url?: string
 }
 
 interface ErrorCodeProps {
+  success: false
   errorCode: number
   errorMessage: string
 }
 
-type Props = StoryProps | ErrorCodeProps
+type StoryPageProps = StoryProps | ErrorCodeProps
 
 const shareIconSize = 64
 const contentSize = 150
 
-export default function StoryPage({ story, errorCode, errorMessage }: Props) {
+export default function StoryPage(props: StoryPageProps): JSX.Element {
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -53,9 +55,11 @@ export default function StoryPage({ story, errorCode, errorMessage }: Props) {
    * passing different error codes like 404 in case a page is not found or a 500
    * in case of a server error.
    */
-  if (errorCode && errorMessage) {
-    return <ErrorPage code={errorCode} message={errorMessage} />
+  if (props.success === false) {
+    return <ErrorPage code={props.errorCode} message={props.errorMessage} />
   }
+
+  const { story } = props
 
   // If we came from the feed, go back on cancel. If not, navigate forward to the feed.
   function handleClose() {
@@ -114,21 +118,22 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps({ params }): Promise<GetStaticPropsResult<Props>> {
+export async function getStaticProps({ params }): Promise<GetStaticPropsResult<StoryPageProps>> {
   try {
     /**
      * Needed to use `as` keyword, but this should be refactored.
      */
     const story = (await get(params.id)) as Story
 
-    return { props: { story } }
+    return { props: { success: true, story } }
   } catch (err) {
     if (err instanceof ResponseError) {
-      return { props: { errorCode: err.status, errorMessage: err.message } }
+      return { props: { success: false, errorCode: err.status, errorMessage: err.message } }
     }
 
     return {
       props: {
+        success: false,
         errorCode: 500,
         errorMessage: "This was an unknown error, we'll try to solve it as soon as possible",
       },

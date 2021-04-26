@@ -5,10 +5,6 @@ import ContentBox from '../common/ContentBox'
 import Label from '../common/Label'
 import { Story } from '@prisma/client'
 
-interface StoryFeedProps {
-  stories: Story[]
-}
-
 function FeedHeader() {
   return (
     <Box
@@ -28,7 +24,11 @@ function FeedHeader() {
   )
 }
 
-function StorySummary({ story }: { story: Story }) {
+interface StorySummaryProps {
+  story: Story
+}
+
+function StorySummary({ story }: StorySummaryProps) {
   const href = `/story/${story.id}`
 
   return (
@@ -72,6 +72,10 @@ function StorySummary({ story }: { story: Story }) {
       </NextLink>
     </Box>
   )
+}
+
+interface StoryFeedProps {
+  stories: Story[]
 }
 
 export default function StoryFeed({ stories }: StoryFeedProps) {

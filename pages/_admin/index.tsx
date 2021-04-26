@@ -118,11 +118,8 @@ const updateStory = async (e) => {
 export async function getServerSideProps({ req, query }) {
   const session = await getSession({ req })
 
-  const deleted = query.deleted === "true"
-  const approved = query.approved === "true"
-
-  console.log(deleted)
-  console.log(approved)
+  const deleted = query.deleted === 'true'
+  const approved = query.approved === 'true'
 
   let stories = {}
   if (session) {

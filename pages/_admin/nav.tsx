@@ -15,7 +15,8 @@ import ContentBox from '../../components/common/ContentBox'
 import { Session } from 'next-auth'
 
 const Links = [
-  { href: '/_admin/', text: 'Admin' },
+  { href: '/_admin/', text: 'Admin Homepage' },
+  { href: '/_admin/?approved=true', text: 'Show Approved' },
   { href: '/_admin/?deleted=true', text: 'Show Deleted' },
 ]
 

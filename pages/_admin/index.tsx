@@ -56,7 +56,7 @@ function StoryOptions({
           data-type={deleted ? 'undelete' : 'delete'}
           onClick={(e) => {
             if (window.confirm('Are you sure you want to delete this?')) {
-              updateStory(e).then()
+              updateStory(e)
             }
           }}
         >
@@ -102,7 +102,7 @@ export default function _Admin({ stories }: _Admin) {
 }
 
 // `unapprove` and `undelete` aren't technically needed but it helps when reading the code
-const updateStory = async (e) => {
+const updateStory = (e) => {
   let approved = false
   let deleted = false
 
@@ -126,7 +126,7 @@ const updateStory = async (e) => {
     deleted,
   }
 
-  await fetch('/api/admin/update', {
+  fetch('/api/admin/update', {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',

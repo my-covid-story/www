@@ -1,11 +1,14 @@
-import { ReactElement } from 'react'
 import NextLink from 'next/link'
 import { Box, Heading, Link, SimpleGrid } from '@chakra-ui/react'
-import { storyImage, storyCite } from './model'
+import { storyCite, storyImage } from './model'
 import ContentBox from '../common/ContentBox'
 import { Story } from '@prisma/client'
 
-export default function StoryFeed({ stories }: { stories: Story[] }): ReactElement {
+interface StoryFeedProps {
+  stories: Story[]
+}
+
+export default function StoryFeed({ stories }: StoryFeedProps) {
   return (
     <Box>
       <FeedHeader />
@@ -28,7 +31,7 @@ export default function StoryFeed({ stories }: { stories: Story[] }): ReactEleme
   )
 }
 
-function FeedHeader(): ReactElement {
+function FeedHeader() {
   return (
     <Box
       bgImage="url('/img/landingpage-v2.jpg')"
@@ -47,7 +50,7 @@ function FeedHeader(): ReactElement {
   )
 }
 
-function StorySummary({ story }: { story: Story }): ReactElement {
+function StorySummary({ story }: { story: Story }) {
   const href = `/story/${story.id}`
 
   return (

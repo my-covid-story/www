@@ -1,23 +1,21 @@
-import { ReactElement } from 'react'
-import { Box, IconButton, Flex, Heading, Stack, Text } from '@chakra-ui/react'
+import { Box, Flex, Heading, IconButton, Stack, Text } from '@chakra-ui/react'
 import { CloseIcon } from '@chakra-ui/icons'
 import { Story } from '@prisma/client'
 import {
   categoryLabel,
   storyCategoryLabel,
+  storyDate,
   storyImage,
   storyName,
-  storyDate,
   storyParagraphs,
 } from './model'
 
-export default function StoryDetail({
-  story,
-  onClose,
-}: {
+interface StoryDetailProps {
   story: Story
   onClose: () => void
-}): ReactElement {
+}
+
+export default function StoryDetail({ story, onClose }: StoryDetailProps) {
   return (
     <Box>
       <Box bgImage={storyImage(story)} bgSize="cover" bgPosition="center" color="white">

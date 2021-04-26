@@ -1,9 +1,8 @@
-import { ReactElement } from 'react'
 import Head from 'next/head'
 import { Box, Heading, Stack, Text } from '@chakra-ui/react'
 import ContentBox from '../components/common/ContentBox'
 
-export default function About(): ReactElement {
+export default function About() {
   return (
     <div>
       <Head>

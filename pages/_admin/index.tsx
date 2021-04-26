@@ -1,14 +1,25 @@
-import { ReactElement } from 'react'
-import { Box, Button, Heading, Stack, Text } from '@chakra-ui/react'
-import { useSession, getSession } from 'next-auth/client'
+import { Box, BoxProps, Button, Heading, Stack, Text } from '@chakra-ui/react'
+import { getSession, useSession } from 'next-auth/client'
 import Link from 'next/link'
 
 import prisma from '../../lib/prisma'
+import { Story } from '@prisma/client'
 import Nav from './nav'
 import ContentBox from '../../components/common/ContentBox'
 import { GetServerSidePropsContext } from 'next'
 
-function Story({ id, title, content, name, postal, email, phone, twitter, ...rest }): ReactElement {
+interface StoryProps extends BoxProps {
+  id: string
+  title: string
+  content: string
+  name: string
+  postal: string
+  email: string
+  phone: string
+  twitter: string
+}
+
+function Story({ id, title, content, name, postal, email, phone, twitter, ...rest }: StoryProps) {
   return (
     <Box mt={2} p={5} shadow="md" borderWidth="1px" {...rest}>
       <Heading fontSize="xl">{title}</Heading>
@@ -51,11 +62,11 @@ function Story({ id, title, content, name, postal, email, phone, twitter, ...res
   )
 }
 
-export default function _Admin({
-  stories,
-}: {
-  stories: Record<string, unknown>[] | []
-}): ReactElement {
+interface _Admin {
+  stories: Story[] | []
+}
+
+export default function _Admin({ stories }: _Admin) {
   const [session] = useSession()
 
   return (
@@ -76,7 +87,7 @@ export default function _Admin({
   )
 }
 
-const updateStory = async (e): Promise<void> => {
+const updateStory = async (e) => {
   let approved = false
   let deleted = false
 
@@ -103,12 +114,7 @@ const updateStory = async (e): Promise<void> => {
   })
 }
 
-export async function getServerSideProps({
-  req,
-  query,
-}: GetServerSidePropsContext): Promise<{
-  props: { stories: Record<string, unknown>[] | Record<string, never> }
-}> {
+export async function getServerSideProps({ req, query }: GetServerSidePropsContext) {
   const session = await getSession({ req })
 
   const deleted = query.deleted ? true : false

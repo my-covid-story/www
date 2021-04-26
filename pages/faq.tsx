@@ -1,12 +1,11 @@
-import { ReactElement } from 'react'
 import Head from 'next/head'
 
 import {
   Accordion,
-  AccordionItem,
   AccordionButton,
-  AccordionPanel,
   AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
   Box,
   Heading,
   Link,
@@ -17,7 +16,7 @@ import ContentBox from '../components/common/ContentBox'
 
 const NUM_FAQS = 8
 
-export default function FAQ(): ReactElement {
+export default function FAQ() {
   return (
     <div className={styles.faq}>
       <Head>

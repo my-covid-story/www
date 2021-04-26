@@ -1,25 +1,24 @@
-import { ReactElement } from 'react'
 import {
-  Stack,
+  Button,
+  Checkbox,
   FormControl,
-  FormLabel,
   FormErrorMessage,
   FormHelperText,
+  FormLabel,
   Input,
   InputGroup,
   InputLeftAddon,
-  Button,
-  Textarea,
-  Select,
   Radio,
   RadioGroup,
-  Checkbox,
+  Select,
+  Stack,
   Text,
+  Textarea,
 } from '@chakra-ui/react'
-import { Formik, Field, Form } from 'formik'
+import { Field, Form, Formik } from 'formik'
 import Router from 'next/router'
 
-import storySchema, { TITLE_CHAR_LIMIT, STORY_WORD_LIMIT } from '../../lib/storySchema'
+import storySchema, { STORY_WORD_LIMIT, TITLE_CHAR_LIMIT } from '../../lib/storySchema'
 
 type LoginFormInputs = {
   title: string
@@ -54,7 +53,7 @@ const initialValues = {
 const FIELD_PADDING = '4'
 const OPTIONAL_FIELD_PADDING = '2'
 
-export default function StoryForm(): ReactElement {
+export default function StoryForm() {
   return (
     <Formik
       initialValues={initialValues}

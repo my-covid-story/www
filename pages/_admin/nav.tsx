@@ -2,17 +2,16 @@ import {
   Box,
   Flex,
   HStack,
-  Link,
   IconButton,
-  useDisclosure,
-  useColorModeValue,
+  Link,
   Stack,
+  useColorModeValue,
+  useDisclosure,
 } from '@chakra-ui/react'
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
+import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
 
 import { signIn, signOut } from 'next-auth/client'
 import ContentBox from '../../components/common/ContentBox'
-import { ReactElement } from 'react'
 import { Session } from 'next-auth'
 
 const Links = [
@@ -20,7 +19,12 @@ const Links = [
   { href: '/_admin/?deleted=true', text: 'Show Deleted' },
 ]
 
-const NavLink = ({ href, text }: { href: string; text: string }): ReactElement => (
+interface NavLinkProps {
+  href: string
+  text: string
+}
+
+const NavLink = ({ href, text }: NavLinkProps) => (
   <Link
     px={2}
     py={1}
@@ -35,7 +39,11 @@ const NavLink = ({ href, text }: { href: string; text: string }): ReactElement =
   </Link>
 )
 
-export default function Nav({ session }: { session: Session }): ReactElement {
+interface NavProps {
+  session: Session
+}
+
+export default function Nav({ session }: NavProps) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (

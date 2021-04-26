@@ -1,17 +1,16 @@
-import { ReactElement, ReactNode } from 'react'
-import { Link, Text } from '@chakra-ui/react'
+import { Link, Text, TextProps } from '@chakra-ui/react'
+
+interface MenuItemProps extends TextProps {
+  to?: string
+  externalLink?: boolean
+}
 
 export default function MenuItem({
   children,
   to = '/',
   externalLink = false,
   ...props
-}: {
-  children: ReactNode
-  to?: string
-  externalLink?: boolean
-  [x: string]: unknown
-}): ReactElement {
+}: MenuItemProps) {
   return (
     <Link href={to} isExternal={externalLink}>
       <Text display="block" {...props}>

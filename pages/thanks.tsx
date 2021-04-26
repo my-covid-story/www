@@ -1,9 +1,9 @@
-import { ReactElement, ReactNode, useEffect } from 'react'
-import { Center, Heading, Text, Container, Button, VStack, Icon, Link } from '@chakra-ui/react'
+import { ReactNode, useEffect } from 'react'
+import { Button, Center, Container, Heading, Icon, Link, Text, VStack } from '@chakra-ui/react'
 
 import BlankLayout from '../layouts/Blank'
 
-const Thanks = (): ReactElement => {
+const Thanks = () => {
   // Triggers a Story goal event on Fathom
   useEffect(() => {
     window?.fathom?.trackGoal('RT0FH11Y', 0)
@@ -55,7 +55,7 @@ const Thanks = (): ReactElement => {
   )
 }
 
-const TwitterIcon = (): ReactElement => (
+const TwitterIcon = () => (
   <Icon
     stroke="currentColor"
     fill="currentColor"
@@ -71,7 +71,7 @@ const TwitterIcon = (): ReactElement => (
   </Icon>
 )
 
-const ThanksLayout = (page: ReactNode): ReactElement => <BlankLayout>{page}</BlankLayout>
+const ThanksLayout = (page: ReactNode) => <BlankLayout>{page}</BlankLayout>
 
 Thanks.getLayout = ThanksLayout
 

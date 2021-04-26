@@ -1,10 +1,9 @@
 import Link from 'next/link'
-import { Text, Heading } from '@chakra-ui/react'
+import { Heading, Text } from '@chakra-ui/react'
 import ContentBox from '../components/common/ContentBox'
 import StoryForm from '../components/stories/StoryForm'
-import { ReactElement } from 'react'
 
-export default function CreateStory(): ReactElement {
+export default function CreateStory() {
   return (
     <ContentBox py>
       <Heading as="h1" size="lg" pb={4}>

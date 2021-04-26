@@ -1,8 +1,7 @@
-import { ReactElement } from 'react'
 import { Box, Container, SimpleGrid, Text } from '@chakra-ui/react'
 import MenuItem from './MenuItem'
 
-export default function Footer(): ReactElement {
+export default function Footer() {
   return (
     <Box
       as="footer"

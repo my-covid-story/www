@@ -1,24 +1,19 @@
-import { MouseEventHandler, ReactElement, ReactNode, useState } from 'react'
-import { Box, Flex, Button, Stack, Icon } from '@chakra-ui/react'
+import { MouseEventHandler, useState } from 'react'
+import {
+  Box,
+  Button,
+  Flex,
+  FlexProps,
+  Icon,
+  PositionProps,
+  Stack,
+} from '@chakra-ui/react'
 import Logo from './Logo'
 import MenuItem from './MenuItem'
-import { RESPONSIVE_PADDING } from '../lib/Definitions'
+import { RESPONSIVE_PADDING } from './ContentBox'
 
-const NavBar = ({ ...props }: { [x: string]: unknown }): ReactElement => {
-  const [isOpen, setIsOpen] = useState(false)
-
-  const toggle = (): void => setIsOpen(!isOpen)
-
-  return (
-    <NavBarContainer {...props}>
-      <Logo w="150px" color={['white', 'white', 'primary.500', 'primary.500']} />
-      <MenuToggle toggle={toggle} isOpen={isOpen} />
-      <MenuLinks isOpen={isOpen} />
-    </NavBarContainer>
-  )
-}
 // TODO: Add Facebook when we're ready
-// const FacebookIcon = (): ReactElement => (
+// const FacebookIcon = () => (
 //   <Icon
 //     stroke="currentColor"
 //     fill="currentColor"
@@ -34,7 +29,7 @@ const NavBar = ({ ...props }: { [x: string]: unknown }): ReactElement => {
 //   </Icon>
 // )
 
-const TwitterIcon = (): ReactElement => (
+const TwitterIcon = () => (
   <Icon
     stroke="currentColor"
     fill="currentColor"
@@ -50,7 +45,7 @@ const TwitterIcon = (): ReactElement => (
   </Icon>
 )
 
-const CloseIcon = (): ReactElement => (
+const CloseIcon = () => (
   <svg width="24" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
     <title>Close</title>
     <path
@@ -60,20 +55,19 @@ const CloseIcon = (): ReactElement => (
   </svg>
 )
 
-const MenuIcon = (): ReactElement => (
+const MenuIcon = () => (
   <svg width="24px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="white">
     <title>Menu</title>
     <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
   </svg>
 )
 
-const MenuToggle = ({
-  toggle,
-  isOpen,
-}: {
+interface MenuToggleProps {
   toggle: MouseEventHandler
   isOpen: boolean
-}): ReactElement => {
+}
+
+const MenuToggle = ({ toggle, isOpen }: MenuToggleProps) => {
   return (
     <Box display={{ base: 'block', md: 'none' }} onClick={toggle}>
       {isOpen ? <CloseIcon /> : <MenuIcon />}
@@ -81,7 +75,11 @@ const MenuToggle = ({
   )
 }
 
-const MenuLinks = ({ isOpen }: { isOpen?: boolean }): ReactElement => {
+interface MenuLinksProps {
+  isOpen?: boolean
+}
+
+const MenuLinks = ({ isOpen }: MenuLinksProps) => {
   return (
     <Box
       display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
@@ -122,13 +120,7 @@ const MenuLinks = ({ isOpen }: { isOpen?: boolean }): ReactElement => {
   )
 }
 
-const NavBarContainer = ({
-  children,
-  ...props
-}: {
-  children: ReactNode
-  [x: string]: unknown
-}): ReactElement => {
+const NavBarContainer = ({ children, ...props }: FlexProps) => {
   return (
     <Flex
       zIndex="5"
@@ -150,4 +142,16 @@ const NavBarContainer = ({
   )
 }
 
-export default NavBar
+export default function Nav({ ...props }: FlexProps & PositionProps) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const toggle = (): void => setIsOpen(!isOpen)
+
+  return (
+    <NavBarContainer {...props}>
+      <Logo w="150px" color={['white', 'white', 'primary.500', 'primary.500']} />
+      <MenuToggle toggle={toggle} isOpen={isOpen} />
+      <MenuLinks isOpen={isOpen} />
+    </NavBarContainer>
+  )
+}

@@ -1,9 +1,8 @@
-import { ReactElement, ReactNode } from 'react'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, ChakraProviderProps } from '@chakra-ui/react'
 
 import theme from '../styles/theme'
 
-const BlankLayout = ({ children }: { children: ReactNode }): ReactElement => {
+const BlankLayout = ({ children }: ChakraProviderProps) => {
   return (
     <ChakraProvider theme={theme}>
       <main>{children}</main>

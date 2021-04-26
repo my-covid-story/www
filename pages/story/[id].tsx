@@ -1,28 +1,27 @@
-import { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 
 import {
   Box,
   Drawer,
   DrawerBody,
+  DrawerContent,
   DrawerHeader,
   DrawerOverlay,
-  DrawerContent,
   useDisclosure,
 } from '@chakra-ui/react'
 import {
-  EmailShareButton,
   EmailIcon,
-  FacebookShareButton,
+  EmailShareButton,
   FacebookIcon,
-  TwitterShareButton,
+  FacebookShareButton,
   TwitterIcon,
-  WhatsappShareButton,
+  TwitterShareButton,
   WhatsappIcon,
+  WhatsappShareButton,
 } from 'react-share'
 
 import { Story } from '@prisma/client'
-import { list, get } from '../../lib/api/stories'
+import { get, list } from '../../lib/api/stories'
 import StoryDetail from '../../components/stories/StoryDetail'
 import { storyCite } from '../../components/stories/model'
 import FloatingRibbon, { Button } from '../../components/common/FloatingRibbon'
@@ -30,7 +29,12 @@ import FloatingRibbon, { Button } from '../../components/common/FloatingRibbon'
 const shareIconSize = 64
 const contentSize = 150
 
-export default function StoryPage({ story }: { story: Story; url: string }): ReactElement {
+interface StoryPageProps {
+  story: Story
+  url: string
+}
+
+export default function StoryPage({ story }: StoryPageProps) {
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -82,10 +86,7 @@ export default function StoryPage({ story }: { story: Story; url: string }): Rea
 // The page will be rendered on the server, and the page will be cached for future requests.
 // Details: https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation
 //
-export async function getStaticPaths(): Promise<{
-  paths: { params: { id: string } }[]
-  fallback: string
-}> {
+export async function getStaticPaths() {
   const stories = await list()
   const paths = stories.map((s) => ({ params: { id: s.id } }))
   return {
@@ -94,13 +95,13 @@ export async function getStaticPaths(): Promise<{
   }
 }
 
-export async function getStaticProps({
-  params,
-}: {
+interface GetStaticProps {
   params: {
     id: string
   }
-}): Promise<{ props: { story: Record<string, unknown> } }> {
+}
+
+export async function getStaticProps({ params }: GetStaticProps) {
   const story = await get(params.id)
   return { props: { story } }
 }

@@ -25,18 +25,17 @@ const description =
   "Ontario is in a humanitarian crisis. If our leaders won't listen to the numbers, they must face our stories."
 const previewImage = 'https://www.mycovidstory.ca/img/landingpage-v2.jpg'
 
-type GetLayout = (page: ReactElement) => ReactElement
+type GetLayout = (page: ReactNode) => ReactElement
 type PageWithLayout = NextPage & {
   getLayout: GetLayout
 }
 
-function MyApp({
-  Component,
-  pageProps,
-}: {
+interface MyAppProps {
   Component: PageWithLayout
   pageProps: unknown
-}): ReactElement {
+}
+
+function MyApp({ Component, pageProps }: MyAppProps) {
   const router = useRouter()
 
   useEffect(() => {
@@ -57,8 +56,7 @@ function MyApp({
     }
   }, [router.events])
 
-  const getLayout =
-    Component.getLayout || ((page: ReactNode): ReactElement => <SiteLayout>{page}</SiteLayout>)
+  const getLayout = Component.getLayout || ((page: ReactNode) => <SiteLayout>{page}</SiteLayout>)
 
   return getLayout(
     <>

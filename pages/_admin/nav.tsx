@@ -17,7 +17,7 @@ const Links = [
   { href: '/_admin/?deleted=true', text: 'Show Deleted' },
 ]
 
-const NavLink = ({ href, text }: { href: string; text: string }) => (
+const NavLink = ({ href, text }: { href: string; text: string }): JSX.Element => (
   <Link
     px={2}
     py={1}
@@ -32,7 +32,7 @@ const NavLink = ({ href, text }: { href: string; text: string }) => (
   </Link>
 )
 
-export default function Nav({ session }) {
+export default function Nav({ session }): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (

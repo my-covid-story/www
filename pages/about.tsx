@@ -1,15 +1,16 @@
+import { ReactElement } from 'react'
 import Head from 'next/head'
 import { Box, Heading, Stack, Text } from '@chakra-ui/react'
 import ContentBox from '../components/common/ContentBox'
 
-export default function About() {
+export default function About(): ReactElement {
   return (
     <div>
       <Head>
         <title>About - My COVID Story</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ContentBox py>
+      <ContentBox py={[1, 1]}>
         <Heading as="h1" size="2xl" pb={6}>
           About
         </Heading>

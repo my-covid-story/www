@@ -1,7 +1,8 @@
+import { ReactElement, ReactNode } from 'react'
 import { Button as BaseButton, Center } from '@chakra-ui/react'
-import { RESPONSIVE_PADDING } from './ContentBox'
+import { RESPONSIVE_PADDING } from '../lib/Definitions'
 
-export default function FloatingRibbon({ children }) {
+export default function FloatingRibbon({ children }: { children: ReactNode }): ReactElement {
   return (
     <Center
       pos="sticky"
@@ -19,7 +20,13 @@ export default function FloatingRibbon({ children }) {
   )
 }
 
-export function Button({ children, ...props }) {
+export function Button({
+  children,
+  ...props
+}: {
+  children: ReactNode
+  [x: string]: unknown
+}): ReactElement {
   return (
     <BaseButton
       py={2}

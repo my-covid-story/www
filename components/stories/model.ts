@@ -9,11 +9,11 @@ export const categoryLabel = {
   'patient-family-member': 'Patient or Family Member',
 }
 
-export function storyCategoryLabel({ category }: Story) {
+export function storyCategoryLabel({ category }: Story): string {
   return categoryLabel[category] || 'Other'
 }
 
-export function storyImage({ category }: Story) {
+export function storyImage({ category }: Story): string {
   switch (category) {
     case 'concerned-citizen':
     case 'essential-worker':
@@ -28,20 +28,20 @@ export function storyImage({ category }: Story) {
   }
 }
 
-export function storyName({ displayName }: Story) {
+export function storyName({ displayName }: Story): string {
   return displayName || 'Anonymous'
 }
 
-export function storyCite({ displayName, category, postal }: Story) {
+export function storyCite({ displayName, category, postal }: Story): string {
   if (displayName) return `${displayName} from ${postal}`
   const cl = categoryLabel[category]
   return cl ? `${cl} from ${postal}` : `From ${postal}`
 }
 
-export function storyDate({ createdAt }: Story) {
+export function storyDate({ createdAt }: Story): string {
   return new Date(createdAt).toDateString()
 }
 
-export function storyParagraphs({ content }: Story) {
+export function storyParagraphs({ content }: Story): string[] {
   return content.split('\n').filter((p) => p)
 }

@@ -1,10 +1,9 @@
-// eslint-disable-next-line
 import '../styles/globals.css'
 import '@fontsource/inter/700.css'
 import '@fontsource/inter/400.css'
 import Head from 'next/head'
 
-import { useEffect } from 'react'
+import { ReactElement, ReactNode, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import * as Fathom from 'fathom-client'
 
@@ -12,6 +11,7 @@ import * as Sentry from '@sentry/react'
 import { Integrations } from '@sentry/tracing'
 
 import SiteLayout from '../layouts/Default'
+import { NextPage } from 'next'
 
 Sentry.init({
   dsn: 'https://ff771404287542638b24e14b8de8edff@o573965.ingest.sentry.io/5724646',
@@ -25,7 +25,18 @@ const description =
   "Ontario is in a humanitarian crisis. If our leaders won't listen to the numbers, they must face our stories."
 const previewImage = 'https://www.mycovidstory.ca/img/landingpage-v2.jpg'
 
-function MyApp({ Component, pageProps }) {
+type GetLayout = (page: ReactElement) => ReactElement
+type PageWithLayout = NextPage & {
+  getLayout: GetLayout
+}
+
+function MyApp({
+  Component,
+  pageProps,
+}: {
+  Component: PageWithLayout
+  pageProps: unknown
+}): ReactElement {
   const router = useRouter()
 
   useEffect(() => {
@@ -33,7 +44,7 @@ function MyApp({ Component, pageProps }) {
       includedDomains: ['www.mycovidstory.ca'],
     })
 
-    function onRouteChangeComplete() {
+    function onRouteChangeComplete(): void {
       Fathom.trackPageview()
     }
 
@@ -44,9 +55,10 @@ function MyApp({ Component, pageProps }) {
     return () => {
       router.events.off('routeChangeComplete', onRouteChangeComplete)
     }
-  }, [])
+  }, [router.events])
 
-  const getLayout = Component.getLayout || ((page) => <SiteLayout>{page}</SiteLayout>)
+  const getLayout =
+    Component.getLayout || ((page: ReactNode): ReactElement => <SiteLayout>{page}</SiteLayout>)
 
   return getLayout(
     <>

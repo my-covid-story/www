@@ -1,7 +1,8 @@
 import landing from '../styles/LandingPage.module.css'
 import { Box, Button, Heading, VStack, Link, Text } from '@chakra-ui/react'
+import { ReactElement } from 'react'
 
-export default function Home() {
+export default function Home(): ReactElement {
   return (
     <>
       <div className={landing.container}>

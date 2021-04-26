@@ -1,3 +1,4 @@
+import { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 
 import {
@@ -26,20 +27,15 @@ import StoryDetail from '../../components/stories/StoryDetail'
 import { storyCite } from '../../components/stories/model'
 import FloatingRibbon, { Button } from '../../components/common/FloatingRibbon'
 
-interface Props {
-  story: Story
-  url: string
-}
-
 const shareIconSize = 64
 const contentSize = 150
 
-export default function StoryPage({ story }: Props) {
+export default function StoryPage({ story }: { story: Story; url: string }): ReactElement {
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   // If we came from the feed, go back on cancel. If not, navigate forward to the feed.
-  function handleClose() {
+  function handleClose(): void {
     router.query.back === 'true' ? router.back() : router.push('/')
   }
 
@@ -86,7 +82,10 @@ export default function StoryPage({ story }: Props) {
 // The page will be rendered on the server, and the page will be cached for future requests.
 // Details: https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation
 //
-export async function getStaticPaths() {
+export async function getStaticPaths(): Promise<{
+  paths: { params: { id: string } }[]
+  fallback: string
+}> {
   const stories = await list()
   const paths = stories.map((s) => ({ params: { id: s.id } }))
   return {
@@ -95,7 +94,13 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({
+  params,
+}: {
+  params: {
+    id: string
+  }
+}): Promise<{ props: { story: Record<string, unknown> } }> {
   const story = await get(params.id)
   return { props: { story } }
 }

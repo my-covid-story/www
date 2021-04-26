@@ -5,7 +5,7 @@ import Link from 'next/link'
 import prisma from '../../lib/prisma'
 import Nav from './nav'
 
-function Story({ id, title, content, name, postal, email, phone, twitter, ...rest }) {
+function Story({ id, title, content, name, postal, email, phone, twitter, ...rest }): JSX.Element {
   return (
     <Box mt={2} p={5} shadow="md" borderWidth="1px" {...rest}>
       <Heading fontSize="xl">{title}</Heading>
@@ -48,7 +48,7 @@ function Story({ id, title, content, name, postal, email, phone, twitter, ...res
   )
 }
 
-export default function _Admin({ stories }) {
+export default function _Admin({ stories }): JSX.Element {
   const [session] = useSession()
 
   return (

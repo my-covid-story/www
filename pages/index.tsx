@@ -4,8 +4,10 @@ import { list } from '../lib/api/stories'
 import StoryFeed from '../components/stories/StoryFeed'
 import FloatingRibbon, { Button } from '../components/common/FloatingRibbon'
 import SiteLayout from '../layouts/Default'
+import { ReactElement, ReactNode } from 'react'
+import { Story } from '@prisma/client'
 
-const MainPage = ({ stories }) => {
+const MainPage = ({ stories }: { stories: Story[] }): ReactElement => {
   return (
     <>
       <Box>
@@ -22,7 +24,10 @@ const MainPage = ({ stories }) => {
   )
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(): Promise<{
+  props: { stories: Record<string, unknown>[] }
+  revalidate: number
+}> {
   const stories = await list()
   return {
     props: { stories },
@@ -30,7 +35,9 @@ export async function getStaticProps() {
   }
 }
 
-const MainPageLayout = (page): JSX.Element => <SiteLayout navPosition="sticky">{page}</SiteLayout>
+const MainPageLayout = (page: ReactNode): ReactElement => (
+  <SiteLayout navPosition="sticky">{page}</SiteLayout>
+)
 
 MainPage.getLayout = MainPageLayout
 

@@ -1,13 +1,15 @@
+import { ReactElement } from 'react'
 import NextLink from 'next/link'
 import { Box, Heading, Link, SimpleGrid } from '@chakra-ui/react'
 import { storyImage, storyCite } from './model'
 import ContentBox from '../common/ContentBox'
+import { Story } from '@prisma/client'
 
-export default function StoryFeed({ stories }) {
+export default function StoryFeed({ stories }: { stories: Story[] }): ReactElement {
   return (
     <Box>
       <FeedHeader />
-      <ContentBox py>
+      <ContentBox py={5}>
         <Heading as="h2" mb={[6, null, 8]} color="primary.100">
           Stories
         </Heading>
@@ -26,7 +28,7 @@ export default function StoryFeed({ stories }) {
   )
 }
 
-function FeedHeader() {
+function FeedHeader(): ReactElement {
   return (
     <Box
       bgImage="url('/img/landingpage-v2.jpg')"
@@ -45,7 +47,7 @@ function FeedHeader() {
   )
 }
 
-function StorySummary({ story }) {
+function StorySummary({ story }: { story: Story }): ReactElement {
   const href = `/story/${story.id}`
 
   return (

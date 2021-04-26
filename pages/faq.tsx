@@ -1,3 +1,4 @@
+import { ReactElement } from 'react'
 import Head from 'next/head'
 
 import {
@@ -15,7 +16,7 @@ import styles from '../styles/FaqPage.module.css'
 
 const NUM_FAQS = 8
 
-export default function FAQ() {
+export default function FAQ(): ReactElement {
   return (
     <div className={styles.faq}>
       <Head>

@@ -2,8 +2,9 @@ import Link from 'next/link'
 import { Text, Heading } from '@chakra-ui/react'
 import ContentBox from '../components/common/ContentBox'
 import StoryForm from '../components/stories/StoryForm'
+import { ReactElement } from 'react'
 
-export default function CreateStory() {
+export default function CreateStory(): ReactElement {
   return (
     <ContentBox py>
       <Heading as="h1" size="lg" pb={4}>

@@ -1,3 +1,4 @@
+import { ReactElement } from 'react'
 import {
   Stack,
   FormControl,
@@ -53,7 +54,7 @@ const initialValues = {
 const FIELD_PADDING = '4'
 const OPTIONAL_FIELD_PADDING = '2'
 
-export default function StoryForm() {
+export default function StoryForm(): ReactElement {
   return (
     <Formik
       initialValues={initialValues}

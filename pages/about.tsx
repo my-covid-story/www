@@ -10,7 +10,7 @@ export default function About(): ReactElement {
         <title>About - My COVID Story</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ContentBox py={[1, 1]}>
+      <ContentBox py>
         <Heading as="h1" size="2xl" pb={6}>
           About
         </Heading>

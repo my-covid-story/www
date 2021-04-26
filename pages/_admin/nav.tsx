@@ -11,13 +11,16 @@ import {
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 
 import { signIn, signOut } from 'next-auth/client'
+import ContentBox from '../../components/common/ContentBox'
+import { ReactElement } from 'react'
+import { Session } from 'next-auth'
 
 const Links = [
   { href: '/_admin/', text: 'Admin' },
   { href: '/_admin/?deleted=true', text: 'Show Deleted' },
 ]
 
-const NavLink = ({ href, text }: { href: string; text: string }): JSX.Element => (
+const NavLink = ({ href, text }: { href: string; text: string }): ReactElement => (
   <Link
     px={2}
     py={1}
@@ -32,18 +35,18 @@ const NavLink = ({ href, text }: { href: string; text: string }): JSX.Element =>
   </Link>
 )
 
-export default function Nav({ session }): JSX.Element {
+export default function Nav({ session }: { session: Session }): ReactElement {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
       <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
         {!session && (
-          <>
+          <ContentBox height="100%" display="flex" alignItems="center" justifyContent="center">
             <Link spacing={8} onClick={() => signIn()}>
               Sign in
             </Link>
-          </>
+          </ContentBox>
         )}
         {session && (
           <>

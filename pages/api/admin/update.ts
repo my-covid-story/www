@@ -23,7 +23,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse):
 
 // PATCH /api/admin/update
 // Required fields in body: id, approved
-// Udates Story.approved to value
+// Updates Story.approved to value
 async function handlePatch(req: NextApiRequest, res: NextApiResponse): Promise<void> {
   const { id, approved, deleted } = req.body
 

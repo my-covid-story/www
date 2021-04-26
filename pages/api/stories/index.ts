@@ -5,7 +5,7 @@ import * as stories from '../../../lib/api/stories'
 const baseUrl = 'https://mycovidstory.ca'
 
 // GET, POST /api/stories
-export default function handle(req: NextApiRequest, res: NextApiResponse) {
+export default function handle(req: NextApiRequest, res: NextApiResponse): Promise<void> {
   switch (req.method) {
     case 'GET':
       return stories.list().then(res.json, (err) => sendError(res, err))

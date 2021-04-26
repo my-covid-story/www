@@ -9,7 +9,7 @@ export default function StoryFeed({ stories }: { stories: Story[] }): ReactEleme
   return (
     <Box>
       <FeedHeader />
-      <ContentBox py={5}>
+      <ContentBox py>
         <Heading as="h2" mb={[6, null, 8]} color="primary.100">
           Stories
         </Heading>

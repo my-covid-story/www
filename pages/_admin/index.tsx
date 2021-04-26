@@ -1,11 +1,14 @@
-import { Box, Button, Container, Heading, Stack, Text } from '@chakra-ui/react'
+import { ReactElement } from 'react'
+import { Box, Button, Heading, Stack, Text } from '@chakra-ui/react'
 import { useSession, getSession } from 'next-auth/client'
 import Link from 'next/link'
 
 import prisma from '../../lib/prisma'
 import Nav from './nav'
+import ContentBox from '../../components/common/ContentBox'
+import { GetServerSidePropsContext } from 'next'
 
-function Story({ id, title, content, name, postal, email, phone, twitter, ...rest }): JSX.Element {
+function Story({ id, title, content, name, postal, email, phone, twitter, ...rest }): ReactElement {
   return (
     <Box mt={2} p={5} shadow="md" borderWidth="1px" {...rest}>
       <Heading fontSize="xl">{title}</Heading>
@@ -28,7 +31,7 @@ function Story({ id, title, content, name, postal, email, phone, twitter, ...res
           data-type="deleted"
           onClick={(e) => {
             if (window.confirm('Are you sure you want to delete this?')) {
-              updateStory(e)
+              updateStory(e).then()
             }
           }}
         >
@@ -48,7 +51,11 @@ function Story({ id, title, content, name, postal, email, phone, twitter, ...res
   )
 }
 
-export default function _Admin({ stories }): JSX.Element {
+export default function _Admin({
+  stories,
+}: {
+  stories: Record<string, unknown>[] | []
+}): ReactElement {
   const [session] = useSession()
 
   return (
@@ -56,20 +63,20 @@ export default function _Admin({ stories }): JSX.Element {
       <Nav session={session} />
       {session && (
         <>
-          <Container>
+          <ContentBox pb={2}>
             <Stack spacing={8}>
               {stories.map((story) => (
                 <Story key={story.id} {...story} />
               ))}
             </Stack>
-          </Container>
+          </ContentBox>
         </>
       )}
     </>
   )
 }
 
-const updateStory = async (e) => {
+const updateStory = async (e): Promise<void> => {
   let approved = false
   let deleted = false
 
@@ -96,7 +103,12 @@ const updateStory = async (e) => {
   })
 }
 
-export async function getServerSideProps({ req, query }) {
+export async function getServerSideProps({
+  req,
+  query,
+}: GetServerSidePropsContext): Promise<{
+  props: { stories: Record<string, unknown>[] | Record<string, never> }
+}> {
   const session = await getSession({ req })
 
   const deleted = query.deleted ? true : false

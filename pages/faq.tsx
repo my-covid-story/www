@@ -13,6 +13,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 import styles from '../styles/FaqPage.module.css'
+import ContentBox from '../components/common/ContentBox'
 
 const NUM_FAQS = 8
 
@@ -23,7 +24,7 @@ export default function FAQ(): ReactElement {
         <title>FAQ - My COVID Story</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Box w="95%" p={8} pb={24}>
+      <ContentBox py>
         <Box pb={4}>
           <Heading as="h1" size="2xl" pb={4}>
             FAQ
@@ -235,7 +236,7 @@ export default function FAQ(): ReactElement {
             </AccordionItem>
           </Accordion>
         </Box>
-      </Box>
+      </ContentBox>
     </div>
   )
 }

@@ -32,10 +32,8 @@ export function storyName({ displayName }: Story) {
   return displayName || 'Anonymous'
 }
 
-export function storyCite({ displayName, category, postal }: Story) {
-  if (displayName) return `${displayName} from ${postal}`
-  const cl = categoryLabel[category]
-  return cl ? `${cl} from ${postal}` : `From ${postal}`
+export function storyCite({ displayName, postal }: Story) {
+  return displayName ? `${displayName} from ${postal}` : `From ${postal}`
 }
 
 export function storyDate({ createdAt }: Story) {

@@ -1,7 +1,8 @@
 import NextLink from 'next/link'
-import { Box, Heading, Link, SimpleGrid } from '@chakra-ui/react'
-import { storyImage, storyCite } from './model'
+import { Box, Flex, Heading, Link, SimpleGrid } from '@chakra-ui/react'
+import { storyCategoryLabel, storyImage, storyCite } from './model'
 import ContentBox from '../common/ContentBox'
+import Label from '../common/Label'
 
 export default function StoryFeed({ stories }) {
   return (
@@ -59,8 +60,11 @@ function StorySummary({ story }) {
             bgPosition="center"
             color="white"
           >
-            <Box pt={4} pb={4} px={[6, null, 7]} borderRadius="8px" bg="rgba(0, 0, 0, 0.5)">
-              <Box minH="6em" mt={[0, null, 4, 6]} mb={[4, null, 8, 12]}>
+            <Box p={[4, null, null, 6]} borderRadius="8px" bg="rgba(0, 0, 0, 0.5)">
+              <Flex>
+                <Label>{storyCategoryLabel(story)}</Label>
+              </Flex>
+              <Box minH="6em" my={[4, null, null, 6]}>
                 <Heading
                   as="h3"
                   fontSize="2xl"

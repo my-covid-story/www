@@ -3,6 +3,7 @@ import { CloseIcon } from '@chakra-ui/icons'
 import { Story } from '@prisma/client'
 import { storyCategoryLabel, storyImage, storyName, storyDate, storyParagraphs } from './model'
 import ContentBox from '../common/ContentBox'
+import Label from '../common/Label'
 
 interface Props {
   story: Story
@@ -16,18 +17,7 @@ export default function StoryDetail({ story, onClose }: Props) {
         <Box bg="rgba(0, 0, 0, 0.5)">
           <ContentBox py>
             <Flex justifyContent="space-between">
-              <Box
-                py={1}
-                px={2}
-                border="2px"
-                borderColor="gray.200"
-                borderRadius="4px"
-                fontSize="md"
-                fontWeight={600}
-                lineHeight={1.2}
-              >
-                {storyCategoryLabel(story)}
-              </Box>
+              <Label>{storyCategoryLabel(story)}</Label>
               <IconButton
                 size="md"
                 mr={-2}

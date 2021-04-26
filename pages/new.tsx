@@ -5,7 +5,7 @@ import StoryForm from '../components/stories/StoryForm'
 
 export default function CreateStory() {
   return (
-    <ContentBox py>
+    <ContentBox responsivePaddingY>
       <Heading as="h1" size="lg" pb={4}>
         Share your COVID story
       </Heading>

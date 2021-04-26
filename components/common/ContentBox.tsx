@@ -1,22 +1,21 @@
-import { ReactElement, ReactNode } from 'react'
-import { useTheme, Box } from '@chakra-ui/react'
-import { RESPONSIVE_PADDING } from '../lib/Definitions'
-import { Token } from '@chakra-ui/styled-system/dist/types/utils'
-import * as CSS from 'csstype'
+import { Box, BoxProps, useTheme } from '@chakra-ui/react'
 
-interface Props {
-  py?: boolean | Token<CSS.Property.Padding | number, 'space'>
-  children?: ReactNode
-  [x: string]: unknown
+export const RESPONSIVE_PADDING = [4, null, 8]
+
+interface ContentBoxProps extends BoxProps {
+  responsivePaddingY?: boolean
 }
 
-export default function ContentBox({ py, children, ...props }: Props): ReactElement {
+export default function ContentBox({
+  responsivePaddingY,
+  children,
+  py,
+  ...props
+}: ContentBoxProps) {
   const { breakpoints } = useTheme()
 
-  if (py === true) {
+  if (responsivePaddingY === true) {
     py = RESPONSIVE_PADDING
-  } else {
-    py = {}
   }
 
   return (

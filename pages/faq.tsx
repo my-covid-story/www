@@ -11,7 +11,7 @@ export default function FAQ() {
         <title>FAQ - My COVID Story</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ContentBox py>
+      <ContentBox responsivePaddingY>
         <Heading as="h1" size="2xl" pb={6}>
           Frequently Asked Questions
         </Heading>

@@ -13,7 +13,7 @@ export default function StoryFeed({ stories }: StoryFeedProps) {
   return (
     <Box>
       <FeedHeader />
-      <ContentBox py>
+      <ContentBox responsivePaddingY>
         <Heading as="h2" mb={[6, null, 8]} color="primary.100">
           Stories
         </Heading>

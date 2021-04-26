@@ -9,29 +9,6 @@ interface StoryFeedProps {
   stories: Story[]
 }
 
-export default function StoryFeed({ stories }: StoryFeedProps) {
-  return (
-    <Box>
-      <FeedHeader />
-      <ContentBox responsivePaddingY>
-        <Heading as="h2" mb={[6, null, 8]} color="primary.100">
-          Stories
-        </Heading>
-        <SimpleGrid
-          as="main"
-          columns={[1, null, 2]}
-          spacingY={[6, null, 8]}
-          spacingX={[6, null, 10, 16]}
-        >
-          {stories.map((story) => (
-            <StorySummary key={story.id} story={story} />
-          ))}
-        </SimpleGrid>
-      </ContentBox>
-    </Box>
-  )
-}
-
 function FeedHeader() {
   return (
     <Box
@@ -91,6 +68,29 @@ function StorySummary({ story }: { story: Story }) {
           </Box>
         </Link>
       </NextLink>
+    </Box>
+  )
+}
+
+export default function StoryFeed({ stories }: StoryFeedProps) {
+  return (
+    <Box>
+      <FeedHeader />
+      <ContentBox responsivePaddingY>
+        <Heading as="h2" mb={[6, null, 8]} color="primary.100">
+          Stories
+        </Heading>
+        <SimpleGrid
+          as="main"
+          columns={[1, null, 2]}
+          spacingY={[6, null, 8]}
+          spacingX={[6, null, 10, 16]}
+        >
+          {stories.map((story) => (
+            <StorySummary key={story.id} story={story} />
+          ))}
+        </SimpleGrid>
+      </ContentBox>
     </Box>
   )
 }

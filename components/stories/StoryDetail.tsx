@@ -5,6 +5,10 @@ import { storyCategoryLabel, storyImage, storyName, storyDate, storyParagraphs }
 import ContentBox from '../common/ContentBox'
 import Label from '../common/Label'
 
+function StoryParagraphs(p: string, i: number) {
+  return <Text key={i}>{p}</Text>
+}
+
 interface StoryDetailProps {
   story: Story
   onClose: () => void
@@ -53,11 +57,7 @@ export default function StoryDetail({ story, onClose }: StoryDetailProps) {
         <Heading as="h2" mb={4} fontSize="md" fontWeight={700}>
           {storyName(story)}
         </Heading>
-        <Stack spacing={2}>
-          {storyParagraphs(story).map((p, i) => (
-            <Text key={i}>{p}</Text>
-          ))}
-        </Stack>
+        <Stack spacing={2}>{storyParagraphs(story).map(StoryParagraphs)}</Stack>
       </ContentBox>
     </Box>
   )

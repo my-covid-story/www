@@ -10,7 +10,7 @@ export default function handle(req: NextApiRequest, res: NextApiResponse) {
     case 'POST':
       return stories.add(req.body).then(
         (result) => {
-          res.setHeader('Location', `${process.env.NEXT_PUBLIC_VERCEL_URL}${req.url}/${result.id}`)
+          res.setHeader('Location', `${process.env.NEXT_PUBLIC_BASE_URL}${req.url}/${result.id}`)
           res.status(201).json(result)
         },
         (err) => sendError(res, err)

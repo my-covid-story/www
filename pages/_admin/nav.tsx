@@ -13,7 +13,8 @@ import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import { signIn, signOut } from 'next-auth/client'
 
 const Links = [
-  { href: '/_admin/', text: 'Admin' },
+  { href: '/_admin/', text: 'Admin Homepage' },
+  { href: '/_admin/?approved=true', text: 'Show Approved' },
   { href: '/_admin/?deleted=true', text: 'Show Deleted' },
 ]
 

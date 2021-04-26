@@ -1,4 +1,6 @@
-import { chakra, Flex, Heading, Text } from '@chakra-ui/react'
+import { Flex, Heading, Text } from '@chakra-ui/react'
+import FlexBreak from '../components/common/FlexBreak'
+import SimpleLink from '../components/common/SimpleLink'
 
 interface ErrorPageProps {
   code: number
@@ -19,10 +21,20 @@ export default function ErrorPage({
       <Flex flexWrap="wrap" justifyContent="center">
         <Heading>Ooops... there was an error!</Heading>
 
-        <chakra.div flexBasis="100%"></chakra.div>
+        <FlexBreak></FlexBreak>
 
         <Text>
           Status code: <code>{code}</code>, message: &quot;{message}&quot;
+        </Text>
+
+        <FlexBreak></FlexBreak>
+
+        <Text>
+          You should go back to the{' '}
+          <SimpleLink href="/" fontWeight="500">
+            homepage
+          </SimpleLink>
+          !
         </Text>
       </Flex>
     </Flex>

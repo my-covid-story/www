@@ -27,7 +27,7 @@ import { storyCite } from '../../components/stories/model'
 import FloatingRibbon, { Button } from '../../components/common/FloatingRibbon'
 import { ResponseError } from '../../lib/errors'
 import { GetStaticPropsResult } from 'next'
-import ErrorPage from '../_error'
+import ErrorPage from '../404'
 
 interface StoryProps {
   success: true

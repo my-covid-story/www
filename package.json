@@ -10,7 +10,7 @@
     "lint": "eslint \"*/**/*.{js,ts,tsx}\" --quiet --fix",
     "format": "prettier --write \"{,!(node_modules)/**/}*.{js,jsx}\"",
     "prepare": "husky install",
-    "ts-node": "ts-node --compiler-options '{\"module\":\"CommonJS\"}'",
+    "ts-node": "ts-node --project=tsconfig.seed.json",
     "vercel-build": "prisma migrate deploy && next build",
     "prisma:generate": "prisma generate",
     "gen:theme-typings": "chakra-cli tokens theme/index.ts",

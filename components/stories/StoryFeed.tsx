@@ -1,6 +1,6 @@
 import NextLink from 'next/link'
 import { Box, Flex, Heading, Link, SimpleGrid } from '@chakra-ui/react'
-import { storyCategoryLabel, storyImage, storyCite } from './model'
+import { categoryLabel, storyCategoryLabel, storyImage, storyCite } from './model'
 import ContentBox from '../common/ContentBox'
 import Label from '../common/Label'
 import { Story } from '@prisma/client'
@@ -44,7 +44,9 @@ function StorySummary({ story }: { story: Story }) {
           >
             <Box p={[4, null, null, 6]} borderRadius="8px" bg="rgba(0, 0, 0, 0.5)">
               <Flex>
-                <Label>{storyCategoryLabel(story)}</Label>
+                <Label visibility={categoryLabel[story.category] ? 'visible' : 'hidden'}>
+                  {storyCategoryLabel(story)}
+                </Label>
               </Flex>
               <Box minH="6em" my={[4, null, null, 6]}>
                 <Heading

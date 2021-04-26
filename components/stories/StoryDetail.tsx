@@ -15,7 +15,7 @@ export default function StoryDetail({ story, onClose }: StoryDetailProps) {
     <Box>
       <Box bgImage={storyImage(story)} bgSize="cover" bgPosition="center" color="white">
         <Box bg="rgba(0, 0, 0, 0.5)">
-          <ContentBox py>
+          <ContentBox responsivePaddingY>
             <Flex justifyContent="space-between">
               <Label>{storyCategoryLabel(story)}</Label>
               <IconButton
@@ -46,7 +46,7 @@ export default function StoryDetail({ story, onClose }: StoryDetailProps) {
           </ContentBox>
         </Box>
       </Box>
-      <ContentBox py>
+      <ContentBox responsivePaddingY>
         <Heading as="h2" mb={3} fontSize="md" fontWeight={700}>
           {storyDate(story)}
         </Heading>

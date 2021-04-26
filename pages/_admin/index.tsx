@@ -8,7 +8,7 @@ import Nav from './nav'
 import ContentBox from '../../components/common/ContentBox'
 import { GetServerSidePropsContext } from 'next'
 
-interface StoryProps extends BoxProps {
+interface StoryOptionsProps extends BoxProps {
   id: string
   title: string
   content: string
@@ -21,7 +21,7 @@ interface StoryProps extends BoxProps {
   deleted: boolean
 }
 
-function Story({
+function StoryOptions({
   id,
   title,
   content,
@@ -33,7 +33,7 @@ function Story({
   approved,
   deleted,
   ...rest
-}: StoryProps) {
+}: StoryOptionsProps) {
   return (
     <Box mt={2} p={5} shadow="md" borderWidth="1px" {...rest}>
       <Heading fontSize="xl">{title}</Heading>
@@ -91,7 +91,7 @@ export default function _Admin({ stories }: _Admin) {
           <ContentBox pb={2}>
             <Stack spacing={8}>
               {stories.map((story) => (
-                <Story key={story.id} {...story} />
+                <StoryOptions key={story.id} {...story} />
               ))}
             </Stack>
           </ContentBox>

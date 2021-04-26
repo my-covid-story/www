@@ -1,7 +1,14 @@
 import { Box, IconButton, Flex, Heading, Stack, Text } from '@chakra-ui/react'
 import { CloseIcon } from '@chakra-ui/icons'
 import { Story } from '@prisma/client'
-import { storyCategoryLabel, storyImage, storyName, storyDate, storyParagraphs } from './model'
+import {
+  categoryLabel,
+  storyCategoryLabel,
+  storyImage,
+  storyName,
+  storyDate,
+  storyParagraphs,
+} from './model'
 import ContentBox from '../common/ContentBox'
 import Label from '../common/Label'
 
@@ -17,7 +24,9 @@ export default function StoryDetail({ story, onClose }: Props) {
         <Box bg="rgba(0, 0, 0, 0.5)">
           <ContentBox py>
             <Flex justifyContent="space-between">
-              <Label>{storyCategoryLabel(story)}</Label>
+              <Label visibility={categoryLabel[story.category] ? 'visible' : 'hidden'}>
+                {storyCategoryLabel(story)}
+              </Label>
               <IconButton
                 size="md"
                 mr={-2}

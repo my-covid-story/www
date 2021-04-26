@@ -1,12 +1,6 @@
-import { Box } from '@chakra-ui/react'
+import { Box, BoxProps } from '@chakra-ui/react'
 
-interface Props {
-  color?: string
-  children?: React.ReactNode
-  [x: string]: unknown
-}
-
-export default function Label({ children, ...props }: Props) {
+export default function Label({ children, ...props }: BoxProps) {
   const color = props.color || 'white'
 
   return (

@@ -25,18 +25,37 @@ import { list, get } from '../../lib/api/stories'
 import StoryDetail from '../../components/stories/StoryDetail'
 import { storyCite } from '../../components/stories/model'
 import FloatingRibbon, { Button } from '../../components/common/FloatingRibbon'
+import { ResponseError } from '../../lib/errors'
+import { GetStaticPropsResult } from 'next'
+import ErrorPage from '../_error'
 
-interface Props {
+interface StoryProps {
   story: Story
-  url: string
+  url?: string
 }
+
+interface ErrorCodeProps {
+  errorCode: number
+  errorMessage: string
+}
+
+type Props = StoryProps | ErrorCodeProps
 
 const shareIconSize = 64
 const contentSize = 150
 
-export default function StoryPage({ story }: Props) {
+export default function StoryPage({ story, errorCode, errorMessage }: Props) {
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  /**
+   * Return the custom error page with the relative status code. This can allow
+   * passing different error codes like 404 in case a page is not found or a 500
+   * in case of a server error.
+   */
+  if (errorCode) {
+    return <ErrorPage code={errorCode} message={errorMessage} />
+  }
 
   // If we came from the feed, go back on cancel. If not, navigate forward to the feed.
   function handleClose() {
@@ -95,7 +114,25 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps({ params }) {
-  const story = await get(params.id)
-  return { props: { story } }
+export async function getStaticProps({ params }): Promise<GetStaticPropsResult<Props>> {
+  try {
+    /**
+     * Needed to use `as` keyword, but this should be refactored.
+     */
+    const story = (await get(params.id)) as Story
+    console.log('it got here')
+
+    return { props: { story } }
+  } catch (err) {
+    if (err instanceof ResponseError) {
+      return { props: { errorCode: err.status, errorMessage: err.message } }
+    }
+
+    return {
+      props: {
+        errorCode: 500,
+        errorMessage: "This was an unknown error, we'll try to solve it as soon as possible",
+      },
+    }
+  }
 }

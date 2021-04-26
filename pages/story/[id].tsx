@@ -53,7 +53,7 @@ export default function StoryPage({ story, errorCode, errorMessage }: Props) {
    * passing different error codes like 404 in case a page is not found or a 500
    * in case of a server error.
    */
-  if (errorCode) {
+  if (errorCode && errorMessage) {
     return <ErrorPage code={errorCode} message={errorMessage} />
   }
 
@@ -120,7 +120,6 @@ export async function getStaticProps({ params }): Promise<GetStaticPropsResult<P
      * Needed to use `as` keyword, but this should be refactored.
      */
     const story = (await get(params.id)) as Story
-    console.log('it got here')
 
     return { props: { story } }
   } catch (err) {

@@ -30,6 +30,8 @@ export async function getStaticProps() {
   }
 }
 
-MainPage.getLayout = (page) => <SiteLayout navPosition="sticky">{page}</SiteLayout>
+const MainPageLayout = (page): JSX.Element => <SiteLayout navPosition="sticky">{page}</SiteLayout>
+
+MainPage.getLayout = MainPageLayout
 
 export default MainPage

@@ -71,6 +71,8 @@ const TwitterIcon = () => (
   </Icon>
 )
 
-Thanks.getLayout = (page) => <BlankLayout>{page}</BlankLayout>
+const ThanksLayout = (page): JSX.Element => <BlankLayout>{page}</BlankLayout>
+
+Thanks.getLayout = ThanksLayout
 
 export default Thanks

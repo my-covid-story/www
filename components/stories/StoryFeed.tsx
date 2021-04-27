@@ -1,30 +1,9 @@
 import NextLink from 'next/link'
-import { Box, Heading, Link, SimpleGrid } from '@chakra-ui/react'
-import { storyImage, storyCite } from './model'
+import { Box, Flex, Heading, Link, SimpleGrid } from '@chakra-ui/react'
+import { categoryLabel, storyCategoryLabel, storyImage, storyCite } from './model'
 import ContentBox from '../common/ContentBox'
-
-export default function StoryFeed({ stories }) {
-  return (
-    <Box>
-      <FeedHeader />
-      <ContentBox py>
-        <Heading as="h2" mb={[6, null, 8]} color="primary.100">
-          Stories
-        </Heading>
-        <SimpleGrid
-          as="main"
-          columns={[1, null, 2]}
-          spacingY={[6, null, 8]}
-          spacingX={[6, null, 10, 16]}
-        >
-          {stories.map((story) => (
-            <StorySummary key={story.id} story={story} />
-          ))}
-        </SimpleGrid>
-      </ContentBox>
-    </Box>
-  )
-}
+import Label from '../common/Label'
+import { Story } from '@prisma/client'
 
 function FeedHeader() {
   return (
@@ -45,7 +24,11 @@ function FeedHeader() {
   )
 }
 
-function StorySummary({ story }) {
+interface StorySummaryProps {
+  story: Story
+}
+
+function StorySummary({ story }: StorySummaryProps) {
   const href = `/story/${story.id}`
 
   return (
@@ -59,8 +42,13 @@ function StorySummary({ story }) {
             bgPosition="center"
             color="white"
           >
-            <Box pt={4} pb={4} px={[6, null, 7]} borderRadius="8px" bg="rgba(0, 0, 0, 0.5)">
-              <Box minH="6em" mt={[0, null, 4, 6]} mb={[4, null, 8, 12]}>
+            <Box p={[4, null, null, 6]} borderRadius="8px" bg="rgba(0, 0, 0, 0.5)">
+              <Flex>
+                <Label visibility={categoryLabel[story.category] ? 'visible' : 'hidden'}>
+                  {storyCategoryLabel(story)}
+                </Label>
+              </Flex>
+              <Box minH="6em" my={[4, null, null, 6]}>
                 <Heading
                   as="h3"
                   fontSize="2xl"
@@ -82,6 +70,33 @@ function StorySummary({ story }) {
           </Box>
         </Link>
       </NextLink>
+    </Box>
+  )
+}
+
+interface StoryFeedProps {
+  stories: Story[]
+}
+
+export default function StoryFeed({ stories }: StoryFeedProps) {
+  return (
+    <Box>
+      <FeedHeader />
+      <ContentBox>
+        <Heading as="h2" mb={[6, null, 8]} color="primary.100">
+          Stories
+        </Heading>
+        <SimpleGrid
+          as="main"
+          columns={[1, null, 2]}
+          spacingY={[6, null, 8]}
+          spacingX={[6, null, 10, 16]}
+        >
+          {stories.map((story) => (
+            <StorySummary key={story.id} story={story} />
+          ))}
+        </SimpleGrid>
+      </ContentBox>
     </Box>
   )
 }

@@ -1,14 +1,21 @@
-import { Link, Text } from '@chakra-ui/react'
-import NextLink from 'next/link'
+import { Link, Text, TextProps } from '@chakra-ui/react'
 
-export default function MenuItem({ children, to = '/', externalLink = false, ...rest }) {
+interface MenuItemProps extends TextProps {
+  to?: string
+  externalLink?: boolean
+}
+
+export default function MenuItem({
+  children,
+  to = '/',
+  externalLink = false,
+  ...props
+}: MenuItemProps) {
   return (
-    <NextLink href={to} passHref>
-      <Link href={to} isExternal={externalLink}>
-        <Text display="block" {...rest}>
-          {children}
-        </Text>
-      </Link>
-    </NextLink>
+    <Link href={to} isExternal={externalLink}>
+      <Text display="block" {...props}>
+        {children}
+      </Text>
+    </Link>
   )
 }

@@ -40,14 +40,10 @@ module.exports = {
         '@typescript-eslint/no-unused-vars': ['error'],
 
         // I suggest this setting for requiring return types on functions only where useful
-        '@typescript-eslint/explicit-function-return-type': [
-          'warn',
-          {
-            allowExpressions: true,
-            allowConciseArrowFunctionExpressionsStartingWithVoid: true,
-          },
-        ],
-        'prettier/prettier': ['error', { endOfLine: 'auto' }, { usePrettierrc: true }], // Includes .prettierrc.js rules
+        '@typescript-eslint/explicit-function-return-type': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+
+        'prettier/prettier': ['error', {}, { usePrettierrc: true }], // Includes .prettierrc.js rules
       },
     },
   ],

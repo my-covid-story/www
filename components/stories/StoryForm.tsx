@@ -1,24 +1,24 @@
 import {
-  Stack,
+  Button,
+  Checkbox,
   FormControl,
-  FormLabel,
   FormErrorMessage,
   FormHelperText,
+  FormLabel,
   Input,
   InputGroup,
   InputLeftAddon,
-  Button,
-  Textarea,
-  Select,
   Radio,
   RadioGroup,
-  Checkbox,
+  Select,
+  Stack,
   Text,
+  Textarea,
 } from '@chakra-ui/react'
-import { Formik, Field, Form } from 'formik'
+import { Field, Form, Formik } from 'formik'
 import Router from 'next/router'
 
-import storySchema, { TITLE_CHAR_LIMIT, STORY_WORD_LIMIT } from '../../lib/storySchema'
+import storySchema, { STORY_WORD_LIMIT, TITLE_CHAR_LIMIT } from '../../lib/storySchema'
 
 type LoginFormInputs = {
   title: string

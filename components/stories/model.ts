@@ -40,6 +40,6 @@ export function storyDate({ createdAt }: Story): string {
   return new Date(createdAt).toDateString()
 }
 
-export function storyParagraphs({ content }: Story) {
+export function storyParagraphs({ content }: Story): string[] {
   return content.split('\n').filter((p) => p)
 }

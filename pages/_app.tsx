@@ -56,7 +56,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
     }
   }, [router.events])
 
-  const getLayout = Component.getLayout || ((page: ReactNode) => <SiteLayout>{page}</SiteLayout>)
+  const getLayout = Component.getLayout || ((page) => <SiteLayout>{page}</SiteLayout>)
 
   return getLayout(
     <>

@@ -55,7 +55,9 @@ function StoryOptions({
           data-id={id}
           data-type={deleted ? 'undelete' : 'delete'}
           onClick={(e) => {
-            if (window.confirm('Are you sure you want to delete this?')) {
+            if (
+              window.confirm(`Are you sure you want to ${deleted ? 'undelete' : 'delete'} this?`)
+            ) {
               updateStory(e)
             }
           }}

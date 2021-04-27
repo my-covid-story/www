@@ -3,6 +3,7 @@ import { Box, Flex, Heading, Link, SimpleGrid } from '@chakra-ui/react'
 import { categoryLabel, storyCategoryLabel, storyImage, storyCite } from './model'
 import ContentBox from '../common/ContentBox'
 import Label from '../common/Label'
+import { ContentWarningBox } from '../common/Warnings'
 import { Story } from '@prisma/client'
 
 function FeedHeader() {
@@ -60,6 +61,7 @@ function StorySummary({ story }: StorySummaryProps) {
                 >
                   {story.title}
                 </Heading>
+                {story.contentWarning && <ContentWarningBox />}
               </Box>
               <Box lineHeight={1.2}>{storyCite(story)}</Box>
             </Box>

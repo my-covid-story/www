@@ -19,6 +19,7 @@ Our stack / architecture is:
 7. Run `npx prisma db seed --preview-feature` to see test data from `prisma/seed.ts`.
 8. Run `npm run dev` to start the app locally.
 9. You can use `/api/stories` to create new stories.
+10. Run `npm test` to run the test suite. This also gets run automatically on each Pull Request
 
 ---
 

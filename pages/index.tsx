@@ -6,6 +6,7 @@ import FloatingRibbon, { Button } from '../components/common/FloatingRibbon'
 import SiteLayout from '../layouts/Default'
 import { Story } from '@prisma/client'
 import { ReactNode } from 'react'
+import HeadTags from '../components/common/HeadTags'
 
 interface MainPageProps {
   stories: Story[]
@@ -14,6 +15,9 @@ interface MainPageProps {
 const MainPage = ({ stories }: MainPageProps) => {
   return (
     <>
+      <HeadTags>
+        <link rel="canonical" href="https://www.mycovidstory.ca" />
+      </HeadTags>
       <Box>
         <StoryFeed stories={stories} />
       </Box>

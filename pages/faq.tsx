@@ -1,16 +1,15 @@
-import Head from 'next/head'
-
 import { Box, Heading, Link, Text } from '@chakra-ui/react'
 import styles from '../styles/FaqPage.module.css'
 import ContentBox from '../components/common/ContentBox'
+import HeadTags from '../components/common/HeadTags'
 
 export default function FAQ() {
   return (
     <div className={styles.faq}>
-      <Head>
-        <title>FAQ - My COVID Story</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <HeadTags
+        title="Frequently Asked Questions"
+        description="View our list of Frequently Asked Questions to learn more about how the site began, moderation guidelines and how we protect your privacy."
+      />
       <ContentBox>
         <Heading as="h1" size="2xl" pb={6}>
           Frequently Asked Questions

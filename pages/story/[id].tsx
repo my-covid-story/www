@@ -25,6 +25,8 @@ import { get, list } from '../../lib/api/stories'
 import generateSocial from '../../lib/social'
 import StoryDetail from '../../components/stories/StoryDetail'
 import FloatingRibbon, { Button } from '../../components/common/FloatingRibbon'
+import HeadTags from '../../components/common/HeadTags'
+import { storyImage } from '../../components/stories/model'
 
 const shareIconSize = 64
 const buttonStyle = { marginRight: '12px' }
@@ -50,6 +52,7 @@ export default function StoryPage({ story }: StoryPageProps) {
 
   return (
     <>
+      <HeadTags title={story.title} description={story.content} previewImage={storyImage(story)} />
       <Box>
         <StoryDetail story={story} onClose={handleClose} />
       </Box>

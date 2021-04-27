@@ -24,7 +24,7 @@ interface StoryDetailProps {
 export default function StoryDetail({ story, onClose }: StoryDetailProps) {
   return (
     <Box>
-      <Box bgImage={storyImage(story)} bgSize="cover" bgPosition="center" color="white">
+      <Box bgImage={`url(${storyImage(story)})`} bgSize="cover" bgPosition="center" color="white">
         <Box bg="rgba(0, 0, 0, 0.5)">
           <ContentBox>
             <Flex justifyContent="space-between">

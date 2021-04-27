@@ -22,12 +22,12 @@ import {
 
 import { Story } from '@prisma/client'
 import { get, list } from '../../lib/api/stories'
+import generateSocial from '../../lib/social'
 import StoryDetail from '../../components/stories/StoryDetail'
-import { storyCite } from '../../components/stories/model'
 import FloatingRibbon, { Button } from '../../components/common/FloatingRibbon'
 
 const shareIconSize = 64
-const contentSize = 150
+const buttonStyle = { marginRight: '12px' }
 
 interface StoryPageProps {
   story: Story
@@ -45,7 +45,7 @@ export default function StoryPage({ story }: StoryPageProps) {
 
   // Get Story details
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}/story/${story.id}`
-  const description = `"${story.content.slice(0, contentSize)}" by ${storyCite(story)}`
+  const description = generateSocial(story)
   const emailSubject = 'Help me amplify this story'
 
   return (
@@ -60,17 +60,27 @@ export default function StoryPage({ story }: StoryPageProps) {
             <DrawerContent>
               <DrawerHeader>Share via</DrawerHeader>
               <DrawerBody>
-                <TwitterShareButton url={url} title={description} via="MyCOVIDStory_CA">
-                  <TwitterIcon size={shareIconSize} round={true} />
+                <TwitterShareButton
+                  url={url}
+                  title={description}
+                  via="MyCOVIDStory_CA"
+                  style={buttonStyle}
+                >
+                  <TwitterIcon size={shareIconSize} />
                 </TwitterShareButton>
-                <FacebookShareButton url={url} quote={description}>
-                  <FacebookIcon size={shareIconSize} round={true} />
+                <FacebookShareButton url={url} quote={description} style={buttonStyle}>
+                  <FacebookIcon size={shareIconSize} />
                 </FacebookShareButton>
-                <WhatsappShareButton url={url} title={description}>
-                  <WhatsappIcon size={shareIconSize} round={true} />
+                <WhatsappShareButton url={url} title={description} style={buttonStyle}>
+                  <WhatsappIcon size={shareIconSize} />
                 </WhatsappShareButton>
-                <EmailShareButton url={url} subject={emailSubject} body={description}>
-                  <EmailIcon size={shareIconSize} round={true} />
+                <EmailShareButton
+                  url={url}
+                  subject={emailSubject}
+                  body={description}
+                  style={buttonStyle}
+                >
+                  <EmailIcon size={shareIconSize} />
                 </EmailShareButton>
               </DrawerBody>
             </DrawerContent>

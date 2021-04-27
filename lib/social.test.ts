@@ -1,3 +1,4 @@
+import faker from 'faker'
 import prisma from './prisma'
 import generateSocial from './social'
 
@@ -29,12 +30,47 @@ describe('Test Social Sharing', () => {
     })
   })
 
-  test('generateSocial should generate text of 150 characters', async () => {
+  test('generateSocial should generate text less than 280 characters', async () => {
     const savedStory = await prisma.story.findFirst({
       where: { email: 'test@test.test' },
     })
 
-    expect(generateSocial(savedStory).length).toBeLessThanOrEqual(150)
+    savedStory.content = faker.lorem.words(300)
+    savedStory.displayName = faker.lorem.words(300)
+
+    expect(generateSocial(savedStory).length).toBeLessThanOrEqual(280)
+  })
+
+  test('generateSocial should generate text without a display name', async () => {
+    const savedStory = await prisma.story.findFirst({
+      where: { email: 'test@test.test' },
+    })
+
+    const expectedString = `"this is content" From ${savedStory.postal}`
+
+    expect(generateSocial(savedStory)).toBe(expectedString)
+  })
+
+  test('generateSocial should generate text with a display name', async () => {
+    const savedStory = await prisma.story.findFirst({
+      where: { email: 'test@test.test' },
+    })
+
+    savedStory.displayName = 'Name'
+
+    const expectedString = `"this is content" ${savedStory.displayName} from ${savedStory.postal}`
+
+    expect(generateSocial(savedStory)).toBe(expectedString)
+  })
+
+  test('generateSocial should generate text less than 280 characters with long Display Name', async () => {
+    const savedStory = await prisma.story.findFirst({
+      where: { email: 'test@test.test' },
+    })
+
+    savedStory.content = faker.lorem.words(300)
+
+    expect(generateSocial(savedStory).length).toBeLessThanOrEqual(280)
   })
 })
 

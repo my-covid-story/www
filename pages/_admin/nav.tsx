@@ -2,22 +2,30 @@ import {
   Box,
   Flex,
   HStack,
-  Link,
   IconButton,
-  useDisclosure,
-  useColorModeValue,
+  Link,
   Stack,
+  useColorModeValue,
+  useDisclosure,
 } from '@chakra-ui/react'
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
+import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
 
 import { signIn, signOut } from 'next-auth/client'
+import ContentBox from '../../components/common/ContentBox'
+import { Session } from 'next-auth'
 
 const Links = [
-  { href: '/_admin/', text: 'Admin' },
+  { href: '/_admin/', text: 'Admin Homepage' },
+  { href: '/_admin/?approved=true', text: 'Show Approved' },
   { href: '/_admin/?deleted=true', text: 'Show Deleted' },
 ]
 
-const NavLink = ({ href, text }: { href: string; text: string }) => (
+interface NavLinkProps {
+  href: string
+  text: string
+}
+
+const NavLink = ({ href, text }: NavLinkProps) => (
   <Link
     px={2}
     py={1}
@@ -32,18 +40,22 @@ const NavLink = ({ href, text }: { href: string; text: string }) => (
   </Link>
 )
 
-export default function Nav({ session }) {
+interface NavProps {
+  session: Session
+}
+
+export default function Nav({ session }: NavProps) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
       <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
         {!session && (
-          <>
+          <ContentBox height="100%" display="flex" alignItems="center" justifyContent="center">
             <Link spacing={8} onClick={() => signIn()}>
               Sign in
             </Link>
-          </>
+          </ContentBox>
         )}
         {session && (
           <>

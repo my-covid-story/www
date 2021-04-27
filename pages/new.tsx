@@ -1,11 +1,11 @@
 import Link from 'next/link'
-import { Text, Heading } from '@chakra-ui/react'
+import { Heading, Text } from '@chakra-ui/react'
 import ContentBox from '../components/common/ContentBox'
 import StoryForm from '../components/stories/StoryForm'
 
 export default function CreateStory() {
   return (
-    <ContentBox py>
+    <ContentBox>
       <Heading as="h1" size="lg" pb={4}>
         Share your COVID story
       </Heading>

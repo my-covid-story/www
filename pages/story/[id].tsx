@@ -4,24 +4,24 @@ import {
   Box,
   Drawer,
   DrawerBody,
+  DrawerContent,
   DrawerHeader,
   DrawerOverlay,
-  DrawerContent,
   useDisclosure,
 } from '@chakra-ui/react'
 import {
-  EmailShareButton,
   EmailIcon,
-  FacebookShareButton,
+  EmailShareButton,
   FacebookIcon,
-  TwitterShareButton,
+  FacebookShareButton,
   TwitterIcon,
-  WhatsappShareButton,
+  TwitterShareButton,
   WhatsappIcon,
+  WhatsappShareButton,
 } from 'react-share'
 
 import { Story } from '@prisma/client'
-import { list, get } from '../../lib/api/stories'
+import { get, list } from '../../lib/api/stories'
 import StoryDetail from '../../components/stories/StoryDetail'
 import { storyCite } from '../../components/stories/model'
 import FloatingRibbon, { Button } from '../../components/common/FloatingRibbon'
@@ -62,7 +62,7 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
   const { story } = props
 
   // If we came from the feed, go back on cancel. If not, navigate forward to the feed.
-  function handleClose() {
+  function handleClose(): void {
     router.query.back === 'true' ? router.back() : router.push('/')
   }
 
@@ -117,8 +117,14 @@ export async function getStaticPaths() {
     fallback: 'blocking',
   }
 }
+      
+interface GetStaticProps {
+  params: {
+    id: string
+  }
+}
 
-export async function getStaticProps({ params }): Promise<GetStaticPropsResult<StoryPageProps>> {
+export async function getStaticProps({ params }: GetStaticProps): Promise<GetStaticPropsResult<StoryPageProps>> {
   try {
     /**
      * Needed to use `as` keyword, but this should be refactored.

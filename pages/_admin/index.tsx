@@ -1,11 +1,27 @@
-import { Box, Button, Container, Heading, Stack, Text } from '@chakra-ui/react'
-import { useSession, getSession } from 'next-auth/client'
+import { Box, BoxProps, Button, Heading, Stack, Text } from '@chakra-ui/react'
+import { getSession, useSession } from 'next-auth/client'
 import Link from 'next/link'
 
 import prisma from '../../lib/prisma'
+import { Story } from '@prisma/client'
 import Nav from './nav'
+import ContentBox from '../../components/common/ContentBox'
+import { GetServerSidePropsContext } from 'next'
 
-function Story({
+interface StoryOptionsProps extends BoxProps {
+  id: string
+  title: string
+  content: string
+  name: string
+  postal: string
+  email: string
+  phone: string
+  twitter: string
+  approved: boolean
+  deleted: boolean
+}
+
+function StoryOptions({
   id,
   title,
   content,
@@ -17,7 +33,7 @@ function Story({
   approved,
   deleted,
   ...rest
-}) {
+}: StoryOptionsProps) {
   return (
     <Box mt={2} p={5} shadow="md" borderWidth="1px" {...rest}>
       <Heading fontSize="xl">{title}</Heading>
@@ -39,7 +55,9 @@ function Story({
           data-id={id}
           data-type={deleted ? 'undelete' : 'delete'}
           onClick={(e) => {
-            if (window.confirm('Are you sure you want to delete this?')) {
+            if (
+              window.confirm(`Are you sure you want to ${deleted ? 'undelete' : 'delete'} this?`)
+            ) {
               updateStory(e)
             }
           }}
@@ -60,7 +78,11 @@ function Story({
   )
 }
 
-export default function _Admin({ stories }) {
+interface _Admin {
+  stories: Story[] | []
+}
+
+export default function _Admin({ stories }: _Admin) {
   const [session] = useSession()
 
   return (
@@ -68,13 +90,13 @@ export default function _Admin({ stories }) {
       <Nav session={session} />
       {session && (
         <>
-          <Container>
+          <ContentBox pb={2}>
             <Stack spacing={8}>
               {stories.map((story) => (
-                <Story key={story.id} {...story} />
+                <StoryOptions key={story.id} {...story} />
               ))}
             </Stack>
-          </Container>
+          </ContentBox>
         </>
       )}
     </>
@@ -82,7 +104,7 @@ export default function _Admin({ stories }) {
 }
 
 // `unapprove` and `undelete` aren't technically needed but it helps when reading the code
-const updateStory = async (e) => {
+const updateStory = (e) => {
   let approved = false
   let deleted = false
 
@@ -106,7 +128,7 @@ const updateStory = async (e) => {
     deleted,
   }
 
-  await fetch('/api/admin/update', {
+  fetch('/api/admin/update', {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -115,7 +137,7 @@ const updateStory = async (e) => {
   })
 }
 
-export async function getServerSideProps({ req, query }) {
+export async function getServerSideProps({ req, query }: GetServerSidePropsContext) {
   const session = await getSession({ req })
 
   const deleted = query.deleted === 'true'

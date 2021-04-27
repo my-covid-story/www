@@ -4,42 +4,42 @@ import {
   Box,
   Drawer,
   DrawerBody,
+  DrawerContent,
   DrawerHeader,
   DrawerOverlay,
-  DrawerContent,
   useDisclosure,
 } from '@chakra-ui/react'
 import {
-  EmailShareButton,
   EmailIcon,
-  FacebookShareButton,
+  EmailShareButton,
   FacebookIcon,
-  TwitterShareButton,
+  FacebookShareButton,
   TwitterIcon,
-  WhatsappShareButton,
+  TwitterShareButton,
   WhatsappIcon,
+  WhatsappShareButton,
 } from 'react-share'
 
 import { Story } from '@prisma/client'
-import { list, get } from '../../lib/api/stories'
+import { get, list } from '../../lib/api/stories'
 import StoryDetail from '../../components/stories/StoryDetail'
 import { storyCite } from '../../components/stories/model'
 import FloatingRibbon, { Button } from '../../components/common/FloatingRibbon'
 
-interface Props {
+const shareIconSize = 64
+const contentSize = 150
+
+interface StoryPageProps {
   story: Story
   url: string
 }
 
-const shareIconSize = 64
-const contentSize = 150
-
-export default function StoryPage({ story }: Props) {
+export default function StoryPage({ story }: StoryPageProps) {
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   // If we came from the feed, go back on cancel. If not, navigate forward to the feed.
-  function handleClose() {
+  function handleClose(): void {
     router.query.back === 'true' ? router.back() : router.push('/')
   }
 
@@ -95,7 +95,13 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps({ params }) {
+interface GetStaticProps {
+  params: {
+    id: string
+  }
+}
+
+export async function getStaticProps({ params }: GetStaticProps) {
   const story = await get(params.id)
   return { props: { story } }
 }

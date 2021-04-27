@@ -9,7 +9,7 @@ export default function About() {
         <title>About - My COVID Story</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ContentBox py>
+      <ContentBox>
         <Heading as="h1" size="2xl" pb={6}>
           About
         </Heading>

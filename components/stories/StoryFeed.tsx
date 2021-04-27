@@ -3,29 +3,7 @@ import { Box, Flex, Heading, Link, SimpleGrid } from '@chakra-ui/react'
 import { categoryLabel, storyCategoryLabel, storyImage, storyCite } from './model'
 import ContentBox from '../common/ContentBox'
 import Label from '../common/Label'
-
-export default function StoryFeed({ stories }) {
-  return (
-    <Box>
-      <FeedHeader />
-      <ContentBox py>
-        <Heading as="h2" mb={[6, null, 8]} color="primary.100">
-          Stories
-        </Heading>
-        <SimpleGrid
-          as="main"
-          columns={[1, null, 2]}
-          spacingY={[6, null, 8]}
-          spacingX={[6, null, 10, 16]}
-        >
-          {stories.map((story) => (
-            <StorySummary key={story.id} story={story} />
-          ))}
-        </SimpleGrid>
-      </ContentBox>
-    </Box>
-  )
-}
+import { Story } from '@prisma/client'
 
 function FeedHeader() {
   return (
@@ -46,7 +24,11 @@ function FeedHeader() {
   )
 }
 
-function StorySummary({ story }) {
+interface StorySummaryProps {
+  story: Story
+}
+
+function StorySummary({ story }: StorySummaryProps) {
   const href = `/story/${story.id}`
 
   return (
@@ -88,6 +70,33 @@ function StorySummary({ story }) {
           </Box>
         </Link>
       </NextLink>
+    </Box>
+  )
+}
+
+interface StoryFeedProps {
+  stories: Story[]
+}
+
+export default function StoryFeed({ stories }: StoryFeedProps) {
+  return (
+    <Box>
+      <FeedHeader />
+      <ContentBox>
+        <Heading as="h2" mb={[6, null, 8]} color="primary.100">
+          Stories
+        </Heading>
+        <SimpleGrid
+          as="main"
+          columns={[1, null, 2]}
+          spacingY={[6, null, 8]}
+          spacingX={[6, null, 10, 16]}
+        >
+          {stories.map((story) => (
+            <StorySummary key={story.id} story={story} />
+          ))}
+        </SimpleGrid>
+      </ContentBox>
     </Box>
   )
 }

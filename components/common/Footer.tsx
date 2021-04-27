@@ -1,38 +1,63 @@
-import { Box, Button as BaseButton, Center } from '@chakra-ui/react'
+import { Box, Container, SimpleGrid, Text } from '@chakra-ui/react'
+import MenuItem from './MenuItem'
 
-export default function Footer({ children }) {
+export default function Footer() {
   return (
-    <Center
-      pos="fixed"
-      bottom={0}
-      left={0}
-      right={0}
-      p={4}
-      borderTopRadius="8px"
-      boxShadow="0px -4px 4px rgba(0, 0, 0, 0.1)"
-      bg="white"
+    <Box
+      as="footer"
+      backgroundColor="#202020"
+      color="#FFF"
+      paddingTop={10}
+      paddingBottom={8}
+      textAlign="left"
     >
-      {children}
-    </Center>
-  )
-}
-
-export function FooterSpace() {
-  return <Box h="72px" />
-}
-
-export function Button({ children, ...props }) {
-  return (
-    <BaseButton
-      py={2}
-      px={8}
-      bg="#55099D"
-      color="white"
-      borderRadius="4px"
-      fontWeight={600}
-      {...props}
-    >
-      {children}
-    </BaseButton>
+      <Container centerContent maxW="container.sm">
+        <SimpleGrid columns={[2, 3]} width="100%" textAlign={['left', 'center']}>
+          <MenuItem padding={1} marginBottom={1}>
+            Home
+          </MenuItem>
+          <MenuItem to="/about" padding={1} marginBottom={1}>
+            About
+          </MenuItem>
+          <MenuItem to="/faq" padding={1} marginBottom={1}>
+            FAQ
+          </MenuItem>
+          <MenuItem
+            to="https://kvmhxg5ojy6.typeform.com/to/gUsoYkft"
+            externalLink={true}
+            padding={1}
+            marginBottom={1}
+          >
+            Media Form
+          </MenuItem>
+          {/*<MenuItem padding={1} marginBottom={1}>Releases</MenuItem>*/}
+          <MenuItem
+            to="https://github.com/my-covid-story/www"
+            externalLink={true}
+            padding={1}
+            marginBottom={1}
+          >
+            Github
+          </MenuItem>
+          <MenuItem
+            to="https://app.usefathom.com/share/xnknpyhv/mycovidstory.ca"
+            externalLink={true}
+            padding={1}
+            marginBottom={1}
+          >
+            Analytics
+          </MenuItem>
+          <MenuItem to="mailto:info@mycovidstory.ca" padding={1} marginBottom={1}>
+            Email Us
+          </MenuItem>
+        </SimpleGrid>
+        <Text as="strong" paddingTop={4}>
+          Made with love by Ontarians{' '}
+          <span role="img" aria-label="heart" style={{ filter: 'brightness(0) invert(1)' }}>
+            ❤️
+          </span>
+        </Text>
+      </Container>
+    </Box>
   )
 }

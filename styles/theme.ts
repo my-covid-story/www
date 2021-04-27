@@ -4,6 +4,7 @@ const global = {
   styles: {
     global: {
       a: {
+        textDecoration: 'none',
         color: '#55099D',
       },
     },

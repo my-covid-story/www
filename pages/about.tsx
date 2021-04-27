@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { Box, Heading, Stack, Text } from '@chakra-ui/react'
+import ContentBox from '../components/common/ContentBox'
 
 export default function About() {
   return (
@@ -8,14 +9,12 @@ export default function About() {
         <title>About - My COVID Story</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Box w="95%" p={8} pb={24}>
-        <Box pb={4}>
-          <Heading as="h1" size="2xl" pb={4}>
-            About
-          </Heading>
-        </Box>
-        <Box pb={7}>
-          <Heading as="h2" size="l" pb={4}>
+      <ContentBox>
+        <Heading as="h1" size="2xl" pb={6}>
+          About
+        </Heading>
+        <Box pb={6}>
+          <Heading as="h2" size="l" pb={3}>
             Who We Are
           </Heading>
           <Text>
@@ -24,8 +23,8 @@ export default function About() {
             to drive government action.
           </Text>
         </Box>
-        <Box pb={7}>
-          <Heading as="h2" size="l" pb={4}>
+        <Box pb={6}>
+          <Heading as="h2" size="l" pb={3}>
             Our Mission
           </Heading>
           <Text>
@@ -33,8 +32,8 @@ export default function About() {
             to drive effective government policy that will save lives.
           </Text>
         </Box>
-        <Box pb={7}>
-          <Heading as="h2" size="l" pb={4}>
+        <Box pb={6}>
+          <Heading as="h2" size="l" pb={3}>
             Why We Created MyCovidStory.ca
           </Heading>
           <Stack spacing={4}>
@@ -61,7 +60,7 @@ export default function About() {
           </Stack>
         </Box>
         <Box>
-          <Heading as="h2" size="l" pb={4}>
+          <Heading as="h2" size="l" pb={3}>
             Made With Love By
           </Heading>
           <Stack spacing={1}>
@@ -86,7 +85,7 @@ export default function About() {
             <Text>Surkhab Peerzada</Text>
           </Stack>
         </Box>
-      </Box>
+      </ContentBox>
     </div>
   )
 }

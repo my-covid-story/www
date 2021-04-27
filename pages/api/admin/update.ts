@@ -2,13 +2,13 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/client'
 
 import prisma from '../../../lib/prisma'
-import { sendError, methodNotAllowed, internalServerError, unauthorized } from '../../../lib/errors'
+import { internalServerError, methodNotAllowed, sendError, unauthorized } from '../../../lib/errors'
 
 // /api/admin/update
-export default async function handle(req: NextApiRequest, res: NextApiResponse): Promise<void> {
+export default async function handle(req: NextApiRequest, res: NextApiResponse) {
   const session = await getSession({ req })
 
-  if(!session) {
+  if (!session) {
     sendError(res, unauthorized())
   }
 
@@ -23,20 +23,20 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse):
 
 // PATCH /api/admin/update
 // Required fields in body: id, approved
-// Udates Story.approved to value
-async function handlePatch(req: NextApiRequest, res: NextApiResponse): Promise<void> {
+// Updates Story.approved to value
+async function handlePatch(req: NextApiRequest, res: NextApiResponse) {
   const { id, approved, deleted } = req.body
 
   try {
     const story = await prisma.story.update({
-        where: {
-          id,
-        },
-        data: {
-          approved,
-          deleted,
-        },
-      })
+      where: {
+        id,
+      },
+      data: {
+        approved,
+        deleted,
+      },
+    })
 
     res.json(story)
   } catch (err) {

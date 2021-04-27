@@ -1,26 +1,19 @@
 import { Story } from '@prisma/client'
 
-export function storyCategory({ category }: Story) {
-  switch (category) {
-    case 'concerned-citizen':
-      return 'Concerned Citizen'
-    case 'essential-worker':
-      return 'Essential Worker'
-    case 'healthcare-provider':
-      return 'Healthcare Provider'
-    case 'educator':
-      return 'Educator'
-    case 'small-business-owner':
-      return 'Small Business Owner'
-    case 'patient-family-member':
-      return 'Patient or Family Member'
-    case 'other':
-    default:
-      return 'Resident'
-  }
+export const categoryLabel = {
+  'concerned-citizen': 'Concerned Citizen',
+  'essential-worker': 'Essential Worker',
+  'healthcare-provider': 'Healthcare Provider',
+  educator: 'Educator',
+  'small-business-owner': 'Small Business Owner',
+  'patient-family-member': 'Patient or Family Member',
 }
 
-export function storyImage({ category }: Story) {
+export function storyCategoryLabel({ category }: Story): string {
+  return categoryLabel[category] || 'Other'
+}
+
+export function storyImage({ category }: Story): string {
   switch (category) {
     case 'concerned-citizen':
     case 'essential-worker':
@@ -35,19 +28,18 @@ export function storyImage({ category }: Story) {
   }
 }
 
-export function storyName({ displayName }: Story) {
+export function storyName({ displayName }: Story): string {
   return displayName || 'Anonymous'
 }
 
-export function storyCite(story: Story) {
-  const { displayName, postal } = story
-  return displayName ? `${displayName} from ${postal}` : `${storyCategory(story)} from ${postal}`
+export function storyCite({ displayName, postal }: Story) {
+  return displayName ? `${displayName} from ${postal}` : `From ${postal}`
 }
 
-export function storyDate({ createdAt }: Story) {
+export function storyDate({ createdAt }: Story): string {
   return new Date(createdAt).toDateString()
 }
 
-export function storyParagraphs({ content }: Story) {
+export function storyParagraphs({ content }: Story): string[] {
   return content.split('\n').filter((p) => p)
 }

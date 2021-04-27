@@ -79,6 +79,9 @@ function MyApp({ Component, pageProps }: MyAppProps) {
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
+        <script type="application/ld+json">
+          {`{"@context": "https://schema.org", "@type": "Organization", "name": "MyCovidStory", "alternateName": "MyCovidStory.ca", "url": "https://MyCovidStory.ca", "logo": "", "sameAs": [ "https://www.facebook.com/MyCovidStoryCA", "https://twitter.com/MyCOVIDStory_CA", "https://www.instagram.com/MyCovidStory_CA/", "https://github.com/my-covid-story/www", "https://MyCovidStory.ca" ] }`}
+        </script>
       </Head>
       <Component {...pageProps} />
     </>

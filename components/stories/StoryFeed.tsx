@@ -45,8 +45,8 @@ function StorySummary({ story }: StorySummaryProps) {
             <Box p={[4, null, null, 6]} borderRadius="8px" bg="rgba(0, 0, 0, 0.5)">
               <Flex>
                 {story.contentWarning ? (
-                  <Label color={'red'} backgroundColor="rgba(192, 19, 19, 0.1);">
-                    Warning - Sensitive Content
+                  <Label color="crimson" backgroundColor="white">
+                    Warning: Sensitive Content
                   </Label>
                 ) : (
                   <Label visibility={categoryLabel[story.category] ? 'visible' : 'hidden'}>

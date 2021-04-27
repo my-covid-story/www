@@ -3,7 +3,6 @@ import { Box, Flex, Heading, Link, SimpleGrid } from '@chakra-ui/react'
 import { categoryLabel, storyCategoryLabel, storyImage, storyCite } from './model'
 import ContentBox from '../common/ContentBox'
 import Label from '../common/Label'
-import { ContentWarningBox } from '../common/Warnings'
 import { Story } from '@prisma/client'
 
 function FeedHeader() {
@@ -45,9 +44,15 @@ function StorySummary({ story }: StorySummaryProps) {
           >
             <Box p={[4, null, null, 6]} borderRadius="8px" bg="rgba(0, 0, 0, 0.5)">
               <Flex>
-                <Label visibility={categoryLabel[story.category] ? 'visible' : 'hidden'}>
-                  {storyCategoryLabel(story)}
-                </Label>
+                {story.contentWarning ? (
+                  <Label color={'red'} backgroundColor="rgba(192, 19, 19, 0.1);">
+                    Warning - Sensitive Content
+                  </Label>
+                ) : (
+                  <Label visibility={categoryLabel[story.category] ? 'visible' : 'hidden'}>
+                    {storyCategoryLabel(story)}
+                  </Label>
+                )}
               </Flex>
               <Box minH="6em" my={[4, null, null, 6]}>
                 <Heading
@@ -61,7 +66,6 @@ function StorySummary({ story }: StorySummaryProps) {
                 >
                   {story.title}
                 </Heading>
-                {story.contentWarning && <ContentWarningBox />}
               </Box>
               <Box lineHeight={1.2}>{storyCite(story)}</Box>
             </Box>

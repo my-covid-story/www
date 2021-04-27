@@ -8,7 +8,7 @@
     "start": "next start",
     "type-check": "tsc --project tsconfig.json --pretty --noEmit",
     "lint": "eslint \"*/**/*.{js,ts,tsx}\" --quiet --fix",
-    "format": "prettier --write \"{,!(node_modules)/**/}*.{js,jsx}\"",
+    "format": "prettier --write \"{,!(node_modules)/**/}*.{js,ts,tsx}\"",
     "prepare": "husky install",
     "ts-node": "ts-node --project=tsconfig.seed.json",
     "vercel-build": "prisma migrate deploy && next build",

@@ -1,5 +1,4 @@
 import { Flex, Heading, Text } from '@chakra-ui/react'
-import FlexBreak from '../components/common/FlexBreak'
 import SimpleLink from '../components/common/SimpleLink'
 
 interface ErrorPageProps {
@@ -17,26 +16,20 @@ export default function ErrorPage({
   message = 'Not found',
 }: ErrorPageProps): JSX.Element {
   return (
-    <Flex flexWrap="wrap" justifyContent="center" alignItems="center" height="100%">
-      <Flex flexWrap="wrap" justifyContent="center">
-        <Heading>Ooops... there was an error!</Heading>
+    <Flex justifyContent="center" alignItems="center" height="100%" flexDirection="column">
+      <Heading>Ooops... there was an error!</Heading>
 
-        <FlexBreak></FlexBreak>
+      <Text>
+        Status code: <code>{code}</code>, message: &quot;{message}&quot;
+      </Text>
 
-        <Text>
-          Status code: <code>{code}</code>, message: &quot;{message}&quot;
-        </Text>
-
-        <FlexBreak></FlexBreak>
-
-        <Text>
-          You should go back to the{' '}
-          <SimpleLink href="/" fontWeight="500">
-            homepage
-          </SimpleLink>
-          !
-        </Text>
-      </Flex>
+      <Text>
+        You should go back to the{' '}
+        <SimpleLink href="/" fontWeight="600">
+          homepage
+        </SimpleLink>
+        !
+      </Text>
     </Flex>
   )
 }

@@ -1,11 +1,12 @@
 import { ReactNode, useEffect } from 'react'
-import { Button, Center, Container, Heading, Link, Text, VStack } from '@chakra-ui/react'
+import { Button, Center, Container, Flex, Heading, Link, Text, VStack } from '@chakra-ui/react'
 
 import HeadTags from '../components/common/HeadTags'
 
 import BlankLayout from '../layouts/Blank'
 import TwitterSVG from '../components/icons/TwitterSVG'
-
+import FacebookSVG from '../components/icons/FacebookSVG'
+import InstagramSVG from '../components/icons/InstagramSVG'
 import NextLink from 'next/link'
 
 const Thanks = () => {
@@ -51,11 +52,25 @@ const Thanks = () => {
             Spread the word
           </Heading>
 
-          <Link href="https://twitter.com/MyCOVIDStory_CA" isExternal>
-            <Button color="white" leftIcon={<TwitterSVG />}>
-              Share @MyCOVIDStory_CA
-            </Button>
-          </Link>
+          <Flex>
+            <Link href="https://twitter.com/MyCOVIDStory_CA" isExternal margin="5px">
+              <Button color="white" leftIcon={<TwitterSVG />}>
+                Share @MyCOVIDStory_CA
+              </Button>
+            </Link>
+
+            <Link href="https://www.facebook.com/MyCovidStoryCA" isExternal margin="5px">
+              <Button color="white" leftIcon={<FacebookSVG />}>
+                Share @MyCovidStoryCA
+              </Button>
+            </Link>
+
+            <Link href="https://www.instagram.com/mycovidstory_ca/" isExternal margin="5px">
+              <Button color="white" leftIcon={<InstagramSVG />}>
+                Share @mycovidstory_ca
+              </Button>
+            </Link>
+          </Flex>
 
           <NextLink href="/">
             <Link>

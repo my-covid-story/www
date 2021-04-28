@@ -7,6 +7,7 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
+  Flex,
   useClipboard,
   useDisclosure,
 } from '@chakra-ui/react'
@@ -91,36 +92,39 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
           <DrawerOverlay>
             <DrawerContent>
               <DrawerHeader>Share via</DrawerHeader>
+
               <DrawerBody>
-                <TwitterShareButton
-                  url={url}
-                  title={description}
-                  via="MyCOVIDStory_CA"
-                  style={buttonStyle}
-                >
-                  <TwitterIcon size={shareIconSize} />
-                </TwitterShareButton>
+                <Flex alignItems="flex-start">
+                  <TwitterShareButton
+                    url={url}
+                    title={description}
+                    via="MyCOVIDStory_CA"
+                    style={buttonStyle}
+                  >
+                    <TwitterIcon size={shareIconSize} />
+                  </TwitterShareButton>
 
-                <FacebookShareButton url={url} quote={description} style={buttonStyle}>
-                  <FacebookIcon size={shareIconSize} />
-                </FacebookShareButton>
+                  <FacebookShareButton url={url} quote={description} style={buttonStyle}>
+                    <FacebookIcon size={shareIconSize} />
+                  </FacebookShareButton>
 
-                <WhatsappShareButton url={url} title={description} style={buttonStyle}>
-                  <WhatsappIcon size={shareIconSize} />
-                </WhatsappShareButton>
+                  <WhatsappShareButton url={url} title={description} style={buttonStyle}>
+                    <WhatsappIcon size={shareIconSize} />
+                  </WhatsappShareButton>
 
-                <EmailShareButton
-                  url={url}
-                  subject={emailSubject}
-                  body={description}
-                  style={buttonStyle}
-                >
-                  <EmailIcon size={shareIconSize} />
-                </EmailShareButton>
+                  <EmailShareButton
+                    url={url}
+                    subject={emailSubject}
+                    body={description}
+                    style={buttonStyle}
+                  >
+                    <EmailIcon size={shareIconSize} />
+                  </EmailShareButton>
 
-                <CustomShareContainer style={buttonStyle} onClick={onCopy}>
-                  <LinkIcon color="#fff" w={8} h={8} />
-                </CustomShareContainer>
+                  <CustomShareContainer style={buttonStyle} onClick={onCopy}>
+                    <LinkIcon color="#fff" w={8} h={8} />
+                  </CustomShareContainer>
+                </Flex>
               </DrawerBody>
             </DrawerContent>
           </DrawerOverlay>

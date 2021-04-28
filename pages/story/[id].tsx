@@ -46,7 +46,7 @@ export default function StoryPage({ story }: StoryPageProps) {
   }
 
   // Get Story details
-  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/story/${story.id}`
+  const url = `${process.env.BASE_URL}/story/${story.id}`
   const description = generateSocial(story)
   const emailSubject = 'Help me amplify this story'
 

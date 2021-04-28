@@ -35,7 +35,6 @@ async function handlePatch(req: NextApiRequest, res: NextApiResponse) {
       data: {
         approved,
         deleted,
-        updatedAt: new Date(),
       },
     })
 

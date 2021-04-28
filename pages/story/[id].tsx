@@ -10,6 +10,7 @@ import {
   Flex,
   useClipboard,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react'
 import {
   EmailIcon,
@@ -58,6 +59,7 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const url = props.success ? `${process.env.BASE_URL}/story/${props.story.id}` : ''
   const { onCopy } = useClipboard(url)
+  const toast = useToast()
 
   /**
    * Return the custom error page with the relative status code. This can allow
@@ -75,6 +77,16 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
     router.query.back === 'true' ? router.back() : router.push('/')
   }
 
+  function handleURLCopy() {
+    onCopy()
+
+    toast({
+      position: 'top',
+      title: 'Link copied',
+      status: 'success',
+    })
+  }
+
   // Get Story details
   const description = generateSocial(story)
   const emailSubject = 'Help me amplify this story'
@@ -82,9 +94,11 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
   return (
     <>
       <HeadTags title={story.title} description={story.content} previewImage={storyImage(story)} />
+
       <Box>
         <StoryDetail story={story} onClose={handleClose} />
       </Box>
+
       <FloatingRibbon>
         <Button onClick={onOpen}>Share This Story</Button>
 
@@ -121,7 +135,7 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
                     <EmailIcon size={shareIconSize} />
                   </EmailShareButton>
 
-                  <CustomShareContainer style={buttonStyle} onClick={onCopy}>
+                  <CustomShareContainer style={buttonStyle} onClick={handleURLCopy}>
                     <LinkIcon color="#fff" w={8} h={8} />
                   </CustomShareContainer>
                 </Flex>

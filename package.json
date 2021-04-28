@@ -42,6 +42,8 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "@commitlint/cli": "^12.1.1",
+    "@commitlint/config-conventional": "^12.1.1",
     "@types/faker": "^5.5.3",
     "@types/jest": "^26.0.23",
     "@types/next-auth": "^3.13.0",

@@ -1,6 +1,6 @@
 {
   "name": "www-my-covid-story",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -16,7 +16,8 @@
     "prisma:generate": "prisma generate",
     "gen:theme-typings": "chakra-cli tokens theme/index.ts",
     "postinstall": "prisma generate",
-    "test": "jest"
+    "test": "jest",
+    "release": "standard-version"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.0.11",
@@ -69,6 +70,7 @@
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
     "prisma": "^2.21.2",
+    "standard-version": "^9.2.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   }

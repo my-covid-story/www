@@ -1,0 +1,2 @@
+# Automatically convert to UNIX-style line endings on commit
+* text eol=lf

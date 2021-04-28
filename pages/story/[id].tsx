@@ -52,6 +52,7 @@ interface ErrorCodeProps {
 type StoryPageProps = StoryProps | ErrorCodeProps
 
 const shareIconSize = 64
+
 const buttonStyle: CSSProperties = { marginRight: '12px', marginBottom: '12px' }
 
 export default function StoryPage(props: StoryPageProps): JSX.Element {

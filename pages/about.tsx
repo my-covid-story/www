@@ -1,14 +1,14 @@
-import Head from 'next/head'
 import { Box, Heading, Stack, Text } from '@chakra-ui/react'
 import ContentBox from '../components/common/ContentBox'
+import HeadTags from '../components/common/HeadTags'
 
 export default function About() {
   return (
     <div>
-      <Head>
-        <title>About - My COVID Story</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <HeadTags
+        title="About The Project and Team"
+        description="Learn about why MyCovidStory.ca exists, how it began and meet the team of volunteers who came together in just 5 days to bring it to life."
+      />
       <ContentBox>
         <Heading as="h1" size="2xl" pb={6}>
           About

@@ -1,5 +1,5 @@
 import { Box, Flex, Heading, IconButton, Stack, Text } from '@chakra-ui/react'
-import { CloseIcon, LinkIcon } from '@chakra-ui/icons'
+import { CloseIcon } from '@chakra-ui/icons'
 import { Story } from '@prisma/client'
 import {
   categoryLabel,
@@ -13,6 +13,7 @@ import ContentBox from '../common/ContentBox'
 import Label from '../common/Label'
 
 import { ContentWarningBox } from '../common/Warnings'
+import ShareSVG from '../icons/ShareSVG'
 
 function StoryParagraphs(p: string, i: number) {
   return <Text key={i}>{p}</Text>
@@ -41,7 +42,7 @@ export default function StoryDetail({ story, onClose, onShare }: StoryDetailProp
                   variant="link"
                   colorScheme="white"
                   aria-label="Share"
-                  icon={<LinkIcon />}
+                  icon={<ShareSVG />}
                   onClick={onShare}
                 />
 

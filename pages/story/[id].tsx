@@ -7,6 +7,7 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
+  useClipboard,
   useDisclosure,
 } from '@chakra-ui/react'
 import {
@@ -27,9 +28,12 @@ import StoryDetail from '../../components/stories/StoryDetail'
 import FloatingRibbon, { Button } from '../../components/common/FloatingRibbon'
 import HeadTags from '../../components/common/HeadTags'
 import { storyImage } from '../../components/stories/model'
+import { CSSProperties } from 'react'
+import CustomShareContainer from '../../components/common/CustomShareContainer'
+import { LinkIcon } from '@chakra-ui/icons'
 
 const shareIconSize = 64
-const buttonStyle = { marginRight: '12px' }
+const buttonStyle: CSSProperties = { marginRight: '12px' }
 
 interface StoryPageProps {
   story: Story
@@ -39,6 +43,8 @@ interface StoryPageProps {
 export default function StoryPage({ story }: StoryPageProps) {
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const url = `${process.env.BASE_URL}/story/${story.id}`
+  const { onCopy } = useClipboard(url)
 
   // If we came from the feed, go back on cancel. If not, navigate forward to the feed.
   function handleClose(): void {
@@ -46,7 +52,6 @@ export default function StoryPage({ story }: StoryPageProps) {
   }
 
   // Get Story details
-  const url = `${process.env.BASE_URL}/story/${story.id}`
   const description = generateSocial(story)
   const emailSubject = 'Help me amplify this story'
 
@@ -58,6 +63,7 @@ export default function StoryPage({ story }: StoryPageProps) {
       </Box>
       <FloatingRibbon>
         <Button onClick={onOpen}>Share This Story</Button>
+
         <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
           <DrawerOverlay>
             <DrawerContent>
@@ -71,12 +77,15 @@ export default function StoryPage({ story }: StoryPageProps) {
                 >
                   <TwitterIcon size={shareIconSize} />
                 </TwitterShareButton>
+
                 <FacebookShareButton url={url} quote={description} style={buttonStyle}>
                   <FacebookIcon size={shareIconSize} />
                 </FacebookShareButton>
+
                 <WhatsappShareButton url={url} title={description} style={buttonStyle}>
                   <WhatsappIcon size={shareIconSize} />
                 </WhatsappShareButton>
+
                 <EmailShareButton
                   url={url}
                   subject={emailSubject}
@@ -85,6 +94,10 @@ export default function StoryPage({ story }: StoryPageProps) {
                 >
                   <EmailIcon size={shareIconSize} />
                 </EmailShareButton>
+
+                <CustomShareContainer style={buttonStyle} onClick={onCopy}>
+                  <LinkIcon color="#fff" w={8} h={8} />
+                </CustomShareContainer>
               </DrawerBody>
             </DrawerContent>
           </DrawerOverlay>

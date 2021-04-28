@@ -52,7 +52,7 @@ interface ErrorCodeProps {
 type StoryPageProps = StoryProps | ErrorCodeProps
 
 const shareIconSize = 64
-const buttonStyle: CSSProperties = { marginRight: '12px' }
+const buttonStyle: CSSProperties = { marginRight: '12px', marginBottom: '12px' }
 
 export default function StoryPage(props: StoryPageProps): JSX.Element {
   const router = useRouter()
@@ -108,7 +108,7 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
               <DrawerHeader>Share via</DrawerHeader>
 
               <DrawerBody>
-                <Flex alignItems="flex-start">
+                <Flex alignItems="flex-start" flexWrap="wrap">
                   <TwitterShareButton
                     url={url}
                     title={description}

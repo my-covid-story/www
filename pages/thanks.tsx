@@ -1,6 +1,8 @@
 import { ReactNode, useEffect } from 'react'
 import { Button, Center, Container, Heading, Icon, Link, Text, VStack } from '@chakra-ui/react'
 
+import HeadTags from '../components/common/HeadTags'
+
 import BlankLayout from '../layouts/Blank'
 
 const Thanks = () => {
@@ -10,48 +12,54 @@ const Thanks = () => {
   }, [])
 
   return (
-    <Container pt="32">
-      <Center>
-        <Heading as="h1" size="lg" pb="8">
-          Thank you for your story
-        </Heading>
-      </Center>
-      <VStack spacing="12px" align="left">
-        <Text>
-          <strong>Thank you for submitting your story.</strong> We will amplify your story to engage
-          decision-makers and drive effective government policy with science-based practices that
-          will save lives.
-        </Text>
-        <Text>It may take 24-48 hours for your story to appear on the site.</Text>
-        <Text>
-          If you selected that you are willing to be contacted by the media, they may reach out to
-          you with the contact information that you provided.
-        </Text>
-        <Text>
-          {' '}
-          If you have any questions, reach out to{' '}
-          <a style={{ fontWeight: 'bold', color: '#55099D' }} href="mailto:info@mycovidstory.ca">
-            info@mycovidstory.ca
-          </a>
-          .
-        </Text>
-      </VStack>
-      <VStack pt="8" align="center" spacing={8}>
-        <Heading as="h2" size="md">
-          Spread the word
-        </Heading>
-        <Link href="https://twitter.com/MyCOVIDStory_CA" isExternal>
-          <Button color="white" leftIcon={<TwitterIcon />}>
-            Share @MyCOVIDStory_CA
-          </Button>
-        </Link>
-        <Link href="/">
-          <Button variant="outline" size="sm">
-            Return to Stories
-          </Button>
-        </Link>
-      </VStack>
-    </Container>
+    <>
+      <HeadTags
+        title="Thanks for sharing your story"
+        description="Thank you for sharing your story of the impact that COVID-19 has had on you. We'll be reviewing your submission soon."
+      />
+      <Container pt="32">
+        <Center>
+          <Heading as="h1" size="lg" pb="8">
+            Thank you for your story
+          </Heading>
+        </Center>
+        <VStack spacing="12px" align="left">
+          <Text>
+            <strong>Thank you for submitting your story.</strong> We will amplify your story to
+            engage decision-makers and drive effective government policy with science-based
+            practices that will save lives.
+          </Text>
+          <Text>It may take 24-48 hours for your story to appear on the site.</Text>
+          <Text>
+            If you selected that you are willing to be contacted by the media, they may reach out to
+            you with the contact information that you provided.
+          </Text>
+          <Text>
+            {' '}
+            If you have any questions, reach out to{' '}
+            <a style={{ fontWeight: 'bold', color: '#55099D' }} href="mailto:info@mycovidstory.ca">
+              info@mycovidstory.ca
+            </a>
+            .
+          </Text>
+        </VStack>
+        <VStack pt="8" align="center" spacing={8}>
+          <Heading as="h2" size="md">
+            Spread the word
+          </Heading>
+          <Link href="https://twitter.com/MyCOVIDStory_CA" isExternal>
+            <Button color="white" leftIcon={<TwitterIcon />}>
+              Share @MyCOVIDStory_CA
+            </Button>
+          </Link>
+          <Link href="/">
+            <Button variant="outline" size="sm">
+              Return to Stories
+            </Button>
+          </Link>
+        </VStack>
+      </Container>
+    </>
   )
 }
 

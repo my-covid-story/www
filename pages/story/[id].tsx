@@ -25,6 +25,8 @@ import { get, list } from '../../lib/api/stories'
 import generateSocial from '../../lib/social'
 import StoryDetail from '../../components/stories/StoryDetail'
 import FloatingRibbon, { Button } from '../../components/common/FloatingRibbon'
+import HeadTags from '../../components/common/HeadTags'
+import { storyImage } from '../../components/stories/model'
 
 const shareIconSize = 64
 const buttonStyle = { marginRight: '12px' }
@@ -44,12 +46,13 @@ export default function StoryPage({ story }: StoryPageProps) {
   }
 
   // Get Story details
-  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/story/${story.id}`
+  const url = `${process.env.BASE_URL}/story/${story.id}`
   const description = generateSocial(story)
   const emailSubject = 'Help me amplify this story'
 
   return (
     <>
+      <HeadTags title={story.title} description={story.content} previewImage={storyImage(story)} />
       <Box>
         <StoryDetail story={story} onClose={handleClose} />
       </Box>

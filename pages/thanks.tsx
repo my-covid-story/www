@@ -6,6 +6,8 @@ import HeadTags from '../components/common/HeadTags'
 import BlankLayout from '../layouts/Blank'
 import TwitterSVG from '../components/icons/TwitterSVG'
 
+import NextLink from 'next/link'
+
 const Thanks = () => {
   // Triggers a Story goal event on Fathom
   useEffect(() => {
@@ -48,16 +50,20 @@ const Thanks = () => {
           <Heading as="h2" size="md">
             Spread the word
           </Heading>
+
           <Link href="https://twitter.com/MyCOVIDStory_CA" isExternal>
             <Button color="white" leftIcon={<TwitterSVG />}>
               Share @MyCOVIDStory_CA
             </Button>
           </Link>
-          <Link href="/">
-            <Button variant="outline" size="sm">
-              Return to Stories
-            </Button>
-          </Link>
+
+          <NextLink href="/">
+            <Link>
+              <Button variant="outline" size="sm">
+                Return to Stories
+              </Button>
+            </Link>
+          </NextLink>
         </VStack>
       </Container>
     </>

@@ -31,6 +31,7 @@ for (let i = 0; i < NUMBER_SEEDS; i++) {
     displayName: anonymous ? null : name,
     contactName: contact ? name : null,
     approved: faker.datatype.boolean(),
+    contentWarning: faker.datatype.boolean(),
   }
   seedData.push(seed)
 }

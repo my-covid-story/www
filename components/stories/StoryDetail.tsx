@@ -12,6 +12,8 @@ import {
 import ContentBox from '../common/ContentBox'
 import Label from '../common/Label'
 
+import { ContentWarningBox } from '../common/Warnings'
+
 function StoryParagraphs(p: string, i: number) {
   return <Text key={i}>{p}</Text>
 }
@@ -60,6 +62,7 @@ export default function StoryDetail({ story, onClose }: StoryDetailProps) {
         </Box>
       </Box>
       <ContentBox>
+        {story.contentWarning && <ContentWarningBox />}
         <Heading as="h2" mb={3} fontSize="md" fontWeight={700}>
           {storyDate(story)}
         </Heading>

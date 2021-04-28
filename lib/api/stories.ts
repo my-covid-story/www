@@ -35,11 +35,10 @@ export async function list() {
     return await prisma.story.findMany({
       take: 100,
       where: { approved: true },
-      orderBy: { createdAt: 'desc' },
+      orderBy: { updatedAt: 'desc' },
       select,
     })
   } catch (err) {
-    console.error(err)
     throw internalServerError()
   }
 }

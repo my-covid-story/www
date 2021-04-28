@@ -50,6 +50,13 @@ export default function Footer() {
           <MenuItem to="mailto:info@mycovidstory.ca" padding={1} marginBottom={1}>
             Email Us
           </MenuItem>
+          <MenuItem
+            to="mailto:info@mycovidstory.ca?subject=I'd like to help translate!"
+            padding={1}
+            marginBottom={1}
+          >
+            Help Us Translate
+          </MenuItem>
         </SimpleGrid>
         <Text as="strong" paddingTop={4}>
           Made with love by Ontarians{' '}

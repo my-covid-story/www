@@ -8,12 +8,12 @@ export function ContentWarningBox({ ...props }: BoxProps) {
       py={1}
       px={2}
       border="2px"
-      borderColor="crimson"
+      borderColor="#C01313"
       borderRadius="4px"
       fontSize="md"
       fontWeight="bold"
-      color="crimson"
-      backgroundColor="rgba(192, 19, 19, 0.1);"
+      color="#C01313"
+      backgroundColor="rgba(192, 19, 19, 0.1)"
       {...props}
     >
       Warning - Sensitive Content

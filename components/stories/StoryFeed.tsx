@@ -45,7 +45,7 @@ function StorySummary({ story }: StorySummaryProps) {
             <Box p={[4, null, null, 6]} borderRadius="8px" bg="rgba(0, 0, 0, 0.5)">
               <Flex>
                 {story.contentWarning ? (
-                  <Label color="crimson" backgroundColor="white">
+                  <Label color="#C01313" backgroundColor="white">
                     Warning: Sensitive Content
                   </Label>
                 ) : (

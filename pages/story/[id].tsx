@@ -27,18 +27,42 @@ import StoryDetail from '../../components/stories/StoryDetail'
 import FloatingRibbon, { Button } from '../../components/common/FloatingRibbon'
 import HeadTags from '../../components/common/HeadTags'
 import { storyImage } from '../../components/stories/model'
+import { ResponseError } from '../../lib/errors'
+import { GetStaticPropsResult } from 'next'
+import ErrorPage from '../404'
 
-const shareIconSize = 64
-const buttonStyle = { marginRight: '12px' }
-
-interface StoryPageProps {
+interface StoryProps {
+  success: true
   story: Story
-  url: string
+  url?: string
 }
 
-export default function StoryPage({ story }: StoryPageProps) {
+interface ErrorCodeProps {
+  success: false
+  errorCode: number
+  errorMessage: string
+}
+
+type StoryPageProps = StoryProps | ErrorCodeProps
+
+const shareIconSize = 64
+const contentSize = 150
+const buttonStyle = { marginRight: '12px' }
+
+export default function StoryPage(props: StoryPageProps): JSX.Element {
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
+
+  /**
+   * Return the custom error page with the relative status code. This can allow
+   * passing different error codes like 404 in case a page is not found or a 500
+   * in case of a server error.
+   */
+  if (props.success === false) {
+    return <ErrorPage code={props.errorCode} message={props.errorMessage} />
+  }
+
+  const { story } = props
 
   // If we came from the feed, go back on cancel. If not, navigate forward to the feed.
   function handleClose(): void {
@@ -107,14 +131,32 @@ export async function getStaticPaths() {
     fallback: 'blocking',
   }
 }
-
+      
 interface GetStaticProps {
   params: {
     id: string
   }
 }
 
-export async function getStaticProps({ params }: GetStaticProps) {
-  const story = await get(params.id)
-  return { props: { story } }
+export async function getStaticProps({ params }: GetStaticProps): Promise<GetStaticPropsResult<StoryPageProps>> {
+  try {
+    /**
+     * Needed to use `as` keyword, but this should be refactored.
+     */
+    const story = (await get(params.id)) as Story
+
+    return { props: { success: true, story } }
+  } catch (err) {
+    if (err instanceof ResponseError) {
+      return { props: { success: false, errorCode: err.status, errorMessage: err.message } }
+    }
+
+    return {
+      props: {
+        success: false,
+        errorCode: 500,
+        errorMessage: "This was an unknown error, we'll try to solve it as soon as possible",
+      },
+    }
+  }
 }

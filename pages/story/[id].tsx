@@ -46,7 +46,6 @@ interface ErrorCodeProps {
 type StoryPageProps = StoryProps | ErrorCodeProps
 
 const shareIconSize = 64
-const contentSize = 150
 const buttonStyle = { marginRight: '12px' }
 
 export default function StoryPage(props: StoryPageProps): JSX.Element {
@@ -131,14 +130,16 @@ export async function getStaticPaths() {
     fallback: 'blocking',
   }
 }
-      
+
 interface GetStaticProps {
   params: {
     id: string
   }
 }
 
-export async function getStaticProps({ params }: GetStaticProps): Promise<GetStaticPropsResult<StoryPageProps>> {
+export async function getStaticProps({
+  params,
+}: GetStaticProps): Promise<GetStaticPropsResult<StoryPageProps>> {
   try {
     /**
      * Needed to use `as` keyword, but this should be refactored.

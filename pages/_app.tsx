@@ -55,6 +55,22 @@ function MyApp({ Component, pageProps }: MyAppProps) {
 
   const getLayout = Component.getLayout || ((page) => <SiteLayout>{page}</SiteLayout>)
 
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'My COVID Story',
+    alternateName: 'MyCOVIDStory.ca',
+    url: process.env.BASE_URL,
+    logo: '/favicon-32x32.png',
+    sameAs: [
+      'https://www.facebook.com/MyCovidStoryCA',
+      'https://twitter.com/MyCOVIDStory_CA',
+      'https://www.instagram.com/MyCovidStory_CA/',
+      'https://github.com/my-covid-story/www',
+      'https://MyCovidStory.ca',
+    ],
+  }
+
   return getLayout(
     <>
       <Head>
@@ -69,9 +85,10 @@ function MyApp({ Component, pageProps }: MyAppProps) {
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
-        <script type="application/ld+json">
-          {`{"@context": "https://schema.org", "@type": "Organization", "name": "MyCovidStory", "alternateName": "MyCovidStory.ca", "url": "https://MyCovidStory.ca", "logo": "", "sameAs": [ "https://www.facebook.com/MyCovidStoryCA", "https://twitter.com/MyCOVIDStory_CA", "https://www.instagram.com/MyCovidStory_CA/", "https://github.com/my-covid-story/www", "https://MyCovidStory.ca" ] }`}
-        </script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
       </Head>
       <HeadTags />
       <Component {...pageProps} />

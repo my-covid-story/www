@@ -1,9 +1,9 @@
 let baseUrl
-if (process.env.VERCEL_PUBLIC_BASE_URL) {
-  baseUrl = process.env.VERCEL_PUBLIC_BASE_URL
+if (process.env.NEXT_PUBLIC_BASE_URL) {
+  baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 } else if (process.env.VERCEL_ENV) {
   baseUrl = `https://${process.env.VERCEL_URL}`
-} else  {
+} else {
   baseUrl = `http://localhost:${process.env.PORT || '3000'}`
 }
 

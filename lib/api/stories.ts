@@ -16,6 +16,7 @@ const select = {
   displayName: true,
   approved: true,
   viewCount: true,
+  contentWarning: true,
 }
 
 function applySelect(story) {

@@ -21,10 +21,10 @@ export function storyImage({ category }: Story): string {
     case 'educator':
     case 'small-business-owner':
     case 'patient-family-member':
-      return `url("/img/categories/${category}.jpg")`
+      return `/img/categories/${category}.jpg`
     case 'other':
     default:
-      return 'url("/img/categories/other.jpg")'
+      return '/img/categories/other.jpg'
   }
 }
 

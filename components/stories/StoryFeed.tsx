@@ -37,16 +37,22 @@ function StorySummary({ story }: StorySummaryProps) {
         <Link _hover={{ textDecoration: 'none' }}>
           <Box
             borderRadius="8px"
-            bgImage={storyImage(story)}
+            bgImage={`url(${storyImage(story)})`}
             bgSize="cover"
             bgPosition="center"
             color="white"
           >
             <Box p={[4, null, null, 6]} borderRadius="8px" bg="rgba(0, 0, 0, 0.5)">
               <Flex>
-                <Label visibility={categoryLabel[story.category] ? 'visible' : 'hidden'}>
-                  {storyCategoryLabel(story)}
-                </Label>
+                {story.contentWarning ? (
+                  <Label color="crimson" backgroundColor="white">
+                    Warning: Sensitive Content
+                  </Label>
+                ) : (
+                  <Label visibility={categoryLabel[story.category] ? 'visible' : 'hidden'}>
+                    {storyCategoryLabel(story)}
+                  </Label>
+                )}
               </Flex>
               <Box minH="6em" my={[4, null, null, 6]}>
                 <Heading

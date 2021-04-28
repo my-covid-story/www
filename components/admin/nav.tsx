@@ -11,7 +11,7 @@ import {
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
 
 import { signIn, signOut } from 'next-auth/client'
-import ContentBox from '../../components/common/ContentBox'
+import ContentBox from '../common/ContentBox'
 import { Session } from 'next-auth'
 
 const Links = [

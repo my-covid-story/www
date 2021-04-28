@@ -1,6 +1,6 @@
-const baseUrl = process.env.VERCEL_ENV
-  ? `https://${process.env.VERCEL_URL}`
-  : `http://localhost:${process.env.PORT || '3000'}`
+const baseUrl = process.env.BASE_URL
+  ? process.env.BASE_URL
+  : `http://localhost:${process.env.PORT} || '3000'}`
 
 console.log(`BASE_URL: ${baseUrl}`)
 

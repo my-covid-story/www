@@ -52,7 +52,7 @@ const Thanks = () => {
             Spread the word
           </Heading>
 
-          <Flex>
+          <Flex flexWrap="wrap" justifyContent="center">
             <Link href="https://twitter.com/MyCOVIDStory_CA" isExternal margin="5px">
               <Button color="white" leftIcon={<TwitterSVG />}>
                 Share @MyCOVIDStory_CA
@@ -74,7 +74,7 @@ const Thanks = () => {
 
           <NextLink href="/">
             <Link>
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" marginBottom="40px">
                 Return to Stories
               </Button>
             </Link>

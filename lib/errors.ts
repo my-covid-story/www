@@ -5,13 +5,13 @@ interface ResponseErrorOptions {
   allowed?: string[]
 }
 
-interface ResponseError extends ResponseErrorOptions {
+export interface ResponseError extends ResponseErrorOptions {
   message: string
   status: number
 }
 
-class ResponseError extends Error {
-  constructor(message, status, options: ResponseErrorOptions = {}) {
+export class ResponseError extends Error {
+  constructor(message: string, status: number, options: ResponseErrorOptions = {}) {
     super(message)
     Error.captureStackTrace(this, ResponseError)
     this.status = status

@@ -1,21 +1,26 @@
-import { Link, Text, TextProps } from '@chakra-ui/react'
+import { Link, LinkProps } from '@chakra-ui/react'
+import NextLink from 'next/link'
 
-interface MenuItemProps extends TextProps {
+// Add `to` prop to make it work with already existing links
+interface ExtendedMenuItemProps extends LinkProps {
   to?: string
   externalLink?: boolean
 }
 
+// Omit the `href` and the `isExternal` prop to avoid duplication with the to prop
+type MenuItemProps = Omit<ExtendedMenuItemProps, 'href'>
+
 export default function MenuItem({
-  children,
   to = '/',
   externalLink = false,
+  children,
   ...props
 }: MenuItemProps) {
   return (
-    <Link href={to} isExternal={externalLink}>
-      <Text display="block" {...props}>
+    <NextLink href={to} passHref>
+      <Link isExternal={externalLink} {...props}>
         {children}
-      </Text>
-    </Link>
+      </Link>
+    </NextLink>
   )
 }

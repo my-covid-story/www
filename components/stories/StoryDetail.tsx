@@ -1,5 +1,5 @@
 import { Box, Flex, Heading, IconButton, Stack, Text } from '@chakra-ui/react'
-import { CloseIcon } from '@chakra-ui/icons'
+import { CloseIcon, LinkIcon } from '@chakra-ui/icons'
 import { Story } from '@prisma/client'
 import {
   categoryLabel,
@@ -21,9 +21,10 @@ function StoryParagraphs(p: string, i: number) {
 interface StoryDetailProps {
   story: Story
   onClose: () => void
+  onShare: () => void
 }
 
-export default function StoryDetail({ story, onClose }: StoryDetailProps) {
+export default function StoryDetail({ story, onClose, onShare }: StoryDetailProps) {
   return (
     <Box>
       <Box bgImage={`url(${storyImage(story)})`} bgSize="cover" bgPosition="center" color="white">
@@ -33,16 +34,28 @@ export default function StoryDetail({ story, onClose }: StoryDetailProps) {
               <Label visibility={categoryLabel[story.category] ? 'visible' : 'hidden'}>
                 {storyCategoryLabel(story)}
               </Label>
-              <IconButton
-                size="md"
-                mr={-2}
-                py={2}
-                variant="link"
-                colorScheme="white"
-                aria-label="Close"
-                icon={<CloseIcon />}
-                onClick={onClose}
-              />
+
+              <Flex>
+                <IconButton
+                  size="md"
+                  variant="link"
+                  colorScheme="white"
+                  aria-label="Share"
+                  icon={<LinkIcon />}
+                  onClick={onShare}
+                />
+
+                <IconButton
+                  size="md"
+                  mr={-2}
+                  py={2}
+                  variant="link"
+                  colorScheme="white"
+                  aria-label="Close"
+                  icon={<CloseIcon />}
+                  onClick={onClose}
+                />
+              </Flex>
             </Flex>
             <Heading
               as="h1"

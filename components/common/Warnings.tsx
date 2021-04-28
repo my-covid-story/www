@@ -1,6 +1,6 @@
-import { Box } from '@chakra-ui/react'
+import { Box, BoxProps } from '@chakra-ui/react'
 
-export function ContentWarningBox({ ...props }) {
+export function ContentWarningBox({ ...props }: BoxProps) {
   return (
     <Box
       display="table"

@@ -10,6 +10,7 @@ import {
   Flex,
   useClipboard,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react'
 import {
   EmailIcon,
@@ -46,10 +47,21 @@ export default function StoryPage({ story }: StoryPageProps) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const url = `${process.env.BASE_URL}/story/${story.id}`
   const { onCopy } = useClipboard(url)
+  const toast = useToast()
 
   // If we came from the feed, go back on cancel. If not, navigate forward to the feed.
   function handleClose(): void {
     router.query.back === 'true' ? router.back() : router.push('/')
+  }
+
+  function handleURLCopy() {
+    onCopy()
+
+    toast({
+      position: 'top',
+      title: 'Link copied',
+      status: 'success',
+    })
   }
 
   // Get Story details
@@ -59,9 +71,11 @@ export default function StoryPage({ story }: StoryPageProps) {
   return (
     <>
       <HeadTags title={story.title} description={story.content} previewImage={storyImage(story)} />
+
       <Box>
         <StoryDetail story={story} onClose={handleClose} />
       </Box>
+
       <FloatingRibbon>
         <Button onClick={onOpen}>Share This Story</Button>
 
@@ -98,7 +112,7 @@ export default function StoryPage({ story }: StoryPageProps) {
                     <EmailIcon size={shareIconSize} />
                   </EmailShareButton>
 
-                  <CustomShareContainer style={buttonStyle} onClick={onCopy}>
+                  <CustomShareContainer style={buttonStyle} onClick={handleURLCopy}>
                     <LinkIcon color="#fff" w={8} h={8} />
                   </CustomShareContainer>
                 </Flex>

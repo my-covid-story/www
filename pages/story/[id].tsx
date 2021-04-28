@@ -73,7 +73,7 @@ export default function StoryPage({ story }: StoryPageProps) {
       <HeadTags title={story.title} description={story.content} previewImage={storyImage(story)} />
 
       <Box>
-        <StoryDetail story={story} onClose={handleClose} />
+        <StoryDetail story={story} onClose={handleClose} onShare={onOpen} />
       </Box>
 
       <FloatingRibbon>

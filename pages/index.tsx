@@ -22,9 +22,11 @@ const MainPage = ({ stories }: MainPageProps) => {
         <StoryFeed stories={stories} />
       </Box>
       <FloatingRibbon>
-        <NextLink href="/new">
+        <NextLink href="/new" passHref>
           <Link>
-            <Button>Add Your Story</Button>
+            <Button marginTop="5px" marginBottom="5px">
+              Add Your Story
+            </Button>
           </Link>
         </NextLink>
       </FloatingRibbon>

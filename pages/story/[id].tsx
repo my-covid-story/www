@@ -46,7 +46,6 @@ interface ErrorCodeProps {
 type StoryPageProps = StoryProps | ErrorCodeProps
 
 const shareIconSize = 64
-const contentSize = 150
 const buttonStyle = { marginRight: '12px' }
 
 export default function StoryPage(props: StoryPageProps): JSX.Element {
@@ -81,7 +80,9 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
         <StoryDetail story={story} onClose={handleClose} />
       </Box>
       <FloatingRibbon>
-        <Button onClick={onOpen}>Share This Story</Button>
+        <Button onClick={onOpen} marginTop="5px" marginBottom="5px">
+          Share This Story
+        </Button>
         <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
           <DrawerOverlay>
             <DrawerContent>
@@ -131,14 +132,16 @@ export async function getStaticPaths() {
     fallback: 'blocking',
   }
 }
-      
+
 interface GetStaticProps {
   params: {
     id: string
   }
 }
 
-export async function getStaticProps({ params }: GetStaticProps): Promise<GetStaticPropsResult<StoryPageProps>> {
+export async function getStaticProps({
+  params,
+}: GetStaticProps): Promise<GetStaticPropsResult<StoryPageProps>> {
   try {
     /**
      * Needed to use `as` keyword, but this should be refactored.

@@ -7,6 +7,7 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
+  useClipboard,
   useDisclosure,
 } from '@chakra-ui/react'
 import {
@@ -30,6 +31,9 @@ import { storyImage } from '../../components/stories/model'
 import { ResponseError } from '../../lib/errors'
 import { GetStaticPropsResult } from 'next'
 import ErrorPage from '../404'
+import { CSSProperties } from 'react'
+import CustomShareContainer from '../../components/common/CustomShareContainer'
+import { LinkIcon } from '@chakra-ui/icons'
 
 interface StoryProps {
   success: true
@@ -46,12 +50,13 @@ interface ErrorCodeProps {
 type StoryPageProps = StoryProps | ErrorCodeProps
 
 const shareIconSize = 64
-const contentSize = 150
-const buttonStyle = { marginRight: '12px' }
+const buttonStyle: CSSProperties = { marginRight: '12px' }
 
 export default function StoryPage(props: StoryPageProps): JSX.Element {
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const url = props.success ? `${process.env.BASE_URL}/story/${props.story.id}` : ''
+  const { onCopy } = useClipboard(url)
 
   /**
    * Return the custom error page with the relative status code. This can allow
@@ -70,7 +75,6 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
   }
 
   // Get Story details
-  const url = `${process.env.BASE_URL}/story/${story.id}`
   const description = generateSocial(story)
   const emailSubject = 'Help me amplify this story'
 
@@ -82,6 +86,7 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
       </Box>
       <FloatingRibbon>
         <Button onClick={onOpen}>Share This Story</Button>
+
         <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
           <DrawerOverlay>
             <DrawerContent>
@@ -95,12 +100,15 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
                 >
                   <TwitterIcon size={shareIconSize} />
                 </TwitterShareButton>
+
                 <FacebookShareButton url={url} quote={description} style={buttonStyle}>
                   <FacebookIcon size={shareIconSize} />
                 </FacebookShareButton>
+
                 <WhatsappShareButton url={url} title={description} style={buttonStyle}>
                   <WhatsappIcon size={shareIconSize} />
                 </WhatsappShareButton>
+
                 <EmailShareButton
                   url={url}
                   subject={emailSubject}
@@ -109,6 +117,10 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
                 >
                   <EmailIcon size={shareIconSize} />
                 </EmailShareButton>
+
+                <CustomShareContainer style={buttonStyle} onClick={onCopy}>
+                  <LinkIcon color="#fff" w={8} h={8} />
+                </CustomShareContainer>
               </DrawerBody>
             </DrawerContent>
           </DrawerOverlay>
@@ -131,14 +143,16 @@ export async function getStaticPaths() {
     fallback: 'blocking',
   }
 }
-      
+
 interface GetStaticProps {
   params: {
     id: string
   }
 }
 
-export async function getStaticProps({ params }: GetStaticProps): Promise<GetStaticPropsResult<StoryPageProps>> {
+export async function getStaticProps({
+  params,
+}: GetStaticProps): Promise<GetStaticPropsResult<StoryPageProps>> {
   try {
     /**
      * Needed to use `as` keyword, but this should be refactored.

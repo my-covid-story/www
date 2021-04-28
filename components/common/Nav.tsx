@@ -1,5 +1,5 @@
 import { MouseEventHandler, useState } from 'react'
-import { Box, Button, Flex, FlexProps, Icon, PositionProps, Stack } from '@chakra-ui/react'
+import { Box, Button, Flex, FlexProps, Icon, PositionProps, Stack, VisuallyHidden } from '@chakra-ui/react'
 import Logo from './Logo'
 import MenuItem from './MenuItem'
 import { RESPONSIVE_PADDING } from './ContentBox'
@@ -92,6 +92,7 @@ const MenuLinks = ({ isOpen }: MenuLinksProps) => {
         </MenuItem>
         <MenuItem to="https://twitter.com/MyCOVIDStory_CA" externalLink={true}>
           <TwitterIcon />
+          <VisuallyHidden>Twitter @MyCOVIDStory_CA</VisuallyHidden>
         </MenuItem>
         <MenuItem to="/new">
           <Button

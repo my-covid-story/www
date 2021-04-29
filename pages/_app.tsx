@@ -9,18 +9,8 @@ import { ReactElement, ReactNode, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import * as Fathom from 'fathom-client'
 
-import * as Sentry from '@sentry/react'
-import { Integrations } from '@sentry/tracing'
-
 import SiteLayout from '../layouts/Default'
 import { NextPage } from 'next'
-
-Sentry.init({
-  dsn: 'https://ff771404287542638b24e14b8de8edff@o573965.ingest.sentry.io/5724646',
-  environment: process.env.NODE_ENV,
-  integrations: [new Integrations.BrowserTracing()],
-  tracesSampleRate: 1.0,
-})
 
 type GetLayout = (page: ReactNode) => ReactElement
 type PageWithLayout = NextPage & {

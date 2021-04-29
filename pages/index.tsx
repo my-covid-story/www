@@ -19,14 +19,6 @@ const MainPage = ({ stories }: MainPageProps) => {
         <link rel="canonical" href="https://www.mycovidstory.ca" />
       </HeadTags>
       <Box>
-        <Button
-          type="button"
-          onClick={() => {
-            throw new Error('Sentry Frontend Error')
-          }}
-        >
-          Throw error
-        </Button>
         <StoryFeed stories={stories} />
       </Box>
       <FloatingRibbon>

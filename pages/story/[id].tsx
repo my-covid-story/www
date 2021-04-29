@@ -146,10 +146,13 @@ export async function getStaticProps({
      */
     const story = (await get(params.id)) as Story
 
-    return { props: { success: true, story } }
+    return { props: { success: true, story }, revalidate: 60 }
   } catch (err) {
     if (err instanceof ResponseError) {
-      return { props: { success: false, errorCode: err.status, errorMessage: err.message } }
+      return {
+        props: { success: false, errorCode: err.status, errorMessage: err.message },
+        revalidate: 60,
+      }
     }
 
     return {
@@ -158,6 +161,7 @@ export async function getStaticProps({
         errorCode: 500,
         errorMessage: "This was an unknown error, we'll try to solve it as soon as possible",
       },
+      revalidate: 60,
     }
   }
 }

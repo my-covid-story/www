@@ -4,7 +4,6 @@ import {
   Button,
   Flex,
   FlexProps,
-  Icon,
   PositionProps,
   Stack,
   VisuallyHidden,

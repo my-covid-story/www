@@ -36,7 +36,7 @@ export async function getStaticProps() {
   const stories = await list()
   return {
     props: { stories },
-    revalidate: 60, // 1 minutes
+    revalidate: 60, // 1 minute
   }
 }
 

@@ -1,13 +1,9 @@
-import { ChakraProvider, ChakraProviderProps } from '@chakra-ui/react'
+import { ReactElement } from 'react'
 
-import theme from '../styles/theme'
-
-const BlankLayout = ({ children }: ChakraProviderProps) => {
-  return (
-    <ChakraProvider theme={theme}>
-      <main>{children}</main>
-    </ChakraProvider>
-  )
+interface BlankLayoutProps {
+  children: ReactElement
 }
 
-export default BlankLayout
+export default function BlankLayout({ children }: BlankLayoutProps) {
+  return <main>{children}</main>
+}

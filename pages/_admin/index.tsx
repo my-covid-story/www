@@ -5,9 +5,9 @@ import HeadTags from '../../components/common/HeadTags'
 
 import prisma from '../../lib/prisma'
 import { Story } from '@prisma/client'
-import Nav from '../../components/admin/nav'
 import ContentBox from '../../components/common/ContentBox'
 import { GetServerSidePropsContext } from 'next'
+import AdminLayout from '../../layouts/Admin'
 
 interface StoryOptionsProps extends BoxProps {
   id: string
@@ -88,12 +88,11 @@ interface _Admin {
   stories: Story[] | []
 }
 
-export default function _Admin({ stories }: _Admin) {
+const _Admin = ({ stories }: _Admin) => {
   const [session] = useSession()
 
   return (
     <>
-      <Nav session={session} />
       {session && (
         <>
           <ContentBox pb={2}>
@@ -108,6 +107,10 @@ export default function _Admin({ stories }: _Admin) {
     </>
   )
 }
+
+_Admin.setLayout = AdminLayout
+
+export default _Admin
 
 // `unapprove` and `undelete` aren't technically needed but it helps when reading the code
 const updateStory = (e) => {

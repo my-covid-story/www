@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Button, Center, Container, Heading, Icon, Link, Text, VStack } from '@chakra-ui/react'
 
 import HeadTags from '../components/common/HeadTags'
@@ -79,8 +79,6 @@ const TwitterIcon = () => (
   </Icon>
 )
 
-const ThanksLayout = (page: ReactNode) => <BlankLayout>{page}</BlankLayout>
-
-Thanks.getLayout = ThanksLayout
+Thanks.setLayout = BlankLayout
 
 export default Thanks

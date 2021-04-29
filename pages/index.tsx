@@ -5,7 +5,6 @@ import StoryFeed from '../components/stories/StoryFeed'
 import FloatingRibbon, { Button } from '../components/common/FloatingRibbon'
 import SiteLayout from '../layouts/Default'
 import { Story } from '@prisma/client'
-import { ReactNode } from 'react'
 import HeadTags from '../components/common/HeadTags'
 
 interface MainPageProps {
@@ -40,8 +39,8 @@ export async function getStaticProps() {
   }
 }
 
-const MainPageLayout = (page: ReactNode) => <SiteLayout navPosition="sticky">{page}</SiteLayout>
+const MainPageLayout = ({ children }) => <SiteLayout navPosition="sticky">{children}</SiteLayout>
 
-MainPage.getLayout = MainPageLayout
+MainPage.setLayout = MainPageLayout
 
 export default MainPage

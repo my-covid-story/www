@@ -44,7 +44,7 @@ interface NavProps {
   session: Session
 }
 
-export default function Nav({ session }: NavProps) {
+export default function AdminNav({ session }: NavProps) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (

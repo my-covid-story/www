@@ -13,6 +13,7 @@ import ContentBox from '../common/ContentBox'
 import Label from '../common/Label'
 
 import { ContentWarningBox } from '../common/Warnings'
+import ShareSVG from '../icons/ShareSVG'
 
 function StoryParagraphs(p: string, i: number) {
   return <Text key={i}>{p}</Text>
@@ -21,9 +22,10 @@ function StoryParagraphs(p: string, i: number) {
 interface StoryDetailProps {
   story: Story
   onClose: () => void
+  onShare: () => void
 }
 
-export default function StoryDetail({ story, onClose }: StoryDetailProps) {
+export default function StoryDetail({ story, onClose, onShare }: StoryDetailProps) {
   return (
     <Box>
       <Box bgImage={`url(${storyImage(story)})`} bgSize="cover" bgPosition="center" color="white">
@@ -33,16 +35,28 @@ export default function StoryDetail({ story, onClose }: StoryDetailProps) {
               <Label visibility={categoryLabel[story.category] ? 'visible' : 'hidden'}>
                 {storyCategoryLabel(story)}
               </Label>
-              <IconButton
-                size="md"
-                mr={-2}
-                py={2}
-                variant="link"
-                colorScheme="white"
-                aria-label="Close"
-                icon={<CloseIcon />}
-                onClick={onClose}
-              />
+
+              <Flex>
+                <IconButton
+                  size="md"
+                  variant="link"
+                  colorScheme="white"
+                  aria-label="Share"
+                  icon={<ShareSVG />}
+                  onClick={onShare}
+                />
+
+                <IconButton
+                  size="md"
+                  mr={-2}
+                  py={2}
+                  variant="link"
+                  colorScheme="white"
+                  aria-label="Close"
+                  icon={<CloseIcon />}
+                  onClick={onClose}
+                />
+              </Flex>
             </Flex>
             <Heading
               as="h1"

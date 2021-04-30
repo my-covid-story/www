@@ -7,15 +7,14 @@ export default function generateSocial(story: Story, contentSize = 150, citeSize
 
   if (content.length < contentSize) {
     return `"${content}" ${cite}`
-  } else {
-    const storySnippet = content.slice(0, contentSize)
-
-    // Trim the story to the last space
-    const trimmedStorySnippet = storySnippet.substring(
-      0,
-      Math.min(storySnippet.length, storySnippet.lastIndexOf(' '))
-    )
-
-    return `"${trimmedStorySnippet}..." ${storyCite(story).slice(0, citeSize)}`
   }
+  const storySnippet = content.slice(0, contentSize)
+
+  // Trim the story to the last space
+  const trimmedStorySnippet = storySnippet.substring(
+    0,
+    Math.min(storySnippet.length, storySnippet.lastIndexOf(' '))
+  )
+
+  return `"${trimmedStorySnippet}..." ${storyCite(story).slice(0, citeSize)}`
 }

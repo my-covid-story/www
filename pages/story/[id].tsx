@@ -30,7 +30,6 @@ import StoryDetail from '../../components/stories/StoryDetail'
 import FloatingRibbon, { Button } from '../../components/common/FloatingRibbon'
 import HeadTags from '../../components/common/HeadTags'
 import { storyImage } from '../../components/stories/model'
-import { ResponseError } from '../../lib/errors'
 import { GetStaticPropsResult } from 'next'
 import ErrorPage from '../404'
 import { CSSProperties } from 'react'
@@ -45,7 +44,6 @@ interface StoryProps {
 
 interface ErrorCodeProps {
   success: false
-  errorCode: number
   errorMessage: string
 }
 
@@ -67,7 +65,7 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
    * in case of a server error.
    */
   if (props.success === false) {
-    return <ErrorPage code={props.errorCode} message={props.errorMessage} />
+    return <ErrorPage message={props.errorMessage} />
   }
 
   const { story } = props
@@ -100,7 +98,7 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
       </Box>
 
       <FloatingRibbon>
-        <Button onClick={onOpen} my={"5px"}>
+        <Button onClick={onOpen} my={'5px'}>
           Share This Story
         </Button>
 
@@ -181,20 +179,6 @@ export async function getStaticProps({
 
     return { props: { success: true, story }, revalidate: 60 }
   } catch (err) {
-    if (err instanceof ResponseError) {
-      return {
-        props: { success: false, errorCode: err.status, errorMessage: err.message },
-        revalidate: 60,
-      }
-    }
-
-    return {
-      props: {
-        success: false,
-        errorCode: 500,
-        errorMessage: "This was an unknown error, we'll try to solve it as soon as possible",
-      },
-      revalidate: 60,
-    }
+    return { props: { success: false, errorMessage: "Ooops. Can't find it." }, revalidate: 60 }
   }
 }

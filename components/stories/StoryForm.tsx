@@ -15,7 +15,7 @@ import {
   Text,
   Textarea,
 } from '@chakra-ui/react'
-import { Field, Form, Formik } from 'formik'
+import { Field, Form, Formik, FormikHelpers } from 'formik'
 import Router from 'next/router'
 
 import storySchema, { STORY_WORD_LIMIT, TITLE_CHAR_LIMIT } from '../../lib/storySchema'
@@ -54,43 +54,41 @@ const FIELD_PADDING = '4'
 const OPTIONAL_FIELD_PADDING = '2'
 
 export default function StoryForm() {
-  return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={storySchema}
-      onSubmit={async (values: LoginFormInputs, actions) => {
-        // Remove any details the user filled in but then decided not to share.
-        if (values.anonymous === 'true') {
-          values.displayName = ''
-        }
-        if (!values.contact) {
-          values.contactName = ''
-          values.email = ''
-          values.phone = ''
-          values.twitter = ''
-        }
+  async function handleSubmit(values: LoginFormInputs, actions: FormikHelpers<LoginFormInputs>) {
+    // Remove any details the user filled in but then decided not to share.
+    if (values.anonymous === 'true') {
+      values.displayName = ''
+    }
+    if (!values.contact) {
+      values.contactName = ''
+      values.email = ''
+      values.phone = ''
+      values.twitter = ''
+    }
 
-        try {
-          actions.setSubmitting(true)
-          const result = await fetch(`/api/stories`, {
-            method: 'POST',
-            body: JSON.stringify(values),
-            headers: {
-              'content-type': 'application/json',
-            },
-          })
-          if (result.ok) {
-            actions.setSubmitting(false)
-            Router.push('/thanks')
-          } else {
-            console.error('something went wrong')
-          }
-        } catch (e) {
-          console.error(e)
-          actions.setSubmitting(false)
-        }
-      }}
-    >
+    try {
+      actions.setSubmitting(true)
+      const result = await fetch(`/api/stories`, {
+        method: 'POST',
+        body: JSON.stringify(values),
+        headers: {
+          'content-type': 'application/json',
+        },
+      })
+      if (result.ok) {
+        actions.setSubmitting(false)
+        Router.push('/thanks')
+      } else {
+        console.error('something went wrong')
+      }
+    } catch (e) {
+      console.error(e)
+      actions.setSubmitting(false)
+    }
+  }
+
+  return (
+    <Formik initialValues={initialValues} validationSchema={storySchema} onSubmit={handleSubmit}>
       {(props) => (
         <Form>
           {/* Anonymous */}

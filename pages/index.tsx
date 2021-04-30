@@ -21,9 +21,9 @@ const MainPage = ({ stories }: MainPageProps) => {
         <StoryFeed stories={stories} />
       </Box>
       <FloatingRibbon>
-        <NextLink href="/new">
+        <NextLink href="/new" passHref>
           <Link>
-            <Button>Add Your Story</Button>
+            <Button my={'5px'}>Add Your Story</Button>
           </Link>
         </NextLink>
       </FloatingRibbon>
@@ -35,7 +35,7 @@ export async function getStaticProps() {
   const stories = await list()
   return {
     props: { stories },
-    revalidate: 60, // 1 minutes
+    revalidate: 60, // 1 minute
   }
 }
 

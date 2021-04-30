@@ -73,7 +73,7 @@ export default function About() {
             <Text>Charles Chan</Text>
             <Text>Curtis VanderGriendt</Text>
             <Text>Dave Steinberg</Text>
-            <Text>Hannah W.</Text>
+            <Text>Hannah White</Text>
             <Text>Jamieson Roberts</Text>
             <Text>Kapil Haresh Vigneswaren</Text>
             <Text>Kathryn Adams-Sloan</Text>

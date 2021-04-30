@@ -55,6 +55,8 @@ const FIELD_PADDING = '4'
 const OPTIONAL_FIELD_PADDING = '2'
 
 export default function StoryForm() {
+  const formName = 'story-form'
+
   return (
     <Formik
       initialValues={initialValues}
@@ -82,6 +84,7 @@ export default function StoryForm() {
           })
           if (result.ok) {
             actions.setSubmitting(false)
+            window.localStorage.removeItem(formName)
             Router.push('/thanks')
           } else {
             console.error('something went wrong')
@@ -94,7 +97,7 @@ export default function StoryForm() {
     >
       {(props) => (
         <Form>
-          <PersistFormData name="story-form" />
+          <PersistFormData name={formName} />
 
           {/* Anonymous */}
           <Field name="anonymous">

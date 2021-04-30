@@ -19,6 +19,7 @@ import { Field, Form, Formik } from 'formik'
 import Router from 'next/router'
 
 import storySchema, { STORY_WORD_LIMIT, TITLE_CHAR_LIMIT } from '../../lib/storySchema'
+import PersistFormData from '../common/PersistFormData'
 
 type LoginFormInputs = {
   title: string
@@ -93,6 +94,8 @@ export default function StoryForm() {
     >
       {(props) => (
         <Form>
+          <PersistFormData name="story-form" />
+
           {/* Anonymous */}
           <Field name="anonymous">
             {({ field, form }) => {

@@ -1,15 +1,14 @@
-import { ReactNode, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Button, Center, Container, Flex, Heading, Link, Text, VStack } from '@chakra-ui/react'
 
 import HeadTags from './HeadTags'
 
-import BlankLayout from '../../layouts/Blank'
 import TwitterSVG from '../icons/TwitterSVG'
 import FacebookSVG from '../icons/FacebookSVG'
 import InstagramSVG from '../icons/InstagramSVG'
 import NextLink from 'next/link'
 
-const Thanks = () => {
+export default function ThankYou() {
   // Triggers a Story goal event on Fathom
   useEffect(() => {
     window?.fathom?.trackGoal('RT0FH11Y', 0)
@@ -72,7 +71,7 @@ const Thanks = () => {
             </Link>
           </Flex>
 
-          <NextLink href="/">
+          <NextLink href="/" passHref>
             <Link>
               <Button variant="outline" size="sm" marginBottom="40px">
                 Return to Stories
@@ -84,9 +83,3 @@ const Thanks = () => {
     </>
   )
 }
-
-const ThanksLayout = (page: ReactNode) => <BlankLayout>{page}</BlankLayout>
-
-Thanks.getLayout = ThanksLayout
-
-export default Thanks

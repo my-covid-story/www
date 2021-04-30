@@ -16,9 +16,12 @@ import {
   Textarea,
 } from '@chakra-ui/react'
 import { Field, Form, Formik, FormikHelpers } from 'formik'
-import Router from 'next/router'
 
 import storySchema, { STORY_WORD_LIMIT, TITLE_CHAR_LIMIT } from '../../lib/storySchema'
+
+interface StoryFormProps {
+  onSubmitSuccess: () => void
+}
 
 type LoginFormInputs = {
   title: string
@@ -53,7 +56,7 @@ const initialValues = {
 const FIELD_PADDING = '4'
 const OPTIONAL_FIELD_PADDING = '2'
 
-export default function StoryForm() {
+export default function StoryForm({ onSubmitSuccess }: StoryFormProps) {
   async function handleSubmit(values: LoginFormInputs, actions: FormikHelpers<LoginFormInputs>) {
     // Remove any details the user filled in but then decided not to share.
     if (values.anonymous === 'true') {
@@ -77,7 +80,7 @@ export default function StoryForm() {
       })
       if (result.ok) {
         actions.setSubmitting(false)
-        Router.push('/thanks')
+        onSubmitSuccess()
       } else {
         console.error('something went wrong')
       }

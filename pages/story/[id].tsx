@@ -52,7 +52,6 @@ interface ErrorCodeProps {
 type StoryPageProps = StoryProps | ErrorCodeProps
 
 const shareIconSize = 64
-
 const buttonStyle: CSSProperties = { marginRight: '12px', marginBottom: '12px' }
 
 export default function StoryPage(props: StoryPageProps): JSX.Element {
@@ -101,7 +100,9 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
       </Box>
 
       <FloatingRibbon>
-        <Button onClick={onOpen}>Share This Story</Button>
+        <Button onClick={onOpen} my={"5px"}>
+          Share This Story
+        </Button>
 
         <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
           <DrawerOverlay>

@@ -80,7 +80,7 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
         <StoryDetail story={story} onClose={handleClose} />
       </Box>
       <FloatingRibbon>
-        <Button onClick={onOpen} marginTop="5px" marginBottom="5px">
+        <Button onClick={onOpen} my={"5px"}>
           Share This Story
         </Button>
         <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>

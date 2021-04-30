@@ -1,5 +1,6 @@
 import { Box, Container, SimpleGrid, Text } from '@chakra-ui/react'
 import MenuItem from './MenuItem'
+import VercelSVG from '../icons/VercelSVG'
 
 export default function Footer() {
   return (
@@ -58,12 +59,18 @@ export default function Footer() {
             Help Us Translate
           </MenuItem>
         </SimpleGrid>
-        <Text as="strong" paddingTop={4}>
+        <Text as="strong" paddingTop={4} mb={4}>
           Made with love by Ontarians{' '}
           <span role="img" aria-label="heart" style={{ filter: 'brightness(0) invert(1)' }}>
             ❤️
           </span>
         </Text>
+        <MenuItem
+          to="https://vercel.com?utm_source=my-covid-story&utm_campaign=oss"
+          externalLink={true}
+        >
+          <VercelSVG />
+        </MenuItem>
       </Container>
     </Box>
   )

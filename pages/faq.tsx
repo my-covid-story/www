@@ -131,7 +131,15 @@ export default function FAQ() {
           </Heading>
           <Text>
             This page was built by volunteers and is fully funded by Ontarians concerned by the
-            current COVID-19 response in our province.
+            current COVID-19 response in our province. We are using{' '}
+            <Link href="https://vercel.com?utm_source=my-covid-story&utm_campaign=oss" isExternal>
+              Vercel
+            </Link>{' '}
+            to host the site.{' '}
+            <Link href="https://vercel.com?utm_source=my-covid-story&utm_campaign=oss" isExternal>
+              Vercel
+            </Link>{' '}
+            is sponsoring the project by providing free hosting services.
           </Text>
         </Box>
         <Box pb={6}>

@@ -33,14 +33,13 @@ function StoryOptions({
   twitter,
   approved,
   deleted,
-  ...rest
 }: StoryOptionsProps) {
   return (
     <>
       <HeadTags>
         <meta name="robots" content="noindex" />
       </HeadTags>
-      <Box mt={2} p={5} shadow="md" borderWidth="1px" {...rest}>
+      <Box mt={2} p={5} shadow="md" borderWidth="1px">
         <Heading fontSize="xl">{title}</Heading>
         <Text mt={4}>{content}</Text>
         <Text mt={4} mb={4}>

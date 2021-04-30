@@ -4,15 +4,16 @@ import {
   HStack,
   IconButton,
   Link,
+  LinkProps,
+  Skeleton,
   Stack,
   useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react'
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
 
-import { signIn, signOut } from 'next-auth/client'
-import ContentBox from '../common/ContentBox'
-import { Session } from 'next-auth'
+import { signIn, signOut, useSession } from 'next-auth/client'
+import { RESPONSIVE_PADDING } from '../common/ContentBox'
 
 const Links = [
   { href: '/_admin/', text: 'Admin Homepage' },
@@ -20,77 +21,101 @@ const Links = [
   { href: '/_admin/?deleted=true', text: 'Show Deleted' },
 ]
 
-interface NavLinkProps {
-  href: string
+interface LinkDisplayProps extends LinkProps {
+  href?: string
   text: string
 }
 
-const NavLink = ({ href, text }: NavLinkProps) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={'md'}
-    _hover={{
-      textDecoration: 'none',
-      bg: useColorModeValue('gray.200', 'gray.700'),
-    }}
-    href={href}
-  >
-    {text}
-  </Link>
-)
-
-interface NavProps {
-  session: Session
+const LinkDisplay = ({ href = '#', text, ...props }: LinkDisplayProps) => {
+  const bgColor = useColorModeValue('gray.200', 'gray.700')
+  return (
+    <Link
+      px={2}
+      py={1}
+      rounded={'md'}
+      _hover={{
+        textDecoration: 'none',
+        bg: bgColor,
+      }}
+      href={href}
+      {...props}
+    >
+      {text}
+    </Link>
+  )
 }
 
-export default function AdminNav({ session }: NavProps) {
+interface NavLinkProps extends LinkDisplayProps {
+  alwaysDisplay?: boolean
+}
+
+const NavLink = ({ alwaysDisplay = false, ...props }: NavLinkProps) => {
+  const [session, loading] = useSession()
+
+  if (alwaysDisplay) {
+    return <LinkDisplay {...props} />
+  }
+
+  // Checking the session for null based on https://stackoverflow.com/a/63191786
+  if (loading && session !== null) {
+    return <Skeleton height="20px" width="5vw" minWidth="30px" />
+  }
+
+  if (!loading && !session) {
+    return <></>
+  }
+
+  return <LinkDisplay {...props} />
+}
+
+export default function AdminNav() {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const [session] = useSession()
 
   return (
     <>
-      <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
-        {!session && (
-          <ContentBox height="100%" display="flex" alignItems="center" justifyContent="center">
-            <Link spacing={8} onClick={() => signIn()}>
-              Sign in
-            </Link>
-          </ContentBox>
-        )}
-        {session && (
-          <>
-            <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-              <IconButton
-                size={'md'}
-                icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-                aria-label={'Open Menu'}
-                display={{ md: !isOpen ? 'none' : 'inherit' }}
-                onClick={isOpen ? onClose : onOpen}
-              />
-              <HStack spacing={8} alignItems={'center'}>
-                <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
-                  {Links.map((link) => (
-                    <NavLink key={link.text} href={link.href} text={link.text} />
-                  ))}
-                </HStack>
-              </HStack>
-              <Flex alignItems={'center'}>
-                <NavLink key={session.user.email} href="#" text={session.user.email} />
-                <button onClick={() => signOut()}>Sign out</button>
-              </Flex>
-            </Flex>
+      <Box
+        bg={useColorModeValue('gray.100', 'gray.900')}
+        py={4}
+        px={RESPONSIVE_PADDING}
+        position={'sticky'}
+        top={0}
+        zIndex={1}
+      >
+        <Flex alignItems={'center'} justifyContent={'space-between'}>
+          <IconButton
+            size={'md'}
+            icon={isOpen ? <CloseIcon color={'white'} /> : <HamburgerIcon color={'white'} />}
+            aria-label={'Open Menu'}
+            display={{ lg: 'none' }}
+            onClick={isOpen ? onClose : onOpen}
+          />
 
-            {isOpen ? (
-              <Box pb={4}>
-                <Stack as={'nav'} spacing={4}>
-                  {Links.map((link) => (
-                    <NavLink key={link.text} href={link.href} text={link.text} />
-                  ))}
-                </Stack>
-              </Box>
-            ) : null}
-          </>
-        )}
+          <HStack spacing={8} alignItems={'center'}>
+            <HStack as={'nav'} spacing={4} display={{ base: 'none', lg: 'flex' }}>
+              {Links.map((link) => (
+                <NavLink key={link.text} href={link.href} text={link.text} />
+              ))}
+            </HStack>
+          </HStack>
+          <Flex alignItems={'center'} direction={{ base: 'column', sm: 'row' }}>
+            <NavLink key="userEmail" href="#" text={session?.user.email ?? ''} />
+            <NavLink
+              onClick={session ? () => signOut() : () => signIn()}
+              text={session ? 'Sign out' : 'Sign in'}
+              alwaysDisplay={true}
+            />
+          </Flex>
+        </Flex>
+        {isOpen ? (
+          <Box pt={4} display={{ lg: 'none' }} bg={''}>
+            <Stack as={'nav'} spacing={4}>
+              {Links.map((link) => (
+                <NavLink key={link.text} href={link.href} text={link.text} />
+              ))}
+            </Stack>
+          </Box>
+        ) : null}
       </Box>
     </>
   )

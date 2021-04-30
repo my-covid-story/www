@@ -7,7 +7,10 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
+  Flex,
+  useClipboard,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react'
 import {
   EmailIcon,
@@ -30,6 +33,9 @@ import { storyImage } from '../../components/stories/model'
 import { ResponseError } from '../../lib/errors'
 import { GetStaticPropsResult } from 'next'
 import ErrorPage from '../404'
+import { CSSProperties } from 'react'
+import CustomShareContainer from '../../components/common/CustomShareContainer'
+import { LinkIcon } from '@chakra-ui/icons'
 
 interface StoryProps {
   success: true
@@ -46,11 +52,15 @@ interface ErrorCodeProps {
 type StoryPageProps = StoryProps | ErrorCodeProps
 
 const shareIconSize = 64
-const buttonStyle = { marginRight: '12px' }
+
+const buttonStyle: CSSProperties = { marginRight: '12px', marginBottom: '12px' }
 
 export default function StoryPage(props: StoryPageProps): JSX.Element {
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const url = props.success ? `${process.env.BASE_URL}/story/${props.story.id}` : ''
+  const { onCopy } = useClipboard(url)
+  const toast = useToast()
 
   /**
    * Return the custom error page with the relative status code. This can allow
@@ -68,46 +78,68 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
     router.query.back === 'true' ? router.back() : router.push('/')
   }
 
+  function handleURLCopy() {
+    onCopy()
+
+    toast({
+      position: 'top',
+      title: 'Link copied',
+      status: 'success',
+    })
+  }
+
   // Get Story details
-  const url = `${process.env.BASE_URL}/story/${story.id}`
   const description = generateSocial(story)
   const emailSubject = 'Help me amplify this story'
 
   return (
     <>
       <HeadTags title={story.title} description={story.content} previewImage={storyImage(story)} />
+
       <Box>
-        <StoryDetail story={story} onClose={handleClose} />
+        <StoryDetail story={story} onClose={handleClose} onShare={onOpen} />
       </Box>
+
       <FloatingRibbon>
         <Button onClick={onOpen}>Share This Story</Button>
+
         <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
           <DrawerOverlay>
             <DrawerContent>
               <DrawerHeader>Share via</DrawerHeader>
+
               <DrawerBody>
-                <TwitterShareButton
-                  url={url}
-                  title={description}
-                  via="MyCOVIDStory_CA"
-                  style={buttonStyle}
-                >
-                  <TwitterIcon size={shareIconSize} />
-                </TwitterShareButton>
-                <FacebookShareButton url={url} quote={description} style={buttonStyle}>
-                  <FacebookIcon size={shareIconSize} />
-                </FacebookShareButton>
-                <WhatsappShareButton url={url} title={description} style={buttonStyle}>
-                  <WhatsappIcon size={shareIconSize} />
-                </WhatsappShareButton>
-                <EmailShareButton
-                  url={url}
-                  subject={emailSubject}
-                  body={description}
-                  style={buttonStyle}
-                >
-                  <EmailIcon size={shareIconSize} />
-                </EmailShareButton>
+                <Flex alignItems="flex-start" flexWrap="wrap">
+                  <TwitterShareButton
+                    url={url}
+                    title={description}
+                    via="MyCOVIDStory_CA"
+                    style={buttonStyle}
+                  >
+                    <TwitterIcon size={shareIconSize} />
+                  </TwitterShareButton>
+
+                  <FacebookShareButton url={url} quote={description} style={buttonStyle}>
+                    <FacebookIcon size={shareIconSize} />
+                  </FacebookShareButton>
+
+                  <WhatsappShareButton url={url} title={description} style={buttonStyle}>
+                    <WhatsappIcon size={shareIconSize} />
+                  </WhatsappShareButton>
+
+                  <EmailShareButton
+                    url={url}
+                    subject={emailSubject}
+                    body={description}
+                    style={buttonStyle}
+                  >
+                    <EmailIcon size={shareIconSize} />
+                  </EmailShareButton>
+
+                  <CustomShareContainer style={buttonStyle} onClick={handleURLCopy}>
+                    <LinkIcon color="#fff" w={8} h={8} />
+                  </CustomShareContainer>
+                </Flex>
               </DrawerBody>
             </DrawerContent>
           </DrawerOverlay>

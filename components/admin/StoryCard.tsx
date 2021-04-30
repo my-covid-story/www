@@ -10,42 +10,26 @@ import {
 } from '@chakra-ui/react'
 import SimpleLink from '../common/SimpleLink'
 
-const updateStory = (e) => {
-  let approved = false
-  let deleted = false
+interface UpdateStoryProps {
+  id: string
+  approved: boolean
+  deleted: boolean
+  contentWarning: boolean
+}
 
-  // `unapprove` and `undelete` aren't technically needed but it helps when reading the code
-  switch (e.target.dataset.type) {
-    case 'approve':
-      approved = true
-      break
-    case 'delete':
-      deleted = true
-      break
-    case 'unapprove':
-      approved = false
-      break
-    case 'undelete':
-      deleted = false
-      break
-  }
-  const story = {
-    id: e.target.dataset.id,
-    approved,
-    deleted,
-  }
-
+const updateStory = ({ id, approved, deleted, contentWarning }: UpdateStoryProps) => {
   fetch('/api/admin/update', {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
     },
-    body: JSON.stringify(story),
+    body: JSON.stringify({ id, approved, deleted, contentWarning }),
   })
 }
 
 interface StoryCardProps {
   id: string
+  createdAt: Date
   title: string
   content: string
   name: string
@@ -55,10 +39,12 @@ interface StoryCardProps {
   twitter: string
   approved: boolean
   deleted: boolean
+  contentWarning: boolean
 }
 
 export default function StoryCard({
   id,
+  createdAt,
   title,
   content,
   name,
@@ -68,6 +54,7 @@ export default function StoryCard({
   twitter,
   approved,
   deleted,
+  contentWarning,
 }: StoryCardProps) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -90,11 +77,17 @@ export default function StoryCard({
             </Button>
           </Flex>
         </Box>
-        <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={4} p={5} bg={'gray.100'}>
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4} p={5} bg={'gray.100'}>
           <Text>
             {name || `Anonymous`} from {postal}
           </Text>
           <Text>Contact: {email || twitter || phone ? `Yes` : 'No'}</Text>
+          <Text>
+            Submission Date:{' '}
+            {new Intl.DateTimeFormat('en-CA', { dateStyle: 'long', timeStyle: 'short' }).format(
+              createdAt
+            )}
+          </Text>
           <Text>
             ID:{' '}
             <SimpleLink href={`/story/${id}`} textDecoration={'underline'}>
@@ -102,19 +95,23 @@ export default function StoryCard({
             </SimpleLink>
           </Text>
         </SimpleGrid>
-        <Stack direction="row" p={5} spacing={4} align="center" bg={'gray.200'}>
+        <Stack
+          direction={{ base: 'column', sm: 'row' }}
+          p={5}
+          spacing={4}
+          align={{ sm: 'center' }}
+          bg={'gray.200'}
+        >
           <Button
             colorScheme="red"
             variant="outline"
             type="button"
-            data-id={id}
-            data-type={deleted ? 'undelete' : 'delete'}
             bg={'white'}
-            onClick={(e) => {
+            onClick={() => {
               if (
                 window.confirm(`Are you sure you want to ${deleted ? 'undelete' : 'delete'} this?`)
               ) {
-                updateStory(e)
+                updateStory({ id, deleted: !deleted, approved, contentWarning })
               }
             }}
           >
@@ -123,11 +120,18 @@ export default function StoryCard({
           <Button
             colorScheme="blue"
             type="button"
-            data-id={id}
-            data-type={approved ? 'unapprove' : 'approve'}
-            onClick={updateStory}
+            onClick={() => updateStory({ id, deleted, approved: !approved, contentWarning })}
           >
             {approved ? 'Unapprove' : 'Approve'}
+          </Button>
+          <Button
+            colorScheme="blue"
+            variant="outline"
+            type="button"
+            bg={'white'}
+            onClick={() => updateStory({ id, deleted, approved, contentWarning: !contentWarning })}
+          >
+            {contentWarning ? 'Remove Content Warning' : 'Add Content Warning'}
           </Button>
         </Stack>
       </Box>

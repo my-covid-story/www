@@ -7,6 +7,7 @@ import {
   LinkProps,
   Skeleton,
   Stack,
+  Text,
   useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react'
@@ -27,12 +28,13 @@ interface LinkDisplayProps extends LinkProps {
 }
 
 const LinkDisplay = ({ href = '#', text, ...props }: LinkDisplayProps) => {
-  const bgColor = useColorModeValue('gray.200', 'gray.700')
+  const bgColor = useColorModeValue('gray.300', 'gray.700')
   return (
     <Link
       px={2}
       py={1}
       rounded={'md'}
+      bgColor={'gray.200'}
       _hover={{
         textDecoration: 'none',
         bg: bgColor,
@@ -98,8 +100,14 @@ export default function AdminNav() {
               ))}
             </HStack>
           </HStack>
-          <Flex alignItems={'center'} direction={{ base: 'column', sm: 'row' }}>
-            <NavLink key="userEmail" href="#" text={session?.user.email ?? ''} />
+          <Flex
+            spacing={4}
+            alignItems={{ base: 'flex-end', sm: 'center' }}
+            direction={{ base: 'column', sm: 'row' }}
+          >
+            <Text mb={{ base: 1, sm: 0 }} mr={{ sm: 4 }} fontSize={{ base: '0.75rem', sm: 'md' }}>
+              {session?.user.email ?? ''}
+            </Text>
             <NavLink
               onClick={session ? () => signOut() : () => signIn()}
               text={session ? 'Sign out' : 'Sign in'}
@@ -108,7 +116,7 @@ export default function AdminNav() {
           </Flex>
         </Flex>
         {isOpen ? (
-          <Box pt={4} display={{ lg: 'none' }} bg={''}>
+          <Box pt={4} display={{ lg: 'none' }}>
             <Stack as={'nav'} spacing={4}>
               {Links.map((link) => (
                 <NavLink key={link.text} href={link.href} text={link.text} />

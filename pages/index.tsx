@@ -18,9 +18,11 @@ const MainPage = ({ stories }: MainPageProps) => {
       <HeadTags>
         <link rel="canonical" href="https://www.mycovidstory.ca" />
       </HeadTags>
+
       <Box>
         <StoryFeed stories={stories} />
       </Box>
+
       <FloatingRibbon>
         <NextLink href="/new" passHref>
           <Link>

@@ -71,7 +71,7 @@ export default function StoryCard({
       const { deleted: deletedResponse } = await updateStory({
         id,
         deleted: !deleted,
-        approved,
+        approved: false,
         contentWarning,
       })
       setDeleted(deletedResponse)
@@ -82,7 +82,7 @@ export default function StoryCard({
   const handleApprovedInteraction = async () => {
     const { approved: approvedResponse } = await updateStory({
       id,
-      deleted,
+      deleted: false,
       approved: !approved,
       contentWarning,
     })

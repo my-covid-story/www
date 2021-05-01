@@ -91,7 +91,6 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
 
       <FloatingRibbon>
         <Button onClick={onOpen} my={'5px'}>
-        <Button onClick={onOpen} my="5px">
           Share This Story
         </Button>
 

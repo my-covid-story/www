@@ -8,7 +8,7 @@ interface SimpleLinkProps extends LinkProps {
 /**
  * A simple link which wraps Chakra UI's link with the NextJS `Link` component.
  * @param href the destination of the link. Needs to be in the same format as the Next's link's `href` prop.
- * @param children the text to be projected inside the link.
+ * @param children the content to be projected inside the link.
  * @example <SimpleLink href="/about">About us</SimpleLink>
  */
 export default function SimpleLink({ href, children, ...props }: SimpleLinkProps): JSX.Element {

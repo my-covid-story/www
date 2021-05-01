@@ -30,26 +30,16 @@ import StoryDetail from '../../components/stories/StoryDetail'
 import FloatingRibbon, { Button } from '../../components/common/FloatingRibbon'
 import HeadTags from '../../components/common/HeadTags'
 import { storyImage } from '../../components/stories/model'
-import { ResponseError } from '../../lib/errors'
 import { GetStaticPropsResult } from 'next'
-import ErrorPage from '../404'
 import { CSSProperties } from 'react'
 import CustomShareContainer from '../../components/common/CustomShareContainer'
 import { LinkIcon } from '@chakra-ui/icons'
+import FallbackPage from '../../components/common/FallbackPage'
 
-interface StoryProps {
-  success: true
+interface StoryPageProps {
   story: Story
   url?: string
 }
-
-interface ErrorCodeProps {
-  success: false
-  errorCode: number
-  errorMessage: string
-}
-
-type StoryPageProps = StoryProps | ErrorCodeProps
 
 const shareIconSize = 64
 const buttonStyle: CSSProperties = { marginRight: '12px', marginBottom: '12px' }
@@ -57,17 +47,20 @@ const buttonStyle: CSSProperties = { marginRight: '12px', marginBottom: '12px' }
 export default function StoryPage(props: StoryPageProps): JSX.Element {
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const url = props.success ? `${process.env.BASE_URL}/story/${props.story.id}` : ''
+  const url = props.story ? `${process.env.BASE_URL}/story/${props.story.id}` : ''
   const { onCopy } = useClipboard(url)
   const toast = useToast()
 
   /**
-   * Return the custom error page with the relative status code. This can allow
-   * passing different error codes like 404 in case a page is not found or a 500
-   * in case of a server error.
+   * Return the custom fallback page while the server is building the new page.
    */
-  if (props.success === false) {
-    return <ErrorPage code={props.errorCode} message={props.errorMessage} />
+  if (router.isFallback === true) {
+    return (
+      <FallbackPage
+        heading="Looks like we're still building this page!"
+        description="It will be ready in a matter of seconds."
+      />
+    )
   }
 
   const { story } = props
@@ -100,7 +93,7 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
       </Box>
 
       <FloatingRibbon>
-        <Button onClick={onOpen} my={"5px"}>
+        <Button onClick={onOpen} my={'5px'}>
           Share This Story
         </Button>
 
@@ -160,7 +153,7 @@ export async function getStaticPaths() {
   const paths = stories.map((s) => ({ params: { id: s.id } }))
   return {
     paths,
-    fallback: 'blocking',
+    fallback: true,
   }
 }
 
@@ -179,21 +172,10 @@ export async function getStaticProps({
      */
     const story = (await get(params.id)) as Story
 
-    return { props: { success: true, story }, revalidate: 60 }
+    return { props: { story }, revalidate: 60 }
   } catch (err) {
-    if (err instanceof ResponseError) {
-      return {
-        props: { success: false, errorCode: err.status, errorMessage: err.message },
-        revalidate: 60,
-      }
-    }
-
     return {
-      props: {
-        success: false,
-        errorCode: 500,
-        errorMessage: "This was an unknown error, we'll try to solve it as soon as possible",
-      },
+      notFound: true,
       revalidate: 60,
     }
   }

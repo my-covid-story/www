@@ -9,6 +9,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import SimpleLink from '../common/SimpleLink'
+import { useState } from 'react'
 
 interface UpdateStoryProps {
   id: string
@@ -17,14 +18,16 @@ interface UpdateStoryProps {
   contentWarning: boolean
 }
 
-const updateStory = ({ id, approved, deleted, contentWarning }: UpdateStoryProps) => {
-  fetch('/api/admin/update', {
+const updateStory = async ({ id, approved, deleted, contentWarning }: UpdateStoryProps) => {
+  const res = await fetch('/api/admin/update', {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
     },
     body: JSON.stringify({ id, approved, deleted, contentWarning }),
   })
+
+  return await res.json()
 }
 
 interface StoryCardProps {
@@ -52,15 +55,37 @@ export default function StoryCard({
   email,
   phone,
   twitter,
-  approved,
-  deleted,
-  contentWarning,
+  ...rest
 }: StoryCardProps) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
+  const [deleted, setDeleted] = useState(rest.deleted)
+  const [approved, setApproved] = useState(rest.approved)
+  const [contentWarning, setContentWarning] = useState(rest.contentWarning)
+  const [interacted, setInteracted] = useState(false)
+
+  const handleDeletedInteraction = async () => {
+    if (window.confirm(`Are you sure you want to ${deleted ? 'undelete' : 'delete'} this?`)) {
+      const res = await updateStory({ id, deleted: !deleted, approved, contentWarning })
+      setDeleted(res.deleted)
+      setInteracted(true)
+    }
+  }
+
+  const handleApprovedInteraction = async () => {
+    const res = await updateStory({ id, deleted, approved: !approved, contentWarning })
+    setApproved(res.approved)
+    setInteracted(true)
+  }
+
+  const handleContentWarningInteraction = async () => {
+    const res = await updateStory({ id, deleted, approved, contentWarning: !contentWarning })
+    setContentWarning(res.contentWarning)
+  }
+
   return (
     <>
-      <Box mt={2} shadow="md" borderWidth="1px">
+      <Box mt={2} shadow="md" borderWidth="1px" opacity={interacted ? 0.6 : 1}>
         <Box p={5}>
           <Heading fontSize="xl">{title}</Heading>
           <Text mt={4} noOfLines={isOpen ? null : 4}>
@@ -107,21 +132,11 @@ export default function StoryCard({
             variant="outline"
             type="button"
             bg={'white'}
-            onClick={() => {
-              if (
-                window.confirm(`Are you sure you want to ${deleted ? 'undelete' : 'delete'} this?`)
-              ) {
-                updateStory({ id, deleted: !deleted, approved, contentWarning })
-              }
-            }}
+            onClick={handleDeletedInteraction}
           >
             {deleted ? 'Undelete' : 'Delete'}
           </Button>
-          <Button
-            colorScheme="blue"
-            type="button"
-            onClick={() => updateStory({ id, deleted, approved: !approved, contentWarning })}
-          >
+          <Button colorScheme="blue" type="button" onClick={handleApprovedInteraction}>
             {approved ? 'Unapprove' : 'Approve'}
           </Button>
           <Button
@@ -129,7 +144,7 @@ export default function StoryCard({
             variant="outline"
             type="button"
             bg={'white'}
-            onClick={() => updateStory({ id, deleted, approved, contentWarning: !contentWarning })}
+            onClick={handleContentWarningInteraction}
           >
             {contentWarning ? 'Remove Content Warning' : 'Add Content Warning'}
           </Button>

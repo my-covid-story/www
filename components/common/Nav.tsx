@@ -1,4 +1,5 @@
-import { MouseEventHandler, useState } from 'react'
+import { MouseEventHandler, useState, useEffect, useCallback } from 'react'
+import Router from 'next/router'
 import {
   Box,
   Button,
@@ -128,6 +129,13 @@ export default function Nav({ ...props }: FlexProps & PositionProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   const toggle = (): void => setIsOpen(!isOpen)
+
+  const closePanel = useCallback(() => setIsOpen(false), [])
+
+  useEffect(() => {
+    Router.events.on('routeChangeComplete', closePanel)
+    return () => Router.events.off('routeChangeComplete', closePanel)
+  }, [closePanel])
 
   return (
     <NavBarContainer {...props}>

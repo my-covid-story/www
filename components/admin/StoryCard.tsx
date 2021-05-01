@@ -55,32 +55,49 @@ export default function StoryCard({
   email,
   phone,
   twitter,
-  ...rest
+  deleted: deletedInitial,
+  approved: approvedInitial,
+  contentWarning: contentWarningInitial,
 }: StoryCardProps) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const [deleted, setDeleted] = useState(rest.deleted)
-  const [approved, setApproved] = useState(rest.approved)
-  const [contentWarning, setContentWarning] = useState(rest.contentWarning)
+  const [deleted, setDeleted] = useState(deletedInitial)
+  const [approved, setApproved] = useState(approvedInitial)
+  const [contentWarning, setContentWarning] = useState(contentWarningInitial)
   const [interacted, setInteracted] = useState(false)
 
   const handleDeletedInteraction = async () => {
     if (window.confirm(`Are you sure you want to ${deleted ? 'undelete' : 'delete'} this?`)) {
-      const res = await updateStory({ id, deleted: !deleted, approved, contentWarning })
-      setDeleted(res.deleted)
-      setInteracted(true)
+      const { deleted: deletedResponse } = await updateStory({
+        id,
+        deleted: !deleted,
+        approved,
+        contentWarning,
+      })
+      setDeleted(deletedResponse)
+      setInteracted(deletedResponse)
     }
   }
 
   const handleApprovedInteraction = async () => {
-    const res = await updateStory({ id, deleted, approved: !approved, contentWarning })
-    setApproved(res.approved)
-    setInteracted(true)
+    const { approved: approvedResponse } = await updateStory({
+      id,
+      deleted,
+      approved: !approved,
+      contentWarning,
+    })
+    setApproved(approvedResponse)
+    setInteracted(approvedResponse)
   }
 
   const handleContentWarningInteraction = async () => {
-    const res = await updateStory({ id, deleted, approved, contentWarning: !contentWarning })
-    setContentWarning(res.contentWarning)
+    const { contentWarning: contentWarningResponse } = await updateStory({
+      id,
+      deleted,
+      approved,
+      contentWarning: !contentWarning,
+    })
+    setContentWarning(contentWarningResponse)
   }
 
   return (

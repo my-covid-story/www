@@ -1,15 +1,15 @@
-import '../styles/globals.css'
+import '@/styles/globals.css'
 import '@fontsource/inter/700.css'
 import '@fontsource/inter/400.css'
 
 import Head from 'next/head'
-import HeadTags from '../components/common/HeadTags'
+import HeadTags from '@/components/common/HeadTags'
 
 import { ReactElement, ReactNode, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import * as Fathom from 'fathom-client'
 
-import SiteLayout from '../layouts/Default'
+import SiteLayout from '@/layouts/Default'
 import { NextPage } from 'next'
 
 type GetLayout = (page: ReactNode) => ReactElement

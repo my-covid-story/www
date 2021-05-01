@@ -1,10 +1,10 @@
 import { ChakraProvider, ChakraProviderProps, Grid } from '@chakra-ui/react'
 import { Token } from '@chakra-ui/styled-system/dist/types/utils'
 
-import Nav from '../components/common/Nav'
-import Footer from '../components/common/Footer'
+import Nav from '@/components/common/Nav'
+import Footer from '@/components/common/Footer'
 
-import theme from '../styles/theme'
+import theme from '@/styles/theme'
 import * as CSS from 'csstype'
 
 interface SiteLayoutProps {

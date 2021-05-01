@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { methodNotAllowed, sendError } from '../../../lib/errors'
-import * as stories from '../../../lib/api/stories'
+import { methodNotAllowed, sendError } from '@/lib/errors'
+import * as stories from '@/lib/api/stories'
 
 // GET /api/stories/:id
 export default function handle(req: NextApiRequest, res: NextApiResponse) {

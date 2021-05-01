@@ -1,7 +1,7 @@
 import { Box, Heading, Link, Text } from '@chakra-ui/react'
-import styles from '../styles/FaqPage.module.css'
-import ContentBox from '../components/common/ContentBox'
-import HeadTags from '../components/common/HeadTags'
+import styles from '@/styles/FaqPage.module.css'
+import ContentBox from '@/components/common/ContentBox'
+import HeadTags from '@/components/common/HeadTags'
 
 export default function FAQ() {
   return (

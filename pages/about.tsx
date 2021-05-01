@@ -1,6 +1,6 @@
 import { Box, Heading, Stack, Text } from '@chakra-ui/react'
-import ContentBox from '../components/common/ContentBox'
-import HeadTags from '../components/common/HeadTags'
+import ContentBox from '@/components/common/ContentBox'
+import HeadTags from '@/components/common/HeadTags'
 
 export default function About() {
   return (

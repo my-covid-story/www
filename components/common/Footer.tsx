@@ -1,6 +1,6 @@
 import { Box, Container, SimpleGrid, Text } from '@chakra-ui/react'
 import MenuItem from './MenuItem'
-import VercelSVG from '../icons/VercelSVG'
+import VercelSVG from '@/components/icons/VercelSVG'
 
 export default function Footer() {
   return (

@@ -1,9 +1,9 @@
 import sanitizeHtml from 'sanitize-html'
 import { PrismaClientValidationError } from '@prisma/client/runtime'
 import { ValidationError } from 'yup'
-import prisma from '../prisma'
-import storySchema from '../storySchema'
-import { badRequest, internalServerError, notFound } from '../errors'
+import prisma from '@/lib/prisma'
+import storySchema from '@/lib/storySchema'
+import { badRequest, internalServerError, notFound } from '@/lib/errors'
 
 const select = {
   id: true,

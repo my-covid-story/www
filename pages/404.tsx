@@ -1,5 +1,5 @@
 import { Flex, Heading, Text } from '@chakra-ui/react'
-import SimpleLink from '../components/common/SimpleLink'
+import SimpleLink from '@/components/common/SimpleLink'
 
 interface ErrorPageProps {
   code: number

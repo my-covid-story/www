@@ -1,8 +1,8 @@
 import NextLink from 'next/link'
 import { Box, Flex, Heading, Link, SimpleGrid } from '@chakra-ui/react'
 import { categoryLabel, storyCategoryLabel, storyImage, storyCite } from './model'
-import ContentBox from '../common/ContentBox'
-import Label from '../common/Label'
+import ContentBox from '@/components/common/ContentBox'
+import Label from '@/components/common/Label'
 import { Story } from '@prisma/client'
 
 function FeedHeader() {

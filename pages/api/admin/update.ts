@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/client'
 
-import prisma from '../../../lib/prisma'
-import { internalServerError, methodNotAllowed, sendError, unauthorized } from '../../../lib/errors'
+import prisma from '@/lib/prisma'
+import { internalServerError, methodNotAllowed, sendError, unauthorized } from '@/lib/errors'
 
 // /api/admin/update
 export default async function handle(req: NextApiRequest, res: NextApiResponse) {

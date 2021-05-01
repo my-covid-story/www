@@ -9,11 +9,11 @@ import {
   storyDate,
   storyParagraphs,
 } from './model'
-import ContentBox from '../common/ContentBox'
-import Label from '../common/Label'
+import ContentBox from '@/components/common/ContentBox'
+import Label from '@/components/common/Label'
 
-import { ContentWarningBox } from '../common/Warnings'
-import ShareSVG from '../icons/ShareSVG'
+import { ContentWarningBox } from '@/components/common/Warnings'
+import ShareSVG from '@/components/icons/ShareSVG'
 
 function StoryParagraphs(p: string, i: number) {
   return <Text key={i}>{p}</Text>

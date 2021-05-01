@@ -1,12 +1,12 @@
 import { Box, BoxProps, Button, Heading, Stack, Text } from '@chakra-ui/react'
 import { getSession, useSession } from 'next-auth/client'
 import Link from 'next/link'
-import HeadTags from '../../components/common/HeadTags'
+import HeadTags from '@/components/common/HeadTags'
 
-import prisma from '../../lib/prisma'
+import prisma from '@/lib/prisma'
 import { Story } from '@prisma/client'
-import Nav from '../../components/admin/nav'
-import ContentBox from '../../components/common/ContentBox'
+import Nav from '@/components/admin/nav'
+import ContentBox from '@/components/common/ContentBox'
 import { GetServerSidePropsContext } from 'next'
 
 interface StoryOptionsProps extends BoxProps {

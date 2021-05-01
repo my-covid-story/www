@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { Heading, Text } from '@chakra-ui/react'
-import ContentBox from '../components/common/ContentBox'
-import StoryForm from '../components/stories/StoryForm'
-import HeadTags from '../components/common/HeadTags'
+import ContentBox from '@/components/common/ContentBox'
+import StoryForm from '@/components/stories/StoryForm'
+import HeadTags from '@/components/common/HeadTags'
 
 export default function CreateStory() {
   return (

@@ -1,12 +1,12 @@
 import NextLink from 'next/link'
 import { Box, Link } from '@chakra-ui/react'
-import { list } from '../lib/api/stories'
-import StoryFeed from '../components/stories/StoryFeed'
-import FloatingRibbon, { Button } from '../components/common/FloatingRibbon'
-import SiteLayout from '../layouts/Default'
+import { list } from '@/lib/api/stories'
+import StoryFeed from '@/components/stories/StoryFeed'
+import FloatingRibbon, { Button } from '@/components/common/FloatingRibbon'
+import SiteLayout from '@/layouts/Default'
 import { Story } from '@prisma/client'
 import { ReactNode } from 'react'
-import HeadTags from '../components/common/HeadTags'
+import HeadTags from '@/components/common/HeadTags'
 
 interface MainPageProps {
   stories: Story[]

@@ -1,4 +1,4 @@
-import landing from '../styles/LandingPage.module.css'
+import landing from '@/styles/LandingPage.module.css'
 import { Box, Button, Heading, Link, Text, VStack } from '@chakra-ui/react'
 
 export default function Home() {

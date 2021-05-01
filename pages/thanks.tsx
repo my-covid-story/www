@@ -1,12 +1,12 @@
 import { ReactNode, useEffect } from 'react'
 import { Button, Center, Container, Flex, Heading, Link, Text, VStack } from '@chakra-ui/react'
 
-import HeadTags from '../components/common/HeadTags'
+import HeadTags from '@/components/common/HeadTags'
 
-import BlankLayout from '../layouts/Blank'
-import TwitterSVG from '../components/icons/TwitterSVG'
-import FacebookSVG from '../components/icons/FacebookSVG'
-import InstagramSVG from '../components/icons/InstagramSVG'
+import BlankLayout from '@/layouts/Blank'
+import TwitterSVG from '@/components/icons/TwitterSVG'
+import FacebookSVG from '@/components/icons/FacebookSVG'
+import InstagramSVG from '@/components/icons/InstagramSVG'
 import NextLink from 'next/link'
 
 const Thanks = () => {

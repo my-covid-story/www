@@ -90,13 +90,13 @@ export default function StoryCard({
         </Box>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4} p={5} bg={'gray.100'}>
           <Box>
-            <Label>Display name and Postal Code</Label>
+            <Label>Display Name and Postal Code</Label>
             <Text>
               {displayName || `Anonymous`} from {postal}
             </Text>
           </Box>
           <Box>
-            <Label>Consent to be contacted</Label>
+            <Label>Consent to be Contacted</Label>
             <Text>{email || twitter || phone ? `Yes` : 'No'}</Text>
           </Box>
           <Box>

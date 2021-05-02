@@ -12,6 +12,7 @@ import {
 import SimpleLink from '../common/SimpleLink'
 import { useState } from 'react'
 import { Story } from '@prisma/client'
+import { categoryLabel } from '../stories/model'
 
 interface UpdateStoryProps {
   id: string
@@ -46,7 +47,19 @@ interface StoryCardProps {
 }
 
 export default function StoryCard({
-  story: { id, createdAt, title, content, displayName, postal, email, phone, twitter, ...rest },
+  story: {
+    id,
+    createdAt,
+    title,
+    content,
+    displayName,
+    postal,
+    email,
+    phone,
+    twitter,
+    category,
+    ...rest
+  },
   filteredView,
 }: StoryCardProps) {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -106,6 +119,10 @@ export default function StoryCard({
                 createdAt
               )}
             </Text>
+          </Box>
+          <Box>
+            <Label>Category</Label>
+            <Text>{categoryLabel[category] || 'Other'}</Text>
           </Box>
           <Box>
             <Label>ID and Link</Label>

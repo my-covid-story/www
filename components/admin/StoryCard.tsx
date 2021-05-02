@@ -6,6 +6,7 @@ import {
   SimpleGrid,
   Stack,
   Text,
+  TextProps,
   useDisclosure,
 } from '@chakra-ui/react'
 import SimpleLink from '../common/SimpleLink'
@@ -29,6 +30,14 @@ const updateStory = async ({ id, approved, deleted, contentWarning }: UpdateStor
   })
 
   return await res.json()
+}
+
+const Label = ({ children, ...props }: TextProps) => {
+  return (
+    <Text as="strong" display="block" fontSize="xs" {...props}>
+      {children}:
+    </Text>
+  )
 }
 
 interface StoryCardProps {
@@ -80,22 +89,32 @@ export default function StoryCard({
           </Flex>
         </Box>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4} p={5} bg={'gray.100'}>
-          <Text>
-            {displayName || `Anonymous`} from {postal}
-          </Text>
-          <Text>Contact: {email || twitter || phone ? `Yes` : 'No'}</Text>
-          <Text>
-            Submission Date:{' '}
-            {new Intl.DateTimeFormat('en-CA', { dateStyle: 'long', timeStyle: 'short' }).format(
-              createdAt
-            )}
-          </Text>
-          <Text>
-            ID:{' '}
-            <SimpleLink href={`/story/${id}`} textDecoration={'underline'}>
-              {id}
-            </SimpleLink>
-          </Text>
+          <Box>
+            <Label>Display name and Postal Code</Label>
+            <Text>
+              {displayName || `Anonymous`} from {postal}
+            </Text>
+          </Box>
+          <Box>
+            <Label>Consent to be contacted</Label>
+            <Text>{email || twitter || phone ? `Yes` : 'No'}</Text>
+          </Box>
+          <Box>
+            <Label>Submission Date</Label>
+            <Text>
+              {new Intl.DateTimeFormat('en-CA', { dateStyle: 'long', timeStyle: 'short' }).format(
+                createdAt
+              )}
+            </Text>
+          </Box>
+          <Box>
+            <Label>ID and Link</Label>
+            <Text>
+              <SimpleLink href={`/story/${id}`} textDecoration={'underline'} target="_blank">
+                {id}
+              </SimpleLink>
+            </Text>
+          </Box>
         </SimpleGrid>
         <Stack
           direction={{ base: 'column', sm: 'row' }}

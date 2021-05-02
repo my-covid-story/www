@@ -37,9 +37,11 @@
     "next-sitemap": "^1.6.25",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-fast-compare": "^3.2.0",
     "react-share": "^4.4.0",
     "sanitize-html": "^2.3.3",
     "superjson": "^1.7.4",
+    "use-debounce": "^6.0.1",
     "yup": "^0.32.9"
   },
   "devDependencies": {

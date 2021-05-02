@@ -16,7 +16,8 @@
     "prisma:generate": "prisma generate",
     "gen:theme-typings": "chakra-cli tokens theme/index.ts",
     "postinstall": "prisma generate",
-    "test": "jest"
+    "test": "jest",
+    "gen:story-list": "npm run ts-node scripts/generateStoryList.ts"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.0.11",

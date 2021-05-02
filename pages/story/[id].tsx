@@ -33,10 +33,18 @@ import ErrorPage from '../404'
 import { CSSProperties } from 'react'
 import CustomShareContainer from '../../components/common/CustomShareContainer'
 import { LinkIcon } from '@chakra-ui/icons'
+import storyIds from '../../generated/story-ids.json'
+import Link from 'next/link'
 
+type StoryContext = {
+  next: string | null
+  previous: string | null
+}
+
+type EnrichedStory = Story & StoryContext
 interface StoryProps {
   success: true
-  story: Story
+  story: EnrichedStory
   url?: string
 }
 
@@ -87,6 +95,10 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
 
       <Box>
         <StoryDetail story={story} onShare={onOpen} />
+        <Box>
+          {story.previous && <Link href={`${story.previous}`}>Previous Story</Link>}
+          {story.next && <Link href={`${story.next}`}>Next Story</Link>}
+        </Box>
       </Box>
 
       <FloatingRibbon>
@@ -167,7 +179,19 @@ export async function getStaticProps({
     /**
      * Needed to use `as` keyword, but this should be refactored.
      */
-    const story = (await get(params.id)) as Story
+    const story = (await get(params.id)) as EnrichedStory
+
+    const storyIndex = storyIds.findIndex((s) => s === story.id)
+    if (storyIndex !== -1) {
+      const prevStory = storyIds[storyIndex - 1]
+      const nextStory = storyIds[storyIndex + 1]
+      if (prevStory) {
+        story.previous = prevStory
+      }
+      if (nextStory) {
+        story.next = nextStory
+      }
+    }
 
     return { props: { success: true, story }, revalidate: 60 }
   } catch (err) {

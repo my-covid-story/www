@@ -44,6 +44,20 @@ export async function list(size: number = null) {
   }
 }
 
+export async function listAllIds() {
+  try {
+    return await prisma.story.findMany({
+      where: { approved: true },
+      orderBy: { updatedAt: 'desc' },
+      select: {
+        id: true,
+      },
+    })
+  } catch (err) {
+    throw internalServerError()
+  }
+}
+
 export interface NewStory {
   title: string
   content: string

@@ -18,6 +18,7 @@ import {
 import { Field, Form, Formik, FormikHelpers } from 'formik'
 
 import storySchema, { STORY_WORD_LIMIT, TITLE_CHAR_LIMIT } from '../../lib/storySchema'
+import PersistFormData from '../common/PersistFormData'
 
 interface StoryFormProps {
   onSubmitSuccess: () => void
@@ -57,6 +58,8 @@ const FIELD_PADDING = '4'
 const OPTIONAL_FIELD_PADDING = '2'
 
 export default function StoryForm({ onSubmitSuccess }: StoryFormProps) {
+  const formName = 'story-form'
+
   async function handleSubmit(values: LoginFormInputs, actions: FormikHelpers<LoginFormInputs>) {
     // Remove any details the user filled in but then decided not to share.
     if (values.anonymous === 'true') {
@@ -80,6 +83,7 @@ export default function StoryForm({ onSubmitSuccess }: StoryFormProps) {
       })
       if (result.ok) {
         actions.setSubmitting(false)
+        window.localStorage.removeItem(formName)
         onSubmitSuccess()
       } else {
         console.error('something went wrong')
@@ -94,6 +98,8 @@ export default function StoryForm({ onSubmitSuccess }: StoryFormProps) {
     <Formik initialValues={initialValues} validationSchema={storySchema} onSubmit={handleSubmit}>
       {(props) => (
         <Form>
+          <PersistFormData name={formName} />
+
           {/* Anonymous */}
           <Field name="anonymous">
             {({ field, form }) => {

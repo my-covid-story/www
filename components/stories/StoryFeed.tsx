@@ -1,5 +1,5 @@
 import NextLink from 'next/link'
-import { Box, Flex, Heading, Link, SimpleGrid } from '@chakra-ui/react'
+import { Box, Flex, Heading, SimpleGrid } from '@chakra-ui/react'
 import { categoryLabel, storyCategoryLabel, storyImage, storyCite } from './model'
 import ContentBox from '../common/ContentBox'
 import Label from '../common/Label'
@@ -33,8 +33,8 @@ function StorySummary({ story }: StorySummaryProps) {
 
   return (
     <Box as="article">
-      <NextLink href={`${href}?back=true`} as={href}>
-        <Link _hover={{ textDecoration: 'none' }}>
+      <NextLink href={href} passHref>
+        <a style={{ textDecoration: 'none' }}>
           <Box
             borderRadius="8px"
             bgImage={`url(${storyImage(story)})`}
@@ -74,7 +74,7 @@ function StorySummary({ story }: StorySummaryProps) {
           <Box mt={2} color="#333333" fontSize="md" fontWeight={700} lineHeight={1.2}>
             Read Story
           </Box>
-        </Link>
+        </a>
       </NextLink>
     </Box>
   )

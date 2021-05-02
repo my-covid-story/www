@@ -1,5 +1,3 @@
-import { useRouter } from 'next/router'
-
 import {
   Box,
   Drawer,
@@ -30,7 +28,6 @@ import StoryDetail from '../../components/stories/StoryDetail'
 import FloatingRibbon, { Button } from '../../components/common/FloatingRibbon'
 import HeadTags from '../../components/common/HeadTags'
 import { storyImage } from '../../components/stories/model'
-import { ResponseError } from '../../lib/errors'
 import { GetStaticPropsResult } from 'next'
 import ErrorPage from '../404'
 import { CSSProperties } from 'react'
@@ -45,7 +42,6 @@ interface StoryProps {
 
 interface ErrorCodeProps {
   success: false
-  errorCode: number
   errorMessage: string
 }
 
@@ -55,7 +51,6 @@ const shareIconSize = 64
 const buttonStyle: CSSProperties = { marginRight: '12px', marginBottom: '12px' }
 
 export default function StoryPage(props: StoryPageProps): JSX.Element {
-  const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const url = props.success ? `${process.env.BASE_URL}/story/${props.story.id}` : ''
   const { onCopy } = useClipboard(url)
@@ -67,15 +62,10 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
    * in case of a server error.
    */
   if (props.success === false) {
-    return <ErrorPage code={props.errorCode} message={props.errorMessage} />
+    return <ErrorPage message={props.errorMessage} />
   }
 
   const { story } = props
-
-  // If we came from the feed, go back on cancel. If not, navigate forward to the feed.
-  function handleClose(): void {
-    router.query.back === 'true' ? router.back() : router.push('/')
-  }
 
   function handleURLCopy() {
     onCopy()
@@ -96,7 +86,7 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
       <HeadTags title={story.title} description={story.content} previewImage={storyImage(story)} />
 
       <Box>
-        <StoryDetail story={story} onClose={handleClose} onShare={onOpen} />
+        <StoryDetail story={story} onShare={onOpen} />
       </Box>
 
       <FloatingRibbon>
@@ -181,20 +171,6 @@ export async function getStaticProps({
 
     return { props: { success: true, story }, revalidate: 60 }
   } catch (err) {
-    if (err instanceof ResponseError) {
-      return {
-        props: { success: false, errorCode: err.status, errorMessage: err.message },
-        revalidate: 60,
-      }
-    }
-
-    return {
-      props: {
-        success: false,
-        errorCode: 500,
-        errorMessage: "This was an unknown error, we'll try to solve it as soon as possible",
-      },
-      revalidate: 60,
-    }
+    return { props: { success: false, errorMessage: "Ooops. Can't find it." }, revalidate: 60 }
   }
 }

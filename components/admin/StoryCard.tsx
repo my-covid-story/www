@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react'
 import SimpleLink from '../common/SimpleLink'
 import { useState } from 'react'
+import { Story } from '@prisma/client'
 
 interface UpdateStoryProps {
   id: string
@@ -31,73 +32,32 @@ const updateStory = async ({ id, approved, deleted, contentWarning }: UpdateStor
 }
 
 interface StoryCardProps {
-  id: string
-  createdAt: Date
-  title: string
-  content: string
-  name: string
-  postal: string
-  email: string
-  phone: string
-  twitter: string
-  approved: boolean
-  deleted: boolean
-  contentWarning: boolean
+  story: Story
+  filteredView: boolean
 }
 
 export default function StoryCard({
-  id,
-  createdAt,
-  title,
-  content,
-  name,
-  postal,
-  email,
-  phone,
-  twitter,
-  deleted: deletedInitial,
-  approved: approvedInitial,
-  contentWarning: contentWarningInitial,
+  story: { id, createdAt, title, content, displayName, postal, email, phone, twitter, ...rest },
+  filteredView,
 }: StoryCardProps) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const [deleted, setDeleted] = useState(deletedInitial)
-  const [approved, setApproved] = useState(approvedInitial)
-  const [contentWarning, setContentWarning] = useState(contentWarningInitial)
+  const [{ deleted, approved, contentWarning }, setCardStatus] = useState({ ...rest })
+
   const [interacted, setInteracted] = useState(false)
 
-  const handleDeletedInteraction = async () => {
-    if (window.confirm(`Are you sure you want to ${deleted ? 'undelete' : 'delete'} this?`)) {
-      const { deleted: deletedResponse } = await updateStory({
-        id,
-        deleted: !deleted,
-        approved: false,
-        contentWarning,
-      })
-      setDeleted(deletedResponse)
-      setInteracted(deletedResponse)
+  const handleDeleteInteraction = async (props) => {
+    if (window.confirm(`Are you sure you want to ${props.deleted ? 'undelete' : 'delete'} this?`)) {
+      const { approved, deleted, ...rest } = await updateStory(props)
+      setCardStatus({ approved, deleted, ...rest })
+      setInteracted(approved || deleted)
     }
   }
 
-  const handleApprovedInteraction = async () => {
-    const { approved: approvedResponse } = await updateStory({
-      id,
-      deleted: false,
-      approved: !approved,
-      contentWarning,
-    })
-    setApproved(approvedResponse)
-    setInteracted(approvedResponse)
-  }
-
-  const handleContentWarningInteraction = async () => {
-    const { contentWarning: contentWarningResponse } = await updateStory({
-      id,
-      deleted,
-      approved,
-      contentWarning: !contentWarning,
-    })
-    setContentWarning(contentWarningResponse)
+  const handleInteraction = async (props) => {
+    const { approved, deleted, ...rest } = await updateStory(props)
+    setCardStatus({ approved, deleted, ...rest })
+    setInteracted(approved || deleted)
   }
 
   return (
@@ -105,10 +65,10 @@ export default function StoryCard({
       <Box mt={2} shadow="md" borderWidth="1px" opacity={interacted ? 0.6 : 1}>
         <Box p={5}>
           <Heading fontSize="xl">{title}</Heading>
-          <Text mt={4} noOfLines={isOpen ? null : 4}>
+          <Text mt={4} noOfLines={!filteredView || isOpen ? null : 4}>
             {content}
           </Text>
-          <Flex justifyContent={'flex-end'} pt={2}>
+          <Flex justifyContent={'flex-end'} pt={2} display={filteredView ? 'flex' : 'none'}>
             <Button
               textAlign={'right'}
               size={'sm'}
@@ -121,7 +81,7 @@ export default function StoryCard({
         </Box>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4} p={5} bg={'gray.100'}>
           <Text>
-            {name || `Anonymous`} from {postal}
+            {displayName || `Anonymous`} from {postal}
           </Text>
           <Text>Contact: {email || twitter || phone ? `Yes` : 'No'}</Text>
           <Text>
@@ -149,11 +109,19 @@ export default function StoryCard({
             variant="outline"
             type="button"
             bg={'white'}
-            onClick={handleDeletedInteraction}
+            onClick={() =>
+              handleDeleteInteraction({ id, approved: false, deleted: !deleted, contentWarning })
+            }
           >
             {deleted ? 'Undelete' : 'Delete'}
           </Button>
-          <Button colorScheme="blue" type="button" onClick={handleApprovedInteraction}>
+          <Button
+            colorScheme="blue"
+            type="button"
+            onClick={() =>
+              handleInteraction({ id, approved: !approved, deleted: false, contentWarning })
+            }
+          >
             {approved ? 'Unapprove' : 'Approve'}
           </Button>
           <Button
@@ -161,7 +129,9 @@ export default function StoryCard({
             variant="outline"
             type="button"
             bg={'white'}
-            onClick={handleContentWarningInteraction}
+            onClick={() =>
+              handleInteraction({ id, approved, deleted, contentWarning: !contentWarning })
+            }
           >
             {contentWarning ? 'Remove Content Warning' : 'Add Content Warning'}
           </Button>

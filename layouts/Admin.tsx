@@ -13,7 +13,7 @@ export default function AdminLayout({ children }: SiteLayoutProps) {
   return (
     <Grid templateRows="auto 1fr auto" templateColumns="auto" minH="100vh">
       <Nav />
-      <Grid as="main" templateRows="auto 1fr" templateColumns="auto">
+      <Grid as="main" templateRows="auto 1fr" templateColumns="auto" alignSelf="start">
         <AdminNav />
         {children}
       </Grid>

@@ -11,9 +11,10 @@ import StoryCard from '../../components/admin/StoryCard'
 
 interface _Admin {
   stories: Story[] | []
+  filtered: boolean
 }
 
-const _Admin = ({ stories }: _Admin) => {
+const _Admin = ({ stories, filtered }: _Admin) => {
   const [session] = useSession()
 
   return (
@@ -26,7 +27,7 @@ const _Admin = ({ stories }: _Admin) => {
           {session && (
             <>
               {stories.map((story) => (
-                <StoryCard key={story.id} {...story} />
+                <StoryCard key={story.id} story={story} filteredView={filtered} />
               ))}
             </>
           )}
@@ -58,6 +59,6 @@ export async function getServerSideProps({ req, query }: GetServerSidePropsConte
   }
 
   return {
-    props: { stories },
+    props: { stories, filtered: deleted || approved },
   }
 }

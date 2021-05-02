@@ -1,5 +1,5 @@
-import { ReactNode, useEffect } from 'react'
-import { Button, Center, Container, Flex, Heading, Link, Text, VStack } from '@chakra-ui/react'
+import { useEffect } from 'react'
+import { Button, Center, Container, Heading, Link, Text, Flex, VStack } from '@chakra-ui/react'
 
 import HeadTags from '../components/common/HeadTags'
 
@@ -85,8 +85,6 @@ const Thanks = () => {
   )
 }
 
-const ThanksLayout = (page: ReactNode) => <BlankLayout>{page}</BlankLayout>
-
-Thanks.getLayout = ThanksLayout
+Thanks.setLayout = BlankLayout
 
 export default Thanks

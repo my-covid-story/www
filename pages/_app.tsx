@@ -11,18 +11,24 @@ import * as Fathom from 'fathom-client'
 
 import SiteLayout from '../layouts/Default'
 import { NextPage } from 'next'
+import { ChakraProvider } from '@chakra-ui/react'
+import theme from '../styles/theme'
+import { Provider as AuthProvider } from 'next-auth/client'
+import { Session } from 'next-auth'
 
-type GetLayout = (page: ReactNode) => ReactElement
+type SetLayout = (page: ReactNode) => ReactElement
 type PageWithLayout = NextPage & {
-  getLayout: GetLayout
+  setLayout: SetLayout
 }
 
 interface MyAppProps {
   Component: PageWithLayout
-  pageProps: unknown
+  pageProps: {
+    session: Session
+  }
 }
 
-function MyApp({ Component, pageProps }: MyAppProps) {
+function MyApp({ Component, pageProps: { session, ...rest } }: MyAppProps) {
   const router = useRouter()
 
   useEffect(() => {
@@ -43,7 +49,7 @@ function MyApp({ Component, pageProps }: MyAppProps) {
     }
   }, [router.events])
 
-  const getLayout = Component.getLayout || ((page) => <SiteLayout>{page}</SiteLayout>)
+  const Layout = Component.setLayout || SiteLayout
 
   const schema = {
     '@context': 'https://schema.org',
@@ -61,28 +67,34 @@ function MyApp({ Component, pageProps }: MyAppProps) {
     ],
   }
 
-  return getLayout(
-    <>
-      <Head>
-        <link key="favicon" rel="icon" href="/favicon.ico" />
-        <meta key="twitter:card" name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:creator" content="@MyCOVIDStory_CA" />
-        <meta property="og:type" content="website" />
+  return (
+    <ChakraProvider theme={theme}>
+      <AuthProvider session={session}>
+        <Layout>
+          <>
+            <Head>
+              <link key="favicon" rel="icon" href="/favicon.ico" />
+              <meta key="twitter:card" name="twitter:card" content="summary_large_image" />
+              <meta name="twitter:creator" content="@MyCOVIDStory_CA" />
+              <meta property="og:type" content="website" />
 
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-        <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="theme-color" content="#ffffff" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-      </Head>
-      <HeadTags />
-      <Component {...pageProps} />
-    </>
+              <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+              <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+              <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+              <link rel="manifest" href="/site.webmanifest" />
+              <meta name="msapplication-TileColor" content="#da532c" />
+              <meta name="theme-color" content="#ffffff" />
+              <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+              />
+            </Head>
+            <HeadTags />
+            <Component {...rest} />
+          </>
+        </Layout>
+      </AuthProvider>
+    </ChakraProvider>
   )
 }
 

@@ -1,22 +1,20 @@
 import { ReactElement } from 'react'
 import { Grid } from '@chakra-ui/react'
-import { Token } from '@chakra-ui/styled-system/dist/types/utils'
 
 import Nav from '../components/common/Nav'
 import Footer from '../components/common/Footer'
-
-import * as CSS from 'csstype'
+import AdminNav from '../components/admin/AdminNav'
 
 interface SiteLayoutProps {
   children: ReactElement
-  navPosition?: Token<CSS.Property.Position>
 }
 
-export default function SiteLayout({ children, navPosition = 'relative' }: SiteLayoutProps) {
+export default function AdminLayout({ children }: SiteLayoutProps) {
   return (
     <Grid templateRows="auto 1fr auto" templateColumns="auto" minH="100vh">
-      <Nav pos={navPosition} />
-      <Grid as="main" templateRows="1fr auto" templateColumns="auto">
+      <Nav />
+      <Grid as="main" templateRows="auto 1fr" templateColumns="auto" alignSelf="start">
+        <AdminNav />
         {children}
       </Grid>
       <Footer />

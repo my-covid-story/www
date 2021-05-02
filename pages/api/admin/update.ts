@@ -25,7 +25,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
 // Required fields in body: id, approved
 // Updates Story.approved to value
 async function handlePatch(req: NextApiRequest, res: NextApiResponse) {
-  const { id, approved, deleted } = req.body
+  const { id, approved, deleted, contentWarning } = req.body
 
   try {
     const story = await prisma.story.update({
@@ -35,6 +35,7 @@ async function handlePatch(req: NextApiRequest, res: NextApiResponse) {
       data: {
         approved,
         deleted,
+        contentWarning,
       },
     })
 

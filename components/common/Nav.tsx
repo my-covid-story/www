@@ -9,6 +9,7 @@ import {
   Stack,
   VisuallyHidden,
 } from '@chakra-ui/react'
+import useTranslation from 'next-translate/useTranslation'
 import Logo from './Logo'
 import MenuItem from './MenuItem'
 import { RESPONSIVE_PADDING } from './ContentBox'
@@ -51,6 +52,7 @@ interface MenuLinksProps {
 }
 
 const MenuLinks = ({ isOpen }: MenuLinksProps) => {
+  const { t } = useTranslation('common')
   return (
     <Box
       display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
@@ -63,11 +65,11 @@ const MenuLinks = ({ isOpen }: MenuLinksProps) => {
         direction={['column', 'column', 'row', 'row']}
         pt={[4, 4, 0, 0]}
       >
-        <MenuItem to="/">Home</MenuItem>
-        <MenuItem to="/about">About Us</MenuItem>
-        <MenuItem to="/faq">FAQ</MenuItem>
+        <MenuItem to="/">{t('home')}</MenuItem>
+        <MenuItem to="/about">{t('about')}</MenuItem>
+        <MenuItem to="/faq">{t('faq')}</MenuItem>
         <MenuItem to="https://kvmhxg5ojy6.typeform.com/to/gUsoYkft" externalLink={true}>
-          Media
+          {t('media')}
         </MenuItem>
 
         {/* Icons */}
@@ -95,7 +97,7 @@ const MenuLinks = ({ isOpen }: MenuLinksProps) => {
               bg: ['white'],
             }}
           >
-            Add Your Story
+            {t('add_story')}
           </Button>
         </MenuItem>
       </Stack>

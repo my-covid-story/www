@@ -1,11 +1,13 @@
 import NextLink from 'next/link'
 import { Box, Flex, Heading, SimpleGrid } from '@chakra-ui/react'
+import useTranslation from 'next-translate/useTranslation'
 import { categoryLabel, storyCategoryLabel, storyImage, storyCite } from './model'
 import ContentBox from '../common/ContentBox'
 import Label from '../common/Label'
 import { Story } from '@prisma/client'
 
 function FeedHeader() {
+  const { t } = useTranslation('common')
   return (
     <Box
       bgImage="url('/img/landingpage-v2.jpg')"
@@ -16,7 +18,7 @@ function FeedHeader() {
       <Box bg="rgba(0, 0, 0, 0.5)">
         <ContentBox pt={[8, null, 14]} pb={[10, null, 32]}>
           <Heading as="h1" fontSize={['2xl', null, '4xl', '5xl']} fontWeight={300}>
-            If our leaders won’t listen to the numbers, they must face our stories.
+            {t('tagline')}
           </Heading>
         </ContentBox>
       </Box>
@@ -30,6 +32,7 @@ interface StorySummaryProps {
 
 function StorySummary({ story }: StorySummaryProps) {
   const href = `/story/${story.id}`
+  const { t } = useTranslation('story')
 
   return (
     <Box as="article">
@@ -72,7 +75,7 @@ function StorySummary({ story }: StorySummaryProps) {
           </Box>
 
           <Box mt={2} color="#333333" fontSize="md" fontWeight={700} lineHeight={1.2}>
-            Read Story
+            {t('read')}
           </Box>
         </a>
       </NextLink>
@@ -85,12 +88,13 @@ interface StoryFeedProps {
 }
 
 export default function StoryFeed({ stories }: StoryFeedProps) {
+  const { t } = useTranslation('story')
   return (
     <Box>
       <FeedHeader />
       <ContentBox>
         <Heading as="h2" mb={[6, null, 8]} color="primary.100">
-          Stories
+          {t('stories')}
         </Heading>
         <SimpleGrid
           as="main"

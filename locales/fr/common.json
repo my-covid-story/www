@@ -1,11 +1,12 @@
 {
     "home": "Accueil",
-    "about": "About Us",
+    "about": "A propos",
     "faq": "FAQ",
-    "media": "Media Inquires",
-    "add_story": "Add Your Story",
-    "analytics": "Analytics",
-    "email": "Email Us",
-    "translate": "Help Us Translate",
-    "made_with": "Made with love by Ontarians ❤️"
+    "media": "Demandes des Médias",
+    "add_story": "Ajoutez votre Histoire",
+    "analytics": "Analytique",
+    "email": "Envoyez-nous un Email",
+    "translate": "Aidez-nous à Traduire",
+    "made_with": "Fabriqué avec amour par les Ontariens ❤️",
+    "tagline": "Si nos dirigeants n’écoutent pas les chiffres, ils doivent faire face à nos histoires."
 }

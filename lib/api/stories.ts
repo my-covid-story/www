@@ -30,14 +30,14 @@ function applySelect(story) {
 }
 
 // GET /api/stories
-export async function list(size: number = null) {
-  const takeSize = { take: size }
+export async function list(limit: number = null) {
+  const takeLimit = { take: limit }
   try {
     return await prisma.story.findMany({
       where: { approved: true },
       orderBy: { updatedAt: 'desc' },
       select,
-      ...(size && takeSize),
+      ...(limit && takeLimit),
     })
   } catch (err) {
     throw internalServerError()

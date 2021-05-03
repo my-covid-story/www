@@ -7,7 +7,7 @@ import Label from '../common/Label'
 import { Story } from '@prisma/client'
 
 function FeedHeader() {
-  const { t } = useTranslation('home')
+  const { t } = useTranslation('common')
   return (
     <Box
       bgImage="url('/img/landingpage-v2.jpg')"
@@ -32,6 +32,7 @@ interface StorySummaryProps {
 
 function StorySummary({ story }: StorySummaryProps) {
   const href = `/story/${story.id}`
+  const { t } = useTranslation('story')
 
   return (
     <Box as="article">
@@ -74,7 +75,7 @@ function StorySummary({ story }: StorySummaryProps) {
           </Box>
 
           <Box mt={2} color="#333333" fontSize="md" fontWeight={700} lineHeight={1.2}>
-            Read Story
+            {t('read')}
           </Box>
         </a>
       </NextLink>
@@ -87,12 +88,13 @@ interface StoryFeedProps {
 }
 
 export default function StoryFeed({ stories }: StoryFeedProps) {
+  const { t } = useTranslation('story')
   return (
     <Box>
       <FeedHeader />
       <ContentBox>
         <Heading as="h2" mb={[6, null, 8]} color="primary.100">
-          Stories
+          {t('stories')}
         </Heading>
         <SimpleGrid
           as="main"

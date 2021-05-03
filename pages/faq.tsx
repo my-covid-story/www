@@ -2,6 +2,7 @@ import { Box, Heading, Link, Text } from '@chakra-ui/react'
 import styles from '../styles/FaqPage.module.css'
 import ContentBox from '../components/common/ContentBox'
 import HeadTags from '../components/common/HeadTags'
+import SimpleLink from '../components/common/SimpleLink'
 
 export default function FAQ() {
   return (
@@ -41,10 +42,12 @@ export default function FAQ() {
               In order to keep you safe and establish trust with visitors, the content will be
               moderated using the following guidelines:
             </p>
+
             <ol>
               <li>
                 Content must be respectful, authentic, and captures their own or another’s story
               </li>
+              <li>Respects science</li>
               <li>Content isn’t defamatory or bullying anyone</li>
               <li>
                 It’s not self-promoting (i.e. sell a product/business) or encouraging illegal
@@ -55,7 +58,7 @@ export default function FAQ() {
               <li>Does not promote or encourage self-harm</li>
               <li>
                 For storytellers who wish to remain anonymous, their content does not have any
-                personally identifiable information.
+                personally identifiable information
               </li>
               <li>
                 Stories should not have personal identifying information about other people impacted
@@ -63,10 +66,28 @@ export default function FAQ() {
               </li>
             </ol>
 
+            <p>A story that does not meet these guidelines will not be shared publicly.</p>
+
             <p>
-              A story that does not meet these guidelines will not be shared publicly. If you have
-              any questions or concerns, reach out to{' '}
-              <a href="mailto:info@mycovidstory.ca">info@mycovidstory.ca</a>.
+              If you have any questions or concerns, reach out to{' '}
+              <SimpleLink
+                href="mailto:info@mycovidstory.ca"
+                isExternal={true}
+                color="primary.100"
+                fontWeight="600"
+              >
+                info@mycovidstory.ca
+              </SimpleLink>
+              . For additional support or resources, please see{' '}
+              <SimpleLink
+                href="https://211ontario.ca"
+                isExternal={true}
+                color="primary.100"
+                fontWeight="600"
+              >
+                https://211ontario.ca
+              </SimpleLink>{' '}
+              .
             </p>
           </Text>
         </Box>

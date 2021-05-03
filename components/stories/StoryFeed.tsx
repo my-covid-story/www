@@ -1,11 +1,13 @@
 import NextLink from 'next/link'
 import { Box, Flex, Heading, SimpleGrid } from '@chakra-ui/react'
+import useTranslation from 'next-translate/useTranslation'
 import { categoryLabel, storyCategoryLabel, storyImage, storyCite } from './model'
 import ContentBox from '../common/ContentBox'
 import Label from '../common/Label'
 import { Story } from '@prisma/client'
 
 function FeedHeader() {
+  const { t } = useTranslation('home')
   return (
     <Box
       bgImage="url('/img/landingpage-v2.jpg')"
@@ -16,7 +18,7 @@ function FeedHeader() {
       <Box bg="rgba(0, 0, 0, 0.5)">
         <ContentBox pt={[8, null, 14]} pb={[10, null, 32]}>
           <Heading as="h1" fontSize={['2xl', null, '4xl', '5xl']} fontWeight={300}>
-            If our leaders won’t listen to the numbers, they must face our stories.
+            {t('tagline')}
           </Heading>
         </ContentBox>
       </Box>

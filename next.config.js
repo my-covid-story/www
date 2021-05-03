@@ -1,4 +1,5 @@
 const { withSentryConfig } = require('@sentry/nextjs')
+const nextTranslate = require('next-translate')
 
 let baseUrl
 if (process.env.NEXT_PUBLIC_BASE_URL) {
@@ -11,7 +12,7 @@ if (process.env.NEXT_PUBLIC_BASE_URL) {
 
 console.log(`BASE_URL: ${baseUrl}`)
 
-const moduleExports = {
+const moduleExports = nextTranslate({
   future: {
     webpack5: true,
   },
@@ -22,7 +23,7 @@ const moduleExports = {
   env: {
     BASE_URL: baseUrl,
   },
-}
+})
 
 const SentryWebpackPluginOptions = {
   // Additional config options for the Sentry Webpack plugin. Keep in mind that

@@ -10,7 +10,6 @@ import {
   IconButton,
   Stack,
   VisuallyHidden,
-  useBreakpointValue,
   useDisclosure,
 } from '@chakra-ui/react'
 import { CloseIcon } from '@chakra-ui/icons'
@@ -71,7 +70,9 @@ const MenuDrawer = ({ isOpen, onClose }: MenuDrawerProps) => {
           <Logo />
           <MenuButton buttonRef={buttonRef} isOpen={true} onClick={onClose} />
         </NavBar>
-        <NavLinks />
+        <Stack align="center" spacing={6} p={4} pb={6}>
+          <NavLinks />
+        </Stack>
       </DrawerContent>
     </Drawer>
   )
@@ -79,15 +80,7 @@ const MenuDrawer = ({ isOpen, onClose }: MenuDrawerProps) => {
 
 const NavLinks = () => {
   return (
-    <Stack
-      direction={['column', null, 'row']}
-      align="center"
-      spacing={[6, null, null, 8]}
-      // The negative margin lets the button to extend beyond the box, avoiding making the nav bar taller.
-      my={[0, null, -1]}
-      py={[6, null, 0]}
-      px={[4, null, 0]}
-    >
+    <>
       <MenuItem to="/">Home</MenuItem>
       <MenuItem to="/about">About Us</MenuItem>
       <MenuItem to="/faq">FAQ</MenuItem>
@@ -126,7 +119,7 @@ const NavLinks = () => {
           Add Your Story
         </Button>
       </MenuItem>
-    </Stack>
+    </>
   )
 }
 
@@ -155,7 +148,6 @@ interface NavProps {
 }
 
 export default function Nav({ sticky = false }: NavProps) {
-  const menu = useBreakpointValue([true, null, false])
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   useEffect(() => {
@@ -167,8 +159,20 @@ export default function Nav({ sticky = false }: NavProps) {
     <>
       <NavBar sticky={sticky}>
         <Logo />
-        {!menu && <NavLinks />}
-        {menu && <MenuButton isOpen={false} onClick={onOpen} />}
+        <Stack
+          display={['none', null, 'flex']}
+          direction="row"
+          align="center"
+          // Less spacing below lg to avoid wrapping the nav bar as it gets smaller.
+          spacing={[6, null, null, 8]}
+          // The negative margin lets the button to extend beyond the box, avoiding making the nav bar taller.
+          my={-1}
+        >
+          <NavLinks />
+        </Stack>
+        <Box display={['block', null, 'none']}>
+          <MenuButton isOpen={false} onClick={onOpen} />
+        </Box>
       </NavBar>
       <MenuDrawer isOpen={isOpen} onClose={onClose} />
     </>

@@ -1,8 +1,11 @@
-import { useEffect } from 'react'
+import { MutableRefObject, useEffect, useRef } from 'react'
 import Router from 'next/router'
 import {
   Box,
   Button,
+  Drawer,
+  DrawerContent,
+  DrawerOverlay,
   Flex,
   IconButton,
   Stack,
@@ -31,44 +34,46 @@ const MenuIcon = () => (
   </svg>
 )
 
-interface MenuToggleProps {
+interface MenuButtonProps {
   isOpen: boolean
-  onToggle: () => void
+  buttonRef?: MutableRefObject<HTMLButtonElement>
+  onClick: () => void
 }
 
-const MenuToggle = ({ isOpen, onToggle }: MenuToggleProps) => {
+const MenuButton = ({ isOpen, buttonRef, onClick }: MenuButtonProps) => {
   return (
-    <Box display={['block', null, 'none']} m={-2} onClick={onToggle}>
-      <IconButton
-        py={2}
-        variant="link"
-        colorScheme="white"
-        aria-label={isOpen ? 'Close menu' : 'Menu'}
-        icon={isOpen ? <CloseIcon /> : <MenuIcon />}
-      />
-    </Box>
+    <IconButton
+      ref={buttonRef}
+      m={-2}
+      py={2}
+      variant="link"
+      colorScheme="white"
+      aria-label={isOpen ? 'Close menu' : 'Menu'}
+      icon={isOpen ? <CloseIcon /> : <MenuIcon />}
+      onClick={onClick}
+    />
   )
 }
 
 interface MenuDrawerProps {
   isOpen: boolean
+  onClose: () => void
 }
 
-const MenuDrawer = ({ isOpen }: MenuDrawerProps) => {
+const MenuDrawer = ({ isOpen, onClose }: MenuDrawerProps) => {
+  const buttonRef = useRef<HTMLButtonElement>(null)
+
   return (
-    <Box
-      display={isOpen ? 'block' : 'none'}
-      pos="absolute"
-      top={0}
-      left={0}
-      right={0}
-      zIndex={10}
-      py={6}
-      px={4}
-      {...colorProps}
-    >
-      <NavLinks />
-    </Box>
+    <Drawer placement="top" initialFocusRef={buttonRef} isOpen={isOpen} onClose={onClose}>
+      <DrawerOverlay />
+      <DrawerContent {...colorProps}>
+        <NavBar>
+          <Logo />
+          <MenuButton buttonRef={buttonRef} isOpen={true} onClick={onClose} />
+        </NavBar>
+        <NavLinks />
+      </DrawerContent>
+    </Drawer>
   )
 }
 
@@ -80,6 +85,8 @@ const NavLinks = () => {
       spacing={[6, null, null, 8]}
       // The negative margin lets the button to extend beyond the box, avoiding making the nav bar taller.
       my={[0, null, -1]}
+      py={[6, null, 0]}
+      px={[4, null, 0]}
     >
       <MenuItem to="/">Home</MenuItem>
       <MenuItem to="/about">About Us</MenuItem>
@@ -123,15 +130,17 @@ const NavLinks = () => {
   )
 }
 
-const NavContainer = ({ children }) => {
+const NavBar = ({ sticky = false, children }) => {
   return (
     <Flex
-      position="relative"
-      zIndex="5"
       as="nav"
-      align="center"
-      justify="space-between"
+      position={sticky ? 'sticky' : 'static'}
+      top={0}
+      left={0}
+      right={0}
       wrap="wrap"
+      justify="space-between"
+      align="center"
       py={4}
       px={RESPONSIVE_PADDING}
       {...colorProps}
@@ -147,7 +156,7 @@ interface NavProps {
 
 export default function Nav({ sticky = false }: NavProps) {
   const menu = useBreakpointValue([true, null, false])
-  const { isOpen, onClose, onToggle } = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   useEffect(() => {
     Router.events.on('routeChangeComplete', onClose)
@@ -155,17 +164,13 @@ export default function Nav({ sticky = false }: NavProps) {
   }, [onClose])
 
   return (
-    <Box position={sticky ? 'sticky' : 'static'} top={0} left={0} right={0}>
-      <NavContainer>
+    <>
+      <NavBar sticky={sticky}>
         <Logo />
         {!menu && <NavLinks />}
-        {menu && <MenuToggle isOpen={isOpen} onToggle={onToggle} />}
-      </NavContainer>
-      {menu && (
-        <Box position="relative">
-          <MenuDrawer isOpen={isOpen} />
-        </Box>
-      )}
-    </Box>
+        {menu && <MenuButton isOpen={false} onClick={onOpen} />}
+      </NavBar>
+      <MenuDrawer isOpen={isOpen} onClose={onClose} />
+    </>
   )
 }

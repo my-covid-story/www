@@ -131,7 +131,7 @@ const NavLinks = ({ menu = false }) => {
 }
 
 interface NavProps {
-  sticky: boolean
+  sticky?: boolean
 }
 
 export default function Nav({ sticky = false }: NavProps) {

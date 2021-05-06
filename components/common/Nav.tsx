@@ -20,12 +20,6 @@ import FacebookSVG from '../icons/FacebookSVG'
 import InstagramSVG from '../icons/InstagramSVG'
 import TwitterSVG from '../icons/TwitterSVG'
 
-const colorProps = {
-  bg: 'primary.100',
-  bgGradient: 'linear(to-r, primary.100, primary.700)',
-  color: 'white',
-}
-
 const MenuIcon = () => (
   <svg width="16px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="white">
     <title>Menu</title>
@@ -65,20 +59,27 @@ const MenuDrawer = ({ isOpen, onClose }: MenuDrawerProps) => {
   return (
     <Drawer placement="top" initialFocusRef={buttonRef} isOpen={isOpen} onClose={onClose}>
       <DrawerOverlay />
-      <DrawerContent {...colorProps}>
-        <NavBar>
-          <Logo />
-          <MenuButton buttonRef={buttonRef} isOpen={true} onClick={onClose} />
-        </NavBar>
-        <Stack align="center" spacing={6} p={4} pb={6}>
-          <NavLinks />
-        </Stack>
+      <DrawerContent
+        pt={4}
+        pb={6}
+        px={RESPONSIVE_PADDING}
+        bg="primary.100"
+        bgGradient="linear(to-b, primary.100, primary.500)"
+      >
+        <Box position="relative" color="white" fontSize="lg" fontWeight="bold">
+          <Stack direction="column" align="flex-start" spacing={6}>
+            <NavLinks menu />
+          </Stack>
+          <Box position="absolute" top={0} right={0}>
+            <MenuButton buttonRef={buttonRef} isOpen={true} onClick={onClose} />
+          </Box>
+        </Box>
       </DrawerContent>
     </Drawer>
   )
 }
 
-const NavLinks = () => {
+const NavLinks = ({ menu = false }) => {
   return (
     <>
       <MenuItem to="/">Home</MenuItem>
@@ -90,7 +91,13 @@ const NavLinks = () => {
 
       {/* The Box is required to take the spacing margin, allowing the Stack inside to have negative margin. */}
       <Box>
-        <Stack direction="row" spacing={[4, null, null, 6]} m={-1}>
+        <Stack
+          direction="row"
+          spacing={menu ? 6 : [4, null, null, 8]}
+          my={menu ? 1 : -1}
+          mx={-1}
+          fontSize={menu ? '2xl' : 'md'}
+        >
           <MenuItem to="https://twitter.com/MyCOVIDStory_CA" externalLink={true} p={1}>
             <TwitterSVG />
             <VisuallyHidden>Twitter @MyCOVIDStory_CA</VisuallyHidden>
@@ -110,7 +117,7 @@ const NavLinks = () => {
         <Button
           display="block"
           tabIndex={-1}
-          size="sm"
+          size={menu ? 'md' : 'sm'}
           rounded="md"
           color="primary.100"
           bg="white"
@@ -120,26 +127,6 @@ const NavLinks = () => {
         </Button>
       </MenuItem>
     </>
-  )
-}
-
-const NavBar = ({ sticky = false, children }) => {
-  return (
-    <Flex
-      as="nav"
-      position={sticky ? 'sticky' : 'static'}
-      top={0}
-      left={0}
-      right={0}
-      wrap="wrap"
-      justify="space-between"
-      align="center"
-      py={4}
-      px={RESPONSIVE_PADDING}
-      {...colorProps}
-    >
-      {children}
-    </Flex>
   )
 }
 
@@ -157,7 +144,21 @@ export default function Nav({ sticky = false }: NavProps) {
 
   return (
     <>
-      <NavBar sticky={sticky}>
+      <Flex
+        as="nav"
+        position={sticky ? 'sticky' : 'static'}
+        top={0}
+        left={0}
+        right={0}
+        wrap="wrap"
+        justify="space-between"
+        align="center"
+        py={4}
+        px={RESPONSIVE_PADDING}
+        bg="primary.100"
+        bgGradient="linear(to-r, primary.100, primary.700)"
+        color="white"
+      >
         <Logo />
         <Stack
           display={['none', null, 'flex']}
@@ -173,7 +174,7 @@ export default function Nav({ sticky = false }: NavProps) {
         <Box display={['block', null, 'none']}>
           <MenuButton isOpen={false} onClick={onOpen} />
         </Box>
-      </NavBar>
+      </Flex>
       <MenuDrawer isOpen={isOpen} onClose={onClose} />
     </>
   )

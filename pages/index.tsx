@@ -41,7 +41,7 @@ export async function getStaticProps() {
   }
 }
 
-const MainPageLayout = ({ children }) => <SiteLayout navPosition="sticky">{children}</SiteLayout>
+const MainPageLayout = ({ children }) => <SiteLayout stickyNav>{children}</SiteLayout>
 
 MainPage.setLayout = MainPageLayout
 

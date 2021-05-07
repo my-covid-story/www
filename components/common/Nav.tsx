@@ -1,14 +1,18 @@
-import { MouseEventHandler, useState, useEffect } from 'react'
+import { MutableRefObject, useEffect, useRef } from 'react'
 import Router from 'next/router'
 import {
   Box,
   Button,
+  Drawer,
+  DrawerContent,
+  DrawerOverlay,
   Flex,
-  FlexProps,
-  PositionProps,
+  IconButton,
   Stack,
   VisuallyHidden,
+  useDisclosure,
 } from '@chakra-ui/react'
+import { CloseIcon } from '@chakra-ui/icons'
 import Logo from './Logo'
 import MenuItem from './MenuItem'
 import { RESPONSIVE_PADDING } from './ContentBox'
@@ -16,131 +20,162 @@ import FacebookSVG from '../icons/FacebookSVG'
 import InstagramSVG from '../icons/InstagramSVG'
 import TwitterSVG from '../icons/TwitterSVG'
 
-const CloseIcon = () => (
-  <svg width="24" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-    <title>Close</title>
-    <path
-      fill="white"
-      d="M9.00023 7.58599L13.9502 2.63599L15.3642 4.04999L10.4142 8.99999L15.3642 13.95L13.9502 15.364L9.00023 10.414L4.05023 15.364L2.63623 13.95L7.58623 8.99999L2.63623 4.04999L4.05023 2.63599L9.00023 7.58599Z"
-    />
-  </svg>
-)
-
 const MenuIcon = () => (
-  <svg width="24px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="white">
+  <svg width="16px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="white">
     <title>Menu</title>
     <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
   </svg>
 )
 
-interface MenuToggleProps {
-  toggle: MouseEventHandler
+interface MenuButtonProps {
   isOpen: boolean
+  buttonRef?: MutableRefObject<HTMLButtonElement>
+  onClick: () => void
 }
 
-const MenuToggle = ({ toggle, isOpen }: MenuToggleProps) => {
+const MenuButton = ({ isOpen, buttonRef, onClick }: MenuButtonProps) => {
   return (
-    <Box display={{ base: 'block', md: 'none' }} onClick={toggle}>
-      {isOpen ? <CloseIcon /> : <MenuIcon />}
-    </Box>
+    <IconButton
+      ref={buttonRef}
+      m={-2}
+      py={2}
+      variant="link"
+      colorScheme="white"
+      aria-label={isOpen ? 'Close menu' : 'Menu'}
+      icon={isOpen ? <CloseIcon /> : <MenuIcon />}
+      onClick={onClick}
+    />
   )
 }
 
-interface MenuLinksProps {
-  isOpen?: boolean
+interface MenuDrawerProps {
+  isOpen: boolean
+  onClose: () => void
 }
 
-const MenuLinks = ({ isOpen }: MenuLinksProps) => {
+const MenuDrawer = ({ isOpen, onClose }: MenuDrawerProps) => {
+  const buttonRef = useRef<HTMLButtonElement>(null)
+
   return (
-    <Box
-      display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
-      flexBasis={{ base: '100%', md: 'auto' }}
-    >
-      <Stack
-        spacing={8}
-        align="center"
-        justify={['center', 'space-between', 'flex-end', 'flex-end']}
-        direction={['column', 'column', 'row', 'row']}
-        pt={[4, 4, 0, 0]}
+    <Drawer placement="top" initialFocusRef={buttonRef} isOpen={isOpen} onClose={onClose}>
+      <DrawerOverlay />
+      <DrawerContent
+        pt={4}
+        pb={6}
+        px={RESPONSIVE_PADDING}
+        bg="primary.100"
+        bgGradient="linear(to-b, primary.100, primary.500)"
       >
-        <MenuItem to="/">Home</MenuItem>
-        <MenuItem to="/about">About Us</MenuItem>
-        <MenuItem to="/faq">FAQ</MenuItem>
-        <MenuItem to="https://kvmhxg5ojy6.typeform.com/to/gUsoYkft" externalLink={true}>
-          Media
-        </MenuItem>
-
-        {/* Icons */}
-        <MenuItem to="https://twitter.com/MyCOVIDStory_CA" externalLink={true}>
-          <TwitterSVG />
-          <VisuallyHidden>Twitter @MyCOVIDStory_CA</VisuallyHidden>
-        </MenuItem>
-        <MenuItem to="https://www.facebook.com/MyCovidStoryCA" externalLink={true}>
-          <FacebookSVG />
-          <VisuallyHidden>Facebook @MyCovidStoryCA</VisuallyHidden>
-        </MenuItem>
-        <MenuItem to="https://www.instagram.com/mycovidstory_ca/" externalLink={true}>
-          <InstagramSVG />
-          <VisuallyHidden>Instagram @mycovidstory_ca</VisuallyHidden>
-        </MenuItem>
-
-        <MenuItem to="/new">
-          <Button
-            size="sm"
-            my={isOpen ? 0 : -1}
-            rounded="md"
-            color="primary.100"
-            bg="white"
-            _hover={{
-              bg: ['white'],
-            }}
-          >
-            Add Your Story
-          </Button>
-        </MenuItem>
-      </Stack>
-    </Box>
+        <Box position="relative" color="white" fontSize="lg" fontWeight="bold">
+          <Stack direction="column" align="flex-start" spacing={6}>
+            <NavLinks menu />
+          </Stack>
+          <Box position="absolute" top={0} right={0}>
+            <MenuButton buttonRef={buttonRef} isOpen={true} onClick={onClose} />
+          </Box>
+        </Box>
+      </DrawerContent>
+    </Drawer>
   )
 }
 
-const NavBarContainer = ({ children, ...props }: FlexProps) => {
+const NavLinks = ({ menu = false }) => {
   return (
-    <Flex
-      zIndex="5"
-      top="0"
-      as="nav"
-      align="center"
-      justify="space-between"
-      wrap="wrap"
-      w="100%"
-      py={4}
-      px={RESPONSIVE_PADDING}
-      bg="primary.100"
-      bgGradient="linear(to-r, primary.100, primary.700)"
-      color="white"
-      {...props}
-    >
-      {children}
-    </Flex>
+    <>
+      <MenuItem to="/">Home</MenuItem>
+      <MenuItem to="/about">About Us</MenuItem>
+      <MenuItem to="/faq">FAQ</MenuItem>
+      <MenuItem to="https://kvmhxg5ojy6.typeform.com/to/gUsoYkft" externalLink={true}>
+        Media
+      </MenuItem>
+
+      {/* The Box is required to take the spacing margin, allowing the Stack inside to have negative margin. */}
+      <Box>
+        <Stack
+          direction="row"
+          spacing={menu ? 6 : [4, null, null, 8]}
+          my={menu ? 1 : -1}
+          mx={-1}
+          fontSize={menu ? '2xl' : 'md'}
+        >
+          <MenuItem to="https://twitter.com/MyCOVIDStory_CA" externalLink={true} p={1}>
+            <TwitterSVG />
+            <VisuallyHidden>Twitter @MyCOVIDStory_CA</VisuallyHidden>
+          </MenuItem>
+          <MenuItem to="https://www.facebook.com/MyCovidStoryCA" externalLink={true} p={1}>
+            <FacebookSVG />
+            <VisuallyHidden>Facebook @MyCovidStoryCA</VisuallyHidden>
+          </MenuItem>
+          <MenuItem to="https://www.instagram.com/mycovidstory_ca/" externalLink={true} p={1}>
+            <InstagramSVG />
+            <VisuallyHidden>Instagram @mycovidstory_ca</VisuallyHidden>
+          </MenuItem>
+        </Stack>
+      </Box>
+
+      <MenuItem to="/new">
+        <Button
+          display="block"
+          tabIndex={-1}
+          size={menu ? 'md' : 'sm'}
+          rounded="md"
+          color="primary.100"
+          bg="white"
+          _hover={{ bg: ['white'] }}
+        >
+          Add Your Story
+        </Button>
+      </MenuItem>
+    </>
   )
 }
 
-export default function Nav({ ...props }: FlexProps & PositionProps) {
-  const [isOpen, setIsOpen] = useState(false)
+interface NavProps {
+  sticky?: boolean
+}
 
-  const toggle = (): void => setIsOpen(!isOpen)
+export default function Nav({ sticky = false }: NavProps) {
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   useEffect(() => {
-    const closePanel = () => setIsOpen(false)
-    Router.events.on('routeChangeComplete', closePanel)
-    return () => Router.events.off('routeChangeComplete', closePanel)
-  }, [])
+    Router.events.on('routeChangeComplete', onClose)
+    return () => Router.events.off('routeChangeComplete', onClose)
+  }, [onClose])
 
   return (
-    <NavBarContainer {...props}>
-      <Logo w="150px" color={['white', 'white', 'primary.500', 'primary.500']} />
-      <MenuToggle toggle={toggle} isOpen={isOpen} />
-      <MenuLinks isOpen={isOpen} />
-    </NavBarContainer>
+    <>
+      <Flex
+        as="nav"
+        position={sticky ? 'sticky' : 'static'}
+        top={0}
+        left={0}
+        right={0}
+        wrap="wrap"
+        justify="space-between"
+        align="center"
+        py={4}
+        px={RESPONSIVE_PADDING}
+        bg="primary.100"
+        bgGradient="linear(to-r, primary.100, primary.700)"
+        color="white"
+      >
+        <Logo />
+        <Stack
+          display={['none', null, 'flex']}
+          direction="row"
+          align="center"
+          // Less spacing below lg to avoid wrapping the nav bar as it gets smaller.
+          spacing={[6, null, null, 8]}
+          // The negative margin lets the button to extend beyond the box, avoiding making the nav bar taller.
+          my={-1}
+        >
+          <NavLinks />
+        </Stack>
+        <Box display={['block', null, 'none']}>
+          <MenuButton isOpen={false} onClick={onOpen} />
+        </Box>
+      </Flex>
+      <MenuDrawer isOpen={isOpen} onClose={onClose} />
+    </>
   )
 }

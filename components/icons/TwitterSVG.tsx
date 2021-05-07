@@ -3,6 +3,7 @@ import Icon from '@chakra-ui/icon'
 export default function TwitterSVG() {
   return (
     <Icon
+      display="block"
       stroke="currentColor"
       fill="currentColor"
       strokeWidth="0"

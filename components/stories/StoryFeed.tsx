@@ -33,7 +33,7 @@ function StorySummary({ story }: StorySummaryProps) {
 
   return (
     <Box as="article">
-      <NextLink href={href} passHref>
+      <NextLink href={`${href}?back=true`} as={href} passHref>
         <a style={{ textDecoration: 'none' }}>
           <Box
             borderRadius="8px"

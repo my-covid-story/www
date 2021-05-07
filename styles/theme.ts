@@ -12,8 +12,8 @@ const global = {
 }
 
 const fonts = {
-  body: 'Inter',
-  heading: 'Inter',
+  body: 'Inter,sans-serif',
+  heading: 'Inter,sans-serif',
 }
 
 const colors = {

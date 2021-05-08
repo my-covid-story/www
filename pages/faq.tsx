@@ -27,22 +27,19 @@ export default function FAQ() {
             effective government policy that will save lives.
           </Text>
         </Box>
-
         <Box pb={6}>
           <Heading as="h2" size="l" pb={3}>
-            Can anyone share a story? How do we know if they’re true?
+            Can anyone share a story?
           </Heading>
           <Text>
             <p>
               Anyone over the age of 18 can submit their story. While our focus is currently on
               Ontario, we welcome stories from anyone throughout Canada.
             </p>
-
             <p>
               In order to keep you safe and establish trust with visitors, the content will be
               moderated using the following guidelines:
             </p>
-
             <ol>
               <li>
                 Content must be respectful, authentic, and captures their own or another’s story
@@ -65,11 +62,9 @@ export default function FAQ() {
                 by COVID-19 without their consent
               </li>
             </ol>
-
-            <p>A story that does not meet these guidelines will not be shared publicly.</p>
-
             <p>
-              If you have any questions or concerns, reach out to{' '}
+              A story that does not meet these guidelines will not be shared publicly. If you have
+              any questions or concerns, reach out to{' '}
               <SimpleLink
                 href="mailto:info@mycovidstory.ca"
                 isExternal={true}
@@ -91,7 +86,25 @@ export default function FAQ() {
             </p>
           </Text>
         </Box>
-
+        <Box pb={6}>
+          <Heading as="h2" size="l" pb={3}>
+            How do you know these stories are true?
+          </Heading>
+          <Text>
+            <p>
+              The stories published by mycovidstory.ca represent the lived experience, opinions, and
+              truths of the people telling them. They have not been verified for accuracy.
+            </p>
+            <p>
+              These stories do not represent the opinions or beliefs of mycovidstory.ca or any of
+              the many volunteers working on this project.
+            </p>
+            <p>
+              We encourage all readers to consult respected scientific sources for verified, factual
+              information related to Covid-19.
+            </p>
+          </Text>
+        </Box>
         <Box pb={6}>
           <Heading as="h2" size="l" pb={3}>
             Who can access private data?
@@ -108,7 +121,6 @@ export default function FAQ() {
             information.
           </Text>
         </Box>
-
         <Box pb={6}>
           <Heading as="h2" size="l" pb={3}>
             Why might the media want to follow-up with storytellers? Is MyCovidStory.ca a direct
@@ -183,6 +195,90 @@ export default function FAQ() {
             of Ontarians concerned by the COVID-19 response in our province and hope that by sharing
             real stories of the people impacted, decision makers at all levels will make the right
             decisions to keep Ontarians safe.
+          </Text>
+        </Box>
+        <Box pb={6}>
+          <Heading as="h2" size="l" pb={3}>
+            What sites and sources do you recommend to learn about the science of COVID-19 and
+            related vaccines?
+          </Heading>
+          <Text>
+            <strong>Websites:</strong>
+            <ol>
+              <li>
+                <SimpleLink
+                  href="https://covid19-sciencetable.ca/"
+                  isExternal={true}
+                  color="primary.100"
+                  fontWeight="600"
+                >
+                  Ontario COVID-19 Science Advisory Table
+                </SimpleLink>
+              </li>
+              <li>
+                <SimpleLink
+                  href="https://howsmyflattening.ca/"
+                  isExternal={true}
+                  color="primary.100"
+                  fontWeight="600"
+                >
+                  #HowsMyFlattening
+                </SimpleLink>
+              </li>
+              <li>
+                <SimpleLink
+                  href="https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection/prevention-risks.html"
+                  isExternal={true}
+                  color="primary.100"
+                  fontWeight="600"
+                >
+                  Government of Canada: COVID-19 prevention and risks
+                </SimpleLink>
+              </li>
+              <li>
+                <SimpleLink
+                  href="https://www.canada.ca/en/public-health/services/diseases/coronavirus-disease-covid-19/vaccines.html"
+                  isExternal={true}
+                  color="primary.100"
+                  fontWeight="600"
+                >
+                  Government of Canada: Vaccines for COVID-19
+                </SimpleLink>
+              </li>
+            </ol>
+            <strong>Social media:</strong>
+            <ol>
+              <li>
+                <SimpleLink
+                  href="https://twitter.com/VaxHuntersCan"
+                  isExternal={true}
+                  color="primary.100"
+                  fontWeight="600"
+                >
+                  Vaccine Hunters Canada
+                </SimpleLink>
+              </li>
+              <li>
+                <SimpleLink
+                  href="https://www.instagram.com/unambiguousscience/"
+                  isExternal={true}
+                  color="primary.100"
+                  fontWeight="600"
+                >
+                  Unambiguous Science
+                </SimpleLink>
+              </li>
+              <li>
+                <SimpleLink
+                  href="https://www.instagram.com/covidvaccinefacts/"
+                  isExternal={true}
+                  color="primary.100"
+                  fontWeight="600"
+                >
+                  COVID19 Vaccine Facts
+                </SimpleLink>
+              </li>
+            </ol>
           </Text>
         </Box>
       </ContentBox>

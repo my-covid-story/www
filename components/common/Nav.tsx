@@ -13,7 +13,6 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { CloseIcon } from '@chakra-ui/icons'
-import Logo from './Logo'
 import SimpleLink from './SimpleLink'
 import { RESPONSIVE_PADDING } from './ContentBox'
 import FacebookSVG from '../icons/FacebookSVG'
@@ -76,6 +75,14 @@ const MenuDrawer = ({ isOpen, onClose }: MenuDrawerProps) => {
         </Box>
       </DrawerContent>
     </Drawer>
+  )
+}
+
+const Logo = () => {
+  return (
+    <SimpleLink href="/" undecorated fontWeight="bold">
+      My COVID Story
+    </SimpleLink>
   )
 }
 

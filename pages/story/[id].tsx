@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import {
   Box,
   Drawer,
@@ -51,6 +52,7 @@ const shareIconSize = 64
 const buttonStyle: CSSProperties = { marginRight: '12px', marginBottom: '12px' }
 
 export default function StoryPage(props: StoryPageProps): JSX.Element {
+  const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const url = props.success ? `${process.env.BASE_URL}/story/${props.story.id}` : ''
   const { onCopy } = useClipboard(url)
@@ -66,6 +68,12 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
   }
 
   const { story } = props
+
+  // If we came from the feed, go back on cancel. If not, navigate forward to the feed.
+  // Going back in the browser history returns to the user's previous scroll position in the feed.
+  function handleClose(): void {
+    router.query.back === 'true' ? router.back() : router.push('/')
+  }
 
   function handleURLCopy() {
     onCopy()
@@ -86,7 +94,7 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
       <HeadTags title={story.title} description={story.content} previewImage={storyImage(story)} />
 
       <Box>
-        <StoryDetail story={story} onShare={onOpen} />
+        <StoryDetail story={story} onClose={handleClose} onShare={onOpen} />
       </Box>
 
       <FloatingRibbon>

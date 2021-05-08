@@ -1,20 +1,15 @@
 import { Box, Flex, Heading, IconButton, Stack, Text } from '@chakra-ui/react'
 import { CloseIcon } from '@chakra-ui/icons'
 import { Story } from '@prisma/client'
-import {
-  categoryLabel,
-  storyCategoryLabel,
-  storyImage,
-  storyName,
-  storyDate,
-  storyParagraphs,
-} from './model'
+import { categoryLabel, storyImage, storyName, storyDate, storyParagraphs } from './model'
 import ContentBox from '../common/ContentBox'
 import Label from '../common/Label'
 
 import { ContentWarningBox } from '../common/Warnings'
 import ShareSVG from '../icons/ShareSVG'
 import SimpleLink from '../common/SimpleLink'
+
+import useTranslation from 'next-translate/useTranslation'
 
 function StoryParagraphs(p: string, i: number) {
   return <Text key={i}>{p}</Text>
@@ -26,6 +21,7 @@ interface StoryDetailProps {
 }
 
 export default function StoryDetail({ story, onShare }: StoryDetailProps) {
+  const { t } = useTranslation('story')
   return (
     <Box>
       <Box bgImage={`url(${storyImage(story)})`} bgSize="cover" bgPosition="center" color="white">
@@ -33,7 +29,7 @@ export default function StoryDetail({ story, onShare }: StoryDetailProps) {
           <ContentBox>
             <Flex justifyContent="space-between">
               <Label visibility={categoryLabel[story.category] ? 'visible' : 'hidden'}>
-                {storyCategoryLabel(story)}
+                {t(`categories.${story.category}`)}
               </Label>
 
               <Flex>

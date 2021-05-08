@@ -1,7 +1,7 @@
 import NextLink from 'next/link'
 import { Box, Flex, Heading, SimpleGrid } from '@chakra-ui/react'
 import useTranslation from 'next-translate/useTranslation'
-import { categoryLabel, storyCategoryLabel, storyImage, storyCite } from './model'
+import { categoryLabel, storyImage, storyCite } from './model'
 import ContentBox from '../common/ContentBox'
 import Label from '../common/Label'
 import { Story } from '@prisma/client'
@@ -49,11 +49,11 @@ function StorySummary({ story }: StorySummaryProps) {
               <Flex>
                 {story.contentWarning ? (
                   <Label color="#C01313" backgroundColor="white">
-                    Warning: Sensitive Content
+                    {t('warning')}
                   </Label>
                 ) : (
                   <Label visibility={categoryLabel[story.category] ? 'visible' : 'hidden'}>
-                    {storyCategoryLabel(story)}
+                    {t(`categories.${story.category}`)}
                   </Label>
                 )}
               </Flex>

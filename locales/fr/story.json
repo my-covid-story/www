@@ -1,4 +1,13 @@
 {
     "stories": "Histoires",
-    "read": "Lire l'histoire"
+    "read": "Lire l'histoire",
+    "warning": "Avertissement: Contenu sensible",
+    "categories":   {
+        "concerned-citizen": "Citoyen Concerné",
+        "essential-worker": "Travailleur Essentiel",
+        "healthcare-provider": "Fournisseur de soins de santé",
+        "educator": "Éducateur",
+        "small-business-owner": "Patron de PME",
+        "patient-family-member": "Patient ou membre de la famille"
+    }
 }

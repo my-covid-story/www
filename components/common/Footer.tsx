@@ -1,5 +1,5 @@
 import { Box, Container, SimpleGrid, Text } from '@chakra-ui/react'
-import MenuItem from './MenuItem'
+import SimpleLink from './SimpleLink'
 import VercelSVG from '../icons/VercelSVG'
 
 export default function Footer() {
@@ -14,50 +14,50 @@ export default function Footer() {
     >
       <Container centerContent maxW="container.sm">
         <SimpleGrid columns={[2, 3]} width="100%" textAlign={['left', 'center']}>
-          <MenuItem padding={1} marginBottom={1}>
+          <SimpleLink href="/" padding={1} marginBottom={1}>
             Home
-          </MenuItem>
-          <MenuItem to="/about" padding={1} marginBottom={1}>
+          </SimpleLink>
+          <SimpleLink href="/about" padding={1} marginBottom={1}>
             About
-          </MenuItem>
-          <MenuItem to="/faq" padding={1} marginBottom={1}>
+          </SimpleLink>
+          <SimpleLink href="/faq" padding={1} marginBottom={1}>
             FAQ
-          </MenuItem>
-          <MenuItem
-            to="https://kvmhxg5ojy6.typeform.com/to/gUsoYkft"
-            externalLink={true}
+          </SimpleLink>
+          <SimpleLink
+            href="https://kvmhxg5ojy6.typeform.com/to/gUsoYkft"
+            isExternal={true}
             padding={1}
             marginBottom={1}
           >
             Media Form
-          </MenuItem>
-          {/*<MenuItem padding={1} marginBottom={1}>Releases</MenuItem>*/}
-          <MenuItem
-            to="https://github.com/my-covid-story/www"
-            externalLink={true}
+          </SimpleLink>
+          {/*<SimpleLink padding={1} marginBottom={1}>Releases</SimpleLink>*/}
+          <SimpleLink
+            href="https://github.com/my-covid-story/www"
+            isExternal={true}
             padding={1}
             marginBottom={1}
           >
             Github
-          </MenuItem>
-          <MenuItem
-            to="https://app.usefathom.com/share/xnknpyhv/mycovidstory.ca"
-            externalLink={true}
+          </SimpleLink>
+          <SimpleLink
+            href="https://app.usefathom.com/share/xnknpyhv/mycovidstory.ca"
+            isExternal={true}
             padding={1}
             marginBottom={1}
           >
             Analytics
-          </MenuItem>
-          <MenuItem to="mailto:info@mycovidstory.ca" padding={1} marginBottom={1}>
+          </SimpleLink>
+          <SimpleLink href="mailto:info@mycovidstory.ca" padding={1} marginBottom={1}>
             Email Us
-          </MenuItem>
-          <MenuItem
-            to="mailto:info@mycovidstory.ca?subject=I'd like to help translate!"
+          </SimpleLink>
+          <SimpleLink
+            href="mailto:info@mycovidstory.ca?subject=I'd like to help translate!"
             padding={1}
             marginBottom={1}
           >
             Help Us Translate
-          </MenuItem>
+          </SimpleLink>
         </SimpleGrid>
         <Text as="strong" paddingTop={4} mb={4}>
           Made with love by Ontarians{' '}
@@ -65,12 +65,12 @@ export default function Footer() {
             ❤️
           </span>
         </Text>
-        <MenuItem
-          to="https://vercel.com?utm_source=my-covid-story&utm_campaign=oss"
-          externalLink={true}
+        <SimpleLink
+          href="https://vercel.com?utm_source=my-covid-story&utm_campaign=oss"
+          isExternal={true}
         >
           <VercelSVG />
-        </MenuItem>
+        </SimpleLink>
       </Container>
     </Box>
   )

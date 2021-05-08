@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react'
 import { CloseIcon } from '@chakra-ui/icons'
 import Logo from './Logo'
-import MenuItem from './MenuItem'
+import SimpleLink from './SimpleLink'
 import { RESPONSIVE_PADDING } from './ContentBox'
 import FacebookSVG from '../icons/FacebookSVG'
 import InstagramSVG from '../icons/InstagramSVG'
@@ -82,12 +82,12 @@ const MenuDrawer = ({ isOpen, onClose }: MenuDrawerProps) => {
 const NavLinks = ({ menu = false }) => {
   return (
     <>
-      <MenuItem to="/">Home</MenuItem>
-      <MenuItem to="/about">About Us</MenuItem>
-      <MenuItem to="/faq">FAQ</MenuItem>
-      <MenuItem to="https://kvmhxg5ojy6.typeform.com/to/gUsoYkft" externalLink={true}>
+      <SimpleLink href="/">Home</SimpleLink>
+      <SimpleLink href="/about">About Us</SimpleLink>
+      <SimpleLink href="/faq">FAQ</SimpleLink>
+      <SimpleLink href="https://kvmhxg5ojy6.typeform.com/to/gUsoYkft" isExternal>
         Media
-      </MenuItem>
+      </SimpleLink>
 
       {/* The Box is required to take the spacing margin, allowing the Stack inside to have negative margin. */}
       <Box>
@@ -98,22 +98,22 @@ const NavLinks = ({ menu = false }) => {
           mx={-1}
           fontSize={menu ? '2xl' : 'md'}
         >
-          <MenuItem to="https://twitter.com/MyCOVIDStory_CA" externalLink={true} p={1}>
+          <SimpleLink href="https://twitter.com/MyCOVIDStory_CA" isExternal p={1}>
             <TwitterSVG />
             <VisuallyHidden>Twitter @MyCOVIDStory_CA</VisuallyHidden>
-          </MenuItem>
-          <MenuItem to="https://www.facebook.com/MyCovidStoryCA" externalLink={true} p={1}>
+          </SimpleLink>
+          <SimpleLink href="https://www.facebook.com/MyCovidStoryCA" isExternal p={1}>
             <FacebookSVG />
             <VisuallyHidden>Facebook @MyCovidStoryCA</VisuallyHidden>
-          </MenuItem>
-          <MenuItem to="https://www.instagram.com/mycovidstory_ca/" externalLink={true} p={1}>
+          </SimpleLink>
+          <SimpleLink href="https://www.instagram.com/mycovidstory_ca/" isExternal p={1}>
             <InstagramSVG />
             <VisuallyHidden>Instagram @mycovidstory_ca</VisuallyHidden>
-          </MenuItem>
+          </SimpleLink>
         </Stack>
       </Box>
 
-      <MenuItem to="/new">
+      <SimpleLink href="/new">
         <Button
           display="block"
           tabIndex={-1}
@@ -125,7 +125,7 @@ const NavLinks = ({ menu = false }) => {
         >
           Add Your Story
         </Button>
-      </MenuItem>
+      </SimpleLink>
     </>
   )
 }

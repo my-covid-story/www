@@ -31,7 +31,6 @@ export default function Footer() {
           >
             Media Form
           </SimpleLink>
-          {/*<SimpleLink padding={1} marginBottom={1}>Releases</SimpleLink>*/}
           <SimpleLink
             href="https://github.com/my-covid-story/www"
             isExternal={true}

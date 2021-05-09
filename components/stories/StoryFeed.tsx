@@ -7,7 +7,7 @@ import Label from '../common/Label'
 import { Story } from '@prisma/client'
 
 function FeedHeader() {
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('story')
   return (
     <Box
       bgImage="url('/img/landingpage-v2.jpg')"

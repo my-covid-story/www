@@ -3,6 +3,7 @@
   "defaultLocale": "en",
   "pages": {
     "*": ["common"],
-    "/": ["story"]
+    "/": ["story"],
+    "/story/[id]": ["story"]
   }
 }

@@ -1,7 +1,7 @@
 import { Box, Flex, Heading, IconButton, Stack, Text } from '@chakra-ui/react'
 import { CloseIcon } from '@chakra-ui/icons'
 import { Story } from '@prisma/client'
-import { categoryLabel, storyImage, storyName, storyDate, storyParagraphs } from './model'
+import { categories, storyImage, storyDate, storyParagraphs, useLabels } from './utils'
 import ContentBox from '../common/ContentBox'
 import Label from '../common/Label'
 
@@ -22,14 +22,16 @@ interface StoryDetailProps {
 
 export default function StoryDetail({ story, onShare }: StoryDetailProps) {
   const { t } = useTranslation('story')
+  const { storyCategory, storyName } = useLabels()
+
   return (
     <Box>
       <Box bgImage={`url(${storyImage(story)})`} bgSize="cover" bgPosition="center" color="white">
         <Box bg="rgba(0, 0, 0, 0.5)">
           <ContentBox>
             <Flex justifyContent="space-between">
-              <Label visibility={categoryLabel[story.category] ? 'visible' : 'hidden'}>
-                {t(`categories.${story.category}`)}
+              <Label visibility={categories.includes(story.category) ? 'visible' : 'hidden'}>
+                {storyCategory(story)}
               </Label>
 
               <Flex>
@@ -67,7 +69,7 @@ export default function StoryDetail({ story, onShare }: StoryDetailProps) {
               {story.title}
             </Heading>
             <Box fontSize="md" fontWeight={600} lineHeight={1.2}>
-              From {story.postal}
+              {t('cite.anonymous', { location: story.postal })}
             </Box>
           </ContentBox>
         </Box>

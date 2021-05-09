@@ -1,7 +1,7 @@
 import NextLink from 'next/link'
 import { Box, Flex, Heading, SimpleGrid } from '@chakra-ui/react'
 import useTranslation from 'next-translate/useTranslation'
-import { categoryLabel, storyImage, storyCite } from './model'
+import { categories, storyImage, useLabels } from './utils'
 import ContentBox from '../common/ContentBox'
 import Label from '../common/Label'
 import { Story } from '@prisma/client'
@@ -33,6 +33,7 @@ interface StorySummaryProps {
 function StorySummary({ story }: StorySummaryProps) {
   const href = `/story/${story.id}`
   const { t } = useTranslation('story')
+  const { storyCategory, storyCite } = useLabels()
 
   return (
     <Box as="article">
@@ -52,8 +53,8 @@ function StorySummary({ story }: StorySummaryProps) {
                     {t('warning')}
                   </Label>
                 ) : (
-                  <Label visibility={categoryLabel[story.category] ? 'visible' : 'hidden'}>
-                    {t(`categories.${story.category}`)}
+                  <Label visibility={categories.includes(story.category) ? 'visible' : 'hidden'}>
+                    {storyCategory(story)}
                   </Label>
                 )}
               </Flex>

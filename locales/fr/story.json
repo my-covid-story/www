@@ -1,13 +1,19 @@
 {
-    "stories": "Histoires",
-    "read": "Lire l'histoire",
-    "warning": "Avertissement: Contenu sensible",
-    "categories":   {
-        "concerned-citizen": "Citoyen Concerné",
-        "essential-worker": "Travailleur Essentiel",
-        "healthcare-provider": "Fournisseur de soins de santé",
-        "educator": "Éducateur",
-        "small-business-owner": "Patron de PME",
-        "patient-family-member": "Patient ou membre de la famille"
-    }
+  "stories": "Histoires",
+  "read": "Lire l'histoire",
+  "warning": "Avertissement: Contenu sensible",
+  "categories": {
+    "concerned-citizen": "Citoyen concerné",
+    "essential-worker": "Travailleur essentiel",
+    "healthcare-provider": "Fournisseur de soins de santé",
+    "educator": "Éducateur",
+    "small-business-owner": "Patron de PME",
+    "patient-family-member": "Patient ou membre de la famille",
+    "other": "Autre"
+  },
+  "anonymous": "Anonyme",
+  "cite": {
+    "named": "{{name}} de {{location}}",
+    "anonymous": "De {{location}}"
+  }
 }

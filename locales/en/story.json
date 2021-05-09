@@ -1,13 +1,19 @@
 {
-    "stories": "Stories",
-    "read": "Read Story",
-    "warning": "Warning: Sensitive Content",
-    "categories":   {
-        "concerned-citizen": "Concerned Citizen",
-        "essential-worker": "Essential Worker",
-        "healthcare-provider": "Healthcare Provider",
-        "educator": "Educator",
-        "small-business-owner": "Small Business Owner",
-        "patient-family-member": "Patient or Family Member"
-    }
+  "stories": "Stories",
+  "read": "Read Story",
+  "warning": "Warning: Sensitive Content",
+  "categories": {
+    "concerned-citizen": "Concerned Citizen",
+    "essential-worker": "Essential Worker",
+    "healthcare-provider": "Healthcare Provider",
+    "educator": "Educator",
+    "small-business-owner": "Small Business Owner",
+    "patient-family-member": "Patient or Family Member",
+    "other": "Other"
+  },
+  "anonymous": "Anonymous",
+  "cite": {
+    "named": "{{name}} from {{location}}",
+    "anonymous": "From {{location}}"
+  }
 }

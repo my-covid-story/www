@@ -27,6 +27,7 @@
     "@fontsource/inter": "^4.2.2",
     "@hookform/resolvers": "^2.4.0",
     "@prisma/client": "^2.21.2",
+    "@sendgrid/mail": "^7.4.4",
     "@sentry/nextjs": "^6.3.4",
     "@sentry/react": "^6.2.5",
     "@sentry/tracing": "^6.2.5",

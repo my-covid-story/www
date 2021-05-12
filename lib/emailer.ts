@@ -61,17 +61,21 @@ const ENABLED = (() => {
   return false
 })()
 
+// Sends an email for the specified story if emailing is enabled.
+// Does not check if an email has already been sent for the story. The caller must do that.
 // If an email is sent successfully, returns the message ID or '-' if none can be determined.
 // Returns null if emailing is disabled or sending an email fails.
-// Does not check if an email has already been sent for the story. The caller must do that.
 export async function send(story: Story): Promise<string | null> {
   if (ENABLED) {
+    console.log(`Sending email for story ${story.id}`)
     const message = createMessage(story)
     try {
       const result = await mail.send(message)
-      return result?.[0]?.headers?.['x-message-id'] || '-'
+      const messageId = result?.[0]?.headers?.['x-message-id'] || '-'
+      console.log(`Sent email with message ID ${messageId}`)
+      return messageId
     } catch (err) {
-      console.error('Sending email failed:', err, err.response?.body?.errors)
+      console.error('Failed to send email:', err, err.response?.body?.errors)
     }
   }
   return null

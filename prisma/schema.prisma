@@ -27,6 +27,7 @@ model Story {
   deleted        Boolean  @default(false)
   viewCount      Int      @default(0)
   contentWarning Boolean  @default(false)
+  mppMessageId   String?
 
   @@index([postal, approved])
 }

@@ -11,6 +11,9 @@ mail.setApiKey(process.env.SENDGRID_API_KEY)
 
 const FROM_EMAIL = 'MyCovidStory.ca <info@mycovidstory.ca>'
 
+// In production, BCC ourselves using the Gmail plus trick for filtering.
+const BCC_EMAIL = process.env.VERCEL_ENV === 'production' ? 'info+mpp@mycovidstory.ca' : undefined
+
 // The default addresses to receive stories from Ontario.
 // When we have a specific MPP based on the postal code, these addresses will be cc'ed.
 const ONTARIO_EMAILS = [
@@ -92,6 +95,7 @@ function createMessage({ postal, id, title, content }: Story) {
   return {
     from: FROM_EMAIL,
     to,
+    bcc: BCC_EMAIL,
     subject,
     text: generateText(params),
     html: generateHtml(params),

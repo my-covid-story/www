@@ -81,14 +81,14 @@ export async function send(story: Story): Promise<string | null> {
   return null
 }
 
-function createMessage({ id, title, content, postal }: Story) {
+function createMessage({ postal, id, title, content }: Story) {
   const ontario = isOntario(postal)
   const to = CUSTOM_EMAILS || (ontario ? ONTARIO_EMAILS : CANADA_EMAILS)
   const subject = `A COVID-19 story${ontario ? ' from Ontario' : ''}`
   const addressee = ontario ? ONTARIO_ADDRESSEE : CANADA_ADDRESSEE
-  const location = ontario ? 'Ontario' : 'Canada'
+  const jurisdiction = ontario ? 'Ontario' : 'Canada'
   const url = `${process.env.BASE_URL}/story/${id}`
-  const params = { addressee, location, url, title, content }
+  const params = { addressee, postal, jurisdiction, url, title, content }
   return {
     from: FROM_EMAIL,
     to,
@@ -105,18 +105,19 @@ function isOntario(postal: string) {
 
 interface BodyParams {
   addressee: string
-  location: string
+  postal: string
+  jurisdiction: string
   url: string
   title: string
   content: string
 }
 
-function generateText({ addressee, location, url, title, content }: BodyParams) {
+function generateText({ addressee, postal, jurisdiction, url, title, content }: BodyParams) {
   return `Hello ${addressee},
 
 MyCovidStory.ca is a volunteer-led effort to collect and amplify the stories of those impacted by COVID-19. We believe in the power of storytelling and that because the government has refused to listen to the numbers, we must make them face the stories of the people they were elected to represent.
 
-The following story was submitted recently:
+The following story was submitted from postal code ${postal}:
 
 "${title}"
 
@@ -124,7 +125,7 @@ ${content}
 
 ${url}
 
-Every number has a story, and this is a story happening in ${location}, right now.
+Every number has a story, and this is a story happening in ${jurisdiction}, right now.
 
 We encourage you to visit www.mycovidstory.ca to read more of these stories and to use your power to advance effective government policy that will actually save lives.
 
@@ -142,13 +143,13 @@ Instagram: https://www.instagram.com/mycovidstory_ca/
 
 const SANITIZE_OPTIONS = { allowedTags: [], allowedAttributes: {} }
 
-function generateHtml({ addressee, location, url, title, content }: BodyParams) {
+function generateHtml({ addressee, postal, jurisdiction, url, title, content }: BodyParams) {
   title = sanitize(title, SANITIZE_OPTIONS)
   content = sanitize(content, SANITIZE_OPTIONS)
 
   return `<p>Hello ${addressee},</p>
 <p>MyCovidStory.ca is a volunteer-led effort to collect and amplify the stories of those impacted by COVID-19. We believe in the power of storytelling and that because the government has refused to listen to the numbers, we must make them face the stories of the people they were elected to represent.</p>
-<p>The following story was submitted recently:</p>
+<p>The following story was submitted from postal code ${postal}:</p>
 <div style="background: #f9f9f9; border-left: 0.5em solid #ccc; margin: 2em 0; padding: 1px 1em;">
 <p><a href="${url}" style="color: inherit; text-decoration: none;"><strong>“${title}”</strong></a></p>
 ${content
@@ -158,7 +159,7 @@ ${content
   .map((p) => `<p><a href="${url}" style="color: inherit; text-decoration: none;">${p}</a></p>`)
   .join('\n')}
 </div>
-<p>Every number has a story, and <strong>this is a story happening in ${location}, right now.</strong></p>
+<p>Every number has a story, and <strong>this is a story happening in ${jurisdiction}, right now.</strong></p>
 <p>We encourage you to visit <a href="https://www.mycovidstory.ca">www.mycovidstory.ca</a> to read more of these stories and to use your power to advance effective government policy that will actually save lives.</p>
 <p>Thank you,</p>
 <p>The MyCovidStory.ca Team</p>

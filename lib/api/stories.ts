@@ -1,4 +1,3 @@
-import sanitizeHtml from 'sanitize-html'
 import { PrismaClientValidationError } from '@prisma/client/runtime'
 import { ValidationError } from 'yup'
 import prisma from '../prisma'
@@ -68,9 +67,6 @@ export async function add(story: NewStory) {
       // Uppercase postal
     } else if (k === 'postal') {
       acc[k] = story[k].toUpperCase()
-      // Sanitize any strings
-    } else if (typeof story[k] === 'string') {
-      acc[k] = sanitizeHtml(story[k], { allowedTags: [], allowedAttributes: {} })
       // Don't forget the rest
     } else {
       acc[k] = story[k]

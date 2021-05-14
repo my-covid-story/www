@@ -56,11 +56,12 @@ const ENABLED = (() => {
     console.log('Emailer enabled with custom addresses:', CUSTOM_EMAILS)
     return true
   }
-  if (process.env.VERCEL_ENV === 'production') {
+  const env = process.env.VERCEL_ENV
+  if (env === 'production') {
     console.log('Emailer enabled in production')
     return true
   }
-  console.log('Emailer disabled in non-prod environment')
+  console.log(`Emailer disabled in ${env} environment`)
   return false
 })()
 

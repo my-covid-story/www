@@ -101,7 +101,7 @@ export default function FAQ() {
             </p>
             <p>
               We encourage all readers to consult respected scientific sources for verified, factual
-              information related to Covid-19.
+              information related to COVID-19.
             </p>
           </Text>
         </Box>
@@ -275,7 +275,7 @@ export default function FAQ() {
                   color="primary.100"
                   fontWeight="600"
                 >
-                  COVID19 Vaccine Facts
+                  COVID Vaccine Facts
                 </SimpleLink>
               </li>
             </ol>

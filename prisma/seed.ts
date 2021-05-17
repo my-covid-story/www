@@ -22,6 +22,7 @@ for (let i = 0; i < NUMBER_SEEDS; i++) {
   const anonymous = faker.datatype.boolean()
   const contact = faker.datatype.boolean()
   const name = faker.fake('{{name.firstName}} {{name.lastName}}')
+  const approved = faker.datatype.boolean()
   const seed = {
     title: faker.lorem.words(getRandomInt(2, 20)).substring(0, 75),
     content: faker.lorem.words(getRandomInt(3, 900)),
@@ -30,8 +31,9 @@ for (let i = 0; i < NUMBER_SEEDS; i++) {
     email: contact ? faker.internet.email() : null,
     displayName: anonymous ? null : name,
     contactName: contact ? name : null,
-    approved: faker.datatype.boolean(),
+    approved,
     contentWarning: faker.datatype.boolean(),
+    mppMessageId: approved && faker.datatype.boolean() ? faker.random.alphaNumeric(22) : null,
   }
   seedData.push(seed)
 }

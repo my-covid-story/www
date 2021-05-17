@@ -17,6 +17,7 @@ const select = {
   approved: true,
   viewCount: true,
   contentWarning: true,
+  mppMessageId: true,
 }
 
 function applySelect(story) {
@@ -40,6 +41,7 @@ export async function list(limit: number = null) {
       ...(limit && takeLimit),
     })
   } catch (err) {
+    console.error('Failed to retrieve stories:', err)
     throw internalServerError()
   }
 }
@@ -96,7 +98,7 @@ export async function add(story: NewStory) {
     if (err instanceof ValidationError) {
       throw badRequest({ detail: `Invalid story: ${err}` })
     } else {
-      console.error(err)
+      console.error('Failed to add story:', err)
       throw internalServerError()
     }
   }
@@ -111,7 +113,7 @@ export async function get(id: string) {
     }
   } catch (err) {
     if (!(err instanceof PrismaClientValidationError)) {
-      console.error(err)
+      console.error(`Failed to retrieve story ${id}:`, err)
       throw internalServerError()
     }
   }

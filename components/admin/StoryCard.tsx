@@ -58,6 +58,7 @@ export default function StoryCard({
     phone,
     twitter,
     category,
+    mppMessageId,
     ...rest
   },
   filteredView,
@@ -131,6 +132,10 @@ export default function StoryCard({
                 {id}
               </SimpleLink>
             </Text>
+          </Box>
+          <Box>
+            <Label>Emailed to Representatives</Label>
+            <Text>{mppMessageId ? 'Yes' : 'No'}</Text>
           </Box>
         </SimpleGrid>
         <Stack

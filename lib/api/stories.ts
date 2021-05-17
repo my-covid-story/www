@@ -1,8 +1,8 @@
-import sanitizeHtml from 'sanitize-html'
 import { PrismaClientValidationError } from '@prisma/client/runtime'
 import { ValidationError } from 'yup'
 import prisma from '../prisma'
 import storySchema from '../storySchema'
+import { fixTitle } from '../model/story'
 import { badRequest, internalServerError, notFound } from '../errors'
 
 const select = {
@@ -65,12 +65,12 @@ export async function add(story: NewStory) {
     // Strip empty values
     if (story[k] === '') {
       return acc
+      // Clean up title
+    } else if (k === 'title') {
+      acc[k] = fixTitle(story[k])
       // Uppercase postal
     } else if (k === 'postal') {
       acc[k] = story[k].toUpperCase()
-      // Sanitize any strings
-    } else if (typeof story[k] === 'string') {
-      acc[k] = sanitizeHtml(story[k], { allowedTags: [], allowedAttributes: {} })
       // Don't forget the rest
     } else {
       acc[k] = story[k]

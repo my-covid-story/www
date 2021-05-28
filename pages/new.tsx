@@ -17,7 +17,7 @@ export default function CreateStory() {
         </Heading>
         <Text>
           Every number has a story. We believe in the power of storytelling to force government
-          action in Ontario. We value your privacy.
+          action in Canada. We value your privacy.
         </Text>
         <Text pt={4} pb={2} fontWeight="bold" color="#55099D">
           <Link href="/faq">Read our FAQ</Link>

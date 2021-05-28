@@ -18,7 +18,7 @@ export default function About() {
             Who We Are
           </Heading>
           <Text>
-            We are a group of concerned Ontarians who can no longer stand by as our province is led
+            We are a group of concerned Candians who can no longer stand by as our country is led
             into a humanitarian crisis. We believe the power of storytelling is an effective means
             to drive government action.
           </Text>
@@ -43,7 +43,7 @@ export default function About() {
               be ignored.
             </Text>
             <Text>
-              Many doctors, business owners, essential workers and concerned Ontarians have already
+              Many doctors, business owners, essential workers and concerned Canadians have already
               spoken up and shared their stories, but many are fearful and don’t feel they have a
               voice; there are too many stories still left to be told.
             </Text>

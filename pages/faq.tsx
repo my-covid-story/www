@@ -21,7 +21,7 @@ export default function FAQ() {
             Why does this website exist?
           </Heading>
           <Text>
-            The site was created to help any Ontarian impacted by COVID-19 — from factory workers
+            The site was created to help any Canadian impacted by COVID-19 — from factory workers
             and family members to business owners and physicians — to easily and safely share their
             stories so that they can be seen by decision-makers, media and the public to drive
             effective government policy that will save lives.
@@ -33,8 +33,8 @@ export default function FAQ() {
           </Heading>
           <Text>
             <p>
-              Anyone over the age of 18 can submit their story. While our focus is currently on
-              Ontario, we welcome stories from anyone throughout Canada.
+              Anyone over the age of 18 can submit their story. We welcome stories from anyone
+              throughout Canada.
             </p>
             <p>
               In order to keep you safe and establish trust with visitors, the content will be
@@ -163,8 +163,8 @@ export default function FAQ() {
             Who’s paying for this?
           </Heading>
           <Text>
-            This page was built by volunteers and is fully funded by Ontarians concerned by the
-            current COVID-19 response in our province. We are using{' '}
+            This page was built by volunteers and is fully funded by Canadians concerned by the
+            current COVID-19 response in our country. We are using{' '}
             <Link href="https://vercel.com?utm_source=my-covid-story&utm_campaign=oss" isExternal>
               Vercel
             </Link>{' '}
@@ -180,7 +180,7 @@ export default function FAQ() {
             Who built the site?
           </Heading>
           <Text>
-            We are a group of concerned Ontarians who can no longer stand by as our province is led
+            We are a group of concerned Canadians who can no longer stand by as our country is led
             into a humanitarian crisis. We believe the power of storytelling is an effective means
             to drive government action. Please view our <Link href="/about/">About</Link>
             page to view our full list of contributors.
@@ -192,9 +192,9 @@ export default function FAQ() {
           </Heading>
           <Text>
             No, we are not affiliated to any political group or agenda. We are simply a collection
-            of Ontarians concerned by the COVID-19 response in our province and hope that by sharing
+            of Canadians concerned by the COVID-19 response in our country and hope that by sharing
             real stories of the people impacted, decision makers at all levels will make the right
-            decisions to keep Ontarians safe.
+            decisions to keep Canadians safe.
           </Text>
         </Box>
         <Box pb={6}>

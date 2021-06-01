@@ -11,22 +11,24 @@ generator client {
 }
 
 model Story {
-  id             String   @id @default(cuid())
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id             String      @id @default(cuid())
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
   title          String
   content        String
   postal         String
+  // Comment out postalCode before running prisma migrate dev.
+  postalCode     PostalCode? @relation(fields: [postal], references: [code])
   category       String
   contactName    String?
   displayName    String?
   email          String?
   twitter        String?
   phone          String?
-  approved       Boolean  @default(false)
-  deleted        Boolean  @default(false)
-  viewCount      Int      @default(0)
-  contentWarning Boolean  @default(false)
+  approved       Boolean     @default(false)
+  deleted        Boolean     @default(false)
+  viewCount      Int         @default(0)
+  contentWarning Boolean     @default(false)
   mppMessageId   String?
 
   @@index([postal, approved])
@@ -85,4 +87,68 @@ model VerificationRequest {
   updatedAt  DateTime @default(now()) @map(name: "updated_at")
 
   @@map(name: "verification_requests")
+}
+
+enum Province {
+  NL
+  NS
+  PE
+  NB
+  QC
+  ON
+  MB
+  SK
+  AB
+  BC
+  NU
+  NT
+  YT
+}
+
+enum PostalCodeType {
+  rural
+  urban
+}
+
+// Currently populated with just FSAs, but could potentially hold full postal codes, as well.
+model PostalCode {
+  code     String               @id
+  province Province
+  type     PostalCodeType
+  hotspot  Boolean              @default(false)
+  name     String
+  ridings  PostalCodeToRiding[]
+  // Comment out stories before running prisma migrate dev.
+  stories  Story[]
+}
+
+model Riding {
+  province       Province
+  id             String
+  name           String
+  population     Int?
+  area           Int?
+  url            String?
+  mppName        String
+  mppDesignation String
+  mppFirstName   String
+  mppLastName    String
+  mppEmail       String
+  mppPhone       String?
+  mppParty       String?
+  mppUrl         String?
+  postalCodes    PostalCodeToRiding[]
+
+  @@id([province, id])
+}
+
+model PostalCodeToRiding {
+  postal     String
+  postalCode PostalCode @relation(fields: [postal], references: [code])
+  province   Province
+  ridingId   String
+  riding     Riding     @relation(fields: [province, ridingId], references: [province, id])
+  weight     Float
+
+  @@id([postal, province, ridingId])
 }

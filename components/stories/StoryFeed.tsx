@@ -1,5 +1,5 @@
 import { Box, Flex, Heading, SimpleGrid } from '@chakra-ui/react'
-import { Story } from '@prisma/client'
+import { Story } from '../../lib/model/story'
 import { categoryLabel, storyCategoryLabel, storyImage, storyCite } from './model'
 import ContentBox from '../common/ContentBox'
 import Label from '../common/Label'
@@ -66,7 +66,9 @@ function StorySummary({ story }: StorySummaryProps) {
                 {story.title}
               </Heading>
             </Box>
-            <Box lineHeight={1.2}>{storyCite(story)}</Box>
+            <Box isTruncated lineHeight={1.2}>
+              {storyCite(story)}
+            </Box>
           </Box>
         </Box>
 

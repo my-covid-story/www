@@ -1,10 +1,11 @@
 import { Box, Flex, Heading, IconButton, Stack, Text } from '@chakra-ui/react'
 import { CloseIcon } from '@chakra-ui/icons'
-import { Story } from '@prisma/client'
+import { Story } from '../../lib/model/story'
 import {
   categoryLabel,
   storyCategoryLabel,
   storyImage,
+  storyLocation,
   storyName,
   storyDate,
   storyParagraphs,
@@ -69,7 +70,7 @@ export default function StoryDetail({ story, onClose, onShare }: StoryDetailProp
               {story.title}
             </Heading>
             <Box fontSize="md" fontWeight={600} lineHeight={1.2}>
-              From {story.postal}
+              From {storyLocation(story)}
             </Box>
           </ContentBox>
         </Box>

@@ -1,4 +1,4 @@
-import { Story } from '@prisma/client'
+import { Story } from '../../lib/model/story'
 
 export const categoryLabel = {
   'concerned-citizen': 'Concerned Citizen',
@@ -32,8 +32,14 @@ export function storyName({ displayName }: Story): string {
   return displayName || 'Anonymous'
 }
 
-export function storyCite({ displayName, postal }: Story) {
-  return displayName ? `${displayName} from ${postal}` : `From ${postal}`
+export function storyLocation({ postal, postalCode }: Story) {
+  return postalCode ? `${postalCode.name}, ${postalCode.province}` : postal
+}
+
+export function storyCite(story: Story) {
+  const { displayName } = story
+  const location = storyLocation(story)
+  return displayName ? `${displayName} from ${location}` : `From ${location}`
 }
 
 export function storyDate({ createdAt }: Story): string {

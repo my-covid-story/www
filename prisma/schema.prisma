@@ -17,8 +17,7 @@ model Story {
   title          String
   content        String
   postal         String
-  // Comment out postalCode before running prisma migrate dev.
-  postalCode     PostalCode? @relation(fields: [postal], references: [code])
+  postalCode     PostalCode? @relation(fields: [postal], references: [code]) //nomigrate
   category       String
   contactName    String?
   displayName    String?
@@ -118,8 +117,7 @@ model PostalCode {
   hotspot  Boolean              @default(false)
   name     String
   ridings  PostalCodeToRiding[]
-  // Comment out stories before running prisma migrate dev.
-  stories  Story[]
+  stories  Story[] //nomigrate
 }
 
 model Riding {

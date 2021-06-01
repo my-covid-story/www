@@ -6,64 +6,41 @@ Our stack / architecture is:
 
 - [NextJS](https://next.js.org/) hosted on [Vercel](https://vercel.com) (already setup here)
 - [Prisma](https://prisma.io) as our ORM (makes things pretty smooth)
-- Postgresql as a DB (Digital Ocean, Toronto)
+- [PostgreSQL](https://www.postgresql.org/) Managed Database from [Digital Ocean](https://www.digitalocean.com/).
 
-## Contributing
+## Quick Start
 
-1. Clone this repo
-2. Install dependencies with `npm i`
-3. Rename `.env.template` to `.env`
-4. Get a local postgres db running - Docker is probably easiest, but local postgres would also work
-5. With Docker installed, run `docker run --name my-covid-story-dev -p 5432:5432 -e POSTGRES_PASSWORD=mycovidstory -d postgres:12.6-alpine` (this will match the DB URL string in .env)
-6. Run `npx prisma migrate deploy` to apply migrations in `prisma/migrations`.
-7. Run `npx prisma db seed --preview-feature` to see test data from `prisma/seed.ts`.
-8. Run `npm run dev` to start the app locally.
-9. You can use `/api/stories` to create new stories.
-10. Run `npm test` to run the test suite. This also gets run automatically on each Pull Request
+1. Clone this repo.
+1. Install dependencies with `npm i`.
+1. Copy `.env.template` to `.env`.
+1. Get a local postgres db running.
+   Docker is probably easiest, but local postgres would also work.
+   With Docker installed, run `docker run --name my-covid-story-dev -p 5432:5432 -e POSTGRES_PASSWORD=mycovidstory -d postgres:12.6-alpine` (this will match the DB URL string in `.env`).
+1. Run `npx prisma migrate deploy` to apply migrations in `prisma/migrations`.
+1. Run `npx prisma db seed --preview-feature` to see test data from `prisma/seed.ts`.
+1. Run `npm run dev` to start the dev server.
+   Open http://localhost:3000 in your browser to see the app.
+1. Run `npm test` to run the test suite.
+   This also gets run automatically on each Pull Request.
 
----
+## Prisma Migrate
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+We use [Prisma Migrate](https://www.prisma.io/docs/concepts/components/prisma-migrate) to manage the evolution of our database schema.
+To work around a [current limitation](https://github.com/prisma/prisma/issues/7351) in Prisma, we exclude certain relation fields from the schema when running `prisma migrate`.
 
-## Getting Started
-
-First, install the dependencies
-
-```bash
-npm install
-# or
-yarn install
-```
-
-Then, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+These fields are marked with a `//nomigrate` comment in the `schema.prisma` file.
+Excluding them is handled automatically by the `prisma.sh` wrapper script for the prisma CLI.
+For simplicity, you can always use `./prisma.sh` intead of `npx prisma` and the script will do the right thing.
 
 ## Learn More
 
+This is a [Next.js](https://nextjs.org/) application bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and deployed on the [Vercel Platform](https://vercel.com/).
 To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Next.js deployment documentation](https://nextjs.org/docs/deployment) - deployment on Vercel.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 [![https://vercel.com?utm_source=my-covid-story&utm_campaign=oss](./public/powered-by-vercel.svg)](https://vercel.com?utm_source=my-covid-story&utm_campaign=oss)

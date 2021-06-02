@@ -1,6 +1,6 @@
 import { Box, Flex, Heading, SimpleGrid } from '@chakra-ui/react'
 import { Story } from '../../lib/model/story'
-import { categoryLabel, storyCategoryLabel, storyImage, storyCite } from './model'
+import { categoryLabel, storyCategoryLabel, storyImage, storyCite } from './utils'
 import ContentBox from '../common/ContentBox'
 import Label from '../common/Label'
 import SimpleLink from '../common/SimpleLink'

@@ -10,7 +10,7 @@ import {
   storyName,
   storyDate,
   storyParagraphs,
-} from './model'
+} from './utils'
 import ContentBox from '../common/ContentBox'
 import Label from '../common/Label'
 

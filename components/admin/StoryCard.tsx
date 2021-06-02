@@ -12,7 +12,7 @@ import {
 import SimpleLink from '../common/SimpleLink'
 import { useState } from 'react'
 import { Story } from '@prisma/client'
-import { categoryLabel } from '../stories/model'
+import { categoryLabel } from '../stories/utils'
 
 interface UpdateStoryProps {
   id: string

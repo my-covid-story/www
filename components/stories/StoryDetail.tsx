@@ -6,6 +6,7 @@ import {
   storyCategoryLabel,
   storyImage,
   storyLocation,
+  storyLocationLabels,
   storyName,
   storyDate,
   storyParagraphs,
@@ -77,6 +78,13 @@ export default function StoryDetail({ story, onClose, onShare }: StoryDetailProp
       </Box>
       <ContentBox>
         {story.contentWarning && <ContentWarningBox />}
+        <Stack direction="row" align="baseline" spacing={2} mb={6}>
+          {storyLocationLabels(story).map((location) => (
+            <Label background="rgba(85,9,157, 0.1)" color="primary.100" key="location">
+              {location}
+            </Label>
+          ))}
+        </Stack>
         <Heading as="h2" mb={3} fontSize="md" fontWeight={700}>
           {storyDate(story)}
         </Heading>

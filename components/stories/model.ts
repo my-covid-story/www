@@ -36,6 +36,15 @@ export function storyLocation({ postal, postalCode }: Story) {
   return postalCode ? `${postalCode.name}, ${postalCode.province}` : postal
 }
 
+export function storyLocationLabels({ postal, postalCode }: Story) {
+  const labels = []
+  if (postalCode) {
+    labels.push(postalCode.name)
+  }
+  labels.push(postal)
+  return labels
+}
+
 export function storyCite(story: Story) {
   const { displayName } = story
   const location = storyLocation(story)

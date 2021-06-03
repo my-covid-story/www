@@ -12,9 +12,7 @@ import {
   storyParagraphs,
 } from './utils'
 import ContentBox from '../common/ContentBox'
-import Label from '../common/Label'
-
-import { ContentWarningBox } from '../common/Warnings'
+import Label, { ContentWarningLabel } from '../common/Label'
 import ShareSVG from '../icons/ShareSVG'
 
 function StoryParagraphs(p: string, i: number) {
@@ -77,10 +75,10 @@ export default function StoryDetail({ story, onClose, onShare }: StoryDetailProp
         </Box>
       </Box>
       <ContentBox>
-        {story.contentWarning && <ContentWarningBox />}
+        {story.contentWarning && <ContentWarningLabel mb={4} />}
         <Stack direction="row" align="baseline" spacing={2} mb={6}>
           {storyLocationLabels(story).map((location) => (
-            <Label background="rgba(85,9,157, 0.1)" color="primary.100" key="location">
+            <Label opaque key={location}>
               {location}
             </Label>
           ))}

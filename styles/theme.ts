@@ -27,6 +27,7 @@ const colors = {
     500: '#22006A',
     700: '#240c3a',
   },
+  warning: '#c01313',
 }
 
 const components = {

@@ -1,9 +1,11 @@
 import path from 'path'
 import fs from 'fs/promises'
 import { Prisma, PrismaClient } from '@prisma/client'
+import ora from 'ora'
 import faker from 'faker'
 
 const prisma = new PrismaClient()
+const spinner = ora()
 
 const postalPrefixes = ['L7A', 'P6A', 'M4G', 'K7H', 'N1S', 'L4B', 'G3J']
 
@@ -26,7 +28,7 @@ function getRandomInt(min: number, max: number) {
 }
 
 async function seedStories() {
-  console.log('Creating stories')
+  spinner.start('Creating stories')
   const seedData: Prisma.StoryCreateInput[] = []
 
   for (let i = 0; i < STORY_COUNT; i++) {
@@ -52,38 +54,44 @@ async function seedStories() {
   for (const data of seedData) {
     await prisma.story.create({ data })
   }
+  spinner.succeed()
 }
 
 async function seedStaticData() {
+  spinner.start('Deleting postal code-riding mappings')
+  await prisma.postalCodeToRiding.deleteMany({})
+  spinner.succeed()
+
+  spinner.start('Deleting ridings')
+  await prisma.riding.deleteMany({})
+  spinner.succeed()
+
+  spinner.start('Deleting postal codes')
+  await prisma.postalCode.deleteMany({})
+  spinner.succeed()
+
+  spinner.start('Creating postal codes')
   const content = await fs.readFile(path.join(__dirname, 'postal-data.json'), 'utf8')
   const data = JSON.parse(content)
-
-  console.log('Deleting postal code-riding mappings')
-  await prisma.postalCodeToRiding.deleteMany({})
-
-  console.log('Deleting ridings')
-  await prisma.riding.deleteMany({})
-
-  console.log('Deleting postal codes')
-  await prisma.postalCode.deleteMany({})
-
-  console.log('Creating postal codes')
   for (const postalCode of data.postalCode) {
     const data = postalCode as Prisma.PostalCodeCreateInput
     await prisma.postalCode.create({ data })
   }
+  spinner.succeed()
 
-  console.log('Creating ridings')
+  spinner.start('Creating ridings')
   for (const riding of data.riding) {
     const data = riding as Prisma.RidingCreateInput
     await prisma.riding.create({ data })
   }
+  spinner.succeed()
 
-  console.log('Creating postal code-riding mappings')
+  spinner.start('Creating postal code-riding mappings')
   for (const mapping of data.postalCodeToRiding) {
     const data = mapping as Prisma.PostalCodeToRidingCreateInput
     await prisma.postalCodeToRiding.create({ data })
   }
+  spinner.succeed()
 }
 
 async function seed() {
@@ -97,11 +105,11 @@ async function seed() {
   if (!prod) {
     await seedStories()
   }
-  console.log('Done')
 }
 
 seed()
   .catch((e) => {
+    spinner.fail()
     console.error(e)
     process.exit(1)
   })

@@ -21,10 +21,17 @@ export default function FAQ() {
             Why does this website exist?
           </Heading>
           <Text>
-            The site was created to help any Ontarian impacted by COVID-19 — from factory workers
-            and family members to business owners and physicians — to easily and safely share their
-            stories so that they can be seen by decision-makers, media and the public to drive
-            effective government policy that will save lives.
+            The site was created to help any individual in Canada impacted by the COVID-19 pandemic
+            — from factory workers and family members to business owners and physicians — to easily
+            and safely share their stories so that they can be seen by decision-makers, media and
+            the public.
+          </Text>
+          <Text>
+            These stories highlight the need for a pandemic response and recovery that promotes
+            physical, emotional and economic well-being, and offer insight into how certain
+            neighbourhoods, populations, institutions and industries are uniquely affected. By
+            amplifying them, we hope to emphasize the human element of the pandemic to encourage
+            compassion and understanding of the experiences of others.
           </Text>
         </Box>
         <Box pb={6}>
@@ -32,14 +39,14 @@ export default function FAQ() {
             Can anyone share a story?
           </Heading>
           <Text>
-            <p>
-              Anyone over the age of 18 can submit their story. While our focus is currently on
-              Ontario, we welcome stories from anyone throughout Canada.
-            </p>
-            <p>
-              In order to keep you safe and establish trust with visitors, the content will be
-              moderated using the following guidelines:
-            </p>
+            Anyone over the age of 18 can submit their story. While our initial focus was on
+            Ontario, we now welcome stories from anyone throughout Canada.
+          </Text>
+          <Text>
+            In order to keep you safe and establish trust with visitors, the content will be
+            moderated using the following guidelines:
+          </Text>
+          <Text>
             <ol>
               <li>
                 Content must be respectful, authentic, and captures their own or another’s story
@@ -91,18 +98,16 @@ export default function FAQ() {
             How do you know these stories are true?
           </Heading>
           <Text>
-            <p>
-              The stories published by mycovidstory.ca represent the lived experience, opinions, and
-              truths of the people telling them. They have not been verified for accuracy.
-            </p>
-            <p>
-              These stories do not represent the opinions or beliefs of mycovidstory.ca or any of
-              the many volunteers working on this project.
-            </p>
-            <p>
-              We encourage all readers to consult respected scientific sources for verified, factual
-              information related to COVID-19.
-            </p>
+            The stories published by MyCOVIDstory.ca represent the lived experience, opinions, and
+            truths of the people telling them. They have not been verified for accuracy.
+          </Text>
+          <Text>
+            These stories do not represent the opinions or beliefs of MyCOVIDstory.ca or any of the
+            many volunteers working on this project.
+          </Text>
+          <Text>
+            We encourage all readers to consult respected scientific sources for verified, factual
+            information related to COVID-19.
           </Text>
         </Box>
         <Box pb={6}>
@@ -163,8 +168,8 @@ export default function FAQ() {
             Who’s paying for this?
           </Heading>
           <Text>
-            This page was built by volunteers and is fully funded by Ontarians concerned by the
-            current COVID-19 response in our province. We are using{' '}
+            This page was built by volunteers and is fully funded by individuals in Canada concerned
+            by the current COVID-19 response. We are using{' '}
             <Link href="https://vercel.com?utm_source=my-covid-story&utm_campaign=oss" isExternal>
               Vercel
             </Link>{' '}
@@ -180,10 +185,18 @@ export default function FAQ() {
             Who built the site?
           </Heading>
           <Text>
-            We are a group of concerned Ontarians who can no longer stand by as our province is led
-            into a humanitarian crisis. We believe the power of storytelling is an effective means
-            to drive government action. Please view our <Link href="/about/">About</Link>
-            page to view our full list of contributors.
+            We are a group of concerned individuals who could not stand by as parts of our country
+            were led into a humanitarian crisis. We believe the power of storytelling is an
+            effective means to emphasize the human element of the pandemic, encouraging compassion
+            amongst the Canadian public and offering first-hand insight to decision-makers and the
+            media.
+          </Text>
+          <Text>
+            Our team is entirely volunteer-led and consists of developers, designers, marketers,
+            healthcare workers, social workers, policy advocates, caregivers and more. Please view
+            our <Link href="/about/">About</Link>
+            page to view our full list of contributors (we’re always welcoming new team members, so
+            it’s not always up-to-date!).
           </Text>
         </Box>
         <Box pb={6}>
@@ -192,9 +205,10 @@ export default function FAQ() {
           </Heading>
           <Text>
             No, we are not affiliated to any political group or agenda. We are simply a collection
-            of Ontarians concerned by the COVID-19 response in our province and hope that by sharing
-            real stories of the people impacted, decision makers at all levels will make the right
-            decisions to keep Ontarians safe.
+            of individuals concerned by the COVID-19 response in our respective provinces and
+            country as a whole. We hope that by sharing real stories of the people impacted,
+            decision makers at all levels will make the right decisions to promote the physical,
+            emotional and economic well-being of individuals throughout Canada.
           </Text>
         </Box>
         <Box pb={6}>

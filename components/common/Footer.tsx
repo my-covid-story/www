@@ -59,7 +59,7 @@ export default function Footer() {
           </SimpleLink>
         </SimpleGrid>
         <Text as="strong" paddingTop={4} mb={4}>
-          Made with love by Ontarians{' '}
+          Made with love by Canadians{' '}
           <span role="img" aria-label="heart" style={{ filter: 'brightness(0) invert(1)' }}>
             ❤️
           </span>

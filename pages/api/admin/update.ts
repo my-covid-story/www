@@ -4,9 +4,10 @@ import { Story } from '@prisma/client'
 import prisma from '../../../lib/prisma'
 import { internalServerError, methodNotAllowed, sendError, unauthorized } from '../../../lib/errors'
 import * as emailer from '../../../lib/emailer'
+import { withSentry } from '@sentry/nextjs'
 
 // /api/admin/update
-export default async function handle(req: NextApiRequest, res: NextApiResponse) {
+const handle = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req })
 
   if (!session) {
@@ -77,3 +78,5 @@ async function emailStory(story: Story) {
     console.error(`Failed to manage emailing for story ${id}:`, err)
   }
 }
+
+export default withSentry(handle)

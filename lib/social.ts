@@ -1,5 +1,5 @@
-import { Story } from '@prisma/client'
-import { storyCite } from '../components/stories/model'
+import { Story } from './model/story'
+import { storyCite } from '../components/stories/utils'
 
 export default function generateSocial(story: Story, contentSize = 150, citeSize = 60): string {
   const { content } = story

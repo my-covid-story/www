@@ -22,13 +22,13 @@ import {
   WhatsappShareButton,
 } from 'react-share'
 
-import { Story } from '@prisma/client'
+import { Story } from '../../lib/model/story'
 import { get, list } from '../../lib/api/stories'
 import generateSocial from '../../lib/social'
 import StoryDetail from '../../components/stories/StoryDetail'
 import FloatingRibbon, { Button } from '../../components/common/FloatingRibbon'
 import HeadTags from '../../components/common/HeadTags'
-import { storyImage } from '../../components/stories/model'
+import { storyImage } from '../../components/stories/utils'
 import { GetStaticPropsResult } from 'next'
 import ErrorPage from '../404'
 import { CSSProperties } from 'react'
@@ -172,10 +172,7 @@ export async function getStaticProps({
   params,
 }: GetStaticProps): Promise<GetStaticPropsResult<StoryPageProps>> {
   try {
-    /**
-     * Needed to use `as` keyword, but this should be refactored.
-     */
-    const story = (await get(params.id)) as Story
+    const story = await get(params.id)
 
     return { props: { success: true, story }, revalidate: 60 }
   } catch (err) {

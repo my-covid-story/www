@@ -1,8 +1,8 @@
-import { Box, Flex, Heading, SimpleGrid } from '@chakra-ui/react'
-import { Story } from '@prisma/client'
-import { categoryLabel, storyCategoryLabel, storyImage, storyCite } from './model'
+import { Box, Heading, SimpleGrid } from '@chakra-ui/react'
+import { Story } from '../../lib/model/story'
+import { categoryLabel, storyCategoryLabel, storyImage, storyCite } from './utils'
 import ContentBox from '../common/ContentBox'
-import Label from '../common/Label'
+import Label, { ContentWarningLabel } from '../common/Label'
 import SimpleLink from '../common/SimpleLink'
 
 function FeedHeader() {
@@ -42,17 +42,12 @@ function StorySummary({ story }: StorySummaryProps) {
           color="white"
         >
           <Box p={[4, null, null, 6]} borderRadius="8px" bg="rgba(0, 0, 0, 0.5)">
-            <Flex>
-              {story.contentWarning ? (
-                <Label color="#C01313" backgroundColor="white">
-                  Warning: Sensitive Content
-                </Label>
-              ) : (
-                <Label visibility={categoryLabel[story.category] ? 'visible' : 'hidden'}>
-                  {storyCategoryLabel(story)}
-                </Label>
-              )}
-            </Flex>
+            {story.contentWarning && <ContentWarningLabel />}
+            {!story.contentWarning && (
+              <Label visibility={categoryLabel[story.category] ? 'visible' : 'hidden'}>
+                {storyCategoryLabel(story)}
+              </Label>
+            )}
             <Box minH="6em" my={[4, null, null, 6]}>
               <Heading
                 as="h3"
@@ -66,7 +61,9 @@ function StorySummary({ story }: StorySummaryProps) {
                 {story.title}
               </Heading>
             </Box>
-            <Box lineHeight={1.2}>{storyCite(story)}</Box>
+            <Box isTruncated lineHeight={1.2}>
+              {storyCite(story)}
+            </Box>
           </Box>
         </Box>
 

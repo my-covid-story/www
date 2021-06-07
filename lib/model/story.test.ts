@@ -1,4 +1,23 @@
-import { fixTitle } from './story'
+import { testStory, fixTitle } from './story'
+
+describe('testStory()', () => {
+  test('creates a story for testing with basic required properties', () => {
+    const story = testStory()
+    expect(story).toHaveProperty('id', expect.any(String))
+    expect(story).toHaveProperty('createdAt', expect.any(Date))
+    expect(story).toHaveProperty('updatedAt', expect.any(Date))
+    expect(story).toHaveProperty('title', expect.any(String))
+    expect(story).toHaveProperty('content', expect.any(String))
+    expect(story).toHaveProperty('postal', expect.any(String))
+    expect(story).toHaveProperty('category', expect.any(String))
+  })
+
+  test('supports overriding any property values', () => {
+    const story = testStory({ title: 'My title', content: 'This is the content of my story.' })
+    expect(story).toHaveProperty('title', 'My title')
+    expect(story).toHaveProperty('content', 'This is the content of my story.')
+  })
+})
 
 describe('fixTitle()', () => {
   test('returns a clean title unchanged', () => {

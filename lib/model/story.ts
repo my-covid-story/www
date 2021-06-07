@@ -1,3 +1,43 @@
+import { Prisma } from '@prisma/client'
+
+export const SELECT = {
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+  title: true,
+  content: true,
+  postal: true,
+  postalCode: true,
+  category: true,
+  displayName: true,
+  approved: true,
+  viewCount: true,
+  contentWarning: true,
+  mppMessageId: true,
+}
+
+export type Story = Prisma.StoryGetPayload<{ select: typeof SELECT }>
+
+const BASE_TEST_STORY: Story = {
+  id: 'ckoegrn6m00001gma67doeug5',
+  createdAt: new Date('2021-06-01T16:19:08.062Z'),
+  updatedAt: new Date('2021-06-01T17:35:41.768Z'),
+  title: 'Story title',
+  content: 'This is content.',
+  postal: 'M5V',
+  postalCode: null,
+  category: 'patient-family-member',
+  displayName: null,
+  approved: true,
+  viewCount: 0,
+  contentWarning: false,
+  mppMessageId: null,
+}
+
+export function testStory(overrides = {}): Story {
+  return { ...BASE_TEST_STORY, ...overrides }
+}
+
 const QUOTES = {
   single: '\u0027',
   singleLeft: '\u2018',

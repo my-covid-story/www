@@ -4,7 +4,7 @@ import { list } from '../lib/api/stories'
 import StoryFeed from '../components/stories/StoryFeed'
 import FloatingRibbon, { Button } from '../components/common/FloatingRibbon'
 import SiteLayout from '../layouts/Default'
-import { Story } from '@prisma/client'
+import { Story } from '../lib/model/story'
 import HeadTags from '../components/common/HeadTags'
 
 interface MainPageProps {

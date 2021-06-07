@@ -1,18 +1,18 @@
 import { Box, Flex, Heading, IconButton, Stack, Text } from '@chakra-ui/react'
 import { CloseIcon } from '@chakra-ui/icons'
-import { Story } from '@prisma/client'
+import { Story } from '../../lib/model/story'
 import {
   categoryLabel,
   storyCategoryLabel,
   storyImage,
+  storyLocation,
+  storyLocationLabels,
   storyName,
   storyDate,
   storyParagraphs,
-} from './model'
+} from './utils'
 import ContentBox from '../common/ContentBox'
-import Label from '../common/Label'
-
-import { ContentWarningBox } from '../common/Warnings'
+import Label, { ContentWarningLabel } from '../common/Label'
 import ShareSVG from '../icons/ShareSVG'
 
 function StoryParagraphs(p: string, i: number) {
@@ -69,13 +69,20 @@ export default function StoryDetail({ story, onClose, onShare }: StoryDetailProp
               {story.title}
             </Heading>
             <Box fontSize="md" fontWeight={600} lineHeight={1.2}>
-              From {story.postal}
+              From {storyLocation(story)}
             </Box>
           </ContentBox>
         </Box>
       </Box>
       <ContentBox>
-        {story.contentWarning && <ContentWarningBox />}
+        {story.contentWarning && <ContentWarningLabel mb={4} />}
+        <Stack direction="row" align="baseline" spacing={2} mb={6}>
+          {storyLocationLabels(story).map((location) => (
+            <Label opaque key={location}>
+              {location}
+            </Label>
+          ))}
+        </Stack>
         <Heading as="h2" mb={3} fontSize="md" fontWeight={700}>
           {storyDate(story)}
         </Heading>

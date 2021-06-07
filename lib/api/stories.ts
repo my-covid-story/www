@@ -2,33 +2,8 @@ import { PrismaClientValidationError } from '@prisma/client/runtime'
 import { ValidationError } from 'yup'
 import prisma from '../prisma'
 import storySchema from '../storySchema'
-import { fixTitle } from '../model/story'
+import { SELECT, fixTitle } from '../model/story'
 import { badRequest, internalServerError, notFound } from '../errors'
-
-const select = {
-  id: true,
-  createdAt: true,
-  updatedAt: true,
-  title: true,
-  content: true,
-  postal: true,
-  category: true,
-  displayName: true,
-  approved: true,
-  viewCount: true,
-  contentWarning: true,
-  mppMessageId: true,
-}
-
-function applySelect(story) {
-  const result = {}
-  Object.entries(select).forEach(([prop, val]) => {
-    if (val === true) {
-      result[prop] = story[prop]
-    }
-  })
-  return result
-}
 
 // GET /api/stories
 export async function list(limit: number = null) {
@@ -37,7 +12,7 @@ export async function list(limit: number = null) {
     return await prisma.story.findMany({
       where: { approved: true },
       orderBy: { updatedAt: 'desc' },
-      select,
+      select: SELECT,
       ...(limit && takeLimit),
     })
   } catch (err) {
@@ -107,9 +82,9 @@ export async function add(story: NewStory) {
 // GET /api/stories/:id
 export async function get(id: string) {
   try {
-    const story = await prisma.story.findUnique({ where: { id: id } })
+    const story = await prisma.story.findUnique({ where: { id: id }, select: SELECT })
     if (story != null && story.approved) {
-      return applySelect(story)
+      return story
     }
   } catch (err) {
     if (!(err instanceof PrismaClientValidationError)) {

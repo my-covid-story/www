@@ -1,8 +1,8 @@
 import Head from 'next/head'
 
-const defaultTitle = 'The Stories of COVID-19 in Ontario'
+const defaultTitle = 'Amplifying the stories of the pandemic throughout Canada'
 const defaultDescription =
-  "Ontario is in a humanitarian crisis. If our leaders won't listen to the numbers, they must face our stories."
+  'MyCOVIDStory.ca is a non-partisan site to read the stories of the COVID-19 pandemic across Canada and share your own in a safe and anonymous manner.'
 const defaultPreviewImage = `img/landingpage-v2.jpg`
 
 interface HeadTagsProps {

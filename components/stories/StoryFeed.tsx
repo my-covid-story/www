@@ -16,7 +16,7 @@ function FeedHeader() {
       <Box bg="rgba(0, 0, 0, 0.5)">
         <ContentBox pt={[8, null, 14]} pb={[10, null, 32]}>
           <Heading as="h1" fontSize={['2xl', null, '4xl', '5xl']} fontWeight={300}>
-            If our leaders won’t listen to the numbers, they must face our stories.
+            Amplifying the stories of the pandemic throughout Canada
           </Heading>
         </ContentBox>
       </Box>

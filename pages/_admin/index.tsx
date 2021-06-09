@@ -1,20 +1,19 @@
-import { Stack } from '@chakra-ui/react'
+import { GetServerSidePropsContext } from 'next'
 import { getSession, useSession } from 'next-auth/client'
-import HeadTags from '../../components/common/HeadTags'
-
+import { Stack } from '@chakra-ui/react'
 import prisma from '../../lib/prisma'
 import { ADMIN_INCLUDE, AdminStory } from '../../lib/model/story'
-import ContentBox from '../../components/common/ContentBox'
-import { GetServerSidePropsContext } from 'next'
 import AdminLayout from '../../layouts/Admin'
+import HeadTags from '../../components/common/HeadTags'
+import ContentBox from '../../components/common/ContentBox'
 import StoryCard from '../../components/admin/StoryCard'
 
-interface _Admin {
+interface AdminPageProps {
   stories: AdminStory[] | []
   filtered: boolean
 }
 
-const _Admin = ({ stories, filtered }: _Admin) => {
+function AdminPage({ stories, filtered }: AdminPageProps) {
   const [session] = useSession()
 
   return (
@@ -37,8 +36,8 @@ const _Admin = ({ stories, filtered }: _Admin) => {
   )
 }
 
-_Admin.setLayout = AdminLayout
-export default _Admin
+AdminPage.setLayout = AdminLayout
+export default AdminPage
 
 export async function getServerSideProps({ req, query }: GetServerSidePropsContext) {
   const session = await getSession({ req })

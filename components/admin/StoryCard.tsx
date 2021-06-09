@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   Box,
   Button,
@@ -10,9 +11,8 @@ import {
   Tooltip,
   useDisclosure,
 } from '@chakra-ui/react'
-import SimpleLink from '../common/SimpleLink'
-import { useState } from 'react'
 import { AdminStory, storyProvince } from '../../lib/model/story'
+import SimpleLink from '../common/SimpleLink'
 import { categoryLabel } from '../stories/utils'
 
 interface UpdateStoryProps {

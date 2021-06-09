@@ -38,6 +38,37 @@ export function testStory(overrides = {}): Story {
   return { ...BASE_TEST_STORY, ...overrides }
 }
 
+// Nunavut/Northwest Territories share a first letter, so a function is needed to disambiguate.
+const POSTAL_PROVINCE = {
+  A: 'NL',
+  B: 'NS',
+  C: 'PE',
+  E: 'NB',
+  G: 'QC',
+  H: 'QC',
+  J: 'QC',
+  K: 'ON',
+  L: 'ON',
+  M: 'ON',
+  N: 'ON',
+  P: 'ON',
+  R: 'MB',
+  S: 'SK',
+  T: 'AB',
+  V: 'BC',
+  X: (postal) => (['X0A', 'X0B', 'X0C'].includes(postal) ? 'NU' : 'NT'),
+  Y: 'YT',
+}
+
+export function storyProvince({ postal, postalCode }: Story): string | undefined {
+  postal = postal.substring(0, 3).toUpperCase()
+  if (postalCode) {
+    return postalCode.province
+  }
+  const province = POSTAL_PROVINCE[postal.charAt(0)]
+  return typeof province === 'function' ? province(postal) : province
+}
+
 const QUOTES = {
   single: '\u0027',
   singleLeft: '\u2018',
@@ -67,3 +98,17 @@ export function fixTitle(title = '') {
     .replace(new RegExp(QUOTES.doubleLeft, 'g'), QUOTES.singleLeft)
     .replace(new RegExp(QUOTES.doubleRight, 'g'), QUOTES.singleRight)
 }
+
+export const ADMIN_INCLUDE = {
+  postalCode: {
+    include: {
+      ridings: {
+        include: {
+          riding: true,
+        },
+      },
+    },
+  },
+}
+
+export type AdminStory = Prisma.StoryGetPayload<{ include: typeof ADMIN_INCLUDE }>

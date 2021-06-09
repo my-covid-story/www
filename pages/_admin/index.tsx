@@ -3,14 +3,14 @@ import { getSession, useSession } from 'next-auth/client'
 import HeadTags from '../../components/common/HeadTags'
 
 import prisma from '../../lib/prisma'
-import { Story } from '@prisma/client'
+import { ADMIN_INCLUDE, AdminStory } from '../../lib/model/story'
 import ContentBox from '../../components/common/ContentBox'
 import { GetServerSidePropsContext } from 'next'
 import AdminLayout from '../../layouts/Admin'
 import StoryCard from '../../components/admin/StoryCard'
 
 interface _Admin {
-  stories: Story[] | []
+  stories: AdminStory[] | []
   filtered: boolean
 }
 
@@ -38,7 +38,6 @@ const _Admin = ({ stories, filtered }: _Admin) => {
 }
 
 _Admin.setLayout = AdminLayout
-
 export default _Admin
 
 export async function getServerSideProps({ req, query }: GetServerSidePropsContext) {
@@ -47,7 +46,7 @@ export async function getServerSideProps({ req, query }: GetServerSidePropsConte
   const deleted = query.deleted === 'true'
   const approved = query.approved === 'true'
 
-  let stories = {}
+  let stories = []
   if (session) {
     stories = await prisma.story.findMany({
       where: {
@@ -55,6 +54,7 @@ export async function getServerSideProps({ req, query }: GetServerSidePropsConte
         deleted,
       },
       orderBy: { createdAt: 'asc' },
+      include: ADMIN_INCLUDE,
     })
   }
 

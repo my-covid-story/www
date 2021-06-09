@@ -7,11 +7,12 @@ import {
   Stack,
   Text,
   TextProps,
+  Tooltip,
   useDisclosure,
 } from '@chakra-ui/react'
 import SimpleLink from '../common/SimpleLink'
 import { useState } from 'react'
-import { Story } from '@prisma/client'
+import { AdminStory, storyProvince } from '../../lib/model/story'
 import { categoryLabel } from '../stories/utils'
 
 interface UpdateStoryProps {
@@ -42,31 +43,31 @@ const Label = ({ children, ...props }: TextProps) => {
 }
 
 interface StoryCardProps {
-  story: Story
+  story: AdminStory
   filteredView: boolean
 }
 
-export default function StoryCard({
-  story: {
+export default function StoryCard({ story, filteredView }: StoryCardProps) {
+  const {
     id,
     createdAt,
     title,
     content,
-    displayName,
     postal,
+    postalCode,
+    displayName,
     email,
     phone,
     twitter,
     category,
     mppMessageId,
     ...rest
-  },
-  filteredView,
-}: StoryCardProps) {
+  } = story
+  const { name: location, hotspot, ridings } = postalCode ?? {}
+  const riding = ridings?.[0]?.riding
+
   const { isOpen, onOpen, onClose } = useDisclosure()
-
   const [{ deleted, approved, contentWarning }, setCardStatus] = useState({ ...rest })
-
   const [interacted, setInteracted] = useState(false)
 
   const handleDeleteInteraction = async (props) => {
@@ -107,11 +108,32 @@ export default function StoryCard({
             <Label>Display Name and Postal Code</Label>
             <Text>
               {displayName || `Anonymous`} from {postal}
+              {hotspot && (
+                <>
+                  {' '}
+                  <Tooltip hasArrow label="COVID-19 hotspot">
+                    <span role="img" aria-label="COVID-19 hotspot">
+                      🔥
+                    </span>
+                  </Tooltip>
+                </>
+              )}
+            </Text>
+          </Box>
+          <Box>
+            <Label>Location</Label>
+            <Text>
+              {location ? `${location}, ` : ''}
+              {storyProvince(story) || 'Unknown'}
             </Text>
           </Box>
           <Box>
             <Label>Consent to be Contacted</Label>
             <Text>{email || twitter || phone ? `Yes` : 'No'}</Text>
+          </Box>
+          <Box>
+            <Label>MPP and Riding</Label>
+            <Text>{riding ? `${riding.mppName}, ${riding.name}` : 'Unknown'}</Text>
           </Box>
           <Box>
             <Label>Submission Date</Label>

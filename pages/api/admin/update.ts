@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/client'
-import { Story } from '@prisma/client'
+import { ADMIN_INCLUDE, AdminStory } from '../../../lib/model/story'
 import prisma from '../../../lib/prisma'
 import { internalServerError, methodNotAllowed, sendError, unauthorized } from '../../../lib/errors'
 import * as emailer from '../../../lib/emailer'
@@ -23,8 +23,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
 }
 
 // PATCH /api/admin/update
-// Required fields in body: id, approved
-// Updates Story.approved to value
+// Updates approved, deleted, contentWarning on the story with the given id.
 async function handlePatch(req: NextApiRequest, res: NextApiResponse) {
   const { id, approved, deleted, contentWarning } = req.body
 
@@ -36,6 +35,7 @@ async function handlePatch(req: NextApiRequest, res: NextApiResponse) {
         deleted,
         contentWarning,
       },
+      include: ADMIN_INCLUDE,
     })
 
     res.json(story)
@@ -49,7 +49,7 @@ async function handlePatch(req: NextApiRequest, res: NextApiResponse) {
 }
 
 // Emails the story to elected representatives if it is approved and has not already been emailed.
-async function emailStory(story: Story) {
+async function emailStory(story: AdminStory) {
   const { id } = story
 
   try {

@@ -1,20 +1,19 @@
-import { Stack } from '@chakra-ui/react'
-import { getSession, useSession } from 'next-auth/client'
-import HeadTags from '../../components/common/HeadTags'
-
-import prisma from '../../lib/prisma'
-import { Story } from '@prisma/client'
-import ContentBox from '../../components/common/ContentBox'
 import { GetServerSidePropsContext } from 'next'
+import { getSession, useSession } from 'next-auth/client'
+import { Stack } from '@chakra-ui/react'
+import prisma from '../../lib/prisma'
+import { ADMIN_INCLUDE, AdminStory } from '../../lib/model/story'
 import AdminLayout from '../../layouts/Admin'
+import HeadTags from '../../components/common/HeadTags'
+import ContentBox from '../../components/common/ContentBox'
 import StoryCard from '../../components/admin/StoryCard'
 
-interface _Admin {
-  stories: Story[] | []
+interface AdminPageProps {
+  stories: AdminStory[] | []
   filtered: boolean
 }
 
-const _Admin = ({ stories, filtered }: _Admin) => {
+function AdminPage({ stories, filtered }: AdminPageProps) {
   const [session] = useSession()
 
   return (
@@ -37,9 +36,8 @@ const _Admin = ({ stories, filtered }: _Admin) => {
   )
 }
 
-_Admin.setLayout = AdminLayout
-
-export default _Admin
+AdminPage.setLayout = AdminLayout
+export default AdminPage
 
 export async function getServerSideProps({ req, query }: GetServerSidePropsContext) {
   const session = await getSession({ req })
@@ -47,7 +45,7 @@ export async function getServerSideProps({ req, query }: GetServerSidePropsConte
   const deleted = query.deleted === 'true'
   const approved = query.approved === 'true'
 
-  let stories = {}
+  let stories = []
   if (session) {
     stories = await prisma.story.findMany({
       where: {
@@ -55,6 +53,7 @@ export async function getServerSideProps({ req, query }: GetServerSidePropsConte
         deleted,
       },
       orderBy: { createdAt: 'asc' },
+      include: ADMIN_INCLUDE,
     })
   }
 

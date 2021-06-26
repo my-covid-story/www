@@ -1,4 +1,4 @@
-import { testStory, fixTitle } from './story'
+import { testStory, storyProvince, fixTitle } from './story'
 
 describe('testStory()', () => {
   test('creates a story for testing with basic required properties', () => {
@@ -16,6 +16,63 @@ describe('testStory()', () => {
     const story = testStory({ title: 'My title', content: 'This is the content of my story.' })
     expect(story).toHaveProperty('title', 'My title')
     expect(story).toHaveProperty('content', 'This is the content of my story.')
+  })
+})
+
+describe('storyProvince()', () => {
+  test("determines the province from the first letter of the story's postal code", () => {
+    const story = testStory({ postal: 'V6B' })
+    expect(storyProvince(story)).toBe('BC')
+  })
+
+  test('determines the province in spite of an invalid third digit', () => {
+    const story = testStory({ postal: 'H1D' })
+    expect(storyProvince(story)).toBe('QC')
+  })
+
+  test('correctly identifies all five first letters for Ontario', () => {
+    expect(storyProvince(testStory({ postal: 'K1A' }))).toBe('ON')
+    expect(storyProvince(testStory({ postal: 'L1A' }))).toBe('ON')
+    expect(storyProvince(testStory({ postal: 'M1A' }))).toBe('ON')
+    expect(storyProvince(testStory({ postal: 'N1A' }))).toBe('ON')
+    expect(storyProvince(testStory({ postal: 'P1A' }))).toBe('ON')
+  })
+
+  test('correctly identifies one of the specific Nunavut X postal codes', () => {
+    const story = testStory({ postal: 'X0B' })
+    expect(storyProvince(story)).toBe('NU')
+  })
+
+  test('indentifies other X postal codes as Northwest Territories', () => {
+    const story = testStory({ postal: 'X1A' })
+    expect(storyProvince(story)).toBe('NT')
+  })
+
+  test("return undefined if the first letter of the story's postal code is invalid", () => {
+    const story = testStory({ postal: 'F4C' })
+    expect(storyProvince(story)).toBeUndefined()
+  })
+
+  test('correctly handles a postal code that is not uppercase', () => {
+    const story = testStory({ postal: 'm5v' })
+    expect(storyProvince(story)).toBe('ON')
+  })
+
+  test('correctly handles a full postal code', () => {
+    const story = testStory({ postal: 'X0B 1B0' })
+    expect(storyProvince(story)).toBe('NU')
+  })
+
+  test('returns the province from a known postal code instead of determining it again', () => {
+    const postalCode = {
+      code: 'M5V',
+      province: 'OO',
+      type: 'urban',
+      hotspot: true,
+      name: 'Somewhere Else',
+    }
+    const story = testStory({ postal: 'M5V', postalCode })
+    expect(storyProvince(story)).toBe('OO')
   })
 })
 

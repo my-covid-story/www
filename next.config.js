@@ -12,9 +12,6 @@ if (process.env.NEXT_PUBLIC_BASE_URL) {
 console.log(`BASE_URL: ${baseUrl}`)
 
 const moduleExports = {
-  future: {
-    webpack5: true,
-  },
   i18n: {
     locales: ['en-CA'],
     defaultLocale: 'en-CA',

@@ -24,6 +24,7 @@ module.exports = {
         'plugin:react/recommended', // React rules
         'plugin:react-hooks/recommended', // React hooks rules
         'plugin:jsx-a11y/recommended', // Accessibility rules
+        'plugin:@next/next/recommended', // Next rules
         'plugin:prettier/recommended', // Prettier plugin
       ],
       rules: {
@@ -42,6 +43,9 @@ module.exports = {
         // I suggest this setting for requiring return types on functions only where useful
         '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
+
+        // We have an existing usage of img that we would need to fix before enabling this
+        '@next/next/no-img-element': 'off',
 
         'prettier/prettier': ['error', { endOfLine: 'auto' }, { usePrettierrc: true }], // Includes .prettierrc.js rules
       },

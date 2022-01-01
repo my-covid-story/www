@@ -24,14 +24,6 @@ export default function Footer() {
             FAQ
           </SimpleLink>
           <SimpleLink
-            href="https://kvmhxg5ojy6.typeform.com/to/gUsoYkft"
-            isExternal={true}
-            padding={1}
-            marginBottom={1}
-          >
-            Media Form
-          </SimpleLink>
-          <SimpleLink
             href="https://github.com/my-covid-story/www"
             isExternal={true}
             padding={1}

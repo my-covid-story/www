@@ -92,9 +92,6 @@ const NavLinks = ({ menu = false }) => {
       <SimpleLink href="/">Home</SimpleLink>
       <SimpleLink href="/about">About Us</SimpleLink>
       <SimpleLink href="/faq">FAQ</SimpleLink>
-      <SimpleLink href="https://kvmhxg5ojy6.typeform.com/to/gUsoYkft" isExternal>
-        Media
-      </SimpleLink>
 
       {/* The Box is required to take the spacing margin, allowing the Stack inside to have negative margin. */}
       <Box>
@@ -130,7 +127,7 @@ const NavLinks = ({ menu = false }) => {
           bg="white"
           _hover={{ bg: ['white'] }}
         >
-          Add Your Story
+          Add Your Story OR Child Case
         </Button>
       </SimpleLink>
     </>

@@ -25,7 +25,7 @@ const MainPage = ({ stories }: MainPageProps) => {
       <FloatingRibbon>
         <NextLink href="/new" passHref>
           <Link>
-            <Button my={'5px'}>Add Your Story</Button>
+            <Button my={'5px'}>Add Story OR Child Case</Button>
           </Link>
         </NextLink>
       </FloatingRibbon>

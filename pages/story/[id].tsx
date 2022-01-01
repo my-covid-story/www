@@ -30,23 +30,16 @@ import FloatingRibbon, { Button } from '../../components/common/FloatingRibbon'
 import HeadTags from '../../components/common/HeadTags'
 import { storyImage } from '../../components/stories/utils'
 import { GetStaticPropsResult } from 'next'
-import ErrorPage from '../404'
 import { CSSProperties } from 'react'
 import CustomShareContainer from '../../components/common/CustomShareContainer'
 import { LinkIcon } from '@chakra-ui/icons'
 
 interface StoryProps {
-  success: true
   story: Story
   url?: string
 }
 
-interface ErrorCodeProps {
-  success: false
-  errorMessage: string
-}
-
-type StoryPageProps = StoryProps | ErrorCodeProps
+type StoryPageProps = StoryProps
 
 const shareIconSize = 64
 const buttonStyle: CSSProperties = { marginRight: '12px', marginBottom: '12px' }
@@ -54,18 +47,9 @@ const buttonStyle: CSSProperties = { marginRight: '12px', marginBottom: '12px' }
 export default function StoryPage(props: StoryPageProps): JSX.Element {
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const url = props.success ? `${process.env.BASE_URL}/story/${props.story.id}` : ''
+  const url = `${process.env.BASE_URL}/story/${props.story.id}`
   const { onCopy } = useClipboard(url)
   const toast = useToast()
-
-  /**
-   * Return the custom error page with the relative status code. This can allow
-   * passing different error codes like 404 in case a page is not found or a 500
-   * in case of a server error.
-   */
-  if (props.success === false) {
-    return <ErrorPage message={props.errorMessage} />
-  }
 
   const { story } = props
 
@@ -174,8 +158,8 @@ export async function getStaticProps({
   try {
     const story = await get(params.id)
 
-    return { props: { success: true, story }, revalidate: 60 }
+    return { props: { story }, revalidate: 60 }
   } catch (err) {
-    return { props: { success: false, errorMessage: "Ooops. Can't find it." }, revalidate: 60 }
+    console.error(err)
   }
 }

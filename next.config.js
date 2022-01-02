@@ -1,4 +1,6 @@
 const { withSentryConfig } = require('@sentry/nextjs')
+const { withSuperjson } = require('next-superjson')
+
 
 let baseUrl
 if (process.env.NEXT_PUBLIC_BASE_URL) {
@@ -11,10 +13,7 @@ if (process.env.NEXT_PUBLIC_BASE_URL) {
 
 console.log(`BASE_URL: ${baseUrl}`)
 
-const moduleExports = {
-  future: {
-    webpack5: true,
-  },
+const moduleExports = withSuperjson()({
   i18n: {
     locales: ['en-CA'],
     defaultLocale: 'en-CA',
@@ -22,7 +21,7 @@ const moduleExports = {
   env: {
     BASE_URL: baseUrl,
   },
-}
+})
 
 const SentryWebpackPluginOptions = {
   // Additional config options for the Sentry Webpack plugin. Keep in mind that

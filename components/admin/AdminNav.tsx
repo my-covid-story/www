@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react'
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
 
-import { signIn, signOut, useSession } from 'next-auth/client'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import { RESPONSIVE_PADDING } from '../common/ContentBox'
 
 const Links = [
@@ -52,7 +52,8 @@ interface NavLinkProps extends LinkDisplayProps {
 }
 
 const NavLink = ({ alwaysDisplay = false, ...props }: NavLinkProps) => {
-  const [session, loading] = useSession()
+  const { data: session, status } = useSession()
+  const loading = status === 'loading'
 
   if (alwaysDisplay) {
     return <LinkDisplay {...props} />
@@ -72,7 +73,7 @@ const NavLink = ({ alwaysDisplay = false, ...props }: NavLinkProps) => {
 
 export default function AdminNav() {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [session] = useSession()
+  const { data: session } = useSession()
 
   return (
     <>

@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth'
-import Providers from 'next-auth/providers'
-import Adapters from 'next-auth/adapters'
+import GoogleProvider from 'next-auth/providers/google'
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
@@ -8,12 +8,12 @@ const prisma = new PrismaClient()
 export default NextAuth({
   // Configure one or more authentication providers
   providers: [
-    Providers.Google({
+    GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
-  adapter: Adapters.Prisma.Adapter({ prisma }),
+  adapter: PrismaAdapter(prisma),
   // A database is optional, but required to persist accounts in a database
   database: process.env.DATABASE_URL,
   callbacks: {

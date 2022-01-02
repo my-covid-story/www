@@ -1,3 +1,5 @@
+import type { AppProps } from 'next/app'
+
 import '@fontsource/inter/700.css'
 import '@fontsource/inter/400.css'
 
@@ -12,19 +14,15 @@ import SiteLayout from '../layouts/Default'
 import { NextPage } from 'next'
 import { ChakraProvider } from '@chakra-ui/react'
 import theme from '../styles/theme'
-import { Provider as AuthProvider } from 'next-auth/client'
-import { Session } from 'next-auth'
+import { SessionProvider } from 'next-auth/react'
 
 type SetLayout = (page: ReactNode) => ReactElement
 type PageWithLayout = NextPage & {
   setLayout: SetLayout
 }
 
-interface MyAppProps {
+type MyAppProps = AppProps & {
   Component: PageWithLayout
-  pageProps: {
-    session: Session
-  }
 }
 
 function MyApp({ Component, pageProps: { session, ...rest } }: MyAppProps) {
@@ -68,7 +66,7 @@ function MyApp({ Component, pageProps: { session, ...rest } }: MyAppProps) {
 
   return (
     <ChakraProvider theme={theme}>
-      <AuthProvider session={session}>
+      <SessionProvider session={session}>
         <Layout>
           <>
             <Head>
@@ -92,7 +90,7 @@ function MyApp({ Component, pageProps: { session, ...rest } }: MyAppProps) {
             <Component {...rest} />
           </>
         </Layout>
-      </AuthProvider>
+      </SessionProvider>
     </ChakraProvider>
   )
 }

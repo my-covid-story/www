@@ -1,5 +1,5 @@
 import { GetServerSidePropsContext } from 'next'
-import { getSession, useSession } from 'next-auth/client'
+import { getSession, useSession } from 'next-auth/react'
 import { Stack } from '@chakra-ui/react'
 import prisma from '../../lib/prisma'
 import { ADMIN_INCLUDE, AdminStory } from '../../lib/model/story'
@@ -14,7 +14,7 @@ interface AdminPageProps {
 }
 
 function AdminPage({ stories, filtered }: AdminPageProps) {
-  const [session] = useSession()
+  const { data: session } = useSession()
 
   return (
     <>

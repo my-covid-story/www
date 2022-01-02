@@ -12,6 +12,9 @@ if (process.env.NEXT_PUBLIC_BASE_URL) {
 
 console.log(`BASE_URL: ${baseUrl}`)
 
+/**
+ * @type {import('next').NextConfig}
+ **/
 const moduleExports = withSuperjson()({
   i18n: {
     locales: ['en-CA'],

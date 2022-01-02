@@ -14,8 +14,6 @@ export default NextAuth({
     }),
   ],
   adapter: PrismaAdapter(prisma),
-  // A database is optional, but required to persist accounts in a database
-  database: process.env.DATABASE_URL,
   callbacks: {
     async signIn(user) {
       if (process.env.MODERATOR_EMAILS.includes(user.email)) {

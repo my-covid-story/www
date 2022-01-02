@@ -41,3 +41,6 @@ prisma/dev.db
 # sitemap - these get built automatically
 public/sitemap.xml
 public/robots.txt
+
+# Sentry
+.sentryclirc

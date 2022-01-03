@@ -17,7 +17,7 @@ export default NextAuth({
   ],
   adapter: PrismaAdapter(prisma),
   callbacks: {
-    async signIn(user) {
+    async signIn({ user }) {
       if (process.env.MODERATOR_EMAILS.includes(user.email)) {
         return true
       }

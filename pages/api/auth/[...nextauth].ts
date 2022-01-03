@@ -2,6 +2,7 @@ import NextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { PrismaClient } from '@prisma/client'
+import { captureException } from '@sentry/nextjs'
 
 const prisma = new PrismaClient()
 
@@ -21,6 +22,11 @@ export default NextAuth({
         return true
       }
       return false
+    },
+  },
+  logger: {
+    error(code, metadata) {
+      captureException({ code, metadata })
     },
   },
 })

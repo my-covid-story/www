@@ -1,6 +1,11 @@
 import { Box, Heading, SimpleGrid } from '@chakra-ui/react'
 import { Story } from '../../lib/model/story'
-import { categoryLabel, storyCategoryLabel, storyImage, storyCite } from './utils'
+import {
+  categoryLabel,
+  storyCategoryLabel,
+  storyImage,
+  storyCite,
+} from './utils'
 import ContentBox from '../common/ContentBox'
 import Label, { ContentWarningLabel } from '../common/Label'
 import SimpleLink from '../common/SimpleLink'
@@ -15,7 +20,11 @@ function FeedHeader() {
     >
       <Box bg="rgba(0, 0, 0, 0.5)">
         <ContentBox pt={[8, null, 14]} pb={[10, null, 32]}>
-          <Heading as="h1" fontSize={['2xl', null, '4xl', '5xl']} fontWeight={300}>
+          <Heading
+            as="h1"
+            fontSize={['2xl', null, '4xl', '5xl']}
+            fontWeight={300}
+          >
             Amplifying the stories of the pandemic throughout Canada
           </Heading>
         </ContentBox>
@@ -41,10 +50,18 @@ function StorySummary({ story }: StorySummaryProps) {
           bgPosition="center"
           color="white"
         >
-          <Box p={[4, null, null, 6]} borderRadius="8px" bg="rgba(0, 0, 0, 0.5)">
+          <Box
+            p={[4, null, null, 6]}
+            borderRadius="8px"
+            bg="rgba(0, 0, 0, 0.5)"
+          >
             {story.contentWarning && <ContentWarningLabel />}
             {!story.contentWarning && (
-              <Label visibility={categoryLabel[story.category] ? 'visible' : 'hidden'}>
+              <Label
+                visibility={
+                  categoryLabel[story.category] ? 'visible' : 'hidden'
+                }
+              >
                 {storyCategoryLabel(story)}
               </Label>
             )}
@@ -67,7 +84,13 @@ function StorySummary({ story }: StorySummaryProps) {
           </Box>
         </Box>
 
-        <Box mt={2} color="#333333" fontSize="md" fontWeight={700} lineHeight={1.2}>
+        <Box
+          mt={2}
+          color="#333333"
+          fontSize="md"
+          fontWeight={700}
+          lineHeight={1.2}
+        >
           Read Story
         </Box>
       </Box>

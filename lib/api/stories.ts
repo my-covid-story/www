@@ -82,7 +82,10 @@ export async function add(story: NewStory) {
 // GET /api/stories/:id
 export async function get(id: string) {
   try {
-    const story = await prisma.story.findUnique({ where: { id: id }, select: SELECT })
+    const story = await prisma.story.findUnique({
+      where: { id: id },
+      select: SELECT,
+    })
     if (story != null && story.approved) {
       return story
     }

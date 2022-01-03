@@ -1,4 +1,9 @@
-import { Button as BaseButton, ButtonProps, Center, CenterProps } from '@chakra-ui/react'
+import {
+  Button as BaseButton,
+  ButtonProps,
+  Center,
+  CenterProps,
+} from '@chakra-ui/react'
 import { RESPONSIVE_PADDING } from './ContentBox'
 
 export default function FloatingRibbon({ children }: CenterProps) {

@@ -7,7 +7,9 @@ import { withSentry } from '@sentry/nextjs'
 const handle = (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
     case 'GET':
-      return stories.get(req.query.id as string).then(res.json, (err) => sendError(res, err))
+      return stories
+        .get(req.query.id as string)
+        .then(res.json, (err) => sendError(res, err))
     default:
       sendError(res, methodNotAllowed({ allowed: ['GET'] }))
       return Promise.resolve()

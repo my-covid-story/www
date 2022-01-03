@@ -60,7 +60,10 @@ const POSTAL_PROVINCE = {
   Y: 'YT',
 }
 
-export function storyProvince({ postal, postalCode }: Story): string | undefined {
+export function storyProvince({
+  postal,
+  postalCode,
+}: Story): string | undefined {
   postal = postal.substring(0, 3).toUpperCase()
   if (postalCode) {
     return postalCode.province
@@ -111,4 +114,6 @@ export const ADMIN_INCLUDE = {
   },
 }
 
-export type AdminStory = Prisma.StoryGetPayload<{ include: typeof ADMIN_INCLUDE }>
+export type AdminStory = Prisma.StoryGetPayload<{
+  include: typeof ADMIN_INCLUDE
+}>

@@ -20,7 +20,12 @@ import InstagramSVG from '../icons/InstagramSVG'
 import TwitterSVG from '../icons/TwitterSVG'
 
 const MenuIcon = () => (
-  <svg width="16px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="white">
+  <svg
+    width="16px"
+    viewBox="0 0 20 20"
+    xmlns="http://www.w3.org/2000/svg"
+    fill="white"
+  >
     <title>Menu</title>
     <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
   </svg>
@@ -56,7 +61,12 @@ const MenuDrawer = ({ isOpen, onClose }: MenuDrawerProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null)
 
   return (
-    <Drawer placement="top" initialFocusRef={buttonRef} isOpen={isOpen} onClose={onClose}>
+    <Drawer
+      placement="top"
+      initialFocusRef={buttonRef}
+      isOpen={isOpen}
+      onClose={onClose}
+    >
       <DrawerOverlay />
       <DrawerContent
         pt={4}
@@ -92,7 +102,10 @@ const NavLinks = ({ menu = false }) => {
       <SimpleLink href="/">Home</SimpleLink>
       <SimpleLink href="/about">About Us</SimpleLink>
       <SimpleLink href="/faq">FAQ</SimpleLink>
-      <SimpleLink href="https://kvmhxg5ojy6.typeform.com/to/gUsoYkft" isExternal>
+      <SimpleLink
+        href="https://kvmhxg5ojy6.typeform.com/to/gUsoYkft"
+        isExternal
+      >
         Media
       </SimpleLink>
 
@@ -105,15 +118,27 @@ const NavLinks = ({ menu = false }) => {
           mx={-1}
           fontSize={menu ? '2xl' : 'md'}
         >
-          <SimpleLink href="https://twitter.com/MyCOVIDStory_CA" isExternal p={1}>
+          <SimpleLink
+            href="https://twitter.com/MyCOVIDStory_CA"
+            isExternal
+            p={1}
+          >
             <TwitterSVG />
             <VisuallyHidden>Twitter @MyCOVIDStory_CA</VisuallyHidden>
           </SimpleLink>
-          <SimpleLink href="https://www.facebook.com/MyCovidStoryCA" isExternal p={1}>
+          <SimpleLink
+            href="https://www.facebook.com/MyCovidStoryCA"
+            isExternal
+            p={1}
+          >
             <FacebookSVG />
             <VisuallyHidden>Facebook @MyCovidStoryCA</VisuallyHidden>
           </SimpleLink>
-          <SimpleLink href="https://www.instagram.com/mycovidstory_ca/" isExternal p={1}>
+          <SimpleLink
+            href="https://www.instagram.com/mycovidstory_ca/"
+            isExternal
+            p={1}
+          >
             <InstagramSVG />
             <VisuallyHidden>Instagram @mycovidstory_ca</VisuallyHidden>
           </SimpleLink>

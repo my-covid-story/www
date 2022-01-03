@@ -2,7 +2,12 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
 import { ADMIN_INCLUDE, AdminStory } from '../../../lib/model/story'
 import prisma from '../../../lib/prisma'
-import { internalServerError, methodNotAllowed, sendError, unauthorized } from '../../../lib/errors'
+import {
+  internalServerError,
+  methodNotAllowed,
+  sendError,
+  unauthorized,
+} from '../../../lib/errors'
 import * as emailer from '../../../lib/emailer'
 import { withSentry } from '@sentry/nextjs'
 

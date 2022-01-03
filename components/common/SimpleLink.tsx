@@ -16,9 +16,18 @@ interface SimpleLinkProps extends LinkProps {
  * @param props.children the content to be projected inside the link
  * @example <SimpleLink href="/about">About us</SimpleLink>
  */
-export default function SimpleLink({ href, asHref, undecorated, ...props }: SimpleLinkProps) {
+export default function SimpleLink({
+  href,
+  asHref,
+  undecorated,
+  ...props
+}: SimpleLinkProps) {
   if (undecorated === true) {
-    props = { textDecoration: 'none', _hover: { textDecoration: 'none' }, ...props }
+    props = {
+      textDecoration: 'none',
+      _hover: { textDecoration: 'none' },
+      ...props,
+    }
   }
 
   return (

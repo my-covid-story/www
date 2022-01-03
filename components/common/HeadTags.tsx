@@ -22,21 +22,44 @@ export default function HeadTags({
   previewImage = defaultPreviewImage,
 }: HeadTagsProps) {
   const generatedTitle = generateTitle(title, TITLE_SUFFIX)
-  const generatedDescription = generateDescription(description, DESCRIPTION_LENGTH)
+  const generatedDescription = generateDescription(
+    description,
+    DESCRIPTION_LENGTH
+  )
   const generatedPreviewImage = generatePreviewImageUrl(previewImage)
 
   return (
     <Head>
       <title key="title">{generatedTitle}</title>
-      <meta key="description" name="description" content={generatedDescription} />
+      <meta
+        key="description"
+        name="description"
+        content={generatedDescription}
+      />
 
       <meta key="og:title" property="og:title" content={generatedTitle} />
-      <meta key="og:description" property="og:description" content={generatedDescription} />
-      <meta key="og:image" property="og:image" content={generatedPreviewImage} />
+      <meta
+        key="og:description"
+        property="og:description"
+        content={generatedDescription}
+      />
+      <meta
+        key="og:image"
+        property="og:image"
+        content={generatedPreviewImage}
+      />
 
       <meta key="twitter:title" name="twitter:title" content={generatedTitle} />
-      <meta key="twitter:description" name="twitter:description" content={generatedDescription} />
-      <meta key="twitter:image" name="twitter:image" content={generatedPreviewImage} />
+      <meta
+        key="twitter:description"
+        name="twitter:description"
+        content={generatedDescription}
+      />
+      <meta
+        key="twitter:image"
+        name="twitter:image"
+        content={generatedPreviewImage}
+      />
       {children}
     </Head>
   )

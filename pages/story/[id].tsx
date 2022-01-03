@@ -54,7 +54,9 @@ const buttonStyle: CSSProperties = { marginRight: '12px', marginBottom: '12px' }
 export default function StoryPage(props: StoryPageProps): JSX.Element {
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const url = props.success ? `${process.env.BASE_URL}/story/${props.story.id}` : ''
+  const url = props.success
+    ? `${process.env.BASE_URL}/story/${props.story.id}`
+    : ''
   const { onCopy } = useClipboard(url)
   const toast = useToast()
 
@@ -91,7 +93,11 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
 
   return (
     <>
-      <HeadTags title={story.title} description={story.content} previewImage={storyImage(story)} />
+      <HeadTags
+        title={story.title}
+        description={story.content}
+        previewImage={storyImage(story)}
+      />
 
       <Box>
         <StoryDetail story={story} onClose={handleClose} onShare={onOpen} />
@@ -118,11 +124,19 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
                     <TwitterIcon size={shareIconSize} />
                   </TwitterShareButton>
 
-                  <FacebookShareButton url={url} quote={description} style={buttonStyle}>
+                  <FacebookShareButton
+                    url={url}
+                    quote={description}
+                    style={buttonStyle}
+                  >
                     <FacebookIcon size={shareIconSize} />
                   </FacebookShareButton>
 
-                  <WhatsappShareButton url={url} title={description} style={buttonStyle}>
+                  <WhatsappShareButton
+                    url={url}
+                    title={description}
+                    style={buttonStyle}
+                  >
                     <WhatsappIcon size={shareIconSize} />
                   </WhatsappShareButton>
 
@@ -135,7 +149,10 @@ export default function StoryPage(props: StoryPageProps): JSX.Element {
                     <EmailIcon size={shareIconSize} />
                   </EmailShareButton>
 
-                  <CustomShareContainer style={buttonStyle} onClick={handleURLCopy}>
+                  <CustomShareContainer
+                    style={buttonStyle}
+                    onClick={handleURLCopy}
+                  >
                     <LinkIcon color="#fff" w={8} h={8} />
                   </CustomShareContainer>
                 </Flex>
@@ -176,6 +193,9 @@ export async function getStaticProps({
 
     return { props: { success: true, story }, revalidate: 60 }
   } catch (err) {
-    return { props: { success: false, errorMessage: "Ooops. Can't find it." }, revalidate: 60 }
+    return {
+      props: { success: false, errorMessage: "Ooops. Can't find it." },
+      revalidate: 60,
+    }
   }
 }

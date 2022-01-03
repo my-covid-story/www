@@ -25,14 +25,27 @@ interface StoryDetailProps {
   onShare: () => void
 }
 
-export default function StoryDetail({ story, onClose, onShare }: StoryDetailProps) {
+export default function StoryDetail({
+  story,
+  onClose,
+  onShare,
+}: StoryDetailProps) {
   return (
     <Box>
-      <Box bgImage={`url(${storyImage(story)})`} bgSize="cover" bgPosition="center" color="white">
+      <Box
+        bgImage={`url(${storyImage(story)})`}
+        bgSize="cover"
+        bgPosition="center"
+        color="white"
+      >
         <Box bg="rgba(0, 0, 0, 0.5)">
           <ContentBox>
             <Flex justifyContent="space-between">
-              <Label visibility={categoryLabel[story.category] ? 'visible' : 'hidden'}>
+              <Label
+                visibility={
+                  categoryLabel[story.category] ? 'visible' : 'hidden'
+                }
+              >
                 {storyCategoryLabel(story)}
               </Label>
 

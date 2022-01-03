@@ -13,9 +13,14 @@ const schema = yup.object().shape({
     .required('Title is required'),
   content: yup
     .string()
-    .test('word count', `Story can't be more than ${STORY_WORD_LIMIT} words`, (value) =>
-      // If no value, we return true since it passes validation, otherwise coerce word length check to boolean
-      !value ? true : Boolean(value.trim().split(/\s+/).length <= STORY_WORD_LIMIT)
+    .test(
+      'word count',
+      `Story can't be more than ${STORY_WORD_LIMIT} words`,
+      (value) =>
+        // If no value, we return true since it passes validation, otherwise coerce word length check to boolean
+        !value
+          ? true
+          : Boolean(value.trim().split(/\s+/).length <= STORY_WORD_LIMIT)
     )
     .required('A story is required'),
   postal: yup
@@ -44,13 +49,17 @@ const schema = yup.object().shape({
       is: true,
       then: yup
         .string()
-        .required("You must include your name since you've agreed to be contacted."),
+        .required(
+          "You must include your name since you've agreed to be contacted."
+        ),
     }),
   email: yup.string().email('Invalid email address format'),
   phone: yup
     .string()
-    .test('phone is ten digits', 'Phone number must contain 10 digits', (value) =>
-      !value ? true : Boolean(value.match(/\d/g)?.length === 10)
+    .test(
+      'phone is ten digits',
+      'Phone number must contain 10 digits',
+      (value) => (!value ? true : Boolean(value.match(/\d/g)?.length === 10))
     ),
   twitter: yup.string(),
   consent: yup.boolean().isTrue('You must provide your consent to continue'),

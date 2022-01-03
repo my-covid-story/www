@@ -13,7 +13,11 @@ export default function Footer() {
       textAlign="left"
     >
       <Container centerContent maxW="container.sm">
-        <SimpleGrid columns={[2, 3]} width="100%" textAlign={['left', 'center']}>
+        <SimpleGrid
+          columns={[2, 3]}
+          width="100%"
+          textAlign={['left', 'center']}
+        >
           <SimpleLink href="/" padding={1} marginBottom={1}>
             Home
           </SimpleLink>
@@ -47,7 +51,11 @@ export default function Footer() {
           >
             Analytics
           </SimpleLink>
-          <SimpleLink href="mailto:info@mycovidstory.ca" padding={1} marginBottom={1}>
+          <SimpleLink
+            href="mailto:info@mycovidstory.ca"
+            padding={1}
+            marginBottom={1}
+          >
             Email Us
           </SimpleLink>
           <SimpleLink
@@ -60,7 +68,11 @@ export default function Footer() {
         </SimpleGrid>
         <Text as="strong" paddingTop={4} mb={4}>
           Made with love by Canadians{' '}
-          <span role="img" aria-label="heart" style={{ filter: 'brightness(0) invert(1)' }}>
+          <span
+            role="img"
+            aria-label="heart"
+            style={{ filter: 'brightness(0) invert(1)' }}
+          >
             ❤️
           </span>
         </Text>

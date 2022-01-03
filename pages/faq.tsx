@@ -21,17 +21,19 @@ export default function FAQ() {
             Why does this website exist?
           </Heading>
           <Text>
-            The site was created to help any individual in Canada impacted by the COVID-19 pandemic
-            — from factory workers and family members to business owners and physicians — to easily
-            and safely share their stories so that they can be seen by decision-makers, media and
-            the public.
+            The site was created to help any individual in Canada impacted by
+            the COVID-19 pandemic — from factory workers and family members to
+            business owners and physicians — to easily and safely share their
+            stories so that they can be seen by decision-makers, media and the
+            public.
           </Text>
           <Text>
-            These stories highlight the need for a pandemic response and recovery that promotes
-            physical, emotional and economic well-being, and offer insight into how certain
-            neighbourhoods, populations, institutions and industries are uniquely affected. By
-            amplifying them, we hope to emphasize the human element of the pandemic to encourage
-            compassion and understanding of the experiences of others.
+            These stories highlight the need for a pandemic response and
+            recovery that promotes physical, emotional and economic well-being,
+            and offer insight into how certain neighbourhoods, populations,
+            institutions and industries are uniquely affected. By amplifying
+            them, we hope to emphasize the human element of the pandemic to
+            encourage compassion and understanding of the experiences of others.
           </Text>
         </Box>
         <Box pb={6}>
@@ -39,39 +41,41 @@ export default function FAQ() {
             Can anyone share a story?
           </Heading>
           <Text>
-            Anyone over the age of 18 can submit their story. While our initial focus was on
-            Ontario, we now welcome stories from anyone throughout Canada.
+            Anyone over the age of 18 can submit their story. While our initial
+            focus was on Ontario, we now welcome stories from anyone throughout
+            Canada.
           </Text>
           <Text>
-            In order to keep you safe and establish trust with visitors, the content will be
-            moderated using the following guidelines:
+            In order to keep you safe and establish trust with visitors, the
+            content will be moderated using the following guidelines:
           </Text>
           <Text>
             <ol>
               <li>
-                Content must be respectful, authentic, and captures their own or another’s story
+                Content must be respectful, authentic, and captures their own or
+                another’s story
               </li>
               <li>Respects science</li>
               <li>Content isn’t defamatory or bullying anyone</li>
               <li>
-                It’s not self-promoting (i.e. sell a product/business) or encouraging illegal
-                activity
+                It’s not self-promoting (i.e. sell a product/business) or
+                encouraging illegal activity
               </li>
               <li>It’s not racist, homophobic, sexist, ableist</li>
               <li>Does not contain hate speech</li>
               <li>Does not promote or encourage self-harm</li>
               <li>
-                For storytellers who wish to remain anonymous, their content does not have any
-                personally identifiable information
+                For storytellers who wish to remain anonymous, their content
+                does not have any personally identifiable information
               </li>
               <li>
-                Stories should not have personal identifying information about other people impacted
-                by COVID-19 without their consent
+                Stories should not have personal identifying information about
+                other people impacted by COVID-19 without their consent
               </li>
             </ol>
             <p>
-              A story that does not meet these guidelines will not be shared publicly. If you have
-              any questions or concerns, reach out to{' '}
+              A story that does not meet these guidelines will not be shared
+              publicly. If you have any questions or concerns, reach out to{' '}
               <SimpleLink
                 href="mailto:info@mycovidstory.ca"
                 isExternal={true}
@@ -98,16 +102,18 @@ export default function FAQ() {
             How do you know these stories are true?
           </Heading>
           <Text>
-            The stories published by MyCOVIDstory.ca represent the lived experience, opinions, and
-            truths of the people telling them. They have not been verified for accuracy.
+            The stories published by MyCOVIDstory.ca represent the lived
+            experience, opinions, and truths of the people telling them. They
+            have not been verified for accuracy.
           </Text>
           <Text>
-            These stories do not represent the opinions or beliefs of MyCOVIDstory.ca or any of the
-            many volunteers working on this project.
+            These stories do not represent the opinions or beliefs of
+            MyCOVIDstory.ca or any of the many volunteers working on this
+            project.
           </Text>
           <Text>
-            We encourage all readers to consult respected scientific sources for verified, factual
-            information related to COVID-19.
+            We encourage all readers to consult respected scientific sources for
+            verified, factual information related to COVID-19.
           </Text>
         </Box>
         <Box pb={6}>
@@ -115,32 +121,38 @@ export default function FAQ() {
             Who can access private data?
           </Heading>
           <Text>
-            You have full control over who your information will be shared with — nobody else will
-            have access to any personally identifiable information. We take your privacy seriously
-            and have taken this into consideration at every step. This site does not use cookies or
-            any third-party tracking tools. We use{' '}
-            <Link href="https://app.usefathom.com/share/xnknpyhv/mycovidstory.ca#/" isExternal>
+            You have full control over who your information will be shared with
+            — nobody else will have access to any personally identifiable
+            information. We take your privacy seriously and have taken this into
+            consideration at every step. This site does not use cookies or any
+            third-party tracking tools. We use{' '}
+            <Link
+              href="https://app.usefathom.com/share/xnknpyhv/mycovidstory.ca#/"
+              isExternal
+            >
               Fathom
             </Link>{' '}
-            to generate simple traffic metrics. Fathom does not track any personally identifiable
-            information.
+            to generate simple traffic metrics. Fathom does not track any
+            personally identifiable information.
           </Text>
         </Box>
         <Box pb={6}>
           <Heading as="h2" size="l" pb={3}>
-            Why might the media want to follow-up with storytellers? Is MyCovidStory.ca a direct
-            line to media coverage?
+            Why might the media want to follow-up with storytellers? Is
+            MyCovidStory.ca a direct line to media coverage?
           </Heading>
           <Text>
             <p>
-              MyCovidStory.ca is not a direct line to media coverage. While the untold stories of
-              the pandemic are important and we expect that the media may be interested in learning
-              more, they will only contact you if you have given express consent for this.
+              MyCovidStory.ca is not a direct line to media coverage. While the
+              untold stories of the pandemic are important and we expect that
+              the media may be interested in learning more, they will only
+              contact you if you have given express consent for this.
             </p>
 
             <p>
-              We expect that members of the media will respect the privacy of those who have shared
-              their stories here and only contact storytellers by{' '}
+              We expect that members of the media will respect the privacy of
+              those who have shared their stories here and only contact
+              storytellers by{' '}
               <a
                 href="https://kvmhxg5ojy6.typeform.com/to/gUsoYkft"
                 target="_blank"
@@ -154,13 +166,14 @@ export default function FAQ() {
         </Box>
         <Box pb={6}>
           <Heading as="h2" size="l" pb={3}>
-            Will any companies, media, or the government be able to find out that I posted this if I
-            choose to remain anonymous?
+            Will any companies, media, or the government be able to find out
+            that I posted this if I choose to remain anonymous?
           </Heading>
           <Text>
-            <strong>No.</strong> Unless you have specifically consented to share your name publicly
-            or with the media, no one else will have access to any personally identifiable
-            information you have provided during story submission. We respect your choice.
+            <strong>No.</strong> Unless you have specifically consented to share
+            your name publicly or with the media, no one else will have access
+            to any personally identifiable information you have provided during
+            story submission. We respect your choice.
           </Text>
         </Box>
         <Box pb={6}>
@@ -168,13 +181,19 @@ export default function FAQ() {
             Who’s paying for this?
           </Heading>
           <Text>
-            This page was built by volunteers and is fully funded by individuals in Canada concerned
-            by the current COVID-19 response. We are using{' '}
-            <Link href="https://vercel.com?utm_source=my-covid-story&utm_campaign=oss" isExternal>
+            This page was built by volunteers and is fully funded by individuals
+            in Canada concerned by the current COVID-19 response. We are using{' '}
+            <Link
+              href="https://vercel.com?utm_source=my-covid-story&utm_campaign=oss"
+              isExternal
+            >
               Vercel
             </Link>{' '}
             to host the site.{' '}
-            <Link href="https://vercel.com?utm_source=my-covid-story&utm_campaign=oss" isExternal>
+            <Link
+              href="https://vercel.com?utm_source=my-covid-story&utm_campaign=oss"
+              isExternal
+            >
               Vercel
             </Link>{' '}
             is sponsoring the project by providing free hosting services.
@@ -185,18 +204,20 @@ export default function FAQ() {
             Who built the site?
           </Heading>
           <Text>
-            We are a group of concerned individuals who could not stand by as parts of our country
-            were led into a humanitarian crisis. We believe the power of storytelling is an
-            effective means to emphasize the human element of the pandemic, encouraging compassion
-            amongst the Canadian public and offering first-hand insight to decision-makers and the
-            media.
+            We are a group of concerned individuals who could not stand by as
+            parts of our country were led into a humanitarian crisis. We believe
+            the power of storytelling is an effective means to emphasize the
+            human element of the pandemic, encouraging compassion amongst the
+            Canadian public and offering first-hand insight to decision-makers
+            and the media.
           </Text>
           <Text>
-            Our team is entirely volunteer-led and consists of developers, designers, marketers,
-            healthcare workers, social workers, policy advocates, caregivers and more. Please view
-            our <Link href="/about/">About</Link>
-            page to view our full list of contributors (we’re always welcoming new team members, so
-            it’s not always up-to-date!).
+            Our team is entirely volunteer-led and consists of developers,
+            designers, marketers, healthcare workers, social workers, policy
+            advocates, caregivers and more. Please view our{' '}
+            <Link href="/about/">About</Link>
+            page to view our full list of contributors (we’re always welcoming
+            new team members, so it’s not always up-to-date!).
           </Text>
         </Box>
         <Box pb={6}>
@@ -204,17 +225,18 @@ export default function FAQ() {
             Are the website creators affiliated with any group?
           </Heading>
           <Text>
-            No, we are not affiliated to any political group or agenda. We are simply a collection
-            of individuals concerned by the COVID-19 response in our respective provinces and
-            country as a whole. We hope that by sharing real stories of the people impacted,
-            decision makers at all levels will make the right decisions to promote the physical,
+            No, we are not affiliated to any political group or agenda. We are
+            simply a collection of individuals concerned by the COVID-19
+            response in our respective provinces and country as a whole. We hope
+            that by sharing real stories of the people impacted, decision makers
+            at all levels will make the right decisions to promote the physical,
             emotional and economic well-being of individuals throughout Canada.
           </Text>
         </Box>
         <Box pb={6}>
           <Heading as="h2" size="l" pb={3}>
-            What sites and sources do you recommend to learn about the science of COVID-19 and
-            related vaccines?
+            What sites and sources do you recommend to learn about the science
+            of COVID-19 and related vaccines?
           </Heading>
           <Text>
             <strong>Websites:</strong>

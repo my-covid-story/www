@@ -26,7 +26,11 @@ function AdminPage({ stories, filtered }: AdminPageProps) {
           {session && (
             <>
               {stories.map((story) => (
-                <StoryCard key={story.id} story={story} filteredView={filtered} />
+                <StoryCard
+                  key={story.id}
+                  story={story}
+                  filteredView={filtered}
+                />
               ))}
             </>
           )}
@@ -39,7 +43,10 @@ function AdminPage({ stories, filtered }: AdminPageProps) {
 AdminPage.setLayout = AdminLayout
 export default AdminPage
 
-export async function getServerSideProps({ req, query }: GetServerSidePropsContext) {
+export async function getServerSideProps({
+  req,
+  query,
+}: GetServerSidePropsContext) {
   const session = await getSession({ req })
 
   const deleted = query.deleted === 'true'

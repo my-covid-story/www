@@ -9,7 +9,10 @@ interface SiteLayoutProps {
   stickyNav?: boolean
 }
 
-export default function SiteLayout({ children, stickyNav = false }: SiteLayoutProps) {
+export default function SiteLayout({
+  children,
+  stickyNav = false,
+}: SiteLayoutProps) {
   return (
     <Grid templateRows="auto 1fr auto" templateColumns="auto" minH="100vh">
       <Nav sticky={stickyNav} />

@@ -18,7 +18,10 @@ import {
 import { Field, Form, Formik } from 'formik'
 import Router from 'next/router'
 
-import storySchema, { STORY_WORD_LIMIT, TITLE_CHAR_LIMIT } from '../../lib/storySchema'
+import storySchema, {
+  STORY_WORD_LIMIT,
+  TITLE_CHAR_LIMIT,
+} from '../../lib/storySchema'
 import PersistFormData from '../common/PersistFormData'
 
 type LoginFormInputs = {
@@ -135,7 +138,9 @@ export default function StoryForm() {
                   pt={FIELD_PADDING}
                   pb={FIELD_PADDING}
                   isRequired
-                  isInvalid={form.errors.displayName && form.touched.displayName}
+                  isInvalid={
+                    form.errors.displayName && form.touched.displayName
+                  }
                 >
                   <FormLabel htmlFor="displayName">Name to display</FormLabel>
                   <Input {...field} id="displayName" placeholder="Your name" />
@@ -158,7 +163,11 @@ export default function StoryForm() {
                 isInvalid={form.errors.title && form.touched.title}
               >
                 <FormLabel htmlFor="title">Enter a title or quote</FormLabel>
-                <Textarea {...field} id="title" placeholder="Enter your story title" />
+                <Textarea
+                  {...field}
+                  id="title"
+                  placeholder="Enter your story title"
+                />
                 <FormHelperText>{`Up to ${TITLE_CHAR_LIMIT} characters.`}</FormHelperText>
                 <FormErrorMessage>{form.errors.title}</FormErrorMessage>
               </FormControl>
@@ -175,7 +184,11 @@ export default function StoryForm() {
                 isInvalid={form.errors.content && form.touched.content}
               >
                 <FormLabel htmlFor="content">Please share your story</FormLabel>
-                <Textarea {...field} id="content" placeholder="Enter your story content" />
+                <Textarea
+                  {...field}
+                  id="content"
+                  placeholder="Enter your story content"
+                />
                 <FormHelperText>{`Up to ${STORY_WORD_LIMIT} words.`}</FormHelperText>
                 <FormErrorMessage>{form.errors.content}</FormErrorMessage>
               </FormControl>
@@ -191,7 +204,9 @@ export default function StoryForm() {
                 isRequired
                 isInvalid={form.errors.postal && form.touched.postal}
               >
-                <FormLabel htmlFor="postal">First 3 characters of your postal code</FormLabel>
+                <FormLabel htmlFor="postal">
+                  First 3 characters of your postal code
+                </FormLabel>
                 <Input
                   name={field.name}
                   value={field.value.toUpperCase()}
@@ -216,17 +231,30 @@ export default function StoryForm() {
                 isInvalid={form.errors.category && form.touched.category}
               >
                 <FormLabel htmlFor="category">I am a:</FormLabel>
-                <Select {...field} name="category" id="category" placeholder="Choose one">
+                <Select
+                  {...field}
+                  name="category"
+                  id="category"
+                  placeholder="Choose one"
+                >
                   <option value="concerned-citizen">Concerned citizen</option>
                   <option value="essential-worker">Essential worker</option>
-                  <option value="healthcare-provider">Healthcare provider</option>
+                  <option value="healthcare-provider">
+                    Healthcare provider
+                  </option>
                   <option value="educator">Educator</option>
-                  <option value="small-business-owner">Small business owner</option>
-                  <option value="patient-family-member">Patient or patient family member</option>
+                  <option value="small-business-owner">
+                    Small business owner
+                  </option>
+                  <option value="patient-family-member">
+                    Patient or patient family member
+                  </option>
                   <option value="other">Other</option>
                 </Select>
                 <FormErrorMessage>{form.errors.category}</FormErrorMessage>
-                <FormHelperText>Choose the one that best describes you.</FormHelperText>
+                <FormHelperText>
+                  Choose the one that best describes you.
+                </FormHelperText>
               </FormControl>
             )}
           </Field>
@@ -244,7 +272,9 @@ export default function StoryForm() {
                 </FormLabel>
                 <Checkbox {...field}>Yes, a journalist can contact me</Checkbox>
                 <FormErrorMessage>{form.errors.contact}</FormErrorMessage>
-                <FormHelperText>Let us know if the media can contact you.</FormHelperText>
+                <FormHelperText>
+                  Let us know if the media can contact you.
+                </FormHelperText>
               </FormControl>
             )}
           </Field>
@@ -260,12 +290,20 @@ export default function StoryForm() {
                   <FormControl
                     pt={OPTIONAL_FIELD_PADDING}
                     pb={OPTIONAL_FIELD_PADDING}
-                    isInvalid={form.errors.contactName && form.touched.contactName}
+                    isInvalid={
+                      form.errors.contactName && form.touched.contactName
+                    }
                     isRequired
                   >
                     <FormLabel htmlFor="name">Your name</FormLabel>
-                    <Input {...field} id="contactName" placeholder="Contact name" />
-                    <FormErrorMessage>{form.errors.contactName}</FormErrorMessage>
+                    <Input
+                      {...field}
+                      id="contactName"
+                      placeholder="Contact name"
+                    />
+                    <FormErrorMessage>
+                      {form.errors.contactName}
+                    </FormErrorMessage>
                     <FormHelperText>
                       This <em>won&apos;t</em> be published.
                     </FormHelperText>
@@ -295,7 +333,11 @@ export default function StoryForm() {
                     isInvalid={form.errors.email && form.touched.email}
                   >
                     <FormLabel htmlFor="email">Email</FormLabel>
-                    <Input {...field} id="email" placeholder="name@domain.com" />
+                    <Input
+                      {...field}
+                      id="email"
+                      placeholder="name@domain.com"
+                    />
                     <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                   </FormControl>
                 )}
@@ -333,8 +375,8 @@ export default function StoryForm() {
                   Declaration and Consent
                 </FormLabel>
                 <Checkbox {...field} id="consent" name="consent">
-                  I confirm this story is true and I have consent to share it and any photo
-                  submitted.
+                  I confirm this story is true and I have consent to share it
+                  and any photo submitted.
                 </Checkbox>
                 <FormErrorMessage>{form.errors.consent}</FormErrorMessage>
               </FormControl>

@@ -1,4 +1,4 @@
-import { Flex, Heading } from '@chakra-ui/react'
+import { Flex, Heading, Image } from '@chakra-ui/react'
 import SimpleLink from '../components/common/SimpleLink'
 
 interface ErrorPageProps {
@@ -23,10 +23,16 @@ export default function ErrorPage({
     >
       <Heading>{message}</Heading>
 
-      <img
+      <Image
         src="/svg/error-page.svg"
         alt="Error illustration"
-        style={{ width: '75%', maxWidth: '450px', marginTop: '50px', marginBottom: '50px' }}
+        style={{
+          width: '75%',
+          maxWidth: '450px',
+          marginTop: '50px',
+          marginBottom: '50px',
+        }}
+        loading="lazy"
       />
 
       <SimpleLink href="/" fontWeight="600" color="primary.100">

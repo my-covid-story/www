@@ -12,7 +12,6 @@
     "lint-fix": "eslint  --fix '*/**/*.{js,ts,tsx}'",
     "format": "prettier --write '**/*.{js,jsx,ts,tsx,json}'",
     "prepare": "husky install",
-    "ts-node": "ts-node --project=tsconfig.seed.json",
     "vercel-build": "prisma migrate deploy && next build",
     "prisma:generate": "prisma generate",
     "gen:theme-typings": "chakra-cli tokens theme/index.ts",
@@ -28,7 +27,7 @@
     "@fontsource/inter": "^4.5.1",
     "@hookform/resolvers": "^2.8.5",
     "@next-auth/prisma-adapter": "^1.0.1",
-    "@prisma/client": "^2.30.3",
+    "@prisma/client": "^3.7.0",
     "@sendgrid/mail": "^7.6.0",
     "@sentry/nextjs": "^6.16.1",
     "fathom-client": "^3.2.0",
@@ -63,10 +62,13 @@
     "husky": "^7.0.4",
     "jest": "^27.4.5",
     "lint-staged": "^12.1.5",
-    "ora": "^6.0.1",
+    "ora": "^5.4.1",
     "prettier": "^2.5.1",
-    "prisma": "^2.30.3",
-    "ts-node": "^9.1.1",
+    "prisma": "^3.7.0",
+    "ts-node": "^10.4.0",
     "typescript": "^4.5.4"
+  },
+  "prisma": {
+    "seed": "ts-node --project ./tsconfig.seed.json prisma/seed.ts"
   }
 }

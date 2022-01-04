@@ -1,26 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { getSession } from 'next-auth/client'
+import { getSession } from 'next-auth/react'
 import { ADMIN_INCLUDE, AdminStory } from '../../../lib/model/story'
 import prisma from '../../../lib/prisma'
-import { internalServerError, methodNotAllowed, sendError, unauthorized } from '../../../lib/errors'
+import {
+  internalServerError,
+  methodNotAllowed,
+  sendError,
+  unauthorized,
+} from '../../../lib/errors'
 import * as emailer from '../../../lib/emailer'
-
-// /api/admin/update
-export default async function handle(req: NextApiRequest, res: NextApiResponse) {
-  const session = await getSession({ req })
-
-  if (!session) {
-    sendError(res, unauthorized())
-  }
-
-  switch (req.method) {
-    case 'PATCH':
-      await handlePatch(req, res)
-      break
-    default:
-      sendError(res, methodNotAllowed({ allowed: ['PATCH'] }))
-  }
-}
+import { withSentry } from '@sentry/nextjs'
 
 // PATCH /api/admin/update
 // Updates approved, deleted, contentWarning on the story with the given id.
@@ -77,3 +66,22 @@ async function emailStory(story: AdminStory) {
     console.error(`Failed to manage emailing for story ${id}:`, err)
   }
 }
+
+// /api/admin/update
+const handle = async (req: NextApiRequest, res: NextApiResponse) => {
+  const session = await getSession({ req })
+
+  if (!session) {
+    sendError(res, unauthorized())
+  }
+
+  switch (req.method) {
+    case 'PATCH':
+      await handlePatch(req, res)
+      break
+    default:
+      sendError(res, methodNotAllowed({ allowed: ['PATCH'] }))
+  }
+}
+
+export default withSentry(handle)

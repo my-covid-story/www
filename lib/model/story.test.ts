@@ -13,7 +13,10 @@ describe('testStory()', () => {
   })
 
   test('supports overriding any property values', () => {
-    const story = testStory({ title: 'My title', content: 'This is the content of my story.' })
+    const story = testStory({
+      title: 'My title',
+      content: 'This is the content of my story.',
+    })
     expect(story).toHaveProperty('title', 'My title')
     expect(story).toHaveProperty('content', 'This is the content of my story.')
   })

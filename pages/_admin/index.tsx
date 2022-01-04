@@ -1,5 +1,5 @@
 import { GetServerSidePropsContext } from 'next'
-import { getSession, useSession } from 'next-auth/client'
+import { getSession, useSession } from 'next-auth/react'
 import { Stack } from '@chakra-ui/react'
 import prisma from '../../lib/prisma'
 import { ADMIN_INCLUDE, AdminStory } from '../../lib/model/story'
@@ -14,7 +14,7 @@ interface AdminPageProps {
 }
 
 function AdminPage({ stories, filtered }: AdminPageProps) {
-  const [session] = useSession()
+  const { data: session } = useSession()
 
   return (
     <>
@@ -26,7 +26,11 @@ function AdminPage({ stories, filtered }: AdminPageProps) {
           {session && (
             <>
               {stories.map((story) => (
-                <StoryCard key={story.id} story={story} filteredView={filtered} />
+                <StoryCard
+                  key={story.id}
+                  story={story}
+                  filteredView={filtered}
+                />
               ))}
             </>
           )}
@@ -39,7 +43,10 @@ function AdminPage({ stories, filtered }: AdminPageProps) {
 AdminPage.setLayout = AdminLayout
 export default AdminPage
 
-export async function getServerSideProps({ req, query }: GetServerSidePropsContext) {
+export async function getServerSideProps({
+  req,
+  query,
+}: GetServerSidePropsContext) {
   const session = await getSession({ req })
 
   const deleted = query.deleted === 'true'

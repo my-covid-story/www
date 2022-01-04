@@ -1,5 +1,14 @@
 import { useEffect } from 'react'
-import { Button, Center, Container, Heading, Link, Text, Flex, VStack } from '@chakra-ui/react'
+import {
+  Button,
+  Center,
+  Container,
+  Heading,
+  Link,
+  Text,
+  Flex,
+  VStack,
+} from '@chakra-ui/react'
 
 import HeadTags from '../components/common/HeadTags'
 
@@ -29,19 +38,25 @@ const Thanks = () => {
         </Center>
         <VStack spacing="12px" align="left">
           <Text>
-            <strong>Thank you for submitting your story.</strong> We will amplify your story to
-            engage decision-makers and drive effective government policy with science-based
-            practices that will save lives.
+            <strong>Thank you for submitting your story.</strong> We will
+            amplify your story to engage decision-makers and drive effective
+            government policy with science-based practices that will save lives.
           </Text>
-          <Text>It may take 24-48 hours for your story to appear on the site.</Text>
           <Text>
-            If you selected that you are willing to be contacted by the media, they may reach out to
-            you with the contact information that you provided.
+            It may take 24-48 hours for your story to appear on the site.
+          </Text>
+          <Text>
+            If you selected that you are willing to be contacted by the media,
+            they may reach out to you with the contact information that you
+            provided.
           </Text>
           <Text>
             {' '}
             If you have any questions, reach out to{' '}
-            <a style={{ fontWeight: 'bold', color: '#55099D' }} href="mailto:info@mycovidstory.ca">
+            <a
+              style={{ fontWeight: 'bold', color: '#55099D' }}
+              href="mailto:info@mycovidstory.ca"
+            >
               info@mycovidstory.ca
             </a>
             .
@@ -53,19 +68,31 @@ const Thanks = () => {
           </Heading>
 
           <Flex flexWrap="wrap" justifyContent="center">
-            <Link href="https://twitter.com/MyCOVIDStory_CA" isExternal margin="5px">
+            <Link
+              href="https://twitter.com/MyCOVIDStory_CA"
+              isExternal
+              margin="5px"
+            >
               <Button color="white" leftIcon={<TwitterSVG />}>
                 Share @MyCOVIDStory_CA
               </Button>
             </Link>
 
-            <Link href="https://www.facebook.com/MyCovidStoryCA" isExternal margin="5px">
+            <Link
+              href="https://www.facebook.com/MyCovidStoryCA"
+              isExternal
+              margin="5px"
+            >
               <Button color="white" leftIcon={<FacebookSVG />}>
                 Share @MyCovidStoryCA
               </Button>
             </Link>
 
-            <Link href="https://www.instagram.com/mycovidstory_ca/" isExternal margin="5px">
+            <Link
+              href="https://www.instagram.com/mycovidstory_ca/"
+              isExternal
+              margin="5px"
+            >
               <Button color="white" leftIcon={<InstagramSVG />}>
                 Share @mycovidstory_ca
               </Button>

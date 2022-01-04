@@ -12,7 +12,10 @@ mail.setApiKey(process.env.SENDGRID_API_KEY)
 const FROM_EMAIL = 'MyCovidStory.ca <info@mycovidstory.ca>'
 
 // In production, BCC ourselves using the Gmail plus trick for filtering.
-const BCC_EMAIL = process.env.VERCEL_ENV === 'production' ? 'info+mpp@mycovidstory.ca' : undefined
+const BCC_EMAIL =
+  process.env.VERCEL_ENV === 'production'
+    ? 'info+mpp@mycovidstory.ca'
+    : undefined
 
 // The default addresses to receive stories from Ontario.
 // If we are emailing the MPP for a specific riding, these addresses will be cc'ed.
@@ -35,7 +38,8 @@ const CANADA_EMAILS = [
   'patty.hajdu@parl.gc.ca',
 ]
 
-const CANADA_ADDRESSEE = 'Prime Minster Trudeau, Minister Freeland, and Minister Hajdu'
+const CANADA_ADDRESSEE =
+  'Prime Minster Trudeau, Minister Freeland, and Minister Hajdu'
 
 // Parse comma-separated list of email adress from MPP_EMAILS environment variable.
 // If specified, custom emails are always used as-is, never modified based on riding.
@@ -116,7 +120,13 @@ function computeDetails(story: AdminStory) {
   if (riding) {
     const { name: ridingName, mppEmail, mppDesignation, mppLastName } = riding
     return {
-      fields: { from, to: mppEmail, cc: emails, bcc, subject: `${subject} from ${ridingName}` },
+      fields: {
+        from,
+        to: mppEmail,
+        cc: emails,
+        bcc,
+        subject: `${subject} from ${ridingName}`,
+      },
       params: {
         addressee: `${mppDesignation} ${mppLastName}`,
         source: 'by one of your constituents',
@@ -131,7 +141,9 @@ function computeDetails(story: AdminStory) {
       fields: { from, to: emails, bcc, subject: `${subject} from Ontario` },
       params: {
         addressee: ONTARIO_ADDRESSEE,
-        source: `from ${postalCode ? postalCode.name : `postal code ${postal}`}`,
+        source: `from ${
+          postalCode ? postalCode.name : `postal code ${postal}`
+        }`,
         location: 'in Ontario, right now',
         ...params,
       },
@@ -144,7 +156,12 @@ function computeDetails(story: AdminStory) {
 
   return {
     fields: { from, to: emails, bcc, subject },
-    params: { addressee: CANADA_ADDRESSEE, source, location: 'in Canada, right now', ...params },
+    params: {
+      addressee: CANADA_ADDRESSEE,
+      source,
+      location: 'in Canada, right now',
+      ...params,
+    },
   }
 }
 
@@ -157,7 +174,14 @@ interface BodyParams {
   content: string
 }
 
-function generateText({ addressee, source, location, url, title, content }: BodyParams) {
+function generateText({
+  addressee,
+  source,
+  location,
+  url,
+  title,
+  content,
+}: BodyParams) {
   return `Hello ${addressee},
 
 MyCovidStory.ca is a volunteer-led effort to collect and amplify the stories of those impacted by COVID-19. We believe in the power of storytelling and that because the government has refused to listen to the numbers, we must make them face the stories of the people they were elected to represent.
@@ -188,7 +212,14 @@ Instagram: https://www.instagram.com/mycovidstory_ca/
 
 const SANITIZE_OPTIONS = { allowedTags: [], allowedAttributes: {} }
 
-function generateHtml({ addressee, source, location, url, title, content }: BodyParams) {
+function generateHtml({
+  addressee,
+  source,
+  location,
+  url,
+  title,
+  content,
+}: BodyParams) {
   title = sanitize(title, SANITIZE_OPTIONS)
   content = sanitize(content, SANITIZE_OPTIONS)
 
@@ -201,7 +232,10 @@ ${content
   .split('\n')
   .map((p) => p.trim())
   .filter((p) => p)
-  .map((p) => `<p><a href="${url}" style="color: inherit; text-decoration: none;">${p}</a></p>`)
+  .map(
+    (p) =>
+      `<p><a href="${url}" style="color: inherit; text-decoration: none;">${p}</a></p>`
+  )
   .join('\n')}
 </div>
 <p>Every number has a story, and <strong>this is a story happening ${location}.</strong></p>

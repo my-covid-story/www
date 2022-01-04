@@ -11,7 +11,11 @@ export interface ResponseError extends ResponseErrorOptions {
 }
 
 export class ResponseError extends Error {
-  constructor(message: string, status: number, options: ResponseErrorOptions = {}) {
+  constructor(
+    message: string,
+    status: number,
+    options: ResponseErrorOptions = {}
+  ) {
     super(message)
     Error.captureStackTrace(this, ResponseError)
     this.status = status
@@ -37,7 +41,9 @@ export function notFound(): ResponseError {
   return new ResponseError('Not found', 404)
 }
 
-export function methodNotAllowed(options: { allowed?: string[] } = {}): ResponseError {
+export function methodNotAllowed(
+  options: { allowed?: string[] } = {}
+): ResponseError {
   return new ResponseError('Method not allowed', 405, options)
 }
 

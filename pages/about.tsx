@@ -18,11 +18,12 @@ export default function About() {
             Who We Are
           </Heading>
           <Text>
-            Born in Ontario, we are a group of concerned Canadians who could not stand by as parts
-            of our country were led into a humanitarian crisis. We believe the power of storytelling
-            is an effective means to emphasize the human element of the pandemic, encouraging
-            compassion amongst the Canadian public and offering first-hand insight to
-            decision-makers and the media.
+            Born in Ontario, we are a group of concerned Canadians who could not
+            stand by as parts of our country were led into a humanitarian
+            crisis. We believe the power of storytelling is an effective means
+            to emphasize the human element of the pandemic, encouraging
+            compassion amongst the Canadian public and offering first-hand
+            insight to decision-makers and the media.
           </Text>
         </Box>
         <Box pb={6}>
@@ -30,8 +31,8 @@ export default function About() {
             Our Mission
           </Heading>
           <Text>
-            To be a trusted platform that collects and amplifies the experiences of any Canadian
-            impacted by the COVID-19 pandemic.
+            To be a trusted platform that collects and amplifies the experiences
+            of any Canadian impacted by the COVID-19 pandemic.
           </Text>
         </Box>
         <Box pb={6}>
@@ -40,31 +41,36 @@ export default function About() {
           </Heading>
           <Stack spacing={4}>
             <Text>
-              It is clear that not all elected officials and key decision-makers are willing to
-              listen to numbers or scientific evidence. Data might be easy to dismiss, but stories
-              and the human connection they spark cannot be ignored.
+              It is clear that not all elected officials and key decision-makers
+              are willing to listen to numbers or scientific evidence. Data
+              might be easy to dismiss, but stories and the human connection
+              they spark cannot be ignored.
             </Text>
             <Text>
-              Many doctors, business owners, essential workers and concerned individuals have
-              already spoken up and shared their stories, but many are fearful and don’t feel they
-              have a voice; there are too many stories still left to be told.
+              Many doctors, business owners, essential workers and concerned
+              individuals have already spoken up and shared their stories, but
+              many are fearful and don’t feel they have a voice; there are too
+              many stories still left to be told.
             </Text>
             <Text>
-              We created My COVID Story as a way to amplify every voice that wants to share - with
-              government leaders, the media or the public - regardless of whether they have their
-              own platform or not. We strive to make it as easy as possible for anyone to share
-              their story in a safe, anonymous way.
+              We created My COVID Story as a way to amplify every voice that
+              wants to share - with government leaders, the media or the public
+              - regardless of whether they have their own platform or not. We
+              strive to make it as easy as possible for anyone to share their
+              story in a safe, anonymous way.
             </Text>
             <Text>
-              The stories we collect help to surface insights about the unique impact of the
-              pandemic on certain neighbourhoods, populations, industries and institutions. By
-              sharing them with decision-makers, we hope to highlight the need for a pandemic
-              response that promotes physical, emotional and economic well-being for all.
+              The stories we collect help to surface insights about the unique
+              impact of the pandemic on certain neighbourhoods, populations,
+              industries and institutions. By sharing them with decision-makers,
+              we hope to highlight the need for a pandemic response that
+              promotes physical, emotional and economic well-being for all.
             </Text>
             <Text>
-              We believe the stories speak for themselves, and by amplifying them we hope to foster
-              compassion and deeper understanding of the experiences of others and get them in front
-              of the people that have the power to influence change.
+              We believe the stories speak for themselves, and by amplifying
+              them we hope to foster compassion and deeper understanding of the
+              experiences of others and get them in front of the people that
+              have the power to influence change.
             </Text>
           </Stack>
         </Box>

@@ -19,7 +19,11 @@ export default function CustomShareContainer({
   onClick,
 }: CustomShareContainerProps) {
   return (
-    <button style={{ ...defaultStyling, ...style }} onClick={onClick} aria-label="share">
+    <button
+      style={{ ...defaultStyling, ...style }}
+      onClick={onClick}
+      aria-label="share"
+    >
       {children}
     </button>
   )

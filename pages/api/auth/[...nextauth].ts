@@ -1,27 +1,32 @@
 import NextAuth from 'next-auth'
-import Providers from 'next-auth/providers'
-import Adapters from 'next-auth/adapters'
+import GoogleProvider from 'next-auth/providers/google'
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { PrismaClient } from '@prisma/client'
+import { captureException } from '@sentry/nextjs'
 
 const prisma = new PrismaClient()
 
 export default NextAuth({
   // Configure one or more authentication providers
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
-    Providers.Google({
+    GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
-  adapter: Adapters.Prisma.Adapter({ prisma }),
-  // A database is optional, but required to persist accounts in a database
-  database: process.env.DATABASE_URL,
+  adapter: PrismaAdapter(prisma),
   callbacks: {
-    async signIn(user) {
+    async signIn({ user }) {
       if (process.env.MODERATOR_EMAILS.includes(user.email)) {
         return true
       }
       return false
+    },
+  },
+  logger: {
+    error(code, metadata) {
+      captureException({ code, metadata })
     },
   },
 })

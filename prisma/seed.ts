@@ -46,7 +46,10 @@ async function seedStories() {
       contactName: contact ? name : null,
       approved,
       contentWarning: faker.datatype.boolean(),
-      mppMessageId: approved && faker.datatype.boolean() ? faker.random.alphaNumeric(22) : null,
+      mppMessageId:
+        approved && faker.datatype.boolean()
+          ? faker.random.alphaNumeric(22)
+          : null,
     }
     seedData.push(seed)
   }
@@ -71,7 +74,10 @@ async function seedStaticData() {
   spinner.succeed()
 
   spinner.start('Creating postal codes')
-  const content = await fs.readFile(path.join(__dirname, 'postal-data.json'), 'utf8')
+  const content = await fs.readFile(
+    path.join(__dirname, 'postal-data.json'),
+    'utf8'
+  )
   const data = JSON.parse(content)
   for (const postalCode of data.postalCode) {
     const data = postalCode as Prisma.PostalCodeCreateInput
@@ -98,7 +104,9 @@ async function seed() {
   const env = process.env.NODE_ENV
   const prod = env === 'production'
   console.log(`Environment: ${env}`)
-  console.log(prod ? 'Seeding static data only' : 'Seeding static data and stories')
+  console.log(
+    prod ? 'Seeding static data only' : 'Seeding static data and stories'
+  )
   console.log()
   await seedStaticData()
 

@@ -1,7 +1,11 @@
 import { Story } from './model/story'
 import { storyCite } from '../components/stories/utils'
 
-export default function generateSocial(story: Story, contentSize = 150, citeSize = 60): string {
+export default function generateSocial(
+  story: Story,
+  contentSize = 150,
+  citeSize = 60
+): string {
   const { content } = story
   const cite = storyCite(story).slice(0, citeSize)
 

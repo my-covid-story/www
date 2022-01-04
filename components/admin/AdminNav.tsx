@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react'
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
 
-import { signIn, signOut, useSession } from 'next-auth/client'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import { RESPONSIVE_PADDING } from '../common/ContentBox'
 
 const Links = [
@@ -52,7 +52,8 @@ interface NavLinkProps extends LinkDisplayProps {
 }
 
 const NavLink = ({ alwaysDisplay = false, ...props }: NavLinkProps) => {
-  const [session, loading] = useSession()
+  const { data: session, status } = useSession()
+  const loading = status === 'loading'
 
   if (alwaysDisplay) {
     return <LinkDisplay {...props} />
@@ -72,7 +73,7 @@ const NavLink = ({ alwaysDisplay = false, ...props }: NavLinkProps) => {
 
 export default function AdminNav() {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [session] = useSession()
+  const { data: session } = useSession()
 
   return (
     <>
@@ -87,14 +88,24 @@ export default function AdminNav() {
         <Flex alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
             size={'md'}
-            icon={isOpen ? <CloseIcon color={'white'} /> : <HamburgerIcon color={'white'} />}
+            icon={
+              isOpen ? (
+                <CloseIcon color={'white'} />
+              ) : (
+                <HamburgerIcon color={'white'} />
+              )
+            }
             aria-label={'Open Menu'}
             display={{ lg: 'none' }}
             onClick={isOpen ? onClose : onOpen}
           />
 
           <HStack spacing={8} alignItems={'center'}>
-            <HStack as={'nav'} spacing={4} display={{ base: 'none', lg: 'flex' }}>
+            <HStack
+              as={'nav'}
+              spacing={4}
+              display={{ base: 'none', lg: 'flex' }}
+            >
               {Links.map((link) => (
                 <NavLink key={link.text} href={link.href} text={link.text} />
               ))}
@@ -105,7 +116,11 @@ export default function AdminNav() {
             alignItems={{ base: 'flex-end', sm: 'center' }}
             direction={{ base: 'column', sm: 'row' }}
           >
-            <Text mb={{ base: 1, sm: 0 }} mr={{ sm: 4 }} fontSize={{ base: '0.75rem', sm: 'md' }}>
+            <Text
+              mb={{ base: 1, sm: 0 }}
+              mr={{ sm: 4 }}
+              fontSize={{ base: '0.75rem', sm: 'md' }}
+            >
               {session?.user.email ?? ''}
             </Text>
             <NavLink

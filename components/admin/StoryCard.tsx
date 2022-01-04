@@ -22,7 +22,12 @@ interface UpdateStoryProps {
   contentWarning: boolean
 }
 
-const updateStory = async ({ id, approved, deleted, contentWarning }: UpdateStoryProps) => {
+const updateStory = async ({
+  id,
+  approved,
+  deleted,
+  contentWarning,
+}: UpdateStoryProps) => {
   const res = await fetch('/api/admin/update', {
     method: 'PATCH',
     headers: {
@@ -67,11 +72,19 @@ export default function StoryCard({ story, filteredView }: StoryCardProps) {
   const riding = ridings?.[0]?.riding
 
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [{ deleted, approved, contentWarning }, setCardStatus] = useState({ ...rest })
+  const [{ deleted, approved, contentWarning }, setCardStatus] = useState({
+    ...rest,
+  })
   const [interacted, setInteracted] = useState(false)
 
   const handleDeleteInteraction = async (props) => {
-    if (window.confirm(`Are you sure you want to ${props.deleted ? 'undelete' : 'delete'} this?`)) {
+    if (
+      window.confirm(
+        `Are you sure you want to ${
+          props.deleted ? 'undelete' : 'delete'
+        } this?`
+      )
+    ) {
       const { approved, deleted, ...rest } = await updateStory(props)
       setCardStatus({ approved, deleted, ...rest })
       setInteracted(approved || deleted)
@@ -92,7 +105,11 @@ export default function StoryCard({ story, filteredView }: StoryCardProps) {
           <Text mt={4} noOfLines={!filteredView || isOpen ? null : 4}>
             {content}
           </Text>
-          <Flex justifyContent={'flex-end'} pt={2} display={filteredView ? 'flex' : 'none'}>
+          <Flex
+            justifyContent={'flex-end'}
+            pt={2}
+            display={filteredView ? 'flex' : 'none'}
+          >
             <Button
               textAlign={'right'}
               size={'sm'}
@@ -103,7 +120,12 @@ export default function StoryCard({ story, filteredView }: StoryCardProps) {
             </Button>
           </Flex>
         </Box>
-        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4} p={5} bg={'gray.100'}>
+        <SimpleGrid
+          columns={{ base: 1, md: 2 }}
+          spacing={4}
+          p={5}
+          bg={'gray.100'}
+        >
           <Box>
             <Label>Display Name and Postal Code</Label>
             <Text>
@@ -133,14 +155,17 @@ export default function StoryCard({ story, filteredView }: StoryCardProps) {
           </Box>
           <Box>
             <Label>MPP and Riding</Label>
-            <Text>{riding ? `${riding.mppName}, ${riding.name}` : 'Unknown'}</Text>
+            <Text>
+              {riding ? `${riding.mppName}, ${riding.name}` : 'Unknown'}
+            </Text>
           </Box>
           <Box>
             <Label>Submission Date</Label>
             <Text>
-              {new Intl.DateTimeFormat('en-CA', { dateStyle: 'long', timeStyle: 'short' }).format(
-                createdAt
-              )}
+              {new Intl.DateTimeFormat('en-CA', {
+                dateStyle: 'long',
+                timeStyle: 'short',
+              }).format(createdAt)}
             </Text>
           </Box>
           <Box>
@@ -150,7 +175,11 @@ export default function StoryCard({ story, filteredView }: StoryCardProps) {
           <Box>
             <Label>ID and Link</Label>
             <Text>
-              <SimpleLink href={`/story/${id}`} textDecoration={'underline'} target="_blank">
+              <SimpleLink
+                href={`/story/${id}`}
+                textDecoration={'underline'}
+                target="_blank"
+              >
                 {id}
               </SimpleLink>
             </Text>
@@ -173,7 +202,12 @@ export default function StoryCard({ story, filteredView }: StoryCardProps) {
             type="button"
             bg={'white'}
             onClick={() =>
-              handleDeleteInteraction({ id, approved: false, deleted: !deleted, contentWarning })
+              handleDeleteInteraction({
+                id,
+                approved: false,
+                deleted: !deleted,
+                contentWarning,
+              })
             }
           >
             {deleted ? 'Undelete' : 'Delete'}
@@ -182,7 +216,12 @@ export default function StoryCard({ story, filteredView }: StoryCardProps) {
             colorScheme="blue"
             type="button"
             onClick={() =>
-              handleInteraction({ id, approved: !approved, deleted: false, contentWarning })
+              handleInteraction({
+                id,
+                approved: !approved,
+                deleted: false,
+                contentWarning,
+              })
             }
           >
             {approved ? 'Unapprove' : 'Approve'}
@@ -193,7 +232,12 @@ export default function StoryCard({ story, filteredView }: StoryCardProps) {
             type="button"
             bg={'white'}
             onClick={() =>
-              handleInteraction({ id, approved, deleted, contentWarning: !contentWarning })
+              handleInteraction({
+                id,
+                approved,
+                deleted,
+                contentWarning: !contentWarning,
+              })
             }
           >
             {contentWarning ? 'Remove Content Warning' : 'Add Content Warning'}

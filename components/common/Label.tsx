@@ -20,7 +20,9 @@ export default function Label({ opaque, children, ...props }: LabelProps) {
   const theme = useTheme()
 
   const color = (props.color as string) || (opaque ? 'primary.100' : 'white')
-  const background = opaque ? blendWhite(getColor(theme, color), 0.1) : undefined
+  const background = opaque
+    ? blendWhite(getColor(theme, color), 0.1)
+    : undefined
 
   return (
     <Box

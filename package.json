@@ -43,7 +43,7 @@
     "react-fast-compare": "^3.2.0",
     "react-share": "^4.4.0",
     "sanitize-html": "^2.3.3",
-    "superjson": "^1.7.4",
+    "superjson": "^1.8.1",
     "tinycolor2": "^1.4.2",
     "use-debounce": "^6.0.1",
     "yup": "^0.32.9"
